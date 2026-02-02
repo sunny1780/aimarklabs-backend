@@ -11,6 +11,7 @@ import Aboutus from './pages/Aboutus';
 import Contactus from './pages/Contactus';
 import Blog from './pages/Blog';
 import Industries from './pages/Industries';
+import UiUx from './pages/UiUx';
 
 const LoginRoute: React.FC = () => {
   const navigate = useNavigate();
@@ -57,6 +58,11 @@ const IndustriesRoute: React.FC = () => {
   return <Industries onLoginClick={() => navigate('/login')} />;
 };
 
+const UiUxRoute: React.FC = () => {
+  const navigate = useNavigate();
+  return <UiUx onLoginClick={() => navigate('/login')} />;
+};
+
 const App: React.FC = () => {
   return (
     <BrowserRouter>
@@ -66,6 +72,7 @@ const App: React.FC = () => {
         <Route path="/contact" element={<ContactRoute />} />
         <Route path="/blog" element={<BlogRoute />} />
         <Route path="/industries" element={<IndustriesRoute />} />
+        <Route path="/services/ui-ux" element={<UiUxRoute />} />
         <Route path="/login" element={<LoginRoute />} />
         <Route path="/signup" element={<SignUpRoute />} />
         <Route path="/dashboard" element={<AnalyticsDashboard />} />
