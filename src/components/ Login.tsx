@@ -5,7 +5,7 @@ interface LoginProps {
   onGoToSignUp?: () => void;
   onLoginSuccess?: (destination: string) => void;
 }
-// data
+
 const Login: React.FC<LoginProps> = ({ onGoToSignUp, onLoginSuccess }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
