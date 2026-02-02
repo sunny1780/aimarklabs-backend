@@ -55,10 +55,10 @@ const Aboutthree = () => {
               .map((word, index) => (
                 <span
                   key={index}
-                  className="transition-colors duration-500 ease-in-out inline"
+                  className="transition-colors duration-300 ease-in-out inline"
                   style={{
                     color: isInView ? '#111827' : '#D3DBE1',
-                    transitionDelay: isInView ? `${index * 80}ms` : '0ms',
+                    transitionDelay: isInView ? `${index * 40}ms` : '0ms',
                   }}
                 >
                   {word}{' '}

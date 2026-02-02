@@ -16,31 +16,31 @@ const AboutFour: React.FC = () => {
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
               Our Mission
             </h2>
-            <div className="relative">
-              <div className="bg-[#F7F9FB] border border-[#F29335]/50 rounded-lg p-6 pr-8 pt-8">
+            <div className="relative pt-4">
+              <div className="bg-[#F7F9FB] border border-[#F29335]/50 rounded-lg p-6 pr-8 pt-12">
                 <p className="text-gray-800 text-base sm:text-lg leading-relaxed">
                   {content}
                 </p>
               </div>
-              <div className="absolute -top-2 -right-2 w-12 h-12 bg-[#F29335] rounded-lg flex items-center justify-center shadow-md">
-                <span className="text-white font-bold text-lg">99</span>
+              <div className="absolute -top-2 -right-2 w-12 h-12 bg-[#F29335] rounded-lg flex items-center justify-center shadow-md p-2">
+                <img src="/images/comma.svg" alt="" className="w-full h-full object-contain" />
               </div>
             </div>
           </div>
 
           {/* Our Vision */}
-          <div>
+          <div className='pt-40'>
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
               Our Vision
             </h2>
-            <div className="relative">
-              <div className="bg-[#F7F9FB] border border-[#F29335]/50 rounded-lg p-6 pr-8 pt-8">
+            <div className="relative pt-4">
+              <div className="bg-[#F7F9FB] border border-[#F29335]/50 rounded-lg p-6 pr-8 pt-12">
                 <p className="text-gray-800 text-base sm:text-lg leading-relaxed">
                   {content}
                 </p>
               </div>
-              <div className="absolute -top-2 -right-2 w-12 h-12 bg-[#F29335] rounded-lg flex items-center justify-center shadow-md">
-                <span className="text-white font-bold text-lg">99</span>
+              <div className="absolute -top-2 -right-2 w-12 h-12 bg-[#F29335] rounded-lg flex items-center justify-center shadow-md p-2">
+                <img src="/images/comma.svg" alt="" className="w-full h-full object-contain" />
               </div>
             </div>
           </div>

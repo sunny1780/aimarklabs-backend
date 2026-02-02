@@ -61,7 +61,7 @@ const Homethree: React.FC = () => {
 
             {/* Caption text */}
             <p className="text-[11px] sm:text-xs text-[#C8D0FF] mt-1">
-              //Where creativity meets bold growth...
+              {'//'}Where creativity meets bold growth...
             </p>
 
             {/* Steric / star image bottom-right */}
