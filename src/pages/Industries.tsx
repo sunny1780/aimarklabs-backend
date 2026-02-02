@@ -1,5 +1,9 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
+import IndustryHero from '../components/IndustryHero';
+import IndustryCards from '../components/IndustryCards';
+import Homecta from '../components/Homecta';
+import Footer from '../components/Footer';
 
 interface IndustriesProps {
   onLoginClick: () => void;
@@ -9,10 +13,10 @@ const Industries: React.FC<IndustriesProps> = ({ onLoginClick }) => {
   return (
     <div className="min-h-screen">
       <Navbar onLoginClick={onLoginClick} />
-      <div className="py-20 px-4 text-center">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">Industries</h1>
-        <p className="text-gray-600">Industries page content coming soon.</p>
-      </div>
+      <IndustryHero />
+      <IndustryCards />
+      <Homecta />
+      <Footer />
     </div>
   );
 };

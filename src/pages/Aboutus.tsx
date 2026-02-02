@@ -5,6 +5,7 @@ import Abouttwo from '../components/Abouttwo';
 import Aboutthree from '../components/Aboutthree';
 import AboutFour from '../components/AboutFour';
 import Team from '../components/Team';
+import Footer from '../components/Footer';
 
 interface AboutusProps {
   onLoginClick: () => void;
@@ -19,6 +20,7 @@ const Aboutus: React.FC<AboutusProps> = ({ onLoginClick }) => {
       <Aboutthree />
       <AboutFour />
       <Team />
+      <Footer />
     </div>
   );
 };

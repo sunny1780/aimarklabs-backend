@@ -31,7 +31,7 @@ const Homecta: React.FC = () => {
                 color: '#F29335'
               }}
             >
-              READY TO BOOST
+              **READY TO BOOST
             </h2>
             <h3 className="text-white text-4xl lg:text-5xl font-bold leading-tight mb-6">
               YOUR DIGITAL BUSINESS{' '}
