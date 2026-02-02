@@ -37,6 +37,9 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
           <a href="/blog" className="text-gray-800 hover:text-gray-900 text-sm font-medium transition-colors">
             Blog
           </a>
+          <a href="/contact" className="text-gray-800 hover:text-gray-900 text-sm font-medium transition-colors">
+            Contact
+          </a>
         </div>
 
         {/* Login Button */}

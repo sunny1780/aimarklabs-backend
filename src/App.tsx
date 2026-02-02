@@ -8,6 +8,9 @@ import Login from './components/ Login';
 import SignUp from './components/SignUp';
 import Home from './pages/Home';
 import Aboutus from './pages/Aboutus';
+import Contactus from './pages/Contactus';
+import Blog from './pages/Blog';
+import Industries from './pages/Industries';
 
 const LoginRoute: React.FC = () => {
   const navigate = useNavigate();
@@ -39,12 +42,30 @@ const AboutRoute: React.FC = () => {
   return <Aboutus onLoginClick={() => navigate('/login')} />;
 };
 
+const ContactRoute: React.FC = () => {
+  const navigate = useNavigate();
+  return <Contactus onLoginClick={() => navigate('/login')} />;
+};
+
+const BlogRoute: React.FC = () => {
+  const navigate = useNavigate();
+  return <Blog onLoginClick={() => navigate('/login')} />;
+};
+
+const IndustriesRoute: React.FC = () => {
+  const navigate = useNavigate();
+  return <Industries onLoginClick={() => navigate('/login')} />;
+};
+
 const App: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomeRoute />} />
         <Route path="/about" element={<AboutRoute />} />
+        <Route path="/contact" element={<ContactRoute />} />
+        <Route path="/blog" element={<BlogRoute />} />
+        <Route path="/industries" element={<IndustriesRoute />} />
         <Route path="/login" element={<LoginRoute />} />
         <Route path="/signup" element={<SignUpRoute />} />
         <Route path="/dashboard" element={<AnalyticsDashboard />} />
