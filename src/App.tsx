@@ -7,6 +7,7 @@ import AnalyticsDashboard from './AnalyticsDashboard';
 import Login from './components/ Login';
 import SignUp from './components/SignUp';
 import Home from './pages/Home';
+import Aboutus from './pages/Aboutus';
 
 const LoginRoute: React.FC = () => {
   const navigate = useNavigate();
@@ -33,11 +34,17 @@ const HomeRoute: React.FC = () => {
   return <Home onLoginClick={() => navigate('/login')} />;
 };
 
+const AboutRoute: React.FC = () => {
+  const navigate = useNavigate();
+  return <Aboutus onLoginClick={() => navigate('/login')} />;
+};
+
 const App: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomeRoute />} />
+        <Route path="/about" element={<AboutRoute />} />
         <Route path="/login" element={<LoginRoute />} />
         <Route path="/signup" element={<SignUpRoute />} />
         <Route path="/dashboard" element={<AnalyticsDashboard />} />
