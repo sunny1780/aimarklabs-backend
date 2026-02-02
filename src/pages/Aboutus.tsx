@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import Abouttwo from '../components/Abouttwo';
 import Aboutthree from '../components/Aboutthree';
+import AboutFour from '../components/AboutFour';
 
 interface AboutusProps {
   onLoginClick: () => void;
@@ -13,6 +14,7 @@ const Aboutus: React.FC<AboutusProps> = ({ onLoginClick }) => {
       <Navbar onLoginClick={onLoginClick} />
       <Abouttwo />
       <Aboutthree />
+      <AboutFour />
     </div>
   );
 };
