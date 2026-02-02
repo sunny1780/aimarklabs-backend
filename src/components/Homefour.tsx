@@ -1,12 +1,69 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const Homefour: React.FC = () => {
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const [experience, setExperience] = useState(0);
+  const [clients, setClients] = useState(0);
+  const [experts, setExperts] = useState(0);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAnimated) {
+          setHasAnimated(true);
+        }
+      },
+      { threshold: 0.4 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [hasAnimated]);
+
+  useEffect(() => {
+    if (!hasAnimated) return;
+
+    const duration = 1200; // ms
+    const startTime = performance.now();
+
+    const targetExperience = 15;
+    const targetClients = 195;
+    const targetExperts = 75;
+
+    const animate = (time: number) => {
+      const elapsed = time - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      setExperience(Math.floor(progress * targetExperience));
+      setClients(Math.floor(progress * targetClients));
+      setExperts(Math.floor(progress * targetExperts));
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        // ensure final values
+        setExperience(targetExperience);
+        setClients(targetClients);
+        setExperts(targetExperts);
+      }
+    };
+
+    const frame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(frame);
+  }, [hasAnimated]);
+
   return (
     <section
       className="bg-[#F5F7FB] py-16 px-4 sm:px-6 lg:px-10"
       style={{ fontFamily: "'Manrope', 'Segoe UI', sans-serif" }}
     >
-      <div className="max-w-6xl mx-auto">
+      <div ref={sectionRef} className="max-w-6xl mx-auto">
         {/* Row 1: Text + Heading */}
         <div className="grid lg:grid-cols-[1.2fr,1fr] gap-10 items-center mb-8">
           <p className="text-sm lg:text-base text-gray-600 max-w-md leading-relaxed">
@@ -29,7 +86,7 @@ const Homefour: React.FC = () => {
               Experience
             </div>
             <div className="text-[#F97316] text-[128px] font-extrabold leading-none mb-2">
-              15y+
+              {experience}y+
             </div>
             <p className="text-gray-600 text-sm leading-relaxed">
               Delivering proven digital growth strategies.
@@ -42,7 +99,7 @@ const Homefour: React.FC = () => {
               Satisfied Clients
             </div>
             <div className="text-[#F97316] text-[128px] font-extrabold leading-none mb-2">
-              195+
+              {clients}+
             </div>
             <p className="text-gray-600 text-sm leading-relaxed">
               Trusted by brands that value results.
@@ -55,7 +112,7 @@ const Homefour: React.FC = () => {
               Marketing Experts
             </div>
             <div className="text-[#F97316] text-[128px] font-extrabold leading-none mb-2">
-              75+
+              {experts}+
             </div>
             <p className="text-gray-600 text-sm leading-relaxed">
               A team driven by strategy, creativity, and AI.

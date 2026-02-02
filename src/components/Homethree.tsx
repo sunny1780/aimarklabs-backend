@@ -20,31 +20,67 @@ const Homethree: React.FC = () => {
       <div className="relative max-w-6xl mx-auto flex flex-col lg:flex-row items-start lg:items-center gap-10">
         {/* Left text block */}
         <div className="flex-1 text-left text-[#9CA9FF]">
-          <p className="text-xs sm:text-sm uppercase tracking-[0.3em] text-[#5C6ACF] mb-6">
-            (01)
-          </p>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-3 text-[#C0C8FF] uppercase">
+          <h2
+            className="group inline-flex items-baseline gap-2 mb-3 uppercase text-[#57609B] hover:text-white"
+            style={{
+              fontFamily: "'Anton', sans-serif",
+              fontWeight: 400,
+              fontSize: '150px',
+              lineHeight: '100%',
+            }}
+          >
             MARKETING
+            <span className="text-xs sm:text-sm tracking-[0.3em] text-[#57609B] group-hover:text-white">
+              (01)
+            </span>
           </h2>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-3 uppercase transition-colors duration-200 text-[#F2F3FF] hover:text-[#FFC857] cursor-pointer">
+          <h2
+            className="group inline-flex items-baseline gap-2 mb-3 uppercase transition-colors duration-200 text-[#57609B] hover:text-white cursor-pointer"
+            style={{
+              fontFamily: "'Anton', sans-serif",
+              fontWeight: 400,
+              fontSize: '150px',
+              lineHeight: '100%',
+            }}
+          >
             BRANDING
+            <span className="text-xs sm:text-sm tracking-[0.3em] text-[#57609B] group-hover:text-white">
+              (02)
+            </span>
           </h2>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-3 uppercase text-[#8B97E8]">
+          <h2
+            className="group inline-flex items-baseline gap-2 mb-3 uppercase text-[#57609B] hover:text-white"
+            style={{
+              fontFamily: "'Anton', sans-serif",
+              fontWeight: 400,
+              fontSize: '150px',
+              lineHeight: '100%',
+            }}
+          >
             Development
+            <span className="text-xs sm:text-sm tracking-[0.3em] text-[#57609B] group-hover:text-white">
+              (03)
+            </span>
           </h2>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight uppercase text-[#6E7AD8]">
+          <h2
+            className="group inline-flex items-baseline gap-2 uppercase text-[#57609B] hover:text-white"
+            style={{
+              fontFamily: "'Anton', sans-serif",
+              fontWeight: 400,
+              fontSize: '150px',
+              lineHeight: '100%',
+            }}
+          >
             UI/UX Design
+            <span className="text-xs sm:text-sm tracking-[0.3em] text-[#57609B] group-hover:text-white">
+              (04)
+            </span>
           </h2>
-          <div className="mt-6 space-y-2 text-[11px] sm:text-xs tracking-[0.3em] text-[#5C6ACF]">
-            <p>(02)</p>
-            <p>(03)</p>
-            <p>(04)</p>
-          </div>
         </div>
 
         {/* Right card block */}
         <div className="relative flex-1 flex justify-center lg:justify-end">
-          <div className="relative bg-[#0D1430]/80 rounded-[28px] p-4 sm:p-5 w-full max-w-xs sm:max-w-sm shadow-[0_24px_80px_rgba(0,0,0,0.45)] backdrop-blur">
+          <div className="relative rounded-[28px] p-4 sm:p-5 w-full max-w-xs sm:max-w-sm">
             {/* Top pill "Our Services" */}
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/90 text-[#272D55] text-xs font-semibold mb-3 shadow-sm">
               Our Services
@@ -55,7 +91,7 @@ const Homethree: React.FC = () => {
               <img
                 src="/images/CTA.png"
                 alt="Our services preview"
-                className="w-full h-56 object-cover"
+                className="w-full h-80 object-cover"
               />
             </div>
 
@@ -68,7 +104,7 @@ const Homethree: React.FC = () => {
             <img
               src="/images/steric.png"
               alt="Star accent"
-              className="absolute -bottom-6 -right-6 w-16 h-16 sm:w-20 sm:h-20 object-contain"
+              className="absolute -bottom-32 right-24 w-24 h-24 sm:w-20 sm:h-20 object-contain"
             />
           </div>
         </div>

@@ -8,6 +8,7 @@ import Homefive from '../components/Homefive';
 import Homesix from '../components/Homesix';
 import Homeseven from '../components/Homeseven';
 import HomeFaqs from '../components/HomeFaqs';
+import HomeBlog from '../components/HomeBlog';
 import Homecta from '../components/Homecta';
 import Footer from '../components/Footer';
 
@@ -27,6 +28,7 @@ const Home: React.FC<HomeProps> = ({ onLoginClick }) => {
       <Homesix />
       <Homeseven />
       <HomeFaqs />
+      <HomeBlog />
       <Homecta />
       <Footer />
     </div>

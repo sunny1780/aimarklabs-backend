@@ -1,36 +1,85 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 
 const Hometwo: React.FC = () => {
+  const cardsRef = useRef<HTMLDivElement>(null);
+  const leftTextRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [leftVisible, setLeftVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.2, rootMargin: '0px 0px -50px 0px' }
+    );
+
+    if (cardsRef.current) {
+      observer.observe(cardsRef.current);
+    }
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setLeftVisible(true);
+        }
+      },
+      { threshold: 0.2, rootMargin: '0px 0px -50px 0px' }
+    );
+
+    if (leftTextRef.current) {
+      observer.observe(leftTextRef.current);
+    }
+    return () => observer.disconnect();
+  }, []);
+
+  const leftTextStyle = {
+    transform: leftVisible ? 'translateX(0)' : 'translateX(-60px)',
+    opacity: leftVisible ? 1 : 0,
+    transition: 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.5s ease',
+  };
+
+  const cardStyle = (delay: number) => ({
+    transform: isVisible ? 'translateX(0)' : 'translateX(80px)',
+    opacity: isVisible ? 1 : 0,
+    transition: `transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${delay}ms, opacity 0.35s ease ${delay}ms`,
+  });
+
   return (
     <section
       className="bg-[#F5F7FB] py-12 px-4 sm:px-6 lg:px-10"
       style={{ fontFamily: "'Manrope', 'Segoe UI', sans-serif" }}
     >
       <div className="max-w-6xl mx-auto">
-        {/* Header pill */}
-        <div className="mb-8">
-          <span
-            className="inline-flex items-center px-5 py-3 rounded-md text-[16ox] font-semibold tracking-wide text-[#272D55] bg-[#D7DDFC] shadow-sm border border-[#B3BDEF]"
-          >
-            Why choose us
-          </span>
-        </div>
-
         {/* Main Content Grid */}
         <div className="grid lg:grid-cols-2 gap-14 items-start">
           {/* Left Side - Text + Map */}
-          <div className="relative">
-            <h2 className="text-[48px] lg:text-4xl font-extrabold text-gray-900 mb-5 leading-tight">
-              We Create Marketing That
-              <br />
-              Works
-            </h2>
-            <p className="text-base lg:text-lg text-gray-600 mb-8 max-w-md leading-relaxed">
-              We partner with brands to solve real challenges using AI-powered strategies, creative design, and performance-focused marketing.
-            </p>
+          <div className="relative overflow-x-hidden">
+            <div ref={leftTextRef} style={leftTextStyle}>
+              <div className="mb-8">
+                <span
+                  className="inline-flex items-center px-5 py-3 rounded-md text-[16ox] font-semibold tracking-wide text-[#272D55] bg-[#D7DDFC] shadow-sm border border-[#B3BDEF]"
+                >
+                  Why choose us
+                </span>
+              </div>
+              <h2 className="text-[48px] lg:text-4xl font-extrabold text-gray-900 mb-5 leading-tight">
+                We Create Marketing That
+                <br />
+                Works
+              </h2>
+              <p className="text-base lg:text-lg text-gray-600 mb-8 max-w-md leading-relaxed">
+                We partner with brands to solve real challenges using AI-powered strategies, creative design, and performance-focused marketing.
+              </p>
+            </div>
 
             {/* Map with overlay avatars */}
-            <div className="relative max-w-xl">
+            <div className="relative max-w-xl animate-gentle-float">
               <img
                 src="/images/map.png"
                 alt="World Map"
@@ -47,9 +96,9 @@ const Hometwo: React.FC = () => {
           </div>
 
           {/* Right Side - Divider + Feature Cards */}
-          <div className="lg:border-l lg:border-gray-200 lg:pl-12 flex flex-col gap-6">
+          <div ref={cardsRef} className="lg:border-l lg:border-gray-200 lg:pl-12 flex flex-col gap-6 overflow-x-hidden">
             {/* AI-Powered Strategy */}
-            <div className="bg-white rounded-[22px] px-8 py-5 shadow-[0_20px_45px_rgba(15,23,42,0.06)] w-[462px] min-h-[176px]">
+            <div style={cardStyle(0)} className="bg-white rounded-[22px] px-8 py-5 shadow-[0_20px_45px_rgba(15,23,42,0.06)] w-[462px] min-h-[176px]">
               <div className="flex flex-col gap-4">
                 <div className="w-11 h-11">
                   <img
@@ -70,7 +119,7 @@ const Hometwo: React.FC = () => {
             </div>
 
             {/* Creative Excellence */}
-            <div className="bg-white rounded-[22px] px-8 py-5 shadow-[0_20px_45px_rgba(15,23,42,0.06)] w-[462px] min-h-[176px] lg:ml-10">
+            <div style={cardStyle(150)} className="bg-white rounded-[22px] px-8 py-5 shadow-[0_20px_45px_rgba(15,23,42,0.06)] w-[462px] min-h-[176px] lg:ml-10">
               <div className="flex flex-col gap-4">
                 <div className="w-11 h-11">
                   <img
@@ -91,7 +140,7 @@ const Hometwo: React.FC = () => {
             </div>
 
             {/* Proven Results */}
-            <div className="bg-white rounded-[22px] px-8 py-5 shadow-[0_20px_45px_rgba(15,23,42,0.06)] w-[462px] min-h-[176px] lg:ml-3">
+            <div style={cardStyle(300)} className="bg-white rounded-[22px] px-8 py-5 shadow-[0_20px_45px_rgba(15,23,42,0.06)] w-[462px] min-h-[176px] lg:ml-3">
               <div className="flex flex-col gap-4">
                 <div className="w-11 h-11">
                   <img

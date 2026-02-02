@@ -1,8 +1,36 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const Homecta: React.FC = () => {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.3, rootMargin: '0px 0px -60px 0px' }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  const contentStyle: React.CSSProperties = {
+    transform: isVisible ? 'translateY(0) scale(1)' : 'translateY(40px) scale(0.97)',
+    opacity: isVisible ? 1 : 0,
+    transition:
+      'transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s ease',
+  };
+
   return (
     <section
+      ref={sectionRef}
       className="bg-[#F7F9FB] py-16 px-4 sm:px-6 lg:px-4"
       style={{ fontFamily: "'Manrope', 'Segoe UI', sans-serif" }}
     >
@@ -13,12 +41,15 @@ const Homecta: React.FC = () => {
             <img
               src="/images/Arrow.png"
               alt="Arrow"
-              className="w-24 h-24 object-contain opacity-80"
+              className="w-24 h-24 object-contain opacity-80 animate-arrow-float"
             />
           </div>
 
           {/* Content */}
-          <div className="relative z-10 max-w-3xl mx-auto text-center">
+          <div
+            className="relative z-10 max-w-3xl mx-auto text-center"
+            style={contentStyle}
+          >
             <h2 
               className="mb-6 uppercase"
               style={{
