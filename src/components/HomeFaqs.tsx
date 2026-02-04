@@ -1,7 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const HomeFaqs: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(1); // Second item open by default
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+        }
+      },
+      { threshold: 0.25, rootMargin: '0px 0px -80px 0px' }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   const faqs = [
     {
@@ -30,15 +49,30 @@ const HomeFaqs: React.FC = () => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
+  const leftStyle: React.CSSProperties = {
+    transform: visible ? 'translateX(0)' : 'translateX(-40px)',
+    opacity: visible ? 1 : 0,
+    transition:
+      'transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s ease',
+  };
+
+  const rightStyle: React.CSSProperties = {
+    transform: visible ? 'translateX(0)' : 'translateX(40px)',
+    opacity: visible ? 1 : 0,
+    transition:
+      'transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 120ms, opacity 0.6s ease 120ms',
+  };
+
   return (
     <section
+      ref={sectionRef}
       className="bg-[#F7F9FB] py-16 px-4 sm:px-6 lg:px-10"
       style={{ fontFamily: "'Manrope', 'Segoe UI', sans-serif" }}
     >
       <div className="max-w-6xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           {/* Left Side */}
-          <div>
+          <div style={leftStyle}>
             <div className="mb-6">
               <span className="inline-flex items-center px-5 py-3 rounded-md text-[16px] font-semibold tracking-wide text-[#272D55] bg-[#D7DDFC] shadow-sm border border-[#B3BDEF]">
                 FAQ's
@@ -57,7 +91,7 @@ const HomeFaqs: React.FC = () => {
           </div>
 
           {/* Right Side - FAQ Accordion */}
-          <div className="space-y-0">
+          <div className="space-y-0" style={rightStyle}>
             {faqs.map((faq, index) => (
               <div
                 key={index}
