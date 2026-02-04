@@ -1,45 +1,98 @@
 const Servicehero = () => {
   return (
-    <section className=" py-16">
-      <div className="max-w-7xl mx-auto px-6 flex flex-col-reverse md:flex-row items-center gap-12">
-        
-        {/* LEFT CONTENT */}
-        <div className="w-full md:w-1/2">
-          <span className="inline-block bg-[#E8ECFF] text-[#4B5CFF] text-sm px-4 py-1 rounded-full mb-4">
-            UI/UX Design
-          </span>
+    <>
+      <section className="py-16">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col-reverse md:flex-row items-center gap-12">
+          {/* LEFT CONTENT */}
+          <div className="w-full md:w-1/2 service-hero-left">
+            <span className="inline-block bg-[#E8ECFF] text-[#4B5CFF] text-sm px-4 py-1 rounded-full mb-4">
+              UI/UX Design
+            </span>
 
-          <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
-            Adaptive, Human- <br /> Centered Designs
-          </h1>
+            <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
+              Adaptive, Human- <br /> Centered Designs
+            </h1>
 
-          <p className="text-[#687076] mb-6 max-w-md">
-            From strategy to execution, our numbers reflect the growth we
-            create for our clients.
-          </p>
+            <p className="text-[#687076] mb-6 max-w-md">
+              From strategy to execution, our numbers reflect the growth we
+              create for our clients.
+            </p>
 
-          <button className="bg-orange-500 hover:bg-orange-600 transition px-6 py-3 rounded-lg font-medium">
-            Get Designs That Convert
-          </button>
+            <button className="relative group bg-orange-500 hover:bg-orange-600 transition px-6 py-3 rounded-lg font-medium overflow-hidden">
+              <span className="relative z-10">Get Designs That Convert</span>
+              <span className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="absolute -inset-y-1 -left-10 w-20 rotate-12 bg-white/40 blur-md group-hover:translate-x-[220%] transition-transform duration-700" />
+              </span>
+            </button>
+          </div>
+
+          {/* RIGHT IMAGE */}
+          <div className="w-full md:w-1/2 flex justify-center">
+            <div className="service-hero-image rounded-2xl overflow-hidden w-full h-[240px] sm:h-[300px] md:h-[360px]">
+              <img
+                src="/images/service-hero.jpg"
+                alt="UI UX Design"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
         </div>
+      </section>
 
-        {/* RIGHT IMAGE */}
-  {/* RIGHT IMAGE */}
-  <div className="w-full md:w-1/2 flex justify-center">
-  <div className="rounded-2xl overflow-hidden w-full h-[240px] sm:h-[300px] md:h-[360px]">
-    <img
-      src="/images/service-hero.jpg"
-      alt="UI UX Design"
-      className="w-full h-full object-cover"
-    />
-  </div>
-</div>
+      {/* Local styles for professional motion */}
+      <style>
+        {`
+          .service-hero-left {
+            opacity: 0;
+            transform: translateX(-24px);
+            animation: serviceHeroLeftIn 0.7s ease-out forwards;
+          }
 
+          .service-hero-image {
+            transform-origin: center;
+            box-shadow: 0 20px 60px rgba(15, 23, 42, 0.25);
+            opacity: 0;
+            transform: translateX(24px) scale(0.98);
+            animation: serviceHeroImageIn 0.8s ease-out 0.1s forwards,
+                       serviceHeroImageFloat 14s ease-in-out 0.9s infinite alternate;
+          }
 
+          @keyframes serviceHeroLeftIn {
+            from {
+              opacity: 0;
+              transform: translateX(-28px);
+            }
+            to {
+              opacity: 1;
+              transform: translateX(0);
+            }
+          }
 
+          @keyframes serviceHeroImageIn {
+            from {
+              opacity: 0;
+              transform: translateX(28px) scale(0.96);
+            }
+            to {
+              opacity: 1;
+              transform: translateX(0) scale(1);
+            }
+          }
 
-      </div>
-    </section>
+          @keyframes serviceHeroImageFloat {
+            0% {
+              transform: translate3d(0, 0, 0) scale(1);
+            }
+            50% {
+              transform: translate3d(0, -10px, 0) scale(1.01);
+            }
+            100% {
+              transform: translate3d(0, 0, 0) scale(1);
+            }
+          }
+        `}
+      </style>
+    </>
   );
 };
 
