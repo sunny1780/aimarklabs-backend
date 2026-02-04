@@ -1,6 +1,32 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const BlogCards: React.FC = () => {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+        }
+      },
+      { threshold: 0.25, rootMargin: '0px 0px -80px 0px' }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  const cardStyle = (index: number): React.CSSProperties => ({
+    transform: visible ? 'translateY(0)' : 'translateY(40px)',
+    opacity: visible ? 1 : 0,
+    transition: `transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) ${index * 120}ms, opacity 0.5s ease ${index * 120}ms`,
+  });
+
   const card = {
     image: '/images/colors.png',
     buttonText: 'Collaborate',
@@ -11,6 +37,7 @@ const BlogCards: React.FC = () => {
 
   return (
     <section
+      ref={sectionRef}
       className="bg-[#F7F9FB] py-16 px-4 sm:px-6 lg:px-10"
       style={{ fontFamily: "'Manrope', 'Segoe UI', sans-serif" }}
     >
@@ -19,6 +46,7 @@ const BlogCards: React.FC = () => {
           {[...Array(5)].map((_, index) => (
             <div
               key={index}
+              style={cardStyle(index)}
               className="bg-white rounded-xl overflow-hidden shadow-md"
             >
               <img
