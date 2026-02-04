@@ -1,8 +1,42 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const Homesix: React.FC = () => {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+        }
+      },
+      { threshold: 0.25, rootMargin: '0px 0px -80px 0px' }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  const headerStyle: React.CSSProperties = {
+    transform: visible ? 'translateY(0)' : 'translateY(30px)',
+    opacity: visible ? 1 : 0,
+    transition:
+      'transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s ease',
+  };
+
+  const memberStyle = (delay: number): React.CSSProperties => ({
+    transform: visible ? 'translateY(0) scale(1)' : 'translateY(40px) scale(0.95)',
+    opacity: visible ? 1 : 0,
+    transition: `transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms, opacity 0.55s ease ${delay}ms`,
+  });
+
   return (
     <section
+      ref={sectionRef}
       className="bg-[#F7F9FB] py-16 px-4 sm:px-6 lg:px-10 relative"
       style={{ fontFamily: "'Manrope', 'Segoe UI', sans-serif" }}
     >
@@ -17,7 +51,7 @@ const Homesix: React.FC = () => {
 
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-12" style={headerStyle}>
           <div className="mb-6">
             <span className="inline-flex items-center px-5 py-3 rounded-md text-[16px] font-semibold tracking-wide text-[#272D55] bg-[#D7DDFC] shadow-sm border border-[#B3BDEF]">
               Team Members
@@ -31,7 +65,10 @@ const Homesix: React.FC = () => {
         {/* Team Members Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center justify-center">
           {/* Misty Farghaly */}
-          <div className="flex flex-col items-center text-center">
+          <div
+            className="flex flex-col items-center text-center"
+            style={memberStyle(0)}
+          >
             <div className="w-32 h-32 rounded-full overflow-hidden mb-4">
               <img
                 src="/images/misty.png"
@@ -44,7 +81,10 @@ const Homesix: React.FC = () => {
           </div>
 
           {/* Ali Chishti */}
-          <div className="flex flex-col items-center text-center">
+          <div
+            className="flex flex-col items-center text-center"
+            style={memberStyle(150)}
+          >
             <div className="w-32 h-32 rounded-full overflow-hidden mb-4">
               <img
                 src="/images/Ali.png"
@@ -57,7 +97,10 @@ const Homesix: React.FC = () => {
           </div>
 
           {/* Mohammad Farghaly */}
-          <div className="flex flex-col items-center text-center">
+          <div
+            className="flex flex-col items-center text-center"
+            style={memberStyle(300)}
+          >
             <div className="w-32 h-32 rounded-full overflow-hidden mb-4">
               <img
                 src="/images/Muhammad.png"

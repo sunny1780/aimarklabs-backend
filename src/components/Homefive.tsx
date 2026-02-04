@@ -25,7 +25,7 @@ const Homefive: React.FC = () => {
         {/* Testimonial Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* Card 1 */}
-          <div className="bg-white rounded-3xl px-8 py-8 border border-gray-100 shadow-md hover:shadow-lg transition-shadow">
+          <div className="wave-card wave-delay-0 bg-gradient-to-br from-white/70 via-white/40 to-white/10 backdrop-blur-xl rounded-3xl px-8 py-8 border border-white/40 shadow-lg hover:shadow-xl transition-shadow">
             <div className="flex items-start gap-4 mb-6">
               <div className="w-16 h-16 rounded-full bg-gray-300 flex-shrink-0"></div>
               <div className="pt-2">
@@ -39,7 +39,7 @@ const Homefive: React.FC = () => {
           </div>
 
           {/* Card 2 */}
-          <div className="bg-white rounded-3xl px-8 py-8 border border-gray-100 shadow-md hover:shadow-lg transition-shadow">
+          <div className="wave-card wave-delay-1 bg-gradient-to-br from-white/70 via-white/40 to-white/10 backdrop-blur-xl rounded-3xl px-8 py-8 border border-white/40 shadow-lg hover:shadow-xl transition-shadow">
             <div className="flex items-start gap-4 mb-6">
               <div className="w-16 h-16 rounded-full bg-gray-300 flex-shrink-0"></div>
               <div className="pt-2">
@@ -53,7 +53,7 @@ const Homefive: React.FC = () => {
           </div>
 
           {/* Card 3 */}
-          <div className="bg-white rounded-3xl px-8 py-8 border border-gray-100 shadow-md hover:shadow-lg transition-shadow">
+          <div className="wave-card wave-delay-2 bg-gradient-to-br from-white/70 via-white/40 to-white/10 backdrop-blur-xl rounded-3xl px-8 py-8 border border-white/40 shadow-lg hover:shadow-xl transition-shadow">
             <div className="flex items-start gap-4 mb-6">
               <div className="w-16 h-16 rounded-full bg-gray-300 flex-shrink-0"></div>
               <div className="pt-2">
@@ -67,7 +67,7 @@ const Homefive: React.FC = () => {
           </div>
 
           {/* Card 4 */}
-          <div className="bg-white rounded-3xl px-8 py-8 border border-gray-100 shadow-md hover:shadow-lg transition-shadow">
+          <div className="wave-card wave-delay-0 bg-gradient-to-br from-white/70 via-white/40 to-white/10 backdrop-blur-xl rounded-3xl px-8 py-8 border border-white/40 shadow-lg hover:shadow-xl transition-shadow">
             <div className="flex items-start gap-4 mb-6">
               <div className="w-16 h-16 rounded-full bg-gray-300 flex-shrink-0"></div>
               <div className="pt-2">
@@ -81,7 +81,7 @@ const Homefive: React.FC = () => {
           </div>
 
           {/* Card 5 */}
-          <div className="bg-white rounded-3xl px-8 py-8 border border-gray-100 shadow-md hover:shadow-lg transition-shadow">
+          <div className="wave-card wave-delay-1 bg-gradient-to-br from-white/70 via-white/40 to-white/10 backdrop-blur-xl rounded-3xl px-8 py-8 border border-white/40 shadow-lg hover:shadow-xl transition-shadow">
             <div className="flex items-start gap-4 mb-6">
               <div className="w-16 h-16 rounded-full bg-gray-300 flex-shrink-0"></div>
               <div className="pt-2">
@@ -95,7 +95,7 @@ const Homefive: React.FC = () => {
           </div>
 
           {/* Card 6 */}
-          <div className="bg-white rounded-3xl px-8 py-8 border border-gray-100 shadow-md hover:shadow-lg transition-shadow">
+          <div className="wave-card wave-delay-2 bg-gradient-to-br from-white/70 via-white/40 to-white/10 backdrop-blur-xl rounded-3xl px-8 py-8 border border-white/40 shadow-lg hover:shadow-xl transition-shadow">
             <div className="flex items-start gap-4 mb-6">
               <div className="w-16 h-16 rounded-full bg-gray-300 flex-shrink-0"></div>
               <div className="pt-2">

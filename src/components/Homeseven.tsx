@@ -1,14 +1,41 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const Homeseven: React.FC = () => {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+        }
+      },
+      { threshold: 0.25, rootMargin: '0px 0px -60px 0px' }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  const baseLineClasses =
+    'flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-4 lg:mb-5';
+
+  const lineClass = (delayClass: string) =>
+    `${baseLineClasses} ${visible ? `typing-line ${delayClass}` : 'opacity-0'}`;
+
   return (
     <section
+      ref={sectionRef}
       className="bg-[#272D55] py-16 px-4 sm:px-6 lg:px-10"
       style={{ fontFamily: "'Manrope', 'Segoe UI', sans-serif" }}
     >
       <div className="max-w-5xl mx-auto">
         {/* Line 1: GROWING [one] YOUR BRAND* */}
-        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-4 lg:mb-5">
+        <div className={lineClass('typing-delay-0')}>
           <span className="text-white text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold uppercase tracking-tight">
             GROWING
           </span>
@@ -23,7 +50,7 @@ const Homeseven: React.FC = () => {
         </div>
 
         {/* Line 2: ON THE [two] RIGHT PLATFORM */}
-        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-4 lg:mb-5">
+        <div className={lineClass('typing-delay-1')}>
           <span className="text-white text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold uppercase tracking-tight underline decoration-white underline-offset-2">
             ON THE
           </span>
@@ -38,7 +65,7 @@ const Homeseven: React.FC = () => {
         </div>
 
         {/* Line 3: -AT [three] THE RIGHT TIME */}
-        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-4 lg:mb-5">
+        <div className={lineClass('typing-delay-2')}>
           <span className="text-white text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold uppercase tracking-tight">
             -AT
           </span>
@@ -53,7 +80,7 @@ const Homeseven: React.FC = () => {
         </div>
 
         {/* Line 4: 'WITH' A [four] SMART PLAN." */}
-        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+        <div className={lineClass('typing-delay-3')}>
           <span className="text-white text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold uppercase tracking-tight">
             &apos;WITH&apos; A
           </span>

@@ -1,6 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+type ServiceKey = 'marketing' | 'branding' | 'development' | 'uiux';
 
 const Homethree: React.FC = () => {
+  const [activeService, setActiveService] = useState<ServiceKey>('marketing');
+
+  const getServiceImage = () => {
+    switch (activeService) {
+      case 'branding':
+        return '/images/s3.png';
+      case 'development':
+        return '/images/s2.png';
+      case 'uiux':
+        return '/images/s4.png';
+      case 'marketing':
+      default:
+        return '/images/s1.png';
+    }
+  };
   return (
     <section
       className="relative py-16 px-4 sm:px-6 lg:px-10 overflow-hidden"
@@ -21,7 +38,8 @@ const Homethree: React.FC = () => {
         {/* Left text block */}
         <div className="flex-1 text-left text-[#9CA9FF]">
           <h2
-            className="group inline-flex items-baseline gap-2 mb-3 uppercase text-[#57609B] hover:text-white"
+            className="group inline-flex items-baseline gap-2 mb-3 uppercase text-[#57609B] hover:text-[#C7CFFA] cursor-pointer"
+            onMouseEnter={() => setActiveService('marketing')}
             style={{
               fontFamily: "'Anton', sans-serif",
               fontWeight: 400,
@@ -30,49 +48,52 @@ const Homethree: React.FC = () => {
             }}
           >
             MARKETING
-            <span className="text-xs sm:text-sm tracking-[0.3em] text-[#57609B] group-hover:text-white">
+            <span className="text-xs sm:text-sm tracking-[0.3em] text-[#57609B] group-hover:text-[#C7CFFA]">
               (01)
             </span>
           </h2>
           <h2
-            className="group inline-flex items-baseline gap-2 mb-3 uppercase transition-colors duration-200 text-[#57609B] hover:text-white cursor-pointer"
+            className="group inline-flex items-baseline gap-2 mb-3 uppercase transition-colors duration-200 text-[#57609B] hover:text-[#C7CFFA] cursor-pointer"
             style={{
               fontFamily: "'Anton', sans-serif",
               fontWeight: 400,
               fontSize: '150px',
               lineHeight: '100%',
             }}
+            onMouseEnter={() => setActiveService('branding')}
           >
             BRANDING
-            <span className="text-xs sm:text-sm tracking-[0.3em] text-[#57609B] group-hover:text-white">
+            <span className="text-xs sm:text-sm tracking-[0.3em] text-[#57609B] group-hover:text-[#C7CFFA]">
               (02)
             </span>
           </h2>
           <h2
-            className="group inline-flex items-baseline gap-2 mb-3 uppercase text-[#57609B] hover:text-white"
+            className="group inline-flex items-baseline gap-2 mb-3 uppercase text-[#57609B] hover:text-[#C7CFFA] cursor-pointer"
             style={{
               fontFamily: "'Anton', sans-serif",
               fontWeight: 400,
               fontSize: '150px',
               lineHeight: '100%',
             }}
+            onMouseEnter={() => setActiveService('development')}
           >
             Development
-            <span className="text-xs sm:text-sm tracking-[0.3em] text-[#57609B] group-hover:text-white">
+            <span className="text-xs sm:text-sm tracking-[0.3em] text-[#57609B] group-hover:text-[#C7CFFA]">
               (03)
             </span>
           </h2>
           <h2
-            className="group inline-flex items-baseline gap-2 uppercase text-[#57609B] hover:text-white"
+            className="group inline-flex items-baseline gap-2 uppercase text-[#57609B] hover:text-[#C7CFFA] cursor-pointer"
             style={{
               fontFamily: "'Anton', sans-serif",
               fontWeight: 400,
               fontSize: '150px',
               lineHeight: '100%',
             }}
+            onMouseEnter={() => setActiveService('uiux')}
           >
-            UI/UX Design
-            <span className="text-xs sm:text-sm tracking-[0.3em] text-[#57609B] group-hover:text-white">
+            Creative
+            <span className="text-xs sm:text-sm tracking-[0.3em] text-[#57609B] group-hover:text-[#C7CFFA]">
               (04)
             </span>
           </h2>
@@ -89,9 +110,9 @@ const Homethree: React.FC = () => {
             {/* Main image inside card */}
             <div className="overflow-hidden rounded-[22px] border border-white/20 mb-3">
               <img
-                src="/images/CTA.png"
+                src={getServiceImage()}
                 alt="Our services preview"
-                className="w-full h-80 object-cover"
+                className="w-full h-80 object-cover transition-transform duration-500"
               />
             </div>
 
