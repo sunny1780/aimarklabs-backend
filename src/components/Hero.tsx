@@ -17,28 +17,28 @@ const Hero: React.FC = () => {
             <img
               src="/images/star.png"
               alt="star shape"
-              className="absolute -left-28 -top-32 w-36 h-36 object-contain"
+              className="hero-float-1 absolute -left-28 -top-32 w-36 h-36 object-contain"
             />
 
             {/* Floating Aa image */}
             <img
               src="/images/Aa.png"
               alt="Aa card"
-              className="absolute -top-16 left-[300px] w-24 h-auto object-contain"
+              className="hero-float-2 absolute -top-16 left-[300px] w-24 h-auto object-contain"
             />
 
             {/* Bottom left Full-Stack pill image */}
             <img
               src="/images/fullstack.png"
               alt="Full Stack badge"
-              className="absolute -bottom-36 left-40 w-28 h-auto object-contain"
+              className="hero-float-3 absolute -bottom-36 left-40 w-28 h-auto object-contain"
             />
 
             {/* Bottom right Agencies pill image */}
             <img
               src="/images/agencies.png"
               alt="Agencies badge"
-              className="absolute -bottom-40 -right-[320px] w-28 h-auto object-contain"
+              className="hero-float-2 absolute -bottom-40 -right-[320px] w-28 h-auto object-contain"
             />
           </div>
 
@@ -47,15 +47,15 @@ const Hero: React.FC = () => {
             <div className="-mt-[112px] mr-24 text-left space-y-1 text-[16px] text-gray-700">
               <div>
                 <p>ui/ux design</p>
-                <img src="/images/Line.png" alt="line" className="mt-1" />
+                <img src="/images/Line.png" alt="line" className="hero-float-1 mt-1" />
               </div>
               <div>
                 <p>digital marketing</p>
-                <img src="/images/Line.png" alt="line" className="mt-1" />
+                <img src="/images/Line.png" alt="line" className="hero-float-2 mt-1" />
               </div>
               <div>
                 <p>web development</p>
-                <img src="/images/Line.png" alt="line" className="mt-1" />
+                <img src="/images/Line.png" alt="line" className="hero-float-3 mt-1" />
               </div>
             </div>
           </div>

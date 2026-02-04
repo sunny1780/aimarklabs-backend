@@ -72,10 +72,6 @@ const IndustryHero: React.FC = () => {
           .industry-hero-letter:nth-child(9) { animation-delay: 0.29s; }
           .industry-hero-letter:nth-child(10) { animation-delay: 0.32s; }
 
-          .industry-hero-heading:hover .industry-hero-letter {
-            animation: industryHeroHover 0.5s ease-out;
-          }
-
           @keyframes industryHeroBgPan {
             0% {
               transform: scale(1.03) translate3d(-10px, 0, 0);
@@ -99,18 +95,6 @@ const IndustryHero: React.FC = () => {
             }
             100% {
               opacity: 1;
-              transform: translateY(0);
-            }
-          }
-
-          @keyframes industryHeroHover {
-            0% {
-              transform: translateY(0);
-            }
-            50% {
-              transform: translateY(-6px);
-            }
-            100% {
               transform: translateY(0);
             }
           }
