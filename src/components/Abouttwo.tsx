@@ -42,31 +42,76 @@ const Abouttwo = () => {
   ];
 
   return (
-    <section
-      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
-      style={{ fontFamily: "'Manrope', 'Segoe UI', sans-serif" }}
-    >
-      {sections.map((section, index) => {
-        const IconComponent = section.icon as React.ComponentType<React.SVGProps<SVGSVGElement>>;
-        return (
-          <div
-            key={index}
-            className="flex flex-col items-center justify-center text-center p-8 lg:p-10 min-h-[280px] transition-all duration-300 hover:opacity-95"
-            style={{ backgroundColor: section.bg }}
-          >
-            <div className={`mb-4 ${section.iconColor || 'text-gray-800'}`}>
-              <IconComponent className="w-12 h-12" />
+    <>
+      <section
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
+        style={{ fontFamily: "'Manrope', 'Segoe UI', sans-serif" }}
+      >
+        {sections.map((section, index) => {
+          const IconComponent = section.icon as React.ComponentType<React.SVGProps<SVGSVGElement>>;
+          return (
+            <div
+              key={index}
+              className="about-two-card group relative flex flex-col items-center justify-center text-center p-8 lg:p-10 min-h-[280px] transition-all duration-300 hover:opacity-100"
+              style={{
+                backgroundColor: section.bg,
+                animationDelay: `${index * 0.08}s`,
+              }}
+            >
+              {/* subtle shine overlay */}
+              <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <div className="absolute -inset-y-6 -left-16 w-24 rotate-12 bg-white/15 blur-2xl group-hover:translate-x-[260%] transition-transform duration-1000" />
+              </div>
+
+              <div className={`about-two-icon mb-4 ${section.iconColor || 'text-gray-800'}`}>
+                <IconComponent className="w-12 h-12" />
+              </div>
+              <h3 className={`font-bold text-lg lg:text-xl mb-2 ${section.textColor}`}>
+                {section.title}
+              </h3>
+              <p className={`text-sm lg:text-base ${section.descColor}`}>
+                {section.description}
+              </p>
             </div>
-            <h3 className={`font-bold text-lg lg:text-xl mb-2 ${section.textColor}`}>
-              {section.title}
-            </h3>
-            <p className={`text-sm lg:text-base ${section.descColor}`}>
-              {section.description}
-            </p>
-          </div>
-        );
-      })}
-    </section>
+          );
+        })}
+      </section>
+
+      {/* Local styles for professional motion */}
+      <style>
+        {`
+          .about-two-card {
+            opacity: 0;
+            transform: translateY(16px);
+            animation: aboutTwoFadeUp 0.6s ease-out forwards;
+          }
+
+          .about-two-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.14);
+          }
+
+          .about-two-icon {
+            transition: transform 0.35s ease-out;
+          }
+
+          .about-two-card:hover .about-two-icon {
+            transform: translateY(-4px) scale(1.05);
+          }
+
+          @keyframes aboutTwoFadeUp {
+            from {
+              opacity: 0;
+              transform: translateY(22px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+        `}
+      </style>
+    </>
   );
 };
 
