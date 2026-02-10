@@ -19,6 +19,8 @@ const CLIENTS_KEY = 'dashboard_clients_v1';
 
 export const ADMIN_EMAILS = ['farhanali@gmail.com', 'javeria@aimarklabs.com'];
 export const ADMIN_PASSWORD = '123456';
+export const DASHBOARD_EMAILS = ['usman@gmail.com'];
+export const DASHBOARD_PASSWORD = '123456';
 
 const parseJSON = <T,>(value: string | null, fallback: T): T => {
   if (!value) return fallback;

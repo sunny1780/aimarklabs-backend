@@ -6,6 +6,7 @@ import AdminAccount from './AdminAccount';
 import AnalyticsDashboard from './AnalyticsDashboard';
 import Login from './components/ Login';
 import SignUp from './components/SignUp';
+import CursorDot from './components/CursorDot';
 import Home from './pages/Home';
 import Aboutus from './pages/Aboutus';
 import Contactus from './pages/Contactus';
@@ -19,7 +20,7 @@ const LoginRoute: React.FC = () => {
   return (
     <Login
       onGoToSignUp={() => navigate('/signup')}
-      onLoginSuccess={() => navigate('/dashboard')}
+      onLoginSuccess={(destination) => navigate(destination)}
     />
   );
 };
@@ -67,6 +68,7 @@ const UiUxRoute: React.FC = () => {
 const App: React.FC = () => {
   return (
     <BrowserRouter>
+      <CursorDot />
       <Routes>
         <Route path="/" element={<HomeRoute />} />
         <Route path="/about" element={<AboutRoute />} />

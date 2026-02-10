@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { useInView } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import Hometwo from '../components/Hometwo';
@@ -17,11 +18,16 @@ interface HomeProps {
 }
 
 const Home: React.FC<HomeProps> = ({ onLoginClick }) => {
+  const nextRef = useRef<HTMLDivElement>(null);
+  const nextInView = useInView(nextRef, { amount: 0.35, margin: '0px 0px -20% 0px' });
+
   return (
     <div className="min-h-screen">
       <Navbar onLoginClick={onLoginClick} />
-      <Hero />
-      <Hometwo />
+      <Hero nextInView={nextInView} />
+      <div ref={nextRef}>
+        <Hometwo nextInView={nextInView} />
+      </div>
       <Homethree />
       <Homefour />
       <Homefive />

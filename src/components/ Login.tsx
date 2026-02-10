@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
-import { ADMIN_EMAILS, ADMIN_PASSWORD, getUsers } from '../utils/auth';
+import {
+  ADMIN_EMAILS,
+  ADMIN_PASSWORD,
+  DASHBOARD_EMAILS,
+  DASHBOARD_PASSWORD,
+  getUsers,
+} from '../utils/auth';
 
 interface LoginProps {
   onGoToSignUp?: () => void;
@@ -16,6 +22,14 @@ const Login: React.FC<LoginProps> = ({ onGoToSignUp, onLoginSuccess }) => {
     e.preventDefault();
     setError('');
     const users = getUsers();
+    if (DASHBOARD_EMAILS.includes(username)) {
+      if (password !== DASHBOARD_PASSWORD) {
+        setError('Invalid username or password.');
+        return;
+      }
+      onLoginSuccess?.('/dashboard');
+      return;
+    }
     if (ADMIN_EMAILS.includes(username)) {
       if (password !== ADMIN_PASSWORD) {
         setError('Invalid username or password.');

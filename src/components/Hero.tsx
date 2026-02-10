@@ -1,8 +1,21 @@
 import React from 'react';
+import SharedVideo from './SharedVideo';
 
-const Hero: React.FC = () => {
+interface HeroProps {
+  nextInView: boolean;
+}
+
+const Hero: React.FC<HeroProps> = ({ nextInView }) => {
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-[#dbeafe] via-[#ffe4e6] to-[#fef9c3] min-h-[500px] flex items-center">
+      {/* Corner video */}
+      {!nextInView && (
+        <SharedVideo
+          src="/images/video.mp4"
+          className="absolute bottom-0 right-0 z-20 w-64 h-40"
+        />
+      )}
+
       <div className="max-w-7xl mx-auto px-10 w-full relative">
         {/* Big background text - absolutely centered */}
         <h1 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[200px] leading-none font-bold text-[#d4d4d8] tracking-tight select-none z-0">
@@ -66,4 +79,3 @@ const Hero: React.FC = () => {
 };
 
 export default Hero;
-

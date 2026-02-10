@@ -1,6 +1,11 @@
 import React, { useRef, useState, useEffect } from 'react';
+import SharedVideo from './SharedVideo';
 
-const Hometwo: React.FC = () => {
+interface HometwoProps {
+  nextInView: boolean;
+}
+
+const Hometwo: React.FC<HometwoProps> = ({ nextInView }) => {
   const cardsRef = useRef<HTMLDivElement>(null);
   const leftTextRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -52,10 +57,16 @@ const Hometwo: React.FC = () => {
 
   return (
     <section
-      className="bg-[#F5F7FB] py-12 px-4 sm:px-6 lg:px-10"
+      className="relative bg-[#F5F7FB] py-12 px-4 sm:px-6 lg:px-10"
       style={{ fontFamily: "'Manrope', 'Segoe UI', sans-serif" }}
     >
       <div className="max-w-6xl mx-auto">
+        {nextInView && (
+          <SharedVideo
+            src="/images/video.mp4"
+            className="w-[2500px] h-[740px] max-w-full mx-auto mb-12"
+          />
+        )}
         {/* Main Content Grid */}
         <div className="grid lg:grid-cols-2 gap-14 items-start">
           {/* Left Side - Text + Map */}
@@ -95,8 +106,11 @@ const Hometwo: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Side - Divider + Feature Cards */}
-          <div ref={cardsRef} className="lg:border-l lg:border-gray-200 lg:pl-12 flex flex-col gap-6 overflow-x-hidden">
+          {/* Right Side - Divider + Feature Cards (Video section) */}
+          <div
+            ref={cardsRef}
+            className="lg:border-l lg:border-gray-200 lg:pl-12 flex flex-col gap-6 overflow-x-hidden"
+          >
             {/* AI-Powered Strategy */}
             <div style={cardStyle(0)} className="bg-white rounded-[22px] px-8 py-5 shadow-[0_20px_45px_rgba(15,23,42,0.06)] w-[462px] min-h-[176px]">
               <div className="flex flex-col gap-4">

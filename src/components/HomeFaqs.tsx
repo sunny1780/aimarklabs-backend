@@ -24,25 +24,25 @@ const HomeFaqs: React.FC = () => {
 
   const faqs = [
     {
-      question: "Lorem ipsum dolor sit amet consectetur?",
-      answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      question: "What services does your agency offer?",
+      answer: "We provide a full range of digital marketing services, including SEO, PPC, social media management, content creation, email marketing, web design, and analytics reporting."
     },
     {
-      question: "Lorem ipsum dolor sit amet consectetur?",
-      answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+      question: "Do you work with businesses in all industries?",
+      answer: "Yes, we work with businesses across various industries, including e-commerce, technology, healthcare, finance, hospitality, and more."
     },
     {
-      question: "Lorem ipsum dolor sit amet consectetur?",
-      answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      question: "Can you help us target audiences in different countries?",
+      answer: "Absolutely! We specialize in global marketing and can localize campaigns to target specific audiences by region, language, or culture."
     },
     {
-      question: "Lorem ipsum dolor sit amet consectetur?",
-      answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris."
+      question: "How do you measure the success of your campaigns?",
+      answer: "We track metrics such as website traffic, conversions, ROI, engagement rates, and other KPIs based on your business goals. Regular reports are shared for transparency."
     },
-    {
-      question: "Lorem ipsum dolor sit amet consectetur?",
-      answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    }
+    // {
+    //   question: "Lorem ipsum dolor sit amet consectetur?",
+    //   answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    // }
   ];
 
   const toggleFAQ = (index: number) => {

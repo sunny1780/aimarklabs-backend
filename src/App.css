@@ -1,11 +1,58 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap");
+
+:root {
+  --cursor-size: 20px;
+  --cursor-color: #ff6b6b;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body,
+*,
+*::before,
+*::after,
+input,
+textarea,
+select,
+button,
+label,
+a {
+  cursor: none !important;
+}
+
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--cursor-size);
+  height: var(--cursor-size);
+  border-radius: 50%;
+  background: var(--cursor-color);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate3d(-50%, -50%, 0);
+  transition: background-color 120ms ease, opacity 120ms ease;
+  opacity: 1;
+}
+
+.custom-cursor.is-hidden {
+  opacity: 0;
+}
 
 .analytics-app {
   display: flex;
   min-height: 100vh;
   background: #f5f7fb;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text',
-    'Segoe UI', sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Text",
+    "Segoe UI",
+    sans-serif;
   color: #1f2933;
 }
 
@@ -70,7 +117,9 @@
   color: #cdd2ff;
   text-decoration: none;
   font-size: 14px;
-  transition: background 0.15s ease, color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
   border: none;
   background: transparent;
   width: 100%;
@@ -211,14 +260,23 @@
   --accent: #f58a2b;
   display: flex;
   min-height: 100vh;
-  background: radial-gradient(circle at top left, #eef2ff 0%, #f8fafc 55%, #f3f6ff 100%);
+  background: radial-gradient(
+    circle at top left,
+    #eef2ff 0%,
+    #f8fafc 55%,
+    #f3f6ff 100%
+  );
   color: var(--ink);
-  font-family: 'Manrope', 'Segoe UI', sans-serif;
+  font-family: "Manrope", "Segoe UI", sans-serif;
 }
 
 .admin-sidebar {
   width: 260px;
-  background: linear-gradient(180deg, var(--nav-bg) 0%, var(--nav-bg-dark) 100%);
+  background: linear-gradient(
+    180deg,
+    var(--nav-bg) 0%,
+    var(--nav-bg-dark) 100%
+  );
   color: #eef2ff;
   display: flex;
   flex-direction: column;
@@ -229,7 +287,7 @@
 }
 
 .admin-sidebar::after {
-  content: '';
+  content: "";
   position: absolute;
   top: auto;
   right: 24px;
@@ -334,7 +392,7 @@
 }
 
 .admin-main::before {
-  content: '';
+  content: "";
   position: absolute;
   width: 320px;
   height: 320px;
@@ -1071,7 +1129,11 @@
 .chart-bg {
   position: absolute;
   inset: 24px 22px 40px;
-  background: linear-gradient(to bottom, rgba(148, 163, 184, 0.12), transparent);
+  background: linear-gradient(
+    to bottom,
+    rgba(148, 163, 184, 0.12),
+    transparent
+  );
   border-radius: 10px;
 }
 
@@ -1370,9 +1432,25 @@
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #22c55e 0, #22c55e 9px, transparent 10px),
-    radial-gradient(circle at 70% 30%, #facc15 0, #facc15 9px, transparent 10px),
-    radial-gradient(circle at 50% 70%, #3b82f6 0, #3b82f6 14px, transparent 15px);
+  background:
+    radial-gradient(
+      circle at 30% 30%,
+      #22c55e 0,
+      #22c55e 9px,
+      transparent 10px
+    ),
+    radial-gradient(
+      circle at 70% 30%,
+      #facc15 0,
+      #facc15 9px,
+      transparent 10px
+    ),
+    radial-gradient(
+      circle at 50% 70%,
+      #3b82f6 0,
+      #3b82f6 14px,
+      transparent 15px
+    );
 }
 
 .google-ads-text {
@@ -1413,7 +1491,7 @@
 }
 
 .google-biz-logo::after {
-  content: 'G';
+  content: "G";
   position: absolute;
   bottom: 14px;
   left: 50%;
@@ -1502,7 +1580,7 @@
 }
 
 .account-tab.active::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   right: 0;
@@ -2112,7 +2190,7 @@
 }
 
 .packages-tab.active::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   right: 0;
