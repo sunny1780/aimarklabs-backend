@@ -29,12 +29,14 @@ const Homefive: React.FC = () => {
             <div className="flex items-start gap-4 mb-6">
               <div className="w-16 h-16 rounded-full bg-gray-300 flex-shrink-0"></div>
               <div className="pt-2">
-                <h3 className="font-bold text-gray-900 text-lg mb-1">Megan</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">Student at New York University</p>
+                <h3 className="font-bold text-gray-900 text-lg mb-1">Misty</h3>
+                <p className="text-sm text-gray-500 leading-relaxed">
+                CEO, Little Sicily</p>
               </div>
             </div>
             <p className="text-gray-700 leading-relaxed text-base">
-              "This cup is fantastic! It is so well insulated. I live in the desert, and it keeps my cold drinks cold in the heat"
+              "Impressive results from Al Mark Labs' digital marketing. Their expertise and innovative methods have been crucial for our success.
+Truly remarkable."
             </p>
           </div>
 
@@ -43,12 +45,12 @@ const Homefive: React.FC = () => {
             <div className="flex items-start gap-4 mb-6">
               <div className="w-16 h-16 rounded-full bg-gray-300 flex-shrink-0"></div>
               <div className="pt-2">
-                <h3 className="font-bold text-gray-900 text-lg mb-1">Jerry Tang</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">Recent graduate, Marketing at Sweatpals</p>
+                <h3 className="font-bold text-gray-900 text-lg mb-1">Jacob</h3>
+                <p className="text-sm text-gray-500 leading-relaxed">CEO, Lacto Industries</p>
               </div>
             </div>
             <p className="text-gray-700 leading-relaxed text-base">
-              "Joining Mate community is the best thing I have ever done. The projects I worked on gave me the experience I needed in content Marketing"
+              "Choosing Al Mark Labs was a game-changer for our digital presence. Their strategies are insightful and yield great results. Exceptional service."
             </p>
           </div>
 
@@ -57,12 +59,12 @@ const Homefive: React.FC = () => {
             <div className="flex items-start gap-4 mb-6">
               <div className="w-16 h-16 rounded-full bg-gray-300 flex-shrink-0"></div>
               <div className="pt-2">
-                <h3 className="font-bold text-gray-900 text-lg mb-1">Jerry Tang</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">Recent graduate, Marketing at Sweatpals</p>
+                <h3 className="font-bold text-gray-900 text-lg mb-1">Mark</h3>
+                <p className="text-sm text-gray-500 leading-relaxed">CEO, Aventusten</p>
               </div>
             </div>
             <p className="text-gray-700 leading-relaxed text-base">
-              "I love the color. It's even better in person. I love that iron flask gives you multiple lids as well. It's sturdy."
+              "Exceptional digital marketing services by Al Mark Labs. Saw a significant increase in traffic and engagement. I highly recommend their approach."
             </p>
           </div>
 

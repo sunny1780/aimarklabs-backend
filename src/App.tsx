@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import Aboutus from './pages/Aboutus';
 import Contactus from './pages/Contactus';
 import Blog from './pages/Blog';
+import SEOBlog from './components/Blog/SEOBlog';
 import Industries from './pages/Industries';
 import UiUx from './pages/UiUx';
 
@@ -71,6 +72,7 @@ const App: React.FC = () => {
         <Route path="/about" element={<AboutRoute />} />
         <Route path="/contact" element={<ContactRoute />} />
         <Route path="/blog" element={<BlogRoute />} />
+        <Route path="/blog/seo-in-the-age-of-ai" element={<SEOBlog />} />
         <Route path="/industries" element={<IndustriesRoute />} />
         <Route path="/services/ui-ux" element={<UiUxRoute />} />
         <Route path="/login" element={<LoginRoute />} />

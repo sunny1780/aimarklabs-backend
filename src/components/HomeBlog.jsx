@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const HomeBlog = () => {
   const sectionRef = useRef(null);
@@ -33,8 +34,13 @@ const HomeBlog = () => {
     opacity: visible ? 1 : 0,
     transition: `transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms, opacity 0.5s ease ${delay}ms`,
   });
+  const cardImages = [
+    '/images/SEOBLOG.webp',
+    '/images/AIBLOG.webp',
+    '/images/AIPowered.webp',
+  ];
+
   const card = {
-    image: '/images/colors.png',
     buttonText: 'Collaborate',
     title: 'Talk it out with audio',
     description:
@@ -64,30 +70,40 @@ const HomeBlog = () => {
 
         {/* Cards Row */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[...Array(3)].map((_, index) => (
-            <div
-              key={index}
-              style={cardStyle(index * 150)}
-              className="bg-white rounded-xl overflow-hidden shadow-md"
-            >
-              <img
-                src={card.image}
-                alt=""
-                className="w-full h-48 object-cover rounded-t-xl"
-              />
-              <div className="p-6">
-                <button className="bg-[#B3BDEF] text-white text-sm font-medium px-4 py-2 rounded-lg mb-3">
-                  {card.buttonText}
-                </button>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">
-                  {card.title}
-                </h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  {card.description}
-                </p>
+          {[...Array(3)].map((_, index) => {
+            const cardContent = (
+              <>
+                <img
+                  src={cardImages[index]}
+                  alt=""
+                  className="w-full h-48 object-cover rounded-t-xl"
+                />
+                <div className="p-6">
+                  <button className="bg-[#B3BDEF] text-white text-sm font-medium px-4 py-2 rounded-lg mb-3">
+                    {card.buttonText}
+                  </button>
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">
+                    {index === 0 ? 'SEO in the Age of AI' : card.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    {card.description}
+                  </p>
+                </div>
+              </>
+            );
+            const cardClass = 'bg-white rounded-xl overflow-hidden shadow-md ' + (index === 0 ? 'hover:shadow-lg transition-shadow cursor-pointer' : '');
+            return index === 0 ? (
+              <Link key={index} to="/blog/seo-in-the-age-of-ai">
+                <div style={cardStyle(index * 150)} className={cardClass}>
+                  {cardContent}
+                </div>
+              </Link>
+            ) : (
+              <div key={index} style={cardStyle(index * 150)} className={cardClass}>
+                {cardContent}
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
