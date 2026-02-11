@@ -1,7 +1,9 @@
+import CardSwap, { Card } from './CardSwap';
+
 const Servicehero = () => {
   return (
     <>
-      <section className="py-16">
+      <section className="py-16 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 flex flex-col-reverse md:flex-row items-center gap-12">
           {/* LEFT CONTENT */}
           <div className="w-full md:w-1/2 service-hero-left">
@@ -26,14 +28,32 @@ const Servicehero = () => {
             </button>
           </div>
 
-          {/* RIGHT IMAGE */}
+          {/* RIGHT CARDS */}
           <div className="w-full md:w-1/2 flex justify-center">
-            <div className="service-hero-image rounded-2xl overflow-hidden w-full h-[240px] sm:h-[300px] md:h-[360px]">
-              <img
-                src="/images/service-hero.jpg"
-                alt="UI UX Design"
-                className="w-full h-full object-cover"
-              />
+            <div
+              className="service-hero-image w-full max-w-[520px] h-[400px] sm:h-[420px] md:h-[420px] relative overflow-hidden"
+            >
+              <CardSwap
+                width={320}
+                height={220}
+                cardDistance={42}
+                verticalDistance={34}
+                delay={3000}
+                pauseOnHover={false}
+              >
+                <Card customClass="p-6 text-white shadow-xl">
+                  <h3 className="text-2xl font-semibold mb-2">Card 1</h3>
+                  <p className="text-sm text-slate-300">Your content here</p>
+                </Card>
+                <Card customClass="p-6 text-white shadow-xl">
+                  <h3 className="text-2xl font-semibold mb-2">Card 2</h3>
+                  <p className="text-sm text-slate-300">Your content here</p>
+                </Card>
+                <Card customClass="p-6 text-white shadow-xl">
+                  <h3 className="text-2xl font-semibold mb-2">Card 3</h3>
+                  <p className="text-sm text-slate-300">Your content here</p>
+                </Card>
+              </CardSwap>
             </div>
           </div>
         </div>
@@ -50,7 +70,7 @@ const Servicehero = () => {
 
           .service-hero-image {
             transform-origin: center;
-            box-shadow: 0 20px 60px rgba(15, 23, 42, 0.25);
+            /* box-shadow: 0 20px 60px rgba(15, 23, 42, 0.25); */
             opacity: 0;
             transform: translateX(24px) scale(0.98);
             animation: serviceHeroImageIn 0.8s ease-out 0.1s forwards,
