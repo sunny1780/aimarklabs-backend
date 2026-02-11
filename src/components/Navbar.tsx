@@ -46,10 +46,10 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
                   <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Services</span>
                 </div>
                 <Link
-                  to="/services/ui-ux"
+                  to="/services/creative-services"
                   className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition-colors"
                 >
-                  UI/UX
+                  Creative Services
                 </Link>
               </div>
             )}

@@ -76,7 +76,7 @@ const App: React.FC = () => {
         <Route path="/blog" element={<BlogRoute />} />
         <Route path="/blog/seo-in-the-age-of-ai" element={<SEOBlog />} />
         <Route path="/industries" element={<IndustriesRoute />} />
-        <Route path="/services/ui-ux" element={<UiUxRoute />} />
+        <Route path="/services/creative-services" element={<UiUxRoute />} />
         <Route path="/login" element={<LoginRoute />} />
         <Route path="/signup" element={<SignUpRoute />} />
         <Route path="/dashboard" element={<AnalyticsDashboard />} />

@@ -1,3 +1,6 @@
+import { useEffect, useRef, type ReactNode } from 'react';
+import gsap from 'gsap';
+
 type OfferingItem = {
   title: string;
   description: string;
@@ -61,9 +64,124 @@ const Sparkle = () => (
   </svg>
 );
 
-const Creativeoffering = () => {
+const AnimatedOfferingCard = ({
+  children,
+  wide = false
+}: {
+  children: ReactNode;
+  wide?: boolean;
+}) => {
+  const cardRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const element = cardRef.current;
+    if (!element) return;
+
+    const handleMouseMove = (event: MouseEvent) => {
+      const rect = element.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = ((y - centerY) / centerY) * -5;
+      const rotateY = ((x - centerX) / centerX) * 5;
+
+      element.style.setProperty('--glow-x', `${(x / rect.width) * 100}%`);
+      element.style.setProperty('--glow-y', `${(y / rect.height) * 100}%`);
+      element.style.setProperty('--glow-opacity', '1');
+
+      gsap.to(element, {
+        rotateX,
+        rotateY,
+        x: (x - centerX) * 0.015,
+        y: (y - centerY) * 0.015,
+        duration: 0.18,
+        ease: 'power2.out',
+        transformPerspective: 1000
+      });
+    };
+
+    const handleMouseLeave = () => {
+      element.style.setProperty('--glow-opacity', '0');
+      gsap.to(element, {
+        rotateX: 0,
+        rotateY: 0,
+        x: 0,
+        y: 0,
+        duration: 0.3,
+        ease: 'power2.out'
+      });
+    };
+
+    const handleClick = (event: MouseEvent) => {
+      const rect = element.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+
+      const ripple = document.createElement('span');
+      ripple.className = 'creative-ripple';
+      ripple.style.left = `${x}px`;
+      ripple.style.top = `${y}px`;
+      element.appendChild(ripple);
+
+      gsap.fromTo(
+        ripple,
+        { scale: 0, opacity: 0.8 },
+        {
+          scale: 8,
+          opacity: 0,
+          duration: 0.75,
+          ease: 'power2.out',
+          onComplete: () => ripple.remove()
+        }
+      );
+    };
+
+    element.addEventListener('mousemove', handleMouseMove);
+    element.addEventListener('mouseleave', handleMouseLeave);
+    element.addEventListener('click', handleClick);
+
+    return () => {
+      element.removeEventListener('mousemove', handleMouseMove);
+      element.removeEventListener('mouseleave', handleMouseLeave);
+      element.removeEventListener('click', handleClick);
+    };
+  }, []);
+
   return (
-    <section className="bg-[#1F2457] py-16 md:py-20 lg:py-24">
+    <article
+      ref={cardRef}
+      className={`creative-card rounded-[14px] border border-[#9EA8DA] p-6 md:p-7 text-white bg-transparent min-h-[248px] md:min-h-[270px] ${
+        wide ? 'md:col-span-2' : ''
+      }`}
+    >
+      {children}
+    </article>
+  );
+};
+
+const Creativeoffering = () => {
+  const sectionRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+
+    gsap.fromTo(
+      sectionRef.current.querySelectorAll('.creative-card'),
+      { opacity: 0, y: 22 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.55,
+        ease: 'power2.out',
+        stagger: 0.08
+      }
+    );
+  }, []);
+
+  return (
+    <section ref={sectionRef} className="bg-[#1F2457] py-16 md:py-20 lg:py-24">
       <div className="max-w-[1320px] mx-auto px-6 lg:px-8">
         <div className="text-center">
           <span className="inline-block rounded-[10px] bg-[#CDD6FF] px-5 py-2 text-sm md:text-base font-medium text-[#2A315F]">
@@ -76,12 +194,7 @@ const Creativeoffering = () => {
 
         <div className="mt-12 md:mt-14 grid grid-cols-1 md:grid-cols-3 gap-4">
           {offerings.map((item) => (
-            <article
-              key={item.title}
-              className={`rounded-[14px] border border-[#9EA8DA] p-6 md:p-7 text-white bg-transparent min-h-[248px] md:min-h-[270px] ${
-                item.wide ? 'md:col-span-2' : ''
-              }`}
-            >
+            <AnimatedOfferingCard key={item.title} wide={item.wide}>
               <Sparkle />
               <h3 className="mt-8 md:mt-10 text-[33px] leading-tight font-medium">
                 {item.title}
@@ -89,7 +202,7 @@ const Creativeoffering = () => {
               <p className="mt-4 text-[31px] leading-[1.5] text-[#E7ECFF]">
                 {item.description}
               </p>
-            </article>
+            </AnimatedOfferingCard>
           ))}
         </div>
 
@@ -99,6 +212,81 @@ const Creativeoffering = () => {
           </button>
         </div>
       </div>
+
+      <style>
+        {`
+          .creative-card {
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            will-change: transform;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+            --glow-x: 50%;
+            --glow-y: 50%;
+            --glow-opacity: 0;
+          }
+
+          .creative-card::before {
+            content: "";
+            position: absolute;
+            inset: -1px;
+            border-radius: inherit;
+            padding: 1px;
+            background: radial-gradient(
+              140px 140px at var(--glow-x) var(--glow-y),
+              rgba(153, 63, 255, 1) 0%,
+              rgba(132, 0, 255, 0.72) 35%,
+              rgba(132, 0, 255, 0.28) 62%,
+              transparent 78%
+            );
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            pointer-events: none;
+            opacity: 0;
+            z-index: 1;
+            transition: opacity 0.2s ease;
+          }
+
+          .creative-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            pointer-events: none;
+            background: radial-gradient(
+              220px circle at var(--glow-x) var(--glow-y),
+              rgba(132, 0, 255, calc(var(--glow-opacity) * 0.35)) 0%,
+              rgba(132, 0, 255, calc(var(--glow-opacity) * 0.12)) 35%,
+              transparent 70%
+            );
+            opacity: 1;
+          }
+
+          .creative-card:hover::before {
+            opacity: var(--glow-opacity);
+          }
+
+          .creative-card:hover {
+            border-color: #b2bcf5;
+            box-shadow: 0 14px 35px rgba(8, 10, 34, 0.28);
+          }
+
+          .creative-ripple {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            margin-left: -7px;
+            margin-top: -7px;
+            border-radius: 50%;
+            pointer-events: none;
+            background: radial-gradient(circle, rgba(132, 0, 255, 0.55) 0%, transparent 70%);
+            z-index: 2;
+          }
+
+        `}
+      </style>
     </section>
   );
 };

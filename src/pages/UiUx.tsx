@@ -6,6 +6,7 @@ import UiUxOverview from '../components/UiUxOverview';
 import Creativeoffering from '../components/Creativeoffering';
 import Creativefaq from '../components/Creativefaq';
 import Creativeblog from '../components/Creativeblog';
+import Homecta from '../components/Homecta';
 
 interface UiUxProps {
   onLoginClick: () => void;
@@ -20,6 +21,7 @@ const UiUx: React.FC<UiUxProps> = ({ onLoginClick }) => {
       <Creativeoffering />
       <Creativefaq />
       <Creativeblog />
+      <Homecta />
 
       <Footer />
     </div>
