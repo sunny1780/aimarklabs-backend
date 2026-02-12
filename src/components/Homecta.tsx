@@ -54,7 +54,7 @@ const Homecta: React.FC = () => {
               <h2
                 className="homecta-heading mb-6 uppercase"
                 style={{
-                  fontFamily: "'Poppins', sans-serif",
+                  fontFamily: "'Manrope', 'Segoe UI', sans-serif",
                   fontWeight: 700,
                   fontSize: '70px',
                   lineHeight: '104.68px',

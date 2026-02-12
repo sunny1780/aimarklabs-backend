@@ -41,42 +41,44 @@ const cards: OfferingCard[] = [
   },
 ];
 
-const SparkleIcon: React.FC = () => (
-  <svg width="30" height="30" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-    <path
-      d="M12 3.5L13.84 8.16L18.5 10L13.84 11.84L12 16.5L10.16 11.84L5.5 10L10.16 8.16L12 3.5Z"
-      stroke="#B7BEEA"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path d="M18.5 3.5V6.5" stroke="#B7BEEA" strokeWidth="1.8" strokeLinecap="round" />
-    <path d="M17 5H20" stroke="#B7BEEA" strokeWidth="1.8" strokeLinecap="round" />
-  </svg>
-);
-
 const BrandingOfferingsSection: React.FC = () => {
   return (
     <section className="bg-[#1D2255] py-14 sm:py-16 lg:py-20">
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         <div className="text-center">
-          <span className="inline-flex items-center px-4 py-2 rounded-xl bg-[#C9D2FA] text-[#2D3763] text-sm sm:text-base font-medium">
-            What We Deliver
-          </span>
-          <h2 className="mt-6 text-4xl sm:text-5xl lg:text-[68px] font-medium tracking-[-0.02em] text-[#F3F6FF]">
-            Our Branding Offerings
-          </h2>
+    <span className="inline-flex items-center px-4 py-2 rounded-[8px] bg-[#D7DDFC] text-[#272D55] text-sm sm:text-base font-medium border border-[#B3BDEF]">
+  What We Deliver
+</span>
+
+
+        <h2 className="mt-6 text-[60px] font-medium tracking-[-0.02em] text-[#FFFFFF]">
+  Our Branding Offerings
+</h2>
+
         </div>
 
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 items-start">
           {cards.map((card) => (
-            <article
-              key={card.title}
-              className={`rounded-2xl border border-[#AAB4EA] bg-[#1E245A] p-5 sm:p-6 min-h-[260px] sm:min-h-[280px] flex flex-col ${card.span || ''}`}
-            >
-              <SparkleIcon />
-              <h3 className="mt-8 text-[30px] sm:text-[34px] leading-[1.2] text-[#EFF2FF] font-medium">{card.title}</h3>
-              <p className="mt-4 text-[24px] sm:text-[26px] leading-[1.45] text-[#DFE4FF]">{card.description}</p>
+          <article
+  key={card.title}
+  className={`rounded-2xl border border-[#AAB4EA] bg-[#1E245A] p-5 sm:p-6 min-h-[260px] sm:min-h-[280px] ${card.title === 'Brand Strategy & Market Positioning' ? 'lg:min-h-[390px]' : ''} ${card.title === 'Visual Identity & Logo Systems' || card.title === 'Brand Voice & Messaging Frameworks' ? 'lg:min-h-[320px]' : ''} ${card.title === 'Video Production & Editing' ? 'lg:-mt-20 lg:min-h-[400px]' : ''} flex flex-col ${card.span || ''} text-[#FFFFFF]`}
+>
+              <img
+                src="/images/Vector.svg"
+                alt=""
+                aria-hidden="true"
+                className="w-[30px] h-[30px]"
+              />
+<h3 className={`${card.title === 'Brand Strategy & Market Positioning' || card.title === 'Video Production & Editing' ? 'mt-auto' : 'mt-8'} text-[20px] leading-[1.2] text-[#EFF2FF] font-medium`}>
+  {card.title}
+</h3>
+
+
+ <p className="mt-4 text-[16px] leading-[1.45] text-[#FFFFFF] font-normal">
+  {card.description}
+</p>
+
+
             </article>
           ))}
         </div>

@@ -20,7 +20,7 @@ const BlogHero: React.FC = () => {
           <h1
             className="blog-hero-heading text-[#272D55] uppercase"
             style={{
-              fontFamily: "'Roboto', sans-serif",
+              fontFamily: "'Manrope', 'Segoe UI', sans-serif",
               fontWeight: 600,
               fontSize: 'clamp(48px, 12vw, 198px)',
               lineHeight: '100%',

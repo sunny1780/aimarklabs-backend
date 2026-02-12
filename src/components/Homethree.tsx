@@ -41,7 +41,7 @@ const Homethree: React.FC = () => {
             className="group inline-flex items-baseline gap-2 mb-3 uppercase text-[#57609B] hover:text-[#C7CFFA] cursor-pointer"
             onMouseEnter={() => setActiveService('marketing')}
             style={{
-              fontFamily: "'Anton', sans-serif",
+              fontFamily: "'Manrope', 'Segoe UI', sans-serif",
               fontWeight: 400,
               fontSize: '150px',
               lineHeight: '100%',
@@ -55,7 +55,7 @@ const Homethree: React.FC = () => {
           <h2
             className="group inline-flex items-baseline gap-2 mb-3 uppercase transition-colors duration-200 text-[#57609B] hover:text-[#C7CFFA] cursor-pointer"
             style={{
-              fontFamily: "'Anton', sans-serif",
+              fontFamily: "'Manrope', 'Segoe UI', sans-serif",
               fontWeight: 400,
               fontSize: '150px',
               lineHeight: '100%',
@@ -70,7 +70,7 @@ const Homethree: React.FC = () => {
           <h2
             className="group inline-flex items-baseline gap-2 mb-3 uppercase text-[#57609B] hover:text-[#C7CFFA] cursor-pointer"
             style={{
-              fontFamily: "'Anton', sans-serif",
+              fontFamily: "'Manrope', 'Segoe UI', sans-serif",
               fontWeight: 400,
               fontSize: '150px',
               lineHeight: '100%',
@@ -85,7 +85,7 @@ const Homethree: React.FC = () => {
           <h2
             className="group inline-flex items-baseline gap-2 uppercase text-[#57609B] hover:text-[#C7CFFA] cursor-pointer"
             style={{
-              fontFamily: "'Anton', sans-serif",
+              fontFamily: "'Manrope', 'Segoe UI', sans-serif",
               fontWeight: 400,
               fontSize: '150px',
               lineHeight: '100%',
@@ -135,4 +135,3 @@ const Homethree: React.FC = () => {
 };
 
 export default Homethree;
-
