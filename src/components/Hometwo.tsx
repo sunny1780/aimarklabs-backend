@@ -64,7 +64,7 @@ const Hometwo: React.FC<HometwoProps> = ({ nextInView }) => {
         {nextInView && (
           <SharedVideo
             src="/images/video.mp4"
-            className="w-[2500px] h-[740px] max-w-full mx-auto mb-12"
+            className="w-full max-w-[1400px] h-[280px] sm:h-[420px] lg:h-[740px] mx-auto mb-12"
           />
         )}
         {/* Main Content Grid */}
@@ -74,12 +74,12 @@ const Hometwo: React.FC<HometwoProps> = ({ nextInView }) => {
             <div ref={leftTextRef} style={leftTextStyle}>
               <div className="mb-8">
                 <span
-                  className="inline-flex items-center px-5 py-3 rounded-md text-[16ox] font-semibold tracking-wide text-[#272D55] bg-[#D7DDFC] shadow-sm border border-[#B3BDEF]"
+                  className="inline-flex items-center px-5 py-3 rounded-md text-[16px] font-semibold tracking-wide text-[#272D55] bg-[#D7DDFC] shadow-sm border border-[#B3BDEF]"
                 >
                   Why choose us
                 </span>
               </div>
-              <h2 className="text-[48px] lg:text-4xl font-extrabold text-gray-900 mb-5 leading-tight">
+              <h2 className="text-3xl sm:text-4xl lg:text-[48px] font-extrabold text-gray-900 mb-5 leading-tight">
                 We Create Marketing That
                 <br />
                 Works
@@ -112,7 +112,7 @@ const Hometwo: React.FC<HometwoProps> = ({ nextInView }) => {
             className="lg:border-l lg:border-gray-200 lg:pl-12 flex flex-col gap-6 overflow-x-hidden"
           >
             {/* AI-Powered Strategy */}
-            <div style={cardStyle(0)} className="bg-white rounded-[22px] px-8 py-5 shadow-[0_20px_45px_rgba(15,23,42,0.06)] w-[462px] min-h-[176px]">
+            <div style={cardStyle(0)} className="bg-white rounded-[22px] px-8 py-5 shadow-[0_20px_45px_rgba(15,23,42,0.06)] w-full max-w-[462px] min-h-[176px]">
               <div className="flex flex-col gap-4">
                 <div className="w-11 h-11">
                   <img
@@ -133,7 +133,7 @@ const Hometwo: React.FC<HometwoProps> = ({ nextInView }) => {
             </div>
 
             {/* Creative Excellence */}
-            <div style={cardStyle(150)} className="bg-white rounded-[22px] px-8 py-5 shadow-[0_20px_45px_rgba(15,23,42,0.06)] w-[462px] min-h-[176px] lg:ml-10">
+            <div style={cardStyle(150)} className="bg-white rounded-[22px] px-8 py-5 shadow-[0_20px_45px_rgba(15,23,42,0.06)] w-full max-w-[462px] min-h-[176px] lg:ml-10">
               <div className="flex flex-col gap-4">
                 <div className="w-11 h-11">
                   <img
@@ -154,7 +154,7 @@ const Hometwo: React.FC<HometwoProps> = ({ nextInView }) => {
             </div>
 
             {/* Proven Results */}
-            <div style={cardStyle(300)} className="bg-white rounded-[22px] px-8 py-5 shadow-[0_20px_45px_rgba(15,23,42,0.06)] w-[462px] min-h-[176px] lg:ml-3">
+            <div style={cardStyle(300)} className="bg-white rounded-[22px] px-8 py-5 shadow-[0_20px_45px_rgba(15,23,42,0.06)] w-full max-w-[462px] min-h-[176px] lg:ml-3">
               <div className="flex flex-col gap-4">
                 <div className="w-11 h-11">
                   <img

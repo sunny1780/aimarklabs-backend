@@ -1,12 +1,44 @@
 import React from 'react';
 
 const IndustryCards: React.FC = () => {
-  const card = {
-    icon: '/images/graph.png',
-    title: 'AI-Powered Strategy',
-    description:
-      'Data-driven insights and intelligent planning that help your brand grow faster and smarter.',
-  };
+  const cards = [
+    {
+      icon: '/images/icon1.png',
+      title: 'Healthcare & Life Sciences',
+      description:
+        'Manages patient inquiries, automates scheduling, and ensures HIPAA-compliant communication for seamless healthcare experiences.',
+    },
+    {
+      icon: '/images/icon2.png',
+      title: 'Finance & Banking',
+      description:
+        'Delivers secure account support, instant transactions, and personalized financial guidance with complete regulatory compliance.',
+    },
+    {
+      icon: '/images/icon3.png',
+      title: 'Education & Nonprofit',
+      description:
+        'Streamlines enrollment, automates donor engagement, and connects communities with resources that amplify mission impact.',
+    },
+    {
+      icon: '/images/icon4.png',
+      title: 'FMCG & Ecommerce',
+      description:
+        'Boosts conversions, tracks orders, and delivers personalized product recommendations that maximize customer lifetime value.',
+    },
+    {
+      icon: '/images/icon5.png',
+      title: 'Hospitality & Facilities',
+      description:
+        'Automates reservations, manages guest requests, and delivers exceptional service that enhances satisfaction and loyalty.',
+    },
+    {
+      icon: '/images/icon6.png',
+      title: 'Real Estate & Construction',
+      description:
+        'Qualifies leads, schedules viewings, and provides project updates that accelerate sales cycles and close deals.',
+    },
+  ];
 
   return (
     <>
@@ -16,9 +48,9 @@ const IndustryCards: React.FC = () => {
       >
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[...Array(6)].map((_, index) => (
+            {cards.map((card, index) => (
               <div
-                key={index}
+                key={card.title}
                 className="industry-card group bg-white rounded-xl shadow-md p-8 flex flex-col items-center text-center"
                 style={{ animationDelay: `${index * 0.06}s` }}
               >

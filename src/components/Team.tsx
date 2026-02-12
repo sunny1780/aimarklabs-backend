@@ -23,7 +23,7 @@ const Team: React.FC = () => {
               Team Members
             </span>
           </div>
-          <h2 className="text-[60px] font-extrabold text-gray-900 leading-tight mb-4">
+          <h2 className="text-4xl sm:text-5xl lg:text-[60px] font-extrabold text-gray-900 leading-tight mb-4">
             Meet Our Team
           </h2>
         </div>

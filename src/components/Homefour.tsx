@@ -79,13 +79,13 @@ const Homefour: React.FC = () => {
         </div>
 
         {/* Row 2: Cards */}
-        <div className="flex gap-6">
+        <div className="flex flex-col lg:flex-row gap-6">
           {/* Experience */}
-          <div className="bg-white rounded-[22px] px-8 py-6 shadow-[0_20px_45px_rgba(15,23,42,0.06)] w-[416px] min-h-[284px]">
+          <div className="bg-white rounded-[22px] px-8 py-6 shadow-[0_20px_45px_rgba(15,23,42,0.06)] w-full lg:w-[416px] min-h-[284px]">
             <div className="inline-flex items-center px-4 py-3 mb-4 rounded-md bg-[#D7DDFC] text-[#272D55] text-xs font-medium">
               Experience
             </div>
-            <div className="text-[#F97316] text-[128px] font-extrabold leading-none mb-2">
+            <div className="text-[#F97316] text-[64px] sm:text-[92px] lg:text-[128px] font-extrabold leading-none mb-2">
               {experience}y+
             </div>
             <p className="text-gray-600 text-sm leading-relaxed">
@@ -94,11 +94,11 @@ const Homefour: React.FC = () => {
           </div>
 
           {/* Satisfied Clients */}
-          <div className="bg-white rounded-[22px] px-8 py-6 shadow-[0_20px_45px_rgba(15,23,42,0.06)] w-[416px] min-h-[284px]">
+          <div className="bg-white rounded-[22px] px-8 py-6 shadow-[0_20px_45px_rgba(15,23,42,0.06)] w-full lg:w-[416px] min-h-[284px]">
             <div className="inline-flex items-center px-4 py-3 mb-4 rounded-md bg-[#D7DDFC] text-[#272D55] text-xs font-medium">
               Satisfied Clients
             </div>
-            <div className="text-[#F97316] text-[128px] font-extrabold leading-none mb-2">
+            <div className="text-[#F97316] text-[64px] sm:text-[92px] lg:text-[128px] font-extrabold leading-none mb-2">
               {clients}+
             </div>
             <p className="text-gray-600 text-sm leading-relaxed">
@@ -107,11 +107,11 @@ const Homefour: React.FC = () => {
           </div>
 
           {/* Marketing Experts */}
-          <div className="bg-white rounded-[22px] px-8 py-6 shadow-[0_20px_45px_rgba(15,23,42,0.06)] w-[416px] min-h-[284px]">
+          <div className="bg-white rounded-[22px] px-8 py-6 shadow-[0_20px_45px_rgba(15,23,42,0.06)] w-full lg:w-[416px] min-h-[284px]">
             <div className="inline-flex items-center px-4 py-3 mb-4 rounded-md bg-[#D7DDFC] text-[#272D55] text-xs font-medium">
               Marketing Experts
             </div>
-            <div className="text-[#F97316] text-[128px] font-extrabold leading-none mb-2">
+            <div className="text-[#F97316] text-[64px] sm:text-[92px] lg:text-[128px] font-extrabold leading-none mb-2">
               {experts}+
             </div>
             <p className="text-gray-600 text-sm leading-relaxed">

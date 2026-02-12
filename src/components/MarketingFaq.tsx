@@ -7,38 +7,38 @@ type FaqItem = {
 
 const faqItems: FaqItem[] = [
   {
-    question: 'How do I know if my website needs an update?',
+    question: 'How do you track the success of marketing campaigns?',
     answer:
-      'If your site is slow, outdated, or lacks mobile optimization, it’s time for an upgrade.',
+'We use analytics tools to measure KPIs like conversions, engagement rates, and ROI.'
   },
   {
-    question: 'Can you develop an eCommerce store from scratch?',
+    question: 'What social media platforms do you specialize in?',
     answer:
-'Yes! We specialize in building high-converting Shopify, WooCommerce, and custom eCommerce solutions.'
+      'We manage campaigns on Facebook, Instagram, LinkedIn, TikTok, Twitter, and more.',
   },
   {
-    question: 'How long does it take to develop a website?',
+    question: 'How soon can I expect results from SEO?',
     answer:
-      'Depending on complexity, websites typically take 4-8 weeks, while apps may take 3-6 months.',
+      'SEO is a long-term strategy; most businesses see significant improvements within 3-6 months.',
   },
   {
-    question: 'Do you provide website maintenance?',
+    question: 'Do you provide ad management for multiple platforms?',
     answer:
-'Yes! We offer security updates, performance optimization, and technical support.'
+   'Yes! We handle PPC campaigns on Google Ads, Facebook Ads, LinkedIn, and more.',
   },
   {
-    question: 'What makes your development approach different?',
+    question: 'Can you create an end-to-end marketing strategy for my business?',
     answer:
-      'We focus on performance, scalability, and SEO optimization to ensure long-term success.',
+      'Absolutely! We develop full-funnel strategies covering brand awareness, engagement, and conversions.',
   },
    {
-    question: 'Can you integrate my website with third-party software?',
+    question: 'Do you offer monthly performance reports?',
     answer:
-      'Absolutely! We connect CRMs, analytics tools, payment systems, and other APIs for seamless functionality.',
+'Yes! We provide in-depth reports with insights, key metrics, and optimization recommendations.',
   },
 ];
 
-const DevelopmentFaqs = () => {
+const MarketingFaqs = () => {
   const [openIndex, setOpenIndex] = useState<number>(1);
 
   const toggleFaq = (index: number) => {
@@ -122,4 +122,4 @@ const DevelopmentFaqs = () => {
   );
 };
 
-export default DevelopmentFaqs;
+export default MarketingFaqs;

@@ -49,7 +49,7 @@ const Brandingfaq = () => {
               FAQ&apos;s
             </span>
 
-<h2 className="mt-6 text-[#111111] text-4xl sm:text-5xl lg:text-[60px] leading-[1.02] font-medium whitespace-nowrap">
+<h2 className="mt-6 text-[#111111] text-4xl sm:text-5xl lg:text-[60px] leading-[1.02] font-medium">
   Got a Question?
 </h2>
 

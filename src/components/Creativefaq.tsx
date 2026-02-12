@@ -7,29 +7,33 @@ type FaqItem = {
 
 const faqItems: FaqItem[] = [
   {
-    question: 'Lorem ipsum dolor sit amet consectetur?',
+    question: 'Why is branding crucial for business success?',
     answer:
-      'Et facilisis aliquam sem imperdiet ut fames. Tincidunt sed leo in semper magna curabitur dictum. Dignissim id blandit porttitor habitant tortor mattis scelerisque auctor. Mi netus consectetur velit vitae viverra volutpat purus libero nisi. Ullamcorper pharetra nibh auctor tempor diam mi leo mauris dolor.',
+'A strong brand builds trust, recognition, and customer loyalty, making you stand out in a competitive market.',
   },
   {
-    question: 'Lorem ipsum dolor sit amet consectetur?',
+    question: 'How do motion graphics improve engagement?',
     answer:
-      'Et facilisis aliquam sem imperdiet ut fames. Tincidunt sed leo in semper magna curabitur dictum. Dignissim id blandit porttitor habitant tortor mattis scelerisque auctor. Mi netus consectetur velit vitae viverra volutpat purus libero nisi. Ullamcorper pharetra nibh auctor tempor diam mi leo mauris dolor.',
+      'Animated visuals capture attention quickly, helping to convey complex ideas in a simple, engaging way.',
   },
   {
-    question: 'Lorem ipsum dolor sit amet consectetur?',
+    question: 'Can you refresh an existing brand identity?',
     answer:
-      'Et facilisis aliquam sem imperdiet ut fames. Tincidunt sed leo in semper magna curabitur dictum. Dignissim id blandit porttitor habitant tortor mattis scelerisque auctor. Mi netus consectetur velit vitae viverra volutpat purus libero nisi. Ullamcorper pharetra nibh auctor tempor diam mi leo mauris dolor.',
+      'Yes! We modernize logos, colors, and messaging to align with current market trends.',
   },
   {
-    question: 'Lorem ipsum dolor sit amet consectetur?',
+    question: 'Do you provide social media content creation?',
     answer:
-      'Et facilisis aliquam sem imperdiet ut fames. Tincidunt sed leo in semper magna curabitur dictum. Dignissim id blandit porttitor habitant tortor mattis scelerisque auctor. Mi netus consectetur velit vitae viverra volutpat purus libero nisi. Ullamcorper pharetra nibh auctor tempor diam mi leo mauris dolor.',
-  },
+'Absolutely! We design posts, reels, and ad creatives to enhance your online presence.'  },
   {
-    question: 'Lorem ipsum dolor sit amet consectetur?',
+    question: 'What is your process for creating brand assets?',
     answer:
-      'Et facilisis aliquam sem imperdiet ut fames. Tincidunt sed leo in semper magna curabitur dictum. Dignissim id blandit porttitor habitant tortor mattis scelerisque auctor. Mi netus consectetur velit vitae viverra volutpat purus libero nisi. Ullamcorper pharetra nibh auctor tempor diam mi leo mauris dolor.',
+      'We begin with strategy and research, followed by design drafts and multiple revisions to ensure brand consistency.',
+  },
+   {
+    question: 'How do you ensure the content aligns with our business goals?',
+    answer:
+      'We conduct in-depth research on your industry, audience, and competitors to create content that aligns with your objectives.',
   },
 ];
 
@@ -49,7 +53,7 @@ const Creativefaq = () => {
               FAQ&apos;s
             </span>
 
-<h2 className="mt-6 text-[#111111] text-4xl sm:text-5xl lg:text-[60px] leading-[1.02] font-medium whitespace-nowrap">
+<h2 className="mt-6 text-[#111111] text-4xl sm:text-5xl lg:text-[60px] leading-[1.02] font-medium">
   Got a Question?
 </h2>
 
