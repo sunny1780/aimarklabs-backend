@@ -51,6 +51,12 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
                 >
                   Creative Services
                 </Link>
+                <Link
+                  to="/services/branding-services"
+                  className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition-colors"
+                >
+                  Branding Services
+                </Link>
               </div>
             )}
           </div>

@@ -14,6 +14,7 @@ import Blog from './pages/Blog';
 import SEOBlog from './components/Blog/SEOBlog';
 import Industries from './pages/Industries';
 import UiUx from './pages/UiUx';
+import BrandingServices from './pages/BrandingServices';
 
 const LoginRoute: React.FC = () => {
   const navigate = useNavigate();
@@ -65,6 +66,11 @@ const UiUxRoute: React.FC = () => {
   return <UiUx onLoginClick={() => navigate('/login')} />;
 };
 
+const BrandingServicesRoute: React.FC = () => {
+  const navigate = useNavigate();
+  return <BrandingServices onLoginClick={() => navigate('/login')} />;
+};
+
 const App: React.FC = () => {
   return (
     <BrowserRouter>
@@ -77,6 +83,7 @@ const App: React.FC = () => {
         <Route path="/blog/seo-in-the-age-of-ai" element={<SEOBlog />} />
         <Route path="/industries" element={<IndustriesRoute />} />
         <Route path="/services/creative-services" element={<UiUxRoute />} />
+        <Route path="/services/branding-services" element={<BrandingServicesRoute />} />
         <Route path="/login" element={<LoginRoute />} />
         <Route path="/signup" element={<SignUpRoute />} />
         <Route path="/dashboard" element={<AnalyticsDashboard />} />
