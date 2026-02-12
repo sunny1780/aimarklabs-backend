@@ -1,7 +1,6 @@
 import React from 'react';
 
-
-const UiUxOverview: React.FC = () => {
+const DevelopmentInfrastructureSection: React.FC = () => {
   return (
     <section className="py-14 sm:py-16 bg-[#F3F5F7]">
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
@@ -14,7 +13,7 @@ const UiUxOverview: React.FC = () => {
 
           <div>
  <h2 className="text-[36px] leading-[1.1] font-semibold text-[#1D1F24]">
- Strategic Design Framework
+  Technical Infrastructure
 </h2>
 
 
@@ -23,11 +22,11 @@ const UiUxOverview: React.FC = () => {
             <div className="mt-5 border-t border-[#C9CED6] pt-5 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8">
               <article>
               <h3 className="text-[16px] leading-[1.2] font-semibold text-[#22262C]">
-Design Systems
+  Scalable Architecture
 </h3>
 
 <p className="mt-3 text-[16px] leading-[1.35] text-[#5A666E] font-normal">
-Systematic frameworks for brand consistency
+  Future-ready technical foundations
 </p>
 
 
@@ -35,19 +34,19 @@ Systematic frameworks for brand consistency
 
               <article>
                          <h3 className="text-[16px] leading-[1.2] font-semibold text-[#22262C]">
- Visual Architecture
+  Scalable Architecture
 </h3>
               <p className="mt-3 text-[16px] leading-[1.35] text-[#5A666E] font-normal">
- Strategic interface for audience engagement
+  Enterprise-grade protection systems
 </p>
               </article>
 
               <article>
                       <h3 className="text-[16px] leading-[1.2] font-semibold text-[#22262C]">
- Experience Engineering
+  Performance Optimization
 </h3>
               <p className="mt-3 text-[16px] leading-[1.35] text-[#5A666E] font-normal">
-  High-performance conversion infrastructure
+  Speed-optimized user experiences
 
 
 </p>
@@ -69,4 +68,4 @@ Systematic frameworks for brand consistency
   );
 };
 
-export default UiUxOverview;
+export default DevelopmentInfrastructureSection;

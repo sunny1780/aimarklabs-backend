@@ -33,7 +33,7 @@ const faqItems: FaqItem[] = [
   },
 ];
 
-const Creativefaq = () => {
+const DevelopmentFaqs = () => {
   const [openIndex, setOpenIndex] = useState<number>(1);
 
   const toggleFaq = (index: number) => {
@@ -117,4 +117,4 @@ const Creativefaq = () => {
   );
 };
 
-export default Creativefaq;
+export default DevelopmentFaqs;

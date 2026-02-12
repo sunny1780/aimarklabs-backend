@@ -152,7 +152,7 @@ const AnimatedOfferingCard = ({
   return (
     <article
       ref={cardRef}
-      className={`creative-card rounded-[14px] border border-[#9EA8DA] p-6 md:p-7 text-white bg-transparent min-h-[248px] md:min-h-[270px] ${
+      className={`creative-card rounded-[14px] border border-[#9EA8DA] p-6 md:p-7 text-white bg-transparent min-h-[248px] md:min-h-[270px] flex flex-col ${
         wide ? 'md:col-span-2' : ''
       }`}
     >
@@ -184,32 +184,43 @@ const Creativeoffering = () => {
     <section ref={sectionRef} className="bg-[#1F2457] py-16 md:py-20 lg:py-24">
       <div className="max-w-[1320px] mx-auto px-6 lg:px-8">
         <div className="text-center">
-          <span className="inline-block rounded-[10px] bg-[#CDD6FF] px-5 py-2 text-sm md:text-base font-medium text-[#2A315F]">
-            What We Deliver
-          </span>
-          <h2 className="mt-6 text-white text-4xl md:text-[64px] leading-[1.08] font-medium tracking-[-0.02em]">
-            Our Creative Offerings
-          </h2>
+<span className="inline-block rounded-[8px] bg-[#D7DDFC] border border-[#B3BDEF] px-5 py-2 text-[14px] font-medium text-[#272D55]">
+  What We Deliver
+</span>
+
+
+ <h2 className="mt-6 text-white text-4xl md:text-[60px] leading-[1.08] font-medium tracking-[-0.02em]">
+  Our Creative Offerings
+</h2>
+
+
         </div>
 
         <div className="mt-12 md:mt-14 grid grid-cols-1 md:grid-cols-3 gap-4">
           {offerings.map((item) => (
             <AnimatedOfferingCard key={item.title} wide={item.wide}>
               <Sparkle />
-              <h3 className="mt-8 md:mt-10 text-[33px] leading-tight font-medium">
-                {item.title}
-              </h3>
-              <p className="mt-4 text-[31px] leading-[1.5] text-[#E7ECFF]">
-                {item.description}
-              </p>
+              <div className="mt-auto">
+                <h3 className="text-[20px] leading-tight font-medium">
+                  {item.title}
+                </h3>
+                <p className="mt-4 text-[16px] leading-[1.5] text-[#FFFFFF] font-normal">
+                  {item.description}
+                </p>
+              </div>
+
+
             </AnimatedOfferingCard>
           ))}
         </div>
 
         <div className="mt-12 md:mt-14 flex justify-center">
-          <button className="rounded-lg bg-[#F39A34] hover:bg-[#e88f2b] transition-colors text-white px-8 py-4 min-w-[244px] text-[31px] font-medium">
-            Start Designing Solutions
-          </button>
+    <button className="rounded-[8px] bg-[#F29335] hover:bg-[#e88f2b] transition-colors text-white px-8 py-4 min-w-[244px] text-[16px] font-medium">
+  Start Designing Solutions
+</button>
+
+
+
         </div>
       </div>
 

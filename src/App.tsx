@@ -15,6 +15,8 @@ import SEOBlog from './components/Blog/SEOBlog';
 import Industries from './pages/Industries';
 import UiUx from './pages/UiUx';
 import BrandingServices from './pages/BrandingServices';
+import DevelopmentServices from './pages/DevelopmentServices';
+import MarketingServices from './pages/MarketingServices';
 
 const LoginRoute: React.FC = () => {
   const navigate = useNavigate();
@@ -71,6 +73,16 @@ const BrandingServicesRoute: React.FC = () => {
   return <BrandingServices onLoginClick={() => navigate('/login')} />;
 };
 
+const DevelopmentServicesRoute: React.FC = () => {
+  const navigate = useNavigate();
+  return <DevelopmentServices onLoginClick={() => navigate('/login')} />;
+};
+
+const MarketingServicesRoute: React.FC = () => {
+  const navigate = useNavigate();
+  return <MarketingServices onLoginClick={() => navigate('/login')} />;
+};
+
 const App: React.FC = () => {
   return (
     <BrowserRouter>
@@ -84,6 +96,8 @@ const App: React.FC = () => {
         <Route path="/industries" element={<IndustriesRoute />} />
         <Route path="/services/creative-services" element={<UiUxRoute />} />
         <Route path="/services/branding-services" element={<BrandingServicesRoute />} />
+        <Route path="/services/development-services" element={<DevelopmentServicesRoute />} />
+        <Route path="/services/marketing-services" element={<MarketingServicesRoute />} />
         <Route path="/login" element={<LoginRoute />} />
         <Route path="/signup" element={<SignUpRoute />} />
         <Route path="/dashboard" element={<AnalyticsDashboard />} />

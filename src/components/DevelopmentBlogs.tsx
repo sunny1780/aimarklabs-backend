@@ -21,7 +21,7 @@ const blogCards = [
   },
 ];
 
-const Brandingblogs = () => {
+const DevelopmentBlogs = () => {
   return (
     <section className="bg-[#F3F5F7] py-16 sm:py-20">
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
@@ -84,4 +84,4 @@ const Brandingblogs = () => {
   );
 };
 
-export default Brandingblogs;
+export default DevelopmentBlogs;
