@@ -7,35 +7,35 @@ type FaqItem = {
 
 const faqItems: FaqItem[] = [
   {
-    question: 'How do you track the success of marketing campaigns?',
+    question: 'Which marketing channels do you specialize in?',
     answer:
-'We use analytics tools to measure KPIs like conversions, engagement rates, and ROI.'
+' We focus on digital channels, including social media, SEO, SEM, email marketing, and content marketing.'
   },
   {
-    question: 'What social media platforms do you specialize in?',
+    question: 'How do you measure marketing success?',
     answer:
-      'We manage campaigns on Facebook, Instagram, LinkedIn, TikTok, Twitter, and more.',
+      ' Through KPIs like engagement, conversion rates, traffic growth, lead generation, and ROI tracking.',
   },
   {
-    question: 'How soon can I expect results from SEO?',
+    question: 'Do you provide content creation along with marketing?',
     answer:
-      'SEO is a long-term strategy; most businesses see significant improvements within 3-6 months.',
+      ' Yes, we create graphics, videos, blogs, and ad copy aligned with your campaigns.',
   },
   {
-    question: 'Do you provide ad management for multiple platforms?',
+    question: 'Can you run both organic and paid campaigns?',
     answer:
-   'Yes! We handle PPC campaigns on Google Ads, Facebook Ads, LinkedIn, and more.',
+   ' Absolutely, we manage organic strategies alongside paid advertising for maximum reach and results.',
   },
   {
-    question: 'Can you create an end-to-end marketing strategy for my business?',
+    question: 'How long does it take to see results from marketing campaigns?',
     answer:
-      'Absolutely! We develop full-funnel strategies covering brand awareness, engagement, and conversions.',
+      ' SEO and content marketing results usually appear in 2–4 months, while paid campaigns can generate immediate leads and engagement.',
   },
-   {
-    question: 'Do you offer monthly performance reports?',
-    answer:
-'Yes! We provide in-depth reports with insights, key metrics, and optimization recommendations.',
-  },
+//    {
+//     question: 'Do you offer monthly performance reports?',
+//     answer:
+// 'Yes! We provide in-depth reports with insights, key metrics, and optimization recommendations.',
+//   },
 ];
 
 const MarketingFaqs = () => {
@@ -55,14 +55,16 @@ const MarketingFaqs = () => {
             </span>
 
 <h2 className="mt-6 text-[#111111] text-4xl sm:text-5xl lg:text-[60px] leading-[1.02] font-medium">
-  Got a Question?
+  Marketing Questions?
+
 </h2>
 
 
 
 
            <p className="mt-4 text-[#5A666E] text-[18px] leading-relaxed max-w-[420px]">
-  Quick answers to common questions about our services, process, and results.
+Answers about campaigns, performance tracking, budgets, and growth strategy.
+
 </p>
 
 

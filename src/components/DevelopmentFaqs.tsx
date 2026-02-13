@@ -7,35 +7,35 @@ type FaqItem = {
 
 const faqItems: FaqItem[] = [
   {
-    question: 'How do I know if my website needs an update?',
+    question: 'What technologies do you use for development?',
     answer:
-      'If your site is slow, outdated, or lacks mobile optimization, it’s time for an upgrade.',
+      ' We use modern frameworks like React, Angular, Node.js, WordPress, Shopify, and custom backend solutions based on project needs.',
   },
   {
-    question: 'Can you develop an eCommerce store from scratch?',
+    question: 'Do you provide responsive designs for mobile devices?',
     answer:
-'Yes! We specialize in building high-converting Shopify, WooCommerce, and custom eCommerce solutions.'
+'Yes, all our websites and apps are fully responsive for desktop, tablet, and mobile.'
   },
   {
-    question: 'How long does it take to develop a website?',
+    question: 'Can you integrate third-party tools and APIs?',
     answer:
-      'Depending on complexity, websites typically take 4-8 weeks, while apps may take 3-6 months.',
+'Absolutely, we can integrate payment gateways, CRMs, analytics tools, and more.'
   },
   {
-    question: 'Do you provide website maintenance?',
+    question: 'Do you offer post-launch support?',
     answer:
-'Yes! We offer security updates, performance optimization, and technical support.'
+' Yes, we provide maintenance packages to ensure smooth performance after launch.'
   },
   {
-    question: 'What makes your development approach different?',
+    question: 'How long does a typical development project take?',
     answer:
-      'We focus on performance, scalability, and SEO optimization to ensure long-term success.',
+' Small projects may take 4–6 weeks, while complex apps or e-commerce platforms may take 8–16 weeks.',
   },
-   {
-    question: 'Can you integrate my website with third-party software?',
-    answer:
-      'Absolutely! We connect CRMs, analytics tools, payment systems, and other APIs for seamless functionality.',
-  },
+  //  {
+  //   question: 'Can you integrate my website with third-party software?',
+  //   answer:
+  //     'Absolutely! We connect CRMs, analytics tools, payment systems, and other APIs for seamless functionality.',
+  // },
 ];
 
 const DevelopmentFaqs = () => {
@@ -55,14 +55,16 @@ const DevelopmentFaqs = () => {
             </span>
 
 <h2 className="mt-6 text-[#111111] text-4xl sm:text-5xl lg:text-[60px] leading-[1.02] font-medium">
-  Got a Question?
+ Development Questions?
+
 </h2>
 
 
 
 
            <p className="mt-4 text-[#5A666E] text-[18px] leading-relaxed max-w-[420px]">
-  Quick answers to common questions about our services, process, and results.
+Clear insights into platforms, technologies, timelines, and support.
+
 </p>
 
 
@@ -70,7 +72,7 @@ const DevelopmentFaqs = () => {
   href="/contact"
   className="mt-7 inline-flex items-center gap-2 rounded-[6px] bg-[#F29335] px-6 py-3 text-white text-[14px] sm:text-[14px] lg:text-[14px] font-medium hover:bg-[#e88f2b] transition-colors"
 >
-  Transform Your Brand Identity
+  Get Solutions That Scale
   <span aria-hidden="true">→</span>
 </a>
 

@@ -7,8 +7,7 @@ const UiUxOverview: React.FC = () => {
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-[0.82fr_1.58fr] gap-8 lg:gap-12 items-start">
         <p className="text-[16px] leading-[1.5] text-[#5A666E] max-w-[520px] font-normal">
-  By merging innovative design with strategic thinking and audience-driven insights, we ensure your digital
-  presence communicates trust, professionalism, and unique
+  We design visually compelling and striking creatives that grab attention, tell your brand story, and leave a lasting impression on audiences.
 </p>
 
 
@@ -58,7 +57,7 @@ Systematic frameworks for brand consistency
 
         <div className="mt-9 sm:mt-11 overflow-hidden rounded-2xl">
           <img
-            src="/images/ui.png"
+            src="/images/Creative.png"
             alt="Technical infrastructure visual"
             className="w-full h-[280px] sm:h-[420px] lg:h-[470px] object-cover"
             loading="lazy"

@@ -3,37 +3,37 @@ import React from 'react';
 const IndustryCards: React.FC = () => {
   const cards = [
     {
-      icon: '/images/icon1.png',
+      icon: '/images/icon1.svg',
       title: 'Healthcare & Life Sciences',
       description:
         'Manages patient inquiries, automates scheduling, and ensures HIPAA-compliant communication for seamless healthcare experiences.',
     },
     {
-      icon: '/images/icon2.png',
+      icon: '/images/icon2.svg',
       title: 'Finance & Banking',
       description:
         'Delivers secure account support, instant transactions, and personalized financial guidance with complete regulatory compliance.',
     },
     {
-      icon: '/images/icon3.png',
+      icon: '/images/icon3.svg',
       title: 'Education & Nonprofit',
       description:
         'Streamlines enrollment, automates donor engagement, and connects communities with resources that amplify mission impact.',
     },
     {
-      icon: '/images/icon4.png',
+      icon: '/images/icon4.svg',
       title: 'FMCG & Ecommerce',
       description:
         'Boosts conversions, tracks orders, and delivers personalized product recommendations that maximize customer lifetime value.',
     },
     {
-      icon: '/images/icon5.png',
+      icon: '/images/icon5.svg',
       title: 'Hospitality & Facilities',
       description:
         'Automates reservations, manages guest requests, and delivers exceptional service that enhances satisfaction and loyalty.',
     },
     {
-      icon: '/images/icon6.png',
+      icon: '/images/icon6.svg',
       title: 'Real Estate & Construction',
       description:
         'Qualifies leads, schedules viewings, and provides project updates that accelerate sales cycles and close deals.',

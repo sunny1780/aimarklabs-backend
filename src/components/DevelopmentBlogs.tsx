@@ -1,83 +1,131 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 
-const blogCards = [
-  {
-    tag: 'Collaborate',
-    title: 'Talk it out with audio',
-    description:
-      'Use audio to have live conversations with other collaborators directly in your Figma and FigJam files.',
-  },
-  {
-    tag: 'Collaborate',
-    title: 'Talk it out with audio',
-    description:
-      'Use audio to have live conversations with other collaborators directly in your Figma and FigJam files.',
-  },
-  {
-    tag: 'Collaborate',
-    title: 'Talk it out with audio',
-    description:
-      'Use audio to have live conversations with other collaborators directly in your Figma and FigJam files.',
-  },
-];
+type BlogCard = {
+  image: string;
+  buttonText: string;
+  title: string;
+  description: string;
+  link?: string;
+};
 
 const DevelopmentBlogs = () => {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+        }
+      },
+      { threshold: 0.25, rootMargin: '0px 0px -80px 0px' }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  const headerStyle = {
+    transform: visible ? 'translateY(0)' : 'translateY(30px)',
+    opacity: visible ? 1 : 0,
+    transition:
+      'transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s ease',
+  };
+
+  const cardStyle = (delay: number) => ({
+    transform: visible ? 'translateY(0)' : 'translateY(40px)',
+    opacity: visible ? 1 : 0,
+    transition: `transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms, opacity 0.5s ease ${delay}ms`,
+  });
+  const blogCards: BlogCard[] = [
+    {
+      image: '/images/SEOBLOG.webp',
+      buttonText: 'SEO',
+      title: 'SEO in the Age of AI',
+      description:
+        'Discover how AI search is changing ranking signals and what practical SEO strategies still drive sustainable growth.',
+      link: '/blog/seo-in-the-age-of-ai',
+    },
+    {
+      image: '/images/AIBLOG.webp',
+      buttonText: 'Marketing',
+      title: 'AI-Driven Keyword Research',
+      description:
+'Keyword research has always been a crucial part of Search Engine Optimization (SEO) and digital marketing. However, with advancements in Artificial Intelligence (AI), keyword research has become more data-driven, precise, and effective.',
+    },
+    {
+      image: '/images/AIPowered.webp',
+      buttonText: 'Automation',
+      title: 'AI-Powered Content Creation',
+      description:
+        'Artificial Intelligence (AI) is transforming the digital marketing landscape, and content creation is no exception. AI-powered content creation refers to the use of AI tools and algorithms to generate written, visual, or multimedia content with minimal human intervention.', },
+  ];
+
   return (
-    <section className="bg-[#F3F5F7] py-16 sm:py-20">
-      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-        <div className="text-center">
-   <span className="inline-flex items-center px-4 py-2 rounded-[8px] bg-[#D7DDFC] border border-[#B3BDEF] text-[#272D55] text-[14px] font-medium">
-  Blogs
-</span>
+    <section
+      ref={sectionRef}
+      className="bg-[#F7F9FB] py-16 px-4 sm:px-6 lg:px-10"
+      style={{ fontFamily: "'Manrope', 'Segoe UI', sans-serif" }}
+    >
+      <div className="max-w-6xl mx-auto">
+        <div style={headerStyle}>
+          {/* Tag */}
+          <div className="text-center mb-4">
+            <span className="inline-flex items-center px-5 py-2.5 rounded-lg text-sm font-semibold tracking-wide text-[#272D55] bg-[#D7DDFC] border border-[#B3BDEF]">
+              Blog
+            </span>
+          </div>
 
-
-            <h2 className="mt-5 text-[#111111] text-4xl sm:text-5xl lg:text-[72px] leading-[1.05] font-medium">
-            Stay Informed About The Trends
+          {/* Heading */}
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 text-center mb-10">
+            Stay Ahead of Trends
           </h2>
         </div>
 
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {blogCards.map((card, index) => (
-            <article key={index} className="bg-[#F9FAFC] rounded-xl p-3 sm:p-4">
-              <img
-                src="/images/AIBLOG.webp"
-                alt="Branding blog visual"
-                className="w-full h-44 sm:h-48 object-cover rounded-lg"
-                loading="lazy"
-              />
+        {/* Cards Row */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {blogCards.map((card, index) => {
+            const cardContent = (
+              <>
+                <img
+                  src={card.image}
+                  alt=""
+                  className="w-full h-48 object-cover rounded-t-xl"
+                />
+                <div className="p-6 flex flex-col flex-1">
+                  <button className="bg-[#B3BDEF] text-white text-sm font-medium px-4 py-2 rounded-lg mb-3">
+                    {card.buttonText}
+                  </button>
+                  <h3 className="text-lg font-bold text-gray-900 mb-0.5 min-h-[38px]">
+                    {card.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm leading-relaxed min-h-[84px]">
+                    {card.description}
+                  </p>
+                </div>
+              </>
+            );
+            const cardClass =
+              'bg-white rounded-xl overflow-hidden shadow-md h-full flex flex-col ' +
+              (card.link ? 'hover:shadow-lg transition-shadow cursor-pointer' : '');
 
-              <div className="pt-6 px-2 pb-2">
-               <span className="inline-flex items-center px-4 py-2 rounded-[8px] bg-[#D7DDFC] border border-[#D7DDFC] text-[#272D55] text-sm font-medium">
-  {card.tag}
-</span>
-
-
- <h3 className="mt-5 text-[#182126] text-[20px] leading-tight font-semibold">
-  {card.title}
-</h3>
-
-
-
-  <p className="mt-3 text-[#182126] text-[14px] leading-relaxed font-normal">
-  {card.description}
-</p>
-
-
+            return card.link ? (
+              <Link key={index} to={card.link} className="block h-full">
+                <div style={cardStyle(index * 150)} className={cardClass}>
+                  {cardContent}
+                </div>
+              </Link>
+            ) : (
+              <div key={index} style={cardStyle(index * 150)} className={cardClass}>
+                {cardContent}
               </div>
-            </article>
-          ))}
-        </div>
-
-        <div className="mt-10 flex justify-center">
-   <a
-  href="/blog"
-  className="inline-flex items-center gap-2 rounded-[6px] bg-[#F29335] px-8 py-3 text-white text-[16px] font-medium hover:bg-[#e88f2b] transition-colors"
->
-  Learn More
-  <span aria-hidden="true">→</span>
-</a>
-
-
+            );
+          })}
         </div>
       </div>
     </section>

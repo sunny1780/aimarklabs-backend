@@ -29,14 +29,14 @@ const Homefive: React.FC = () => {
             <div className="flex items-start gap-4 mb-6">
               <div className="w-16 h-16 rounded-full bg-gray-300 flex-shrink-0"></div>
               <div className="pt-2">
-                <h3 className="font-bold text-gray-900 text-lg mb-1">Misty</h3>
+                <h3 className="font-bold text-gray-900 text-lg mb-1">Courtney</h3>
                 <p className="text-sm text-gray-500 leading-relaxed">
-                CEO, Little Sicily</p>
+                 Founder & App Owner</p>
               </div>
             </div>
             <p className="text-gray-700 leading-relaxed text-base">
-              "Impressive results from Al Mark Labs' digital marketing. Their expertise and innovative methods have been crucial for our success.
-Truly remarkable."
+         "Working with Al Mark Labs has been an outstanding experience. From development to overall digital growth, their team handled everything with precision and creativity. Their professionalism and dedication truly stand out."
+
             </p>
           </div>
 
@@ -45,12 +45,12 @@ Truly remarkable."
             <div className="flex items-start gap-4 mb-6">
               <div className="w-16 h-16 rounded-full bg-gray-300 flex-shrink-0"></div>
               <div className="pt-2">
-                <h3 className="font-bold text-gray-900 text-lg mb-1">Jacob</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">CEO, Lacto Industries</p>
+                <h3 className="font-bold text-gray-900 text-lg mb-1">Quan</h3>
+                <p className="text-sm text-gray-500 leading-relaxed"> Founder, Trading Services</p>
               </div>
             </div>
             <p className="text-gray-700 leading-relaxed text-base">
-              "Choosing Al Mark Labs was a game-changer for our digital presence. Their strategies are insightful and yield great results. Exceptional service."
+              "Al Mark Labs brought clarity and structure to my online presence. Their strategic approach and consistent support have made a noticeable difference. Reliable, knowledgeable, and results-driven team."
             </p>
           </div>
 
@@ -59,12 +59,12 @@ Truly remarkable."
             <div className="flex items-start gap-4 mb-6">
               <div className="w-16 h-16 rounded-full bg-gray-300 flex-shrink-0"></div>
               <div className="pt-2">
-                <h3 className="font-bold text-gray-900 text-lg mb-1">Mark</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">CEO, Aventusten</p>
+                <h3 className="font-bold text-gray-900 text-lg mb-1">Joslene</h3>
+                <p className="text-sm text-gray-500 leading-relaxed">Director</p>
               </div>
             </div>
             <p className="text-gray-700 leading-relaxed text-base">
-              "Exceptional digital marketing services by Al Mark Labs. Saw a significant increase in traffic and engagement. I highly recommend their approach."
+              "The team at Al Mark Labs understands brand growth deeply. Their thoughtful strategies and attention to detail helped elevate our visibility and engagement. Smooth process and excellent communication throughout."
             </p>
           </div>
 
@@ -73,12 +73,12 @@ Truly remarkable."
             <div className="flex items-start gap-4 mb-6">
               <div className="w-16 h-16 rounded-full bg-gray-300 flex-shrink-0"></div>
               <div className="pt-2">
-                <h3 className="font-bold text-gray-900 text-lg mb-1">David K.</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">Recent graduate, Marketing at Sweatpals</p>
+                <h3 className="font-bold text-gray-900 text-lg mb-1">Shahid Pervaiz</h3>
+                <p className="text-sm text-gray-500 leading-relaxed"> Founder</p>
               </div>
             </div>
             <p className="text-gray-700 leading-relaxed text-base">
-              "I love the color. It's even better in person. I love that iron flask gives you multiple lids as well. It's sturdy. It is kept my cold beverages clothes for way longer than I had expected it to."
+              "Al Mark Labs delivered exactly what we needed with efficiency and expertise. Their understanding of digital platforms and user experience has strengthened our online presence. Highly satisfied with the collaboration."
             </p>
           </div>
 
@@ -87,12 +87,12 @@ Truly remarkable."
             <div className="flex items-start gap-4 mb-6">
               <div className="w-16 h-16 rounded-full bg-gray-300 flex-shrink-0"></div>
               <div className="pt-2">
-                <h3 className="font-bold text-gray-900 text-lg mb-1">Megan</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">Student at New York University</p>
+                <h3 className="font-bold text-gray-900 text-lg mb-1">Jacob</h3>
+                <p className="text-sm text-gray-500 leading-relaxed">CEO</p>
               </div>
             </div>
             <p className="text-gray-700 leading-relaxed text-base">
-              "I absolutely love this cup. I've bought several different brands and there's always something I end up not liking about them. This one checks all of the boxes."
+"Choosing Al Mark Labs was a game-changer for our digital presence. Their strategies are insightful and yield great results. Exceptional service.""
             </p>
           </div>
 
@@ -101,13 +101,13 @@ Truly remarkable."
             <div className="flex items-start gap-4 mb-6">
               <div className="w-16 h-16 rounded-full bg-gray-300 flex-shrink-0"></div>
               <div className="pt-2">
-                <h3 className="font-bold text-gray-900 text-lg mb-1">David K.</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">Recent graduate</p>
+                <h3 className="font-bold text-gray-900 text-lg mb-1">Mark</h3>
+                <p className="text-sm text-gray-500 leading-relaxed">CEO</p>
               </div>
             </div>
             <p className="text-gray-700 leading-relaxed text-base">
-              "I absolutely love this cup. I've bought several different brands and there's always something"
-            </p>
+             "Exceptional digital marketing services by Al Mark Labs. Saw a significant increase in traffic and engagement. I highly recommend their approach."
+             </p>
           </div>
         </div>
       </div>

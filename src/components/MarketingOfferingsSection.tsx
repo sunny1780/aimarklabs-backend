@@ -5,25 +5,25 @@ const offerings = [
   {
     title: 'SEO & Content Marketing Strategy',
     description:
-      'Optimize digital presence through technical SEO, authority-building content, and organic distribution strategies that drive sustainable traffic and search rankings.',
+      'Optimize digital presence with technical SEO, authority-building content, and organic strategies that drive sustainable traffic, improved search rankings, and visibility.',
     className: 'min-h-[280px] sm:min-h-[300px] lg:min-h-[340px]',
   },
   {
     title: 'Social Media Marketing & Community Management',
     description:
-      'Build engaged communities through platform-specific content strategies, audience interaction, and performance analytics across all major social networks.',
+      'Build engaged audiences through platform-specific content, consistent interaction, and analytics-driven strategies across all major social networks for lasting community growth.',
     className: 'min-h-[280px] sm:min-h-[300px] lg:min-h-[700px] lg:row-span-2',
   },
   {
     title: 'Email Marketing & Marketing Automation',
     description:
-      'Develop personalized email journeys with segmentation, behavioral triggers, and automated nurture sequences that maximize customer lifetime value and conversions.',
+      'Create personalized email journeys using segmentation, behavioral triggers, and automated nurture sequences to maximize customer lifetime value, engagement, and conversions.',
     className: 'min-h-[280px] sm:min-h-[300px] lg:min-h-[700px] lg:row-span-2',
   },
   {
-    title: 'Paid Media & Performance Advertising',
+    title: 'AI & LLM Visibility',
     description:
-      'Execute high-ROI campaigns across Google Ads, social platforms, and display networks with precision targeting, budget optimization, and conversion tracking.',
+      'Leverage AI and large language models to enhance brand visibility, optimize content creation, and deliver intelligent insights across digital channels effectively.',
     className: 'min-h-[280px] sm:min-h-[300px] lg:min-h-[340px]',
   },
 ];

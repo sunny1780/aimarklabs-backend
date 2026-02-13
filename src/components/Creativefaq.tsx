@@ -7,34 +7,34 @@ type FaqItem = {
 
 const faqItems: FaqItem[] = [
   {
-    question: 'Why is branding crucial for business success?',
+    question: 'How long does it take to complete a design project?',
     answer:
-'A strong brand builds trust, recognition, and customer loyalty, making you stand out in a competitive market.',
+' Timelines vary depending on complexity, but most projects take 3–6 weeks from concept to final delivery.',
   },
   {
-    question: 'How do motion graphics improve engagement?',
+    question: 'Can you redesign an existing brand or product?',
     answer:
-      'Animated visuals capture attention quickly, helping to convey complex ideas in a simple, engaging way.',
+      ' Yes, we offer refresh and rebranding services to modernize your visuals while maintaining brand recognition.',
   },
   {
-    question: 'Can you refresh an existing brand identity?',
+    question: 'Do you provide design source files?',
     answer:
-      'Yes! We modernize logos, colors, and messaging to align with current market trends.',
+      ' Absolutely, we provide all source files, including PSD, AI, and vector formats, upon project completion.',
   },
   {
-    question: 'Do you provide social media content creation?',
+    question: 'Will my designs be optimized for web and mobile?',
     answer:
-'Absolutely! We design posts, reels, and ad creatives to enhance your online presence.'  },
+' Yes, every design is created with responsive layouts in mind for both desktop and mobile devices.'  },
   {
-    question: 'What is your process for creating brand assets?',
+    question: 'Do you offer ongoing design support?',
     answer:
-      'We begin with strategy and research, followed by design drafts and multiple revisions to ensure brand consistency.',
+      ' Yes, we provide retainer packages for continuous design updates and new creative assets.',
   },
-   {
-    question: 'How do you ensure the content aligns with our business goals?',
-    answer:
-      'We conduct in-depth research on your industry, audience, and competitors to create content that aligns with your objectives.',
-  },
+  //  {
+  //   question: 'How do you ensure the content aligns with our business goals?',
+  //   answer:
+  //     'We conduct in-depth research on your industry, audience, and competitors to create content that aligns with your objectives.',
+  // },
 ];
 
 const Creativefaq = () => {
