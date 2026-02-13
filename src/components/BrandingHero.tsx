@@ -1,4 +1,11 @@
 import React from 'react';
+import Folder from './Folder';
+
+const folderImages = [
+  '/images/1%20(1).png',
+  '/images/2%20(1).png',
+  '/images/3%20(1).png'
+];
 
 const BrandingHero: React.FC = () => {
   return (
@@ -24,17 +31,21 @@ const BrandingHero: React.FC = () => {
             </a>
           </div>
 
-          <div className="bg-[#020016] h-[420px] sm:h-[430px] rounded-none relative overflow-hidden">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="relative w-[360px] h-[280px] sm:w-[420px] sm:h-[310px]">
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[230px] h-[120px] sm:w-[250px] sm:h-[130px] bg-[#e1964b] rounded-[16px]" />
-
-                <div className="absolute bottom-[95px] left-1/2 -translate-x-1/2 w-[100px] h-[54px] bg-[#d18a44] rounded-[20px]" />
-
-                <div className="absolute top-[55px] left-[10px] w-[190px] h-[110px] sm:w-[210px] sm:h-[120px] bg-[#d7d7d7] rounded-[20px] rotate-[-16deg]" />
-                <div className="absolute top-[55px] right-[10px] w-[190px] h-[110px] sm:w-[210px] sm:h-[120px] bg-[#d7d7d7] rounded-[20px] rotate-[16deg]" />
-                <div className="absolute top-[15px] left-1/2 -translate-x-1/2 w-[180px] h-[110px] sm:w-[200px] sm:h-[130px] bg-[#ededed] rounded-[20px]" />
-              </div>
+          <div className="h-[420px] sm:h-[430px] rounded-none relative overflow-hidden flex items-center justify-center">
+            <div style={{ height: '600px', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Folder
+                color="#f29335"
+                size={2}
+                className="custom-folder"
+                items={folderImages.map(src => (
+                  <img
+                    key={src}
+                    src={src}
+                    alt=""
+                    className="w-full h-full object-cover rounded-[10px]"
+                  />
+                ))}
+              />
             </div>
           </div>
         </div>
