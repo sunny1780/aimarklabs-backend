@@ -17,18 +17,20 @@ const BrandingHero: React.FC = () => {
               Branding
             </span>
 
-            <h1 className="mt-12 sm:mt-14 text-[52px] sm:text-[62px] lg:text-[72px] leading-[0.98] font-semibold tracking-[-0.02em] text-[#1E1E1E]">
-              Build Your Brand
-              <br />
-              Legacy
-            </h1>
+           <h1 className="mt-12 sm:mt-14 text-[60px] leading-[0.98] font-semibold tracking-[-0.02em] text-[#1E1E1E]">
+  Build Your Brand
+  <br />
+  Legacy
+</h1>
 
-            <a
-              href="/contact"
-              className="mt-12 inline-flex items-center justify-center rounded-[6px] bg-[#F29335] text-white text-[20px] sm:text-[24px] leading-none px-8 py-4 sm:px-8 sm:py-4 hover:bg-[#df8428] transition-colors"
-            >
-              Build Your Brand with Us
-            </a>
+
+           <a
+  href="/contact"
+  className="mt-12 inline-flex items-center justify-center rounded-[6px] bg-[#F29335] text-white text-[16px] leading-none px-8 py-4 sm:px-8 sm:py-4 hover:bg-[#df8428] transition-colors"
+>
+  Build Your Brand with Us
+</a>
+
           </div>
 
           <div className="h-[420px] sm:h-[430px] rounded-none relative overflow-hidden flex items-center justify-center">
