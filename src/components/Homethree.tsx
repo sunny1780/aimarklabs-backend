@@ -20,7 +20,7 @@ const Homethree: React.FC = () => {
   };
   return (
     <section
-      className="relative py-16 px-4 sm:px-6 lg:px-10 overflow-hidden"
+      className="relative py-16 px-4 sm:px-6 lg:pl-10 lg:pr-12 xl:pr-20 overflow-hidden"
       style={{ fontFamily: "'Manrope', 'Segoe UI', sans-serif" }}
     >
       {/* Background image */}
@@ -34,9 +34,9 @@ const Homethree: React.FC = () => {
         <div className="absolute inset-0 bg-[#050824]/60" />
       </div>
 
-      <div className="relative max-w-6xl mx-auto flex flex-col lg:flex-row items-start lg:items-center gap-10">
+      <div className="relative max-w-6xl mx-auto flex flex-col lg:flex-row items-start lg:items-center gap-10 lg:gap-14">
         {/* Left text block */}
-        <div className="flex-1 text-left text-[#9CA9FF]">
+        <div className="flex-1 min-w-0 text-left text-[#9CA9FF]">
           <h2
             className="group inline-flex items-baseline gap-2 mb-3 uppercase text-[#57609B] hover:text-[#C7CFFA] cursor-pointer"
             onMouseEnter={() => setActiveService('marketing')}
@@ -100,8 +100,8 @@ const Homethree: React.FC = () => {
         </div>
 
         {/* Right card block */}
-        <div className="relative w-full lg:w-[440px] lg:flex-none flex justify-center lg:justify-end">
-          <div className="relative rounded-[28px] p-4 sm:p-5 w-full max-w-md sm:max-w-lg lg:max-w-[440px]">
+        <div className="relative w-full lg:w-[360px] xl:w-[420px] shrink-0 lg:flex-none flex justify-center lg:justify-end">
+          <div className="relative rounded-[28px] p-4 sm:p-5 w-full max-w-md sm:max-w-lg lg:max-w-[360px] xl:max-w-[420px]">
             {/* Top pill "Our Services" */}
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/90 text-[#272D55] text-xs font-semibold mb-3 shadow-sm">
               Our Services
@@ -112,7 +112,7 @@ const Homethree: React.FC = () => {
               <img
                 src={getServiceImage()}
                 alt="Our services preview"
-                className="w-full h-[430px] object-cover transition-transform duration-500"
+                className="w-full h-[390px] xl:h-[430px] object-cover transition-transform duration-500"
               />
             </div>
 

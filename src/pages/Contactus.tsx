@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 interface ContactusProps {
   onLoginClick: () => void;
@@ -139,6 +140,7 @@ const Contactus: React.FC<ContactusProps> = ({ onLoginClick }) => {
           </form>
         </div>
       </main>
+      <Footer />
     </div>
   );
 };

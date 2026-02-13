@@ -1,8 +1,37 @@
 import React, { useState } from 'react';
-import { FaFacebook, FaInstagram, FaXTwitter, FaLinkedin, FaYoutube } from 'react-icons/fa6';
+import { FaFacebook, FaInstagram, FaLinkedin,  } from 'react-icons/fa6';
+import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
   const [email, setEmail] = useState('');
+
+  const handleInternalNavClick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const columnOneLinks = [
+    { label: 'Home', to: '/' },
+    { label: 'About Us', to: '/about' },
+    { label: 'Industries', to: '/industries' },
+    { label: 'Blog', to: '/blog' },
+    { label: 'Contact', to: '/contact' },
+  ];
+
+  const columnTwoLinks = [
+    { label: 'Creative Services', to: '/services/creative-services' },
+    { label: 'Branding Services', to: '/services/branding-services' },
+    { label: 'Development Services', to: '/services/development-services' },
+    { label: 'Marketing Services', to: '/services/marketing-services' },
+    // { label: 'Sign Up', to: '/signup' },
+  ];
+
+  const socialLinks = [
+    { name: 'Facebook', icon: FaFacebook, href: 'https://www.facebook.com/people/AI-Mark-Labs/61555229655979/' },
+    { name: 'Instagram', icon: FaInstagram, href: 'https://www.instagram.com/aimarklab/' },
+    // { name: 'X', icon: FaXTwitter, href: 'https://x.com' },
+    { name: 'LinkedIn', icon: FaLinkedin, href: 'https://www.linkedin.com/company/ai-mark-labs/' },
+    // { name: 'YouTube', icon: FaYoutube, href: 'https://www.youtube.com' },
+  ];
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -61,13 +90,17 @@ const Footer: React.FC = () => {
 
           {/* Column One Links */}
           <div>
-            <h4 className="font-bold text-white mb-4">Column One</h4>
+            <h4 className="font-bold text-white mb-4">Quick  Link</h4>
             <ul className="space-y-2">
-              {['Link One', 'Link Two', 'Link Three', 'Link Four', 'Link Five'].map((link, index) => (
-                <li key={index}>
-                  <a href="/" className="text-white/80 hover:text-white text-sm transition-colors">
-                    {link}
-                  </a>
+              {columnOneLinks.map((link) => (
+                <li key={link.to}>
+                  <Link
+                    to={link.to}
+                    onClick={handleInternalNavClick}
+                    className="text-white/80 hover:text-white text-sm transition-colors"
+                  >
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -75,13 +108,17 @@ const Footer: React.FC = () => {
 
           {/* Column Two Links */}
           <div>
-            <h4 className="font-bold text-white mb-4">Column Two</h4>
+            <h4 className="font-bold text-white mb-4">Quick  Link</h4>
             <ul className="space-y-2">
-              {['Link Six', 'Link Seven', 'Link Eight', 'Link Nine', 'Link Ten'].map((link, index) => (
+              {columnTwoLinks.map((link, index) => (
                 <li key={index}>
-                  <a href="/" className="text-white/80 hover:text-white text-sm transition-colors">
-                    {link}
-                  </a>
+                  <Link
+                    to={link.to}
+                    onClick={handleInternalNavClick}
+                    className="text-white/80 hover:text-white text-sm transition-colors"
+                  >
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -91,17 +128,16 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="font-bold text-white mb-4">Follow Us</h4>
             <ul className="space-y-3">
-              {[
-                { name: 'Facebook', icon: FaFacebook },
-                { name: 'Instagram', icon: FaInstagram },
-                { name: 'X', icon: FaXTwitter },
-                { name: 'LinkedIn', icon: FaLinkedin },
-                { name: 'YouTube', icon: FaYoutube }
-              ].map((social, index) => {
+              {socialLinks.map((social, index) => {
                 const IconComponent = social.icon as React.ComponentType<React.SVGProps<SVGSVGElement>>;
                 return (
                   <li key={index}>
-                    <a href="/" className="flex items-center gap-2 text-white/80 hover:text-white text-sm transition-colors">
+                    <a
+                      href={social.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center gap-2 text-white/80 hover:text-white text-sm transition-colors"
+                    >
                       <IconComponent className="w-5 h-5 text-white" />
                       <span>{social.name}</span>
                     </a>
