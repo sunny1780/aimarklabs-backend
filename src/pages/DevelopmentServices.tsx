@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import Homecta from '../components/Homecta';
+import Developmentcta from '../components/Developmentcta';
 import DevelopmentHero from '../components/DevelopmentHero';
 import DevelopmentInfrastructureSection from '../components/DevelopmentInfrastructureSection';
 import DevelopmentOfferingsSection from '../components/DevelopmentOfferingsSection';
@@ -24,7 +24,7 @@ const DevelopmentServices: React.FC<DevelopmentServicesProps> = ({
       <DevelopmentOfferingsSection />
 <DevelopmentFaqs/>
 <DevelopmentBlogs/>
-      <Homecta />
+      <Developmentcta/>
       <Footer />
     </div>
   );

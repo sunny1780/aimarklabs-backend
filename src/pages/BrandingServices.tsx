@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import Homecta from '../components/Homecta';
+import Brandingcta from '../components/Brandingcta';
 import BrandingHero from '../components/BrandingHero';
 import BrandArchitectureSection from '../components/BrandArchitectureSection';
 import BrandingOfferingsSection from '../components/BrandingOfferingsSection';
@@ -21,7 +21,7 @@ const BrandingServices: React.FC<BrandingServicesProps> = ({ onLoginClick }) => 
       <BrandingOfferingsSection />
       <Brandingfaq />
       <Brandingblogs />
-      <Homecta />
+      <Brandingcta />
       <Footer />
     </div>
   );

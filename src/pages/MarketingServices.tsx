@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import Homecta from '../components/Homecta';
+import Marketingcta from '../components/Marketingcta';
 import MarketingHero from '../components/MarketingHero';
 import MarketingOfferingsSection from '../components/MarketingOfferingsSection';
 import PerformanceMarketing from '../components/PerformanceMarketing';
@@ -30,7 +30,7 @@ const MarketingServices: React.FC<MarketingServicesProps> = ({
         <BlogExtra/>
       </main>
 
-      <Homecta />
+      <Marketingcta/>
       <Footer />
     </div>
   );

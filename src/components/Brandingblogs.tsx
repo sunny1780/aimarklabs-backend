@@ -29,7 +29,7 @@ const Brandingblogs = () => {
       'transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s ease',
   };
 
-  const cardStyle = (delay) => ({
+  const cardStyle = (delay: number) => ({
     transform: visible ? 'translateY(0)' : 'translateY(40px)',
     opacity: visible ? 1 : 0,
     transition: `transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms, opacity 0.5s ease ${delay}ms`,
