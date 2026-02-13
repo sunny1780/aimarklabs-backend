@@ -11,9 +11,8 @@ const MarketingHero: React.FC = () => {
             </span>
 
            <h1 className="mt-14 text-[42px] sm:text-[54px] lg:text-[60px] leading-[0.98] font-semibold tracking-[-0.02em] text-[#1E1E1E]">
-  Campaigns That
-  <br />
-  Convert
+  Growth-Focused Marketing Retainers
+  
 </h1>
 
 

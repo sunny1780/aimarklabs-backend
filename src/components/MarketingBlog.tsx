@@ -77,13 +77,13 @@ const MarketingBlog = () => {
           {/* Tag */}
           <div className="text-center mb-4">
             <span className="inline-flex items-center px-5 py-2.5 rounded-lg text-sm font-semibold tracking-wide text-[#272D55] bg-[#D7DDFC] border border-[#B3BDEF]">
-              Resources
+              Blog
             </span>
           </div>
 
           {/* Heading */}
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 text-center mb-10">
-            Latest Blogs
+           Stay Ahead of Trends
           </h2>
         </div>
 

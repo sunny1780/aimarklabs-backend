@@ -83,7 +83,7 @@ const Creativeblogs = () => {
 
           {/* Heading */}
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 text-center mb-10">
-            Latest Blogs
+            Stay Ahead of Trends
           </h2>
         </div>
 

@@ -6,8 +6,7 @@ const PerformanceMarketing: React.FC = () => {
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-[0.82fr_1.58fr] gap-8 lg:gap-12 items-start">
         <p className="text-[16px] leading-[1.5] text-[#5A666E] max-w-[520px] font-normal">
-  By merging innovative design with strategic thinking and audience-driven insights, we ensure your digital
-  presence communicates trust, professionalism, and unique
+ Targeted campaigns engage audiences, boost visibility, drive conversions, and we optimize them to deliver measurable ROI and strengthen brand presence
 </p>
 
 
