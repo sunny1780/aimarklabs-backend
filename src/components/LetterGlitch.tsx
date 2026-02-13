@@ -88,30 +88,6 @@ const LetterGlitch = ({
     }));
   };
 
-  const resizeCanvas = () => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const parent = canvas.parentElement;
-    if (!parent) return;
-
-    const dpr = window.devicePixelRatio || 1;
-    const rect = parent.getBoundingClientRect();
-
-    canvas.width = rect.width * dpr;
-    canvas.height = rect.height * dpr;
-
-    canvas.style.width = `${rect.width}px`;
-    canvas.style.height = `${rect.height}px`;
-
-    if (context.current) {
-      context.current.setTransform(dpr, 0, 0, dpr, 0, 0);
-    }
-
-    const { columns, rows } = calculateGrid(rect.width, rect.height);
-    initializeLetters(columns, rows);
-    drawLetters();
-  };
-
   const drawLetters = () => {
     if (!context.current || letters.current.length === 0) return;
     const ctx = context.current;
@@ -172,26 +148,51 @@ const LetterGlitch = ({
     }
   };
 
-  const animate = () => {
-    const now = Date.now();
-    if (now - lastGlitchTime.current >= glitchSpeed) {
-      updateLetters();
-      drawLetters();
-      lastGlitchTime.current = now;
-    }
-
-    if (smooth) {
-      handleSmoothTransitions();
-    }
-
-    animationRef.current = requestAnimationFrame(animate);
-  };
-
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
     context.current = canvas.getContext('2d');
+
+    const resizeCanvas = () => {
+      const c = canvasRef.current;
+      if (!c) return;
+      const parent = c.parentElement;
+      if (!parent) return;
+
+      const dpr = window.devicePixelRatio || 1;
+      const rect = parent.getBoundingClientRect();
+
+      c.width = rect.width * dpr;
+      c.height = rect.height * dpr;
+
+      c.style.width = `${rect.width}px`;
+      c.style.height = `${rect.height}px`;
+
+      if (context.current) {
+        context.current.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+
+      const { columns, rows } = calculateGrid(rect.width, rect.height);
+      initializeLetters(columns, rows);
+      drawLetters();
+    };
+
+    const animate = () => {
+      const now = Date.now();
+      if (now - lastGlitchTime.current >= glitchSpeed) {
+        updateLetters();
+        drawLetters();
+        lastGlitchTime.current = now;
+      }
+
+      if (smooth) {
+        handleSmoothTransitions();
+      }
+
+      animationRef.current = requestAnimationFrame(animate);
+    };
+
     resizeCanvas();
     animate();
 
@@ -212,6 +213,8 @@ const LetterGlitch = ({
       if (animationRef.current) cancelAnimationFrame(animationRef.current);
       window.removeEventListener('resize', handleResize);
     };
+    // Only re-run when glitchSpeed or smooth change; other fns read from refs at call time
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [glitchSpeed, smooth]);
 
   return (
