@@ -8,11 +8,11 @@ const Servicehero = () => {
           {/* LEFT CONTENT */}
           <div className="w-full md:w-1/2 service-hero-left">
             <span className="inline-block bg-[#E8ECFF] text-[#4B5CFF] text-sm px-4 py-1 rounded-full mb-4">
-              UI/UX Design
+             Creative
             </span>
 
             <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
-              Adaptive, Human- <br /> Centered Designs
+              Design That Boosts <br /> Conversions
             </h1>
 
             <p className="text-[#687076] mb-6 max-w-md">

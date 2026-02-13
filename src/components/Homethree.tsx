@@ -43,7 +43,7 @@ const Homethree: React.FC = () => {
             style={{
               fontFamily: "'Manrope', 'Segoe UI', sans-serif",
               fontWeight: 400,
-              fontSize: '150px',
+              fontSize: '138px',
               lineHeight: '100%',
             }}
           >
@@ -57,7 +57,7 @@ const Homethree: React.FC = () => {
             style={{
               fontFamily: "'Manrope', 'Segoe UI', sans-serif",
               fontWeight: 400,
-              fontSize: '150px',
+              fontSize: '138px',
               lineHeight: '100%',
             }}
             onMouseEnter={() => setActiveService('branding')}
@@ -100,19 +100,19 @@ const Homethree: React.FC = () => {
         </div>
 
         {/* Right card block */}
-        <div className="relative flex-1 flex justify-center lg:justify-end">
-          <div className="relative rounded-[28px] p-4 sm:p-5 w-full max-w-xs sm:max-w-sm">
+        <div className="relative w-full lg:w-[440px] lg:flex-none flex justify-center lg:justify-end">
+          <div className="relative rounded-[28px] p-4 sm:p-5 w-full max-w-md sm:max-w-lg lg:max-w-[440px]">
             {/* Top pill "Our Services" */}
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/90 text-[#272D55] text-xs font-semibold mb-3 shadow-sm">
               Our Services
             </div>
 
             {/* Main image inside card */}
-            <div className="overflow-hidden rounded-[22px] border border-white/20 mb-3">
+            <div className="overflow-hidden rounded-[22px] border border-white/20 mb-3 w-full">
               <img
                 src={getServiceImage()}
                 alt="Our services preview"
-                className="w-full h-80 object-cover transition-transform duration-500"
+                className="w-full h-[430px] object-cover transition-transform duration-500"
               />
             </div>
 
