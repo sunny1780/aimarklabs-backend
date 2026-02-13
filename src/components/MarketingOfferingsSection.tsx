@@ -21,8 +21,7 @@ const MarketingOfferingsSection: React.FC = () => {
                 SEO &amp; Content Marketing Strategy
               </h3>
               <p className="mt-4 text-[#FFFFFF] text-[16px] leading-[1.45] font-normal">
-                Optimize digital presence through technical SEO, authority-building content, and organic distribution
-                strategies that drive sustainable traffic and search rankings.
+Optimize digital presence with technical SEO, authority-building content, and organic strategies that drive sustainable traffic, improved search rankings, and visibility.
               </p>
             </div>
           </article>
@@ -34,8 +33,8 @@ const MarketingOfferingsSection: React.FC = () => {
                 Social Media Marketing &amp; Community Management
               </h3>
               <p className="mt-4 text-[#FFFFFF] text-[16px] leading-[1.45] font-normal">
-                Build engaged communities through platform-specific content strategies, audience interaction, and
-                performance analytics across all major social networks.
+Build engaged audiences through platform-specific content, consistent interaction, and analytics-driven strategies across all major social networks for lasting community growth.
+
               </p>
             </div>
           </article>
@@ -47,8 +46,8 @@ const MarketingOfferingsSection: React.FC = () => {
                 Email Marketing &amp; Marketing Automation
               </h3>
               <p className="mt-4 text-[#FFFFFF] text-[16px] leading-[1.45] font-normal">
-                Develop personalized email journeys with segmentation, behavioral triggers, and automated nurture
-                sequences that maximize customer lifetime value and conversions.
+Create personalized email journeys using segmentation, behavioral triggers, and automated nurture sequences to maximize customer lifetime value, engagement, and conversions.
+
               </p>
             </div>
           </article>
@@ -57,11 +56,10 @@ const MarketingOfferingsSection: React.FC = () => {
             <img src="/images/Vector.svg" alt="" aria-hidden="true" className="w-[30px] h-[30px]" />
             <div className="mt-auto">
               <h3 className="text-[#FFFFFF] text-[20px] leading-[1.2] font-medium">
-                Paid Media &amp; Performance Advertising
+                AI &amp; LLM Visibility
               </h3>
               <p className="mt-4 text-[#FFFFFF] text-[16px] leading-[1.45] font-normal">
-                Execute high-ROI campaigns across Google Ads, social platforms, and display networks with precision
-                targeting, budget optimization, and conversion tracking.
+Leverage AI and large language models to enhance brand visibility, optimize content creation, and deliver intelligent insights across digital channels effectively.
               </p>
             </div>
           </article>

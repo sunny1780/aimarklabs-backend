@@ -57,7 +57,7 @@ Conversion Architecture
 
         <div className="mt-9 sm:mt-11 overflow-hidden rounded-2xl">
           <img
-            src="/images/ui.png"
+            src="/images/Marketing.png"
             alt="Technical infrastructure visual"
             className="w-full h-[280px] sm:h-[420px] lg:h-[470px] object-cover"
             loading="lazy"

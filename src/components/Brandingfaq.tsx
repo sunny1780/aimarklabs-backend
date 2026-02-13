@@ -7,29 +7,29 @@ type FaqItem = {
 
 const faqItems: FaqItem[] = [
   {
-    question: 'Lorem ipsum dolor sit amet consectetur?',
+    question: 'How do you develop a brand strategy?',
     answer:
-      'Et facilisis aliquam sem imperdiet ut fames. Tincidunt sed leo in semper magna curabitur dictum. Dignissim id blandit porttitor habitant tortor mattis scelerisque auctor. Mi netus consectetur velit vitae viverra volutpat purus libero nisi. Ullamcorper pharetra nibh auctor tempor diam mi leo mauris dolor.',
+      ' We research your industry, competitors, and audience to create a clear positioning, messaging, and visual identity plan.',
   },
   {
-    question: 'Lorem ipsum dolor sit amet consectetur?',
+    question: 'Can you handle both new branding and rebranding projects?',
     answer:
-      'Et facilisis aliquam sem imperdiet ut fames. Tincidunt sed leo in semper magna curabitur dictum. Dignissim id blandit porttitor habitant tortor mattis scelerisque auctor. Mi netus consectetur velit vitae viverra volutpat purus libero nisi. Ullamcorper pharetra nibh auctor tempor diam mi leo mauris dolor.',
+      ' Yes, we work with startups building new brands and established companies looking to refresh their image.',
   },
   {
-    question: 'Lorem ipsum dolor sit amet consectetur?',
+    question: 'Will I receive brand guidelines?',
     answer:
-      'Et facilisis aliquam sem imperdiet ut fames. Tincidunt sed leo in semper magna curabitur dictum. Dignissim id blandit porttitor habitant tortor mattis scelerisque auctor. Mi netus consectetur velit vitae viverra volutpat purus libero nisi. Ullamcorper pharetra nibh auctor tempor diam mi leo mauris dolor.',
+      ' Yes, every project includes detailed brand guidelines covering logo usage, colors, fonts, and tone of voice.',
   },
   {
-    question: 'Lorem ipsum dolor sit amet consectetur?',
+    question: 'Do you assist with brand messaging and storytelling?',
     answer:
-      'Et facilisis aliquam sem imperdiet ut fames. Tincidunt sed leo in semper magna curabitur dictum. Dignissim id blandit porttitor habitant tortor mattis scelerisque auctor. Mi netus consectetur velit vitae viverra volutpat purus libero nisi. Ullamcorper pharetra nibh auctor tempor diam mi leo mauris dolor.',
+      ' Absolutely, we craft narratives that resonate with your audience and communicate your brand’s core values.',
   },
   {
-    question: 'Lorem ipsum dolor sit amet consectetur?',
+    question: 'How long does a branding project take?',
     answer:
-      'Et facilisis aliquam sem imperdiet ut fames. Tincidunt sed leo in semper magna curabitur dictum. Dignissim id blandit porttitor habitant tortor mattis scelerisque auctor. Mi netus consectetur velit vitae viverra volutpat purus libero nisi. Ullamcorper pharetra nibh auctor tempor diam mi leo mauris dolor.',
+      ' Typically 4–8 weeks, depending on project complexity and client collaboration.',
   },
 ];
 
@@ -50,14 +50,15 @@ const Brandingfaq = () => {
             </span>
 
 <h2 className="mt-6 text-[#111111] text-4xl sm:text-5xl lg:text-[60px] leading-[1.02] font-medium">
-  Got a Question?
+  Branding Questions?
+
 </h2>
 
 
 
 
            <p className="mt-4 text-[#5A666E] text-[18px] leading-relaxed max-w-[420px]">
-  Quick answers to common questions about our services, process, and results.
+Everything you need to know about strategy, identity systems, and brand positioning.
 </p>
 
 

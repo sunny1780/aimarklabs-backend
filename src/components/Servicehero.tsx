@@ -20,12 +20,13 @@ const Servicehero = () => {
               create for our clients.
             </p>
 
-            <button className="relative group bg-orange-500 hover:bg-orange-600 transition px-6 py-3 rounded-lg font-medium overflow-hidden">
-              <span className="relative z-10">Get Designs That Convert</span>
-              <span className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <span className="absolute -inset-y-1 -left-10 w-20 rotate-12 bg-white/40 blur-md group-hover:translate-x-[220%] transition-transform duration-700" />
-              </span>
-            </button>
+         <button className="relative group bg-[#F29335] hover:bg-orange-600 transition px-6 py-3 rounded-lg font-medium overflow-hidden text-white">
+  <span className="relative z-10">Get Designs That Convert</span>
+  <span className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+    <span className="absolute -inset-y-1 -left-10 w-20 rotate-12 bg-white/40 blur-md group-hover:translate-x-[220%] transition-transform duration-700" />
+  </span>
+</button>
+
           </div>
 
           {/* RIGHT CARDS */}

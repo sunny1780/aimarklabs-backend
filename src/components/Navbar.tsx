@@ -112,7 +112,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
         <div className="hidden lg:flex items-center">
           <button
             onClick={onLoginClick}
-            className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2.5 rounded-lg font-medium text-sm flex items-center gap-2 transition-colors shadow-sm"
+            className="bg-[#F29335] hover:bg-orange-600 text-white px-6 py-2.5 rounded-lg font-medium text-sm flex items-center gap-2 transition-colors shadow-sm"
           >
             <span>Login</span>
             <img

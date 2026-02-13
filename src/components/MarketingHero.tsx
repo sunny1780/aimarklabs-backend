@@ -28,7 +28,7 @@ const MarketingHero: React.FC = () => {
 
           <div className="overflow-hidden rounded-2xl">
             <img
-              src="/images/ui.png"
+              src="/images/Marketing-hero.png"
               alt="Marketing strategy desk"
               className="w-full h-[420px] sm:h-[430px] object-cover"
               loading="lazy"

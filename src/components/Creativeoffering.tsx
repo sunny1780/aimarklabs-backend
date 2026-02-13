@@ -152,7 +152,7 @@ const AnimatedOfferingCard = ({
   return (
     <article
       ref={cardRef}
-      className={`creative-card rounded-[14px] border border-[#9EA8DA] p-6 md:p-7 text-white bg-transparent min-h-[248px] md:min-h-[270px] flex flex-col ${
+      className={`creative-card rounded-[14px] border border-[#9EA8DA] p-4 md:p-5 text-white bg-transparent min-h-[205px] md:min-h-[225px] flex flex-col ${
         wide ? 'md:col-span-2' : ''
       }`}
     >
@@ -182,7 +182,7 @@ const Creativeoffering = () => {
 
   return (
     <section ref={sectionRef} className="bg-[#1F2457] py-16 md:py-20 lg:py-24">
-      <div className="max-w-[1320px] mx-auto px-6 lg:px-8">
+      <div className="max-w-[1260px] mx-auto px-6 lg:px-8">
         <div className="text-center">
 <span className="inline-block rounded-[8px] bg-[#D7DDFC] border border-[#B3BDEF] px-5 py-2 text-[14px] font-medium text-[#272D55]">
   What We Deliver
@@ -196,7 +196,7 @@ const Creativeoffering = () => {
 
         </div>
 
-        <div className="mt-12 md:mt-14 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="mt-12 md:mt-14 grid grid-cols-1 md:grid-cols-3 gap-3">
           {offerings.map((item) => (
             <AnimatedOfferingCard key={item.title} wide={item.wide}>
               <Sparkle />
