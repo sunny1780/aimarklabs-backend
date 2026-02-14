@@ -1,39 +1,38 @@
 import React from 'react';
-
-const blogTags = Array.from({ length: 15 }, () => 'sdjbcewiycbesjdbcsdh');
+import FallingText from './FallingText';
 
 const BlogExtra = () => {
   return (
-    <section className="bg-[#F3F5F7] py-16 sm:py-20">
+    <section className="bg-white py-16 sm:py-20">
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         <div className="text-center">
-          <span className="inline-flex items-center px-4 py-2 rounded-[8px] bg-[#D7DDFC] border border-[#B3BDEF] text-[#272D55] text-[14px] font-medium">
-            Blogs
+          {/* Top Badge */}
+          <span className="inline-flex items-center px-4 py-2 rounded-full bg-[#D7DDFC] border border-[#B3BDEF] text-[#272D55] text-sm font-medium mb-6">
+            Excellence In Every Service
           </span>
-          <h2 className="mt-5 text-[#111111] text-4xl sm:text-5xl lg:text-[72px] leading-[1.05] font-medium">
-            Stay Informed About The Trends
+
+          {/* Main Heading */}
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#111111] mb-4">
+            Our Expertise
           </h2>
-        </div>
 
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-5">
-          {blogTags.map((tag, index) => (
-            <span
-              key={`${tag}-${index}`}
-              className="inline-flex items-center justify-center rounded-full bg-[#E9EDF6] text-[#111111] text-sm sm:text-base lg:text-[16px] px-6 py-3 leading-none"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
+          {/* Subheading */}
+          <p className="text-[#687076] text-lg sm:text-xl mb-12 max-w-2xl mx-auto">
+            From branding to development, everything your business needs, under one roof.
+          </p>
 
-        <div className="mt-10 flex justify-center">
-          <a
-            href="/blog"
-            className="inline-flex items-center gap-2 rounded-[6px] bg-[#F29335] px-8 py-3 text-white text-[16px] font-medium hover:bg-[#e88f2b] transition-colors"
-          >
-            Learn More
-            <span aria-hidden="true">→</span>
-          </a>
+          {/* Falling text */}
+          <div className="mt-6 max-w-5xl mx-auto">
+            <FallingText
+              text="Branding Photography UI/UX Email Marketing Paid Ads Motion Social Media Logo Design Retainers Content Strategy Copywriting Web Dev SEO Campaigns Wireframes Visual Design Visual Identity"
+              trigger="scroll"
+              backgroundColor="transparent"
+              wireframes={false}
+              gravity={0.56}
+              fontSize="clamp(1rem, 1.5vw, 1.125rem)"
+              mouseConstraintStiffness={0.9}
+            />
+          </div>
         </div>
       </div>
     </section>

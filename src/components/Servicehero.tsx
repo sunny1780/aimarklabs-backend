@@ -1,9 +1,15 @@
-import CardSwap, { Card } from './CardSwap';
+import Stack from './Stack';
+
+const serviceImages = [
+  '/images/onee.png',
+  '/images/twoo.png',
+  '/images/threee.png'
+];
 
 const Servicehero = () => {
   return (
     <>
-      <section className="py-16 overflow-hidden">
+      <section className="pt-12 pb-20 overflow-hidden min-h-[600px] md:min-h-[700px]">
         <div className="max-w-7xl mx-auto px-6 flex flex-col-reverse md:flex-row items-center gap-12">
           {/* LEFT CONTENT */}
           <div className="w-full md:w-1/2 service-hero-left">
@@ -29,34 +35,36 @@ const Servicehero = () => {
 
           </div>
 
-          {/* RIGHT CARDS */}
-          <div className="w-full md:w-1/2 flex justify-center">
-            <div
-              className="service-hero-image w-full max-w-[520px] h-[400px] sm:h-[420px] md:h-[420px] relative overflow-hidden"
-            >
-              <CardSwap
-                width={320}
-                height={220}
-                cardDistance={42}
-                verticalDistance={34}
-                delay={3000}
+          {/* RIGHT STACK */}
+          <div className="w-full md:w-1/2 flex justify-center items-center">
+            <div className="w-[400px] h-[400px]">
+              <Stack
+                randomRotation={false}
+                sensitivity={200}
+                sendToBackOnClick={false}
+                cards={serviceImages.map((src, i) => (
+                  <div key={i} className="relative w-full h-full rounded-2xl overflow-hidden">
+                    <img 
+                      src={src} 
+                      alt={`card-${i + 1}`} 
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-br from-black/60 to-black/40"></div>
+                    <div className="absolute top-6 left-6 z-10">
+                      <h3 className="text-2xl font-semibold text-white">
+                        {i === 0 ? 'Design' : i === 1 ? 'Branding' : 'Experience'}
+                      </h3>
+                    </div>
+                  </div>
+                ))}
+                autoplay={false}
+                autoplayDelay={2000}
                 pauseOnHover={false}
-              >
-                <Card customClass="p-6 text-white shadow-xl">
-                  <h3 className="text-2xl font-semibold mb-2">Card 1</h3>
-                  <p className="text-sm text-slate-300">Your content here</p>
-                </Card>
-                <Card customClass="p-6 text-white shadow-xl">
-                  <h3 className="text-2xl font-semibold mb-2">Card 2</h3>
-                  <p className="text-sm text-slate-300">Your content here</p>
-                </Card>
-                <Card customClass="p-6 text-white shadow-xl">
-                  <h3 className="text-2xl font-semibold mb-2">Card 3</h3>
-                  <p className="text-sm text-slate-300">Your content here</p>
-                </Card>
-              </CardSwap>
+                hoverToCycle={true}
+              />
             </div>
           </div>
+
         </div>
       </section>
 
@@ -69,15 +77,6 @@ const Servicehero = () => {
             animation: serviceHeroLeftIn 0.7s ease-out forwards;
           }
 
-          .service-hero-image {
-            transform-origin: center;
-            /* box-shadow: 0 20px 60px rgba(15, 23, 42, 0.25); */
-            opacity: 0;
-            transform: translateX(24px) scale(0.98);
-            animation: serviceHeroImageIn 0.8s ease-out 0.1s forwards,
-                       serviceHeroImageFloat 14s ease-in-out 0.9s infinite alternate;
-          }
-
           @keyframes serviceHeroLeftIn {
             from {
               opacity: 0;
@@ -86,29 +85,6 @@ const Servicehero = () => {
             to {
               opacity: 1;
               transform: translateX(0);
-            }
-          }
-
-          @keyframes serviceHeroImageIn {
-            from {
-              opacity: 0;
-              transform: translateX(28px) scale(0.96);
-            }
-            to {
-              opacity: 1;
-              transform: translateX(0) scale(1);
-            }
-          }
-
-          @keyframes serviceHeroImageFloat {
-            0% {
-              transform: translate3d(0, 0, 0) scale(1);
-            }
-            50% {
-              transform: translate3d(0, -10px, 0) scale(1.01);
-            }
-            100% {
-              transform: translate3d(0, 0, 0) scale(1);
             }
           }
         `}

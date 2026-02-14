@@ -129,3 +129,18 @@ body {
 .hero-float-3 {
   animation: hero-float-c 5.5s ease-in-out infinite;
 }
+
+@keyframes falling-text {
+  0% {
+    transform: translateY(-40px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-falling-text {
+  animation: falling-text 1s ease-out forwards;
+}

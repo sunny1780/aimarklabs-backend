@@ -1,4 +1,19 @@
 import React from 'react';
+import BounceCards from './BounceCards';
+
+const marketingImages = [
+  '/images/Marketing-hero.png',
+  '/images/11.png',
+  '/images/12.png',
+  '/images/13.png'
+];
+
+const transformStyles = [
+  'rotate(5deg) translate(-150px)',
+  'rotate(0deg) translate(-70px)',
+  'rotate(-5deg)',
+  'rotate(5deg) translate(70px)'
+];
 
 const MarketingHero: React.FC = () => {
   return (
@@ -10,27 +25,29 @@ const MarketingHero: React.FC = () => {
               Marketing
             </span>
 
-           <h1 className="mt-14 text-[42px] sm:text-[54px] lg:text-[60px] leading-[0.98] font-semibold tracking-[-0.02em] text-[#1E1E1E]">
-  Growth-Focused Marketing Retainers
-  
-</h1>
+            <h1 className="mt-14 text-[42px] sm:text-[54px] lg:text-[60px] leading-[0.98] font-semibold tracking-[-0.02em] text-[#1E1E1E]">
+              Growth-Focused Marketing Retainers
+            </h1>
 
-
-           <a
-  href="/contact"
-  className="mt-12 inline-flex items-center justify-center rounded-[10px] bg-[#F29335] text-white text-[16px] font-medium leading-none px-8 py-4 hover:bg-[#df8428] transition-colors"
->
-  Request a Marketing Audit
-</a>
-
+            <a
+              href="/contact"
+              className="mt-12 inline-flex items-center justify-center rounded-[10px] bg-[#F29335] text-white text-[16px] font-medium leading-none px-8 py-4 hover:bg-[#df8428] transition-colors"
+            >
+              Request a Marketing Audit
+            </a>
           </div>
 
-          <div className="overflow-hidden rounded-2xl">
-            <img
-              src="/images/Marketing-hero.png"
-              alt="Marketing strategy desk"
-              className="w-full h-[420px] sm:h-[430px] object-cover"
-              loading="lazy"
+          <div className="flex items-center justify-center min-h-[420px] sm:min-h-[430px] overflow-visible">
+            <BounceCards
+              className="custom-bounceCards"
+              images={marketingImages}
+              containerWidth={500}
+              containerHeight={250}
+              animationDelay={1}
+              animationStagger={0.08}
+              easeType="elastic.out(1, 0.5)"
+              transformStyles={transformStyles}
+              enableHover={false}
             />
           </div>
         </div>
