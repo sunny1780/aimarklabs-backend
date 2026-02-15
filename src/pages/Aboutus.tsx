@@ -7,7 +7,7 @@ import AboutFour from '../components/AboutFour';
 import Team from '../components/Team';
 import Footer from '../components/Footer';
 import AboutCta from '../components/AboutCta';
-
+// data
 interface AboutusProps {
   onLoginClick: () => void;
 }
