@@ -1,5 +1,26 @@
 import { useRef, useState, useEffect } from 'react';
-import Matter from 'matter-js';
+
+type MatterLike = {
+  Engine: any;
+  Render: any;
+  World: any;
+  Bodies: any;
+  Runner: any;
+  Mouse: any;
+  MouseConstraint: any;
+  Body: any;
+};
+
+const loadMatterSafely = (): MatterLike | null => {
+  try {
+    // Avoid static resolution when dependency is not installed in offline environments.
+    // eslint-disable-next-line no-eval
+    const runtimeRequire = (0, eval)('require') as (id: string) => MatterLike;
+    return runtimeRequire('matter-js');
+  } catch {
+    return null;
+  }
+};
 
 interface FallingTextProps {
   text?: string;
@@ -69,9 +90,13 @@ const FallingText: React.FC<FallingTextProps> = ({
   useEffect(() => {
     if (!effectStarted) return;
 
+    const Matter = loadMatterSafely();
+    if (!Matter) return;
+
     const { Engine, Render, World, Bodies, Runner, Mouse, MouseConstraint } = Matter;
 
     if (!containerRef.current || !canvasContainerRef.current) return;
+    const canvasContainer = canvasContainerRef.current;
 
     const containerRect = containerRef.current.getBoundingClientRect();
     const width = containerRect.width;
@@ -83,7 +108,7 @@ const FallingText: React.FC<FallingTextProps> = ({
     engine.world.gravity.y = gravity;
 
     const render = Render.create({
-      element: canvasContainerRef.current,
+      element: canvasContainer,
       engine,
       options: {
         width,
@@ -140,7 +165,7 @@ const FallingText: React.FC<FallingTextProps> = ({
         render: { visible: false }
       }
     });
-    (render as Matter.Render & { mouse?: Matter.Mouse }).mouse = mouse;
+    (render as { mouse?: unknown }).mouse = mouse;
 
     World.add(engine.world, [floor, leftWall, rightWall, ceiling, mouseConstraint, ...wordBodies.map(wb => wb.body)]);
 
@@ -163,8 +188,8 @@ const FallingText: React.FC<FallingTextProps> = ({
     return () => {
       Render.stop(render);
       Runner.stop(runner);
-      if (render.canvas && canvasContainerRef.current && canvasContainerRef.current.contains(render.canvas)) {
-        canvasContainerRef.current.removeChild(render.canvas);
+      if (render.canvas && canvasContainer.contains(render.canvas)) {
+        canvasContainer.removeChild(render.canvas);
       }
       World.clear(engine.world, false);
       Engine.clear(engine);

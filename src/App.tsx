@@ -17,6 +17,7 @@ import UiUx from './pages/UiUx';
 import BrandingServices from './pages/BrandingServices';
 import DevelopmentServices from './pages/DevelopmentServices';
 import MarketingServices from './pages/MarketingServices';
+import TeamMembers from './pages/TeamMembers';
 
 const LoginRoute: React.FC = () => {
   const navigate = useNavigate();
@@ -83,6 +84,11 @@ const MarketingServicesRoute: React.FC = () => {
   return <MarketingServices onLoginClick={() => navigate('/login')} />;
 };
 
+const TeamMembersRoute: React.FC = () => {
+  const navigate = useNavigate();
+  return <TeamMembers onLoginClick={() => navigate('/login')} />;
+};
+
 const App: React.FC = () => {
   return (
     <BrowserRouter>
@@ -98,6 +104,7 @@ const App: React.FC = () => {
         <Route path="/services/branding-services" element={<BrandingServicesRoute />} />
         <Route path="/services/development-services" element={<DevelopmentServicesRoute />} />
         <Route path="/services/marketing-services" element={<MarketingServicesRoute />} />
+        <Route path="/team" element={<TeamMembersRoute />} />
         <Route path="/login" element={<LoginRoute />} />
         <Route path="/signup" element={<SignUpRoute />} />
         <Route path="/dashboard" element={<AnalyticsDashboard />} />

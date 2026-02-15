@@ -12,6 +12,7 @@ const Hero: React.FC<HeroProps> = ({ nextInView }) => {
       {!nextInView && (
         <SharedVideo
           src="/images/video.mp4"
+          layoutId="home-shared-video"
           className="absolute bottom-0 right-0 z-20 w-64 h-40"
         />
       )}

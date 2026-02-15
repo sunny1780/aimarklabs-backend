@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import { useInView } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
+import { LayoutGroup, useInView } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import Hometwo from '../components/Hometwo';
@@ -19,15 +19,30 @@ interface HomeProps {
 
 const Home: React.FC<HomeProps> = ({ onLoginClick }) => {
   const nextRef = useRef<HTMLDivElement>(null);
-  const nextInView = useInView(nextRef, { amount: 0.35, margin: '0px 0px -20% 0px' });
+  // Hysteresis: enter at a higher threshold, exit at a lower threshold.
+  // This prevents rapid toggling near a single boundary.
+  const enterInView = useInView(nextRef, { amount: 0.45, margin: '0px 0px -20% 0px' });
+  const exitInView = useInView(nextRef, { amount: 0.2, margin: '0px 0px -20% 0px' });
+  const [nextInView, setNextInView] = useState(false);
+
+  useEffect(() => {
+    if (!nextInView && enterInView) {
+      setNextInView(true);
+    }
+    if (nextInView && !exitInView) {
+      setNextInView(false);
+    }
+  }, [enterInView, exitInView, nextInView]);
 
   return (
     <div className="min-h-screen">
       <Navbar onLoginClick={onLoginClick} />
-      <Hero nextInView={nextInView} />
-      <div ref={nextRef}>
-        <Hometwo nextInView={nextInView} />
-      </div>
+      <LayoutGroup id="home-shared-video-group">
+        <Hero nextInView={nextInView} />
+        <div ref={nextRef}>
+          <Hometwo nextInView={nextInView} />
+        </div>
+      </LayoutGroup>
       <Homethree />
       <Homefour />
       <Homefive />

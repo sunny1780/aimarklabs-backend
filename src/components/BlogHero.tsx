@@ -31,7 +31,7 @@ const BlogHero: React.FC = () => {
             <span className="blog-hero-letter">L</span>
             <span className="blog-hero-letter">O</span>
             <span className="blog-hero-letter">G</span>
-            <span className="blog-hero-letter">S</span>
+          
           </h1>
         </div>
       </section>

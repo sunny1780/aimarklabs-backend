@@ -94,9 +94,9 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
           <Link to="/industries" className="text-gray-800 hover:text-gray-900 text-sm font-medium transition-colors">
             Industries
           </Link>
-          <Link to="/team" className="text-gray-800 hover:text-gray-900 text-sm font-medium transition-colors">
+          {/* <Link to="/team" className="text-gray-800 hover:text-gray-900 text-sm font-medium transition-colors">
             Team
-          </Link>
+          </Link> */}
           <Link to="/blog" className="text-gray-800 hover:text-gray-900 text-sm font-medium transition-colors">
             Blog
           </Link>
@@ -164,7 +164,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
               </div>
             )}
             <Link to="/industries" className="px-3 py-2 text-sm text-gray-800" onClick={() => setMobileMenuOpen(false)}>Industries</Link>
-            <Link to="/team" className="px-3 py-2 text-sm text-gray-800" onClick={() => setMobileMenuOpen(false)}>Team</Link>
+            {/* <Link to="/team" className="px-3 py-2 text-sm text-gray-800" onClick={() => setMobileMenuOpen(false)}>Team</Link> */}
             <Link to="/blog" className="px-3 py-2 text-sm text-gray-800" onClick={() => setMobileMenuOpen(false)}>Blog</Link>
             <Link to="/contact" className="px-3 py-2 text-sm text-gray-800" onClick={() => setMobileMenuOpen(false)}>Contact</Link>
             <button

@@ -64,6 +64,7 @@ const Hometwo: React.FC<HometwoProps> = ({ nextInView }) => {
         {nextInView && (
           <SharedVideo
             src="/images/video.mp4"
+            layoutId="home-shared-video"
             className="w-full max-w-[1400px] h-[280px] sm:h-[420px] lg:h-[740px] mx-auto mb-12"
           />
         )}

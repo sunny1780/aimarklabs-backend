@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Homesix: React.FC = () => {
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -111,6 +112,15 @@ const Homesix: React.FC = () => {
             <h3 className="font-bold text-gray-900 text-xl mb-1">Mohammad Farghaly</h3>
             <p className="text-gray-600">Client Relations</p>
           </div>
+        </div>
+
+        <div className="mt-10 flex justify-center" style={memberStyle(380)}>
+          <Link
+            to="/team"
+            className="inline-flex items-center rounded-lg bg-[#F29335] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-orange-600"
+          >
+            View All
+          </Link>
         </div>
       </div>
     </section>
