@@ -20,7 +20,7 @@ const Homethree: React.FC = () => {
   };
   return (
     <section
-      className="relative py-16 px-4 sm:px-6 lg:pl-10 lg:pr-12 xl:pr-20 overflow-hidden"
+      className="relative py-16 px-4 sm:px-6 lg:pl-10 lg:pr-24 xl:pr-32 overflow-hidden"
       style={{ fontFamily: "'Manrope', 'Segoe UI', sans-serif" }}
     >
       {/* Background image */}
@@ -34,17 +34,19 @@ const Homethree: React.FC = () => {
         <div className="absolute inset-0 bg-[#050824]/60" />
       </div>
 
-      <div className="relative max-w-6xl mx-auto flex flex-col lg:flex-row items-start lg:items-center gap-10 lg:gap-14">
+      <div className="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_minmax(320px,420px)] items-center gap-12 lg:gap-16 xl:gap-20">
         {/* Left text block */}
-        <div className="flex-1 min-w-0 text-left text-[#9CA9FF]">
+        <div className="min-w-0 text-left text-[#9CA9FF] order-1">
           <h2
-            className="group inline-flex items-baseline gap-2 mb-3 uppercase text-[#57609B] hover:text-[#C7CFFA] cursor-pointer"
+            className="group inline-flex items-center gap-2 mb-3 uppercase text-[#57609B] hover:text-[#C7CFFA] cursor-pointer"
             onMouseEnter={() => setActiveService('marketing')}
             style={{
-              fontFamily: "'Manrope', 'Segoe UI', sans-serif",
+              fontFamily: "'Anton', sans-serif",
               fontWeight: 400,
-              fontSize: '138px',
+              fontSize: '160px',
               lineHeight: '100%',
+              letterSpacing: 0,
+              fontStyle: 'normal',
             }}
           >
             MARKETING
@@ -53,12 +55,14 @@ const Homethree: React.FC = () => {
             </span>
           </h2>
           <h2
-            className="group inline-flex items-baseline gap-2 mb-3 uppercase transition-colors duration-200 text-[#57609B] hover:text-[#C7CFFA] cursor-pointer"
+            className="group inline-flex items-center gap-2 mb-3 uppercase transition-colors duration-200 text-[#57609B] hover:text-[#C7CFFA] cursor-pointer"
             style={{
-              fontFamily: "'Manrope', 'Segoe UI', sans-serif",
+              fontFamily: "'Anton', sans-serif",
               fontWeight: 400,
-              fontSize: '138px',
+              fontSize: '160px',
               lineHeight: '100%',
+              letterSpacing: 0,
+              fontStyle: 'normal',
             }}
             onMouseEnter={() => setActiveService('branding')}
           >
@@ -68,12 +72,14 @@ const Homethree: React.FC = () => {
             </span>
           </h2>
           <h2
-            className="group inline-flex items-baseline gap-2 mb-3 uppercase text-[#57609B] hover:text-[#C7CFFA] cursor-pointer"
+            className="group inline-flex items-center gap-2 mb-3 uppercase text-[#57609B] hover:text-[#C7CFFA] cursor-pointer"
             style={{
-              fontFamily: "'Manrope', 'Segoe UI', sans-serif",
+              fontFamily: "'Anton', sans-serif",
               fontWeight: 400,
-              fontSize: '150px',
+              fontSize: '160px',
               lineHeight: '100%',
+              letterSpacing: 0,
+              fontStyle: 'normal',
             }}
             onMouseEnter={() => setActiveService('development')}
           >
@@ -83,12 +89,14 @@ const Homethree: React.FC = () => {
             </span>
           </h2>
           <h2
-            className="group inline-flex items-baseline gap-2 uppercase text-[#57609B] hover:text-[#C7CFFA] cursor-pointer"
+            className="group inline-flex items-center gap-2 uppercase text-[#57609B] hover:text-[#C7CFFA] cursor-pointer"
             style={{
-              fontFamily: "'Manrope', 'Segoe UI', sans-serif",
+              fontFamily: "'Anton', sans-serif",
               fontWeight: 400,
-              fontSize: '150px',
+              fontSize: '160px',
               lineHeight: '100%',
+              letterSpacing: 0,
+              fontStyle: 'normal',
             }}
             onMouseEnter={() => setActiveService('uiux')}
           >
@@ -100,8 +108,8 @@ const Homethree: React.FC = () => {
         </div>
 
         {/* Right card block */}
-        <div className="relative w-full lg:w-[360px] xl:w-[420px] shrink-0 lg:flex-none flex justify-center lg:justify-end">
-          <div className="relative rounded-[28px] p-4 sm:p-5 w-full max-w-md sm:max-w-lg lg:max-w-[360px] xl:max-w-[420px]">
+        <div className="relative w-full max-w-[380px] mx-auto lg:mx-0 lg:max-w-none flex justify-center lg:justify-end lg:translate-x-10 xl:translate-x-16 order-2">
+          <div className="relative rounded-[28px] p-4 sm:p-5 w-full lg:w-[340px] xl:w-[380px] shrink-0">
             {/* Top pill "Our Services" */}
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/90 text-[#272D55] text-xs font-semibold mb-3 shadow-sm">
               Our Services
@@ -112,7 +120,7 @@ const Homethree: React.FC = () => {
               <img
                 src={getServiceImage()}
                 alt="Our services preview"
-                className="w-full h-[390px] xl:h-[430px] object-cover transition-transform duration-500"
+                className="w-full h-[320px] sm:h-[360px] xl:h-[400px] object-cover transition-transform duration-500"
               />
             </div>
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import BounceCards from './BounceCards';
+import TextType from './TextType';
 
 const marketingImages = [
   '/images/Marketing-hero.png',
@@ -26,7 +27,16 @@ const MarketingHero: React.FC = () => {
             </span>
 
             <h1 className="mt-14 text-[42px] sm:text-[54px] lg:text-[60px] leading-[0.98] font-semibold tracking-[-0.02em] text-[#1E1E1E]">
-              Growth-Focused Marketing Retainers
+              <TextType
+                text={['Growth-Focused Marketing Retainers']}
+                as="span"
+                typingSpeed={75}
+                pauseDuration={2000}
+                showCursor
+                cursorCharacter="|"
+                loop={false}
+                startOnVisible
+              />
             </h1>
 
             <a

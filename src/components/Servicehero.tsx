@@ -1,4 +1,5 @@
 import Stack from './Stack';
+import TextType from './TextType';
 
 const serviceImages = [
   '/images/onee.png',
@@ -18,7 +19,16 @@ const Servicehero = () => {
             </span>
 
             <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
-              Design That Boosts <br /> Conversions
+              <TextType
+                text={['Design That Boosts\nConversions']}
+                as="span"
+                typingSpeed={75}
+                pauseDuration={2000}
+                showCursor
+                cursorCharacter="|"
+                loop={false}
+                startOnVisible
+              />
             </h1>
 
             <p className="text-[#687076] mb-6 max-w-md">

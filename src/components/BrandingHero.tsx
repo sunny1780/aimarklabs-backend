@@ -1,5 +1,6 @@
 import React from 'react';
 import Folder from './Folder';
+import TextType from './TextType';
 
 const folderImages = [
   '/images/1%20(1).png',
@@ -18,10 +19,17 @@ const BrandingHero: React.FC = () => {
             </span>
 
            <h1 className="mt-12 sm:mt-14 text-[60px] leading-[0.98] font-semibold tracking-[-0.02em] text-[#1E1E1E]">
-  Build Your Brand
-  <br />
-  Legacy
-</h1>
+             <TextType
+               text={['Build Your Brand\nLegacy']}
+               as="span"
+               typingSpeed={75}
+               pauseDuration={2000}
+               showCursor
+               cursorCharacter="|"
+               loop={false}
+               startOnVisible
+             />
+           </h1>
 
 
            <a
