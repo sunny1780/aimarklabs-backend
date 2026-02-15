@@ -1,8 +1,44 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import './App.css';
 import MetaAnalyticsSection from './components/MetaAnalyticsSection';
 import Sidebar from './components/Sidebar';
 import TopBar from './components/TopBar';
+
+type DashboardClient = {
+  name: string;
+  brandLabel: string;
+  webTrafficEmbedUrl: string;
+  metaAdsEmbedUrl: string;
+  auditReportPreviewUrl: string;
+  auditReportDownloadUrl: string;
+};
+
+const DASHBOARD_CLIENTS: Record<string, DashboardClient> = {
+  'little-sicily': {
+    name: 'Little Sicily',
+    brandLabel: 'Little Sicily',
+    webTrafficEmbedUrl:
+      'https://lookerstudio.google.com/embed/reporting/46ad2f44-db71-4584-8f2d-283dee53d987/page/mYGiE',
+    metaAdsEmbedUrl:
+      'https://lookerstudio.google.com/embed/reporting/a92fbd55-ba1d-496d-a97d-ac8f8cb0a2ce/page/p_afos27a1oc',
+    auditReportPreviewUrl:
+      'https://docs.google.com/document/d/1C5WM69kPVt29Jdk-gPMpyOTqyUzpJP49JpY7R2vzgHY/preview',
+    auditReportDownloadUrl:
+      'https://docs.google.com/document/d/1C5WM69kPVt29Jdk-gPMpyOTqyUzpJP49JpY7R2vzgHY/export?format=pdf',
+  },
+  'cash-for-gold': {
+    name: 'Cash For Gold Beckley',
+    brandLabel: 'Cash 4 Gold',
+    webTrafficEmbedUrl:
+      'https://lookerstudio.google.com/embed/reporting/2c3342e1-f2e2-4423-8cd6-008a145e6be8/page/DqdkE',
+    metaAdsEmbedUrl:
+      'https://lookerstudio.google.com/embed/reporting/a2fc2c1b-9bd1-4b70-9262-b6169e4dca26/page/p_afos27a1oc',
+    auditReportPreviewUrl:
+      'https://docs.google.com/document/d/1sAEEpYjvi4MRlPrbXNywfqmKiWLz80-zqV0KDt49pmM/preview',
+    auditReportDownloadUrl:
+      'https://docs.google.com/document/d/1sAEEpYjvi4MRlPrbXNywfqmKiWLz80-zqV0KDt49pmM/export?format=pdf',
+  },
+};
 
 const AnalyticsDashboard: React.FC = () => {
   const [activeSection, setActiveSection] = useState<
@@ -18,6 +54,12 @@ const AnalyticsDashboard: React.FC = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [showCheckout, setShowCheckout] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
+  const activeClient = useMemo(() => {
+    if (typeof window === 'undefined') return DASHBOARD_CLIENTS['little-sicily'];
+    const clientSlug =
+      localStorage.getItem('dashboard_active_client_slug') || 'little-sicily';
+    return DASHBOARD_CLIENTS[clientSlug] || DASHBOARD_CLIENTS['little-sicily'];
+  }, []);
 
   return (
     <div className="analytics-app">
@@ -244,7 +286,7 @@ const AnalyticsDashboard: React.FC = () => {
         {activeTab === 'monthly' && (
         <section className="card">
           <header className="card-header">
-            <h2 className="card-title">February Strategy For Cash For Gold Beckley</h2>
+            <h2 className="card-title">{`February Strategy For ${activeClient.name}`}</h2>
             <p className="card-subtitle">
               In February, we&apos;ll enhance online presence, improve website
               functionality, connect with customers through Valentine&apos;s Day
@@ -377,7 +419,7 @@ const AnalyticsDashboard: React.FC = () => {
         {activeTab === 'siteHealth' && (
           <section className="card">
             <header className="card-header">
-              <h2 className="card-title">Site Health For Cash For Gold Beckley</h2>
+              <h2 className="card-title">{`Site Health For ${activeClient.name}`}</h2>
               <p className="card-subtitle">
                 In February, we&apos;ll enhance online presence, improve website
                 functionality, connect with customers through Valentine&apos;s Day
@@ -389,7 +431,7 @@ const AnalyticsDashboard: React.FC = () => {
             <div className="site-health-layout">
               <div className="site-health-header-bar">
                 <div className="site-health-brand">
-                  <div className="site-health-brand-logo">Cash 4 Gold</div>
+                  <div className="site-health-brand-logo">{activeClient.brandLabel}</div>
                 </div>
                 <button className="site-health-date">
                   Nov 15, 2025 - Nov 22, 2025 ▾
@@ -501,7 +543,7 @@ const AnalyticsDashboard: React.FC = () => {
         {activeTab === 'webTraffic' && (
           <section className="card">
             <header className="card-header">
-              <h2 className="card-title">Web Traffic For Cash For Gold Beckley</h2>
+              <h2 className="card-title">{`Web Traffic For ${activeClient.name}`}</h2>
               <p className="card-subtitle">
                 In February, we&apos;ll enhance online presence, improve website
                 functionality, connect with customers through Valentine&apos;s Day
@@ -513,7 +555,7 @@ const AnalyticsDashboard: React.FC = () => {
             <div className="web-traffic-layout">
               <iframe
                 title="Web Traffic Looker Studio"
-                src="https://lookerstudio.google.com/embed/reporting/46ad2f44-db71-4584-8f2d-283dee53d987/page/mYGiE"
+                src={activeClient.webTrafficEmbedUrl}
                 width="600"
                 height="450"
                 style={{ border: 0, width: '100%', maxWidth: '100%' }}
@@ -525,12 +567,18 @@ const AnalyticsDashboard: React.FC = () => {
           </section>
         )}
 
-        {activeTab === 'metaAnalytics' && <MetaAnalyticsSection />}
+        {activeTab === 'metaAnalytics' && (
+          <MetaAnalyticsSection
+            clientName={activeClient.name}
+            brandLabel={activeClient.brandLabel}
+            metaAdsReportUrl={activeClient.metaAdsEmbedUrl}
+          />
+        )}
 
         {activeTab === 'googleAds' && (
           <section className="card">
             <header className="card-header">
-              <h2 className="card-title">Google Ads For Cash For Gold Beckley</h2>
+              <h2 className="card-title">{`Google Ads For ${activeClient.name}`}</h2>
               <p className="card-subtitle">
                 In February, we&apos;ll enhance online presence, improve website
                 functionality, connect with customers through Valentine&apos;s Day
@@ -555,7 +603,7 @@ const AnalyticsDashboard: React.FC = () => {
         {activeTab === 'googleBusiness' && (
           <section className="card">
             <header className="card-header">
-              <h2 className="card-title">Google Ads For Cash For Gold Beckley</h2>
+              <h2 className="card-title">{`Google Ads For ${activeClient.name}`}</h2>
               <p className="card-subtitle">
                 In February, we&apos;ll enhance online presence, improve website
                 functionality, connect with customers through Valentine&apos;s Day
@@ -582,18 +630,29 @@ const AnalyticsDashboard: React.FC = () => {
         )}
 
         {!showCheckout && !showThankYou && activeSection === 'audit' && (
-          <section className="card audit-card">
-            <div className="audit-inner">
-              <div className="audit-icon" />
-              <h2 className="audit-title">Audit Report</h2>
-              <p className="audit-text">
-                Sorry, We can&apos;t found any Audit report for you
-                <br />
-                at this time
-              </p>
-              <button className="audit-button">Download Report</button>
+          <>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '12px' }}>
+              <a
+                className="audit-button"
+                href={activeClient.auditReportDownloadUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Download Report
+              </a>
             </div>
-          </section>
+            <section className="card audit-card">
+            <div style={{ width: '100%', minHeight: '80vh', borderRadius: '20px', overflow: 'hidden' }}>
+              <iframe
+                title="Audit Report"
+                src={activeClient.auditReportPreviewUrl}
+                width="100%"
+                height="900"
+                style={{ border: 0, background: '#fff' }}
+              />
+            </div>
+            </section>
+          </>
         )}
 
         {!showCheckout && !showThankYou && activeSection === 'packages' && (
@@ -1546,5 +1605,3 @@ const AnalyticsDashboard: React.FC = () => {
 };
 
 export default AnalyticsDashboard;
-
-

@@ -19,8 +19,27 @@ const CLIENTS_KEY = 'dashboard_clients_v1';
 
 export const ADMIN_EMAILS = ['farhanali@gmail.com', 'javeria@aimarklabs.com'];
 export const ADMIN_PASSWORD = '123456';
-export const DASHBOARD_EMAILS = ['usman@gmail.com'];
-export const DASHBOARD_PASSWORD = '123456';
+export type DashboardCredential = {
+  email: string;
+  password: string;
+  destination: string;
+  clientSlug: string;
+};
+
+export const DASHBOARD_CREDENTIALS: DashboardCredential[] = [
+  {
+    email: 'littlesicily@gmail.com',
+    password: '123456',
+    destination: '/dashboard',
+    clientSlug: 'little-sicily',
+  },
+  {
+    email: 'cashforgold@gmail.com',
+    password: '123456',
+    destination: '/dashboard',
+    clientSlug: 'cash-for-gold',
+  },
+];
 
 const parseJSON = <T,>(value: string | null, fallback: T): T => {
   if (!value) return fallback;

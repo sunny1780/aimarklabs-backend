@@ -2,7 +2,17 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { fetchMetricoolData, MetricoolData, MetricoolPost } from '../services/metricoolService';
 import '../App.css';
 
-const MetaAnalyticsSection: React.FC = () => {
+interface MetaAnalyticsSectionProps {
+  clientName?: string;
+  brandLabel?: string;
+  metaAdsReportUrl?: string;
+}
+
+const MetaAnalyticsSection: React.FC<MetaAnalyticsSectionProps> = ({
+  clientName = 'Little Sicily',
+  brandLabel = 'Little Sicily',
+  metaAdsReportUrl = 'https://lookerstudio.google.com/embed/reporting/a92fbd55-ba1d-496d-a97d-ac8f8cb0a2ce/page/p_afos27a1oc',
+}) => {
   const [data, setData] = useState<MetricoolData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -39,14 +49,6 @@ const MetaAnalyticsSection: React.FC = () => {
     return `${startDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} - ${endDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`;
   };
 
-  const formatCurrency = (value: number): string => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      maximumFractionDigits: 0,
-    }).format(value);
-  };
-
   const getSortedPosts = (): MetricoolPost[] => {
     if (!data) return [];
     const posts = [...data.posts];
@@ -66,7 +68,7 @@ const MetaAnalyticsSection: React.FC = () => {
     return (
       <section className="card">
         <header className="card-header">
-          <h2 className="card-title">Meta Analytics For Cash For Gold Beckley</h2>
+          <h2 className="card-title">{`Meta Analytics For ${clientName}`}</h2>
           <p className="card-subtitle">Loading data from Metricool...</p>
         </header>
       </section>
@@ -77,7 +79,7 @@ const MetaAnalyticsSection: React.FC = () => {
     return (
       <section className="card">
         <header className="card-header">
-          <h2 className="card-title">Meta Analytics For Cash For Gold Beckley</h2>
+          <h2 className="card-title">{`Meta Analytics For ${clientName}`}</h2>
           <p className="card-subtitle">
             In February, we&apos;ll enhance online presence, improve website
             functionality, connect with customers through Valentine&apos;s Day
@@ -101,16 +103,11 @@ const MetaAnalyticsSection: React.FC = () => {
   const isMockData = data.source === 'mock';
   const instagramPosts = data.posts.filter((p) => p.platform === 'instagram');
   const facebookPosts = data.posts.filter((p) => p.platform === 'facebook');
-  const adCampaigns = data.adCampaigns || [];
   const instagramLikes = instagramPosts.reduce((sum, post) => sum + post.likes, 0);
   const instagramComments = instagramPosts.reduce((sum, post) => sum + post.comments, 0);
   const totalImpressions = data.posts.reduce((sum, post) => sum + post.impressions, 0);
   const instagramImpressions = instagramPosts.reduce((sum, post) => sum + post.impressions, 0);
   const facebookImpressions = facebookPosts.reduce((sum, post) => sum + post.impressions, 0);
-  const totalAdImpressions = adCampaigns.reduce((sum, campaign) => sum + campaign.impressions, 0);
-  const totalAdClicks = adCampaigns.reduce((sum, campaign) => sum + campaign.clicks, 0);
-  const totalAdSpend = adCampaigns.reduce((sum, campaign) => sum + campaign.amountSpent, 0);
-  const totalAdReach = adCampaigns.reduce((sum, campaign) => sum + campaign.reach, 0);
   const getMetricValue = (
     names: string[],
     platform?: 'instagram' | 'facebook',
@@ -169,7 +166,7 @@ const MetaAnalyticsSection: React.FC = () => {
   return (
     <section className="card">
       <header className="card-header">
-        <h2 className="card-title">Meta Analytics For Cash For Gold Beckley</h2>
+        <h2 className="card-title">{`Meta Analytics For ${clientName}`}</h2>
         <p className="card-subtitle">
           In February, we&apos;ll enhance online presence, improve website
           functionality, connect with customers through Valentine&apos;s Day
@@ -191,7 +188,7 @@ const MetaAnalyticsSection: React.FC = () => {
           <div className="meta-panel meta-panel--top">
             <div className="meta-header-row">
               <div className="meta-brand">
-                <span className="meta-brand-icon">Cash 4 Gold</span>
+                <span className="meta-brand-icon">{brandLabel}</span>
                 <span className="meta-brand-title">Meta Analytics</span>
               </div>
               <button className="meta-date">
@@ -282,7 +279,7 @@ const MetaAnalyticsSection: React.FC = () => {
           <div className="meta-panel meta-panel--top">
             <div className="meta-header-row">
               <div className="meta-brand">
-                <span className="meta-brand-icon">Cash 4 Gold</span>
+                <span className="meta-brand-icon">{brandLabel}</span>
                 <span className="meta-brand-title">Post performance</span>
               </div>
               <button className="meta-date">
@@ -368,75 +365,26 @@ const MetaAnalyticsSection: React.FC = () => {
           <div className="meta-panel meta-panel--ads">
             <div className="meta-header-row">
               <div className="meta-brand">
-                <span className="meta-brand-icon">Cash 4 Gold</span>
+                <span className="meta-brand-icon">{brandLabel}</span>
                 <span className="meta-brand-title">Overview Report</span>
               </div>
-              <button className="meta-date">
-                {formatDateRange(dateRange.start, dateRange.end)} ▾
-              </button>
+              <button className="meta-date">Facebook Ads Report</button>
             </div>
 
             <div className="meta-metric-group">
-              <div className="meta-metric-group-title">Revenue and spend</div>
-              <div className="meta-top-grid">
-                {[
-                  { label: 'Impressions', value: formatNumber(totalAdImpressions) },
-                  { label: 'Clicks', value: formatNumber(totalAdClicks) },
-                  { label: 'Amount spent', value: formatCurrency(totalAdSpend) },
-                ].map((metric) => (
-                  <div key={metric.label} className="meta-card small">
-                    <div style={{ padding: '8px' }}>
-                      <div style={{ fontSize: '10px', color: '#6b7280', marginBottom: '4px' }}>
-                        {metric.label}
-                      </div>
-                      <div style={{ fontSize: '20px', fontWeight: 600, color: '#111827' }}>
-                        {metric.value}
-                      </div>
-                    </div>
-                  </div>
-                ))}
+              <div className="meta-metric-group-title">{`${clientName} Facebook Ads Dashboard`}</div>
+              <div className="meta-card meta-card--large" style={{ padding: '0', overflow: 'hidden' }}>
+                <iframe
+                  title={`${clientName} Facebook Ads Report`}
+                  src={metaAdsReportUrl}
+                  width="100%"
+                  height="900"
+                  style={{ border: 0 }}
+                  frameBorder={0}
+                  allowFullScreen
+                  sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+                />
               </div>
-            </div>
-
-            <div className="meta-metric-group">
-              <div className="meta-metric-group-title">Impressions, clicks and campaigns</div>
-              <div className="meta-ads-table">
-                <div className="meta-ads-row meta-ads-row--header">
-                  <div>Source</div>
-                  <div>Campaign</div>
-                  <div className="meta-ads-metric">Impressions</div>
-                  <div className="meta-ads-metric">Clicks</div>
-                  <div className="meta-ads-metric">Amount spent</div>
-                  <div className="meta-ads-metric">Post engagement</div>
-                  <div className="meta-ads-metric">Page engagement</div>
-                  <div className="meta-ads-metric">Page likes</div>
-                  <div className="meta-ads-metric">Reach</div>
-                </div>
-                {adCampaigns.length === 0 ? (
-                  <div className="meta-ads-empty">
-                    No Facebook ad campaigns found for this date range.
-                  </div>
-                ) : (
-                  adCampaigns.map((campaign) => (
-                    <div key={campaign.id} className="meta-ads-row">
-                      <div className="meta-ads-source">{campaign.source}</div>
-                      <div className="meta-ads-campaign">{campaign.campaign}</div>
-                      <div className="meta-ads-metric">{formatNumber(campaign.impressions)}</div>
-                      <div className="meta-ads-metric">{formatNumber(campaign.clicks)}</div>
-                      <div className="meta-ads-metric">{formatCurrency(campaign.amountSpent)}</div>
-                      <div className="meta-ads-metric">{formatNumber(campaign.postEngagement)}</div>
-                      <div className="meta-ads-metric">{formatNumber(campaign.pageEngagement)}</div>
-                      <div className="meta-ads-metric">{formatNumber(campaign.pageLikes)}</div>
-                      <div className="meta-ads-metric">{formatNumber(campaign.reach)}</div>
-                    </div>
-                  ))
-                )}
-              </div>
-              {adCampaigns.length > 0 && (
-                <div className="meta-ads-footnote">
-                  Total reach across campaigns: {formatNumber(totalAdReach)}
-                </div>
-              )}
             </div>
           </div>
         </section>

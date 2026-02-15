@@ -49,13 +49,16 @@ const HomeBlog = () => {
       title: 'AI-Driven Keyword Research',
       description:
 'Keyword research has always been a crucial part of Search Engine Optimization (SEO) and digital marketing. However, with advancements in Artificial Intelligence (AI), keyword research has become more data-driven, precise, and effective.',
+      link: '/blog/ai-driven-keyword-research',
     },
     {
       image: '/images/AIPowered.webp',
       buttonText: 'Automation',
       title: 'AI-Powered Content Creation',
       description:
-        'Artificial Intelligence (AI) is transforming the digital marketing landscape, and content creation is no exception. AI-powered content creation refers to the use of AI tools and algorithms to generate written, visual, or multimedia content with minimal human intervention.', },
+        'Artificial Intelligence (AI) is transforming the digital marketing landscape, and content creation is no exception. AI-powered content creation refers to the use of AI tools and algorithms to generate written, visual, or multimedia content with minimal human intervention.',
+      link: '/blog/ai-powered-content-creation',
+    },
   ];
 
   return (

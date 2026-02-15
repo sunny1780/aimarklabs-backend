@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import {
   ADMIN_EMAILS,
   ADMIN_PASSWORD,
-  DASHBOARD_EMAILS,
-  DASHBOARD_PASSWORD,
+  DASHBOARD_CREDENTIALS,
   getUsers,
 } from '../utils/auth';
 // dsafd
@@ -22,12 +21,18 @@ const Login: React.FC<LoginProps> = ({ onGoToSignUp, onLoginSuccess }) => {
     e.preventDefault();
     setError('');
     const users = getUsers();
-    if (DASHBOARD_EMAILS.includes(username)) {
-      if (password !== DASHBOARD_PASSWORD) {
+    const dashboardUser = DASHBOARD_CREDENTIALS.find(
+      (record) => record.email === username
+    );
+    if (dashboardUser) {
+      if (password !== dashboardUser.password) {
         setError('Invalid username or password.');
         return;
       }
-      onLoginSuccess?.('/dashboard');
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('dashboard_active_client_slug', dashboardUser.clientSlug);
+      }
+      onLoginSuccess?.(dashboardUser.destination);
       return;
     }
     if (ADMIN_EMAILS.includes(username)) {

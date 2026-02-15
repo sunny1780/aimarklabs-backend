@@ -2463,17 +2463,155 @@ a {
 
   .sidebar {
     width: 100%;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 14px 16px;
   }
 
   .main-content {
     padding: 16px;
   }
 
+  .sidebar-brand {
+    margin-bottom: 0;
+  }
+
+  .sidebar-nav {
+    flex-direction: row;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    margin-bottom: 0;
+  }
+
+  .sidebar-nav::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .sidebar-nav::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 999px;
+  }
+
+  .nav-item {
+    white-space: nowrap;
+    flex: 0 0 auto;
+  }
+
+  .sidebar-user {
+    margin-top: 0;
+    align-self: flex-start;
+  }
+
   .strategy-row {
     grid-template-columns: 1fr;
     row-gap: 4px;
+  }
+
+  .top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .tab-row,
+  .packages-tabs,
+  .account-tabs {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    padding-bottom: 4px;
+  }
+
+  .tab,
+  .packages-tab,
+  .account-tab {
+    flex: 0 0 auto;
+  }
+
+  .card {
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+  .card-subtitle {
+    max-width: 100%;
+  }
+
+  .site-health-header-bar,
+  .meta-header-row {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .site-health-date,
+  .meta-date {
+    width: 100%;
+    text-align: center;
+  }
+
+  .google-ads-layout,
+  .google-biz-layout {
+    padding: 24px 14px;
+  }
+
+  .google-ads-inner,
+  .google-biz-inner {
+    padding: 28px 18px;
+  }
+
+  .audit-card iframe,
+  .web-traffic-layout iframe,
+  .meta-card--large iframe {
+    min-height: 70vh;
+    height: 70vh !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .main-content {
+    padding: 12px;
+  }
+
+  .page-title {
+    font-size: 22px;
+  }
+
+  .page-subtitle {
+    font-size: 12px;
+  }
+
+  .cart-button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .card-title {
+    font-size: 16px;
+  }
+
+  .meta-panel {
+    padding: 10px 10px 12px;
+  }
+
+  .meta-top-grid,
+  .meta-bottom-grid,
+  .meta-tabs-row {
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .site-health-layout {
+    padding: 10px;
+  }
+
+  .site-health-section,
+  .site-health-columns,
+  .site-health-bottom-grid {
+    padding-left: 8px;
+    padding-right: 8px;
   }
 }

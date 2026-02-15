@@ -12,12 +12,15 @@ import Aboutus from './pages/Aboutus';
 import Contactus from './pages/Contactus';
 import Blog from './pages/Blog';
 import SEOBlog from './components/Blog/SEOBlog';
+import AIKeywordResearchBlog from './components/Blog/AIKeywordResearchBlog';
+import AIContentCreationBlog from './components/Blog/AIContentCreationBlog';
 import Industries from './pages/Industries';
 import UiUx from './pages/UiUx';
 import BrandingServices from './pages/BrandingServices';
 import DevelopmentServices from './pages/DevelopmentServices';
 import MarketingServices from './pages/MarketingServices';
 import TeamMembers from './pages/TeamMembers';
+import ScrollToTop from './components/ScrollToTop';
 
 const LoginRoute: React.FC = () => {
   const navigate = useNavigate();
@@ -92,6 +95,7 @@ const TeamMembersRoute: React.FC = () => {
 const App: React.FC = () => {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <CursorDot />
       <Routes>
         <Route path="/" element={<HomeRoute />} />
@@ -99,6 +103,8 @@ const App: React.FC = () => {
         <Route path="/contact" element={<ContactRoute />} />
         <Route path="/blog" element={<BlogRoute />} />
         <Route path="/blog/seo-in-the-age-of-ai" element={<SEOBlog />} />
+        <Route path="/blog/ai-driven-keyword-research" element={<AIKeywordResearchBlog />} />
+        <Route path="/blog/ai-powered-content-creation" element={<AIContentCreationBlog />} />
         <Route path="/industries" element={<IndustriesRoute />} />
         <Route path="/services/creative-services" element={<UiUxRoute />} />
         <Route path="/services/branding-services" element={<BrandingServicesRoute />} />
