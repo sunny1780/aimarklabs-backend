@@ -4,7 +4,7 @@ const AboutHero: React.FC = () => {
   return (
     <>
       <section
-        className="relative min-h-[95vh] flex items-center justify-center py-20 px-4 sm:px-6 lg:px-10 overflow-hidden"
+        className="relative min-h-[70vh] sm:min-h-[95vh] flex items-center justify-center py-14 sm:py-20 px-4 sm:px-6 lg:px-10 overflow-hidden"
         style={{ fontFamily: "'Manrope', 'Segoe UI', sans-serif" }}
       >
         {/* Background */}
@@ -16,24 +16,24 @@ const AboutHero: React.FC = () => {
           />
         </div>
 
-        <div className="relative z-10 max-w-4xl mx-auto text-center about-hero-content">
+        <div className="relative z-10 max-w-4xl mx-auto text-center about-hero-content px-1">
           {/* Main Heading */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 leading-tight mb-6">
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 leading-tight mb-5 sm:mb-6">
             <span className="block">
               Your Growth,
               <span className="inline-flex items-center ml-2 align-middle about-hero-icon">
                 <img
                   src="/images/icons.png"
                   alt=""
-                  className="w-20 h-14 sm:w-24 sm:h-16 lg:w-28 lg:h-20 object-contain"
+                  className="w-12 h-10 sm:w-24 sm:h-16 lg:w-28 lg:h-20 object-contain"
                 />
               </span>
             </span>
-            <span className="block mt-2 inline-flex items-center justify-center gap-2 about-hero-row">
+            <span className="block mt-2 inline-flex flex-wrap items-center justify-center gap-2 about-hero-row">
               <img
                 src="/images/people.png"
                 alt=""
-                className="w-auto h-auto max-w-full rounded-2xl flex-shrink-0 align-middle about-hero-people"
+                className="w-[170px] sm:w-auto h-auto max-w-full rounded-2xl flex-shrink-0 align-middle about-hero-people"
               />
               <span>Our</span>
               <span>Strategy.</span>
@@ -41,12 +41,12 @@ const AboutHero: React.FC = () => {
           </h1>
 
           {/* Subheading */}
-          <p className="text-gray-600 text-base sm:text-lg lg:text-xl max-w-2xl mx-auto mb-8 leading-relaxed">
+          <p className="text-gray-600 text-sm sm:text-lg lg:text-xl max-w-2xl mx-auto mb-7 sm:mb-8 leading-relaxed">
             We help businesses build powerful online identities through tailored strategies, creative content, and data-driven campaigns.
           </p>
 
           {/* CTA Button */}
-          <button className="relative bg-[#F29335] text-white font-semibold px-8 py-4 rounded-lg inline-flex items-center gap-2 overflow-hidden group">
+          <button className="relative bg-[#F29335] text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-lg inline-flex items-center gap-2 overflow-hidden group">
             <span className="relative z-10">Lets Talk</span>
             <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-1">
               →

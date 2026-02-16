@@ -13,7 +13,7 @@ interface UiUxProps {
 
 const UiUx: React.FC<UiUxProps> = ({ onLoginClick }) => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen overflow-x-hidden">
       <Navbar onLoginClick={onLoginClick} />
       <Servicehero/>
       <UiUxOverview />

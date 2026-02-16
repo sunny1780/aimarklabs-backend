@@ -26,7 +26,7 @@ const BrandArchitectureSection: React.FC = () => {
 
 
           <div>
-           <h2 className="text-[36px] leading-[1.1] font-bold text-[#1E1E1E]">
+           <h2 className="text-2xl sm:text-[36px] leading-[1.1] font-bold text-[#1E1E1E]">
   Strategic Brand Architecture
 </h2>
 

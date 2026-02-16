@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import BounceCards from './BounceCards';
 import TextType from './TextType';
 
@@ -17,6 +17,22 @@ const transformStyles = [
 ];
 
 const MarketingHero: React.FC = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const updateViewport = () => setIsMobile(window.innerWidth < 640);
+    updateViewport();
+    window.addEventListener('resize', updateViewport);
+    return () => window.removeEventListener('resize', updateViewport);
+  }, []);
+
+  const mobileTransformStyles = [
+    'rotate(5deg) translate(-88px)',
+    'rotate(0deg) translate(-42px)',
+    'rotate(-5deg)',
+    'rotate(5deg) translate(42px)'
+  ];
+
   return (
     <section className="bg-[#F3F5F7] pt-12 sm:pt-16 pb-14 sm:pb-20">
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
@@ -26,7 +42,7 @@ const MarketingHero: React.FC = () => {
               Marketing
             </span>
 
-            <h1 className="mt-14 text-[42px] sm:text-[54px] lg:text-[60px] leading-[0.98] font-semibold tracking-[-0.02em] text-[#1E1E1E]">
+            <h1 className="mt-10 sm:mt-14 text-[34px] sm:text-[54px] lg:text-[60px] leading-[0.98] font-semibold tracking-[-0.02em] text-[#1E1E1E]">
               <TextType
                 text={['Growth-Focused Marketing Retainers']}
                 as="span"
@@ -41,22 +57,22 @@ const MarketingHero: React.FC = () => {
 
             <a
               href="/contact"
-              className="mt-12 inline-flex items-center justify-center rounded-[10px] bg-[#F29335] text-white text-[16px] font-medium leading-none px-8 py-4 hover:bg-[#df8428] transition-colors"
+              className="mt-8 sm:mt-12 inline-flex items-center justify-center rounded-[10px] bg-[#F29335] text-white text-[14px] sm:text-[16px] font-medium leading-none px-6 sm:px-8 py-3 sm:py-4 hover:bg-[#df8428] transition-colors"
             >
               Request a Marketing Audit
             </a>
           </div>
 
-          <div className="flex items-center justify-center min-h-[420px] sm:min-h-[430px] overflow-visible">
+          <div className="flex items-center justify-center min-h-[300px] sm:min-h-[430px] overflow-hidden">
             <BounceCards
               className="custom-bounceCards"
               images={marketingImages}
-              containerWidth={500}
-              containerHeight={250}
+              containerWidth={isMobile ? 300 : 500}
+              containerHeight={isMobile ? 190 : 250}
               animationDelay={1}
               animationStagger={0.08}
               easeType="elastic.out(1, 0.5)"
-              transformStyles={transformStyles}
+              transformStyles={isMobile ? mobileTransformStyles : transformStyles}
               enableHover={false}
             />
           </div>

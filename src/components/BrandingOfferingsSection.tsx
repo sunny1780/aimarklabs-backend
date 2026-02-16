@@ -166,7 +166,7 @@ const BrandingOfferingsSection: React.FC = () => {
             What We Deliver
           </span>
 
-          <h2 className="mt-6 text-[60px] font-medium tracking-[-0.02em] text-[#FFFFFF]">
+          <h2 className="mt-6 text-3xl sm:text-[60px] font-medium tracking-[-0.02em] text-[#FFFFFF] leading-tight">
             Our Branding Offerings
           </h2>
         </div>

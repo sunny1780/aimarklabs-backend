@@ -12,13 +12,13 @@ const BrandingHero: React.FC = () => {
   return (
     <section className="bg-[#eceef2] pt-12 sm:pt-16 pb-14 sm:pb-20">
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-10 lg:gap-14 items-center min-h-[560px]">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-8 sm:gap-10 lg:gap-14 items-center min-h-[520px] lg:min-h-[560px]">
           <div className="max-w-xl">
             <span className="inline-flex items-center rounded-[10px] border border-[#B3BDEF] bg-[#D7DDFC] text-[#272D55] text-[16px] sm:text-[18px] leading-none px-6 py-3 sm:px-5 sm:py-2.5">
               Branding
             </span>
 
-           <h1 className="mt-12 sm:mt-14 text-[60px] leading-[0.98] font-semibold tracking-[-0.02em] text-[#1E1E1E]">
+           <h1 className="mt-8 sm:mt-14 text-[38px] sm:text-[60px] leading-[0.98] font-semibold tracking-[-0.02em] text-[#1E1E1E]">
              <TextType
                text={['Build Your Brand\nLegacy']}
                as="span"
@@ -34,18 +34,18 @@ const BrandingHero: React.FC = () => {
 
            <a
   href="/contact"
-  className="mt-12 inline-flex items-center justify-center rounded-[6px] bg-[#F29335] text-white text-[16px] leading-none px-8 py-4 sm:px-8 sm:py-4 hover:bg-[#df8428] transition-colors"
+  className="mt-8 sm:mt-12 inline-flex items-center justify-center rounded-[6px] bg-[#F29335] text-white text-[14px] sm:text-[16px] leading-none px-6 sm:px-8 py-3 sm:py-4 hover:bg-[#df8428] transition-colors"
 >
   Build Your Brand with Us
 </a>
 
           </div>
 
-          <div className="h-[420px] sm:h-[430px] rounded-none relative overflow-hidden flex items-center justify-center">
-            <div style={{ height: '600px', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div className="h-[300px] sm:h-[430px] rounded-none relative overflow-hidden flex items-center justify-center">
+            <div style={{ height: '100%', width: '100%', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Folder
                 color="#f29335"
-                size={2}
+                size={1.6}
                 className="custom-folder"
                 items={folderImages.map(src => (
                   <img

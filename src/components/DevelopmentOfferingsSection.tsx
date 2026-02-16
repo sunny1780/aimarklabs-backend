@@ -143,7 +143,7 @@ const DevelopmentOfferingsSection: React.FC = () => {
             What We Deliver
           </span>
 
-          <h2 className="mt-6 text-[#FFFFFF] text-4xl sm:text-5xl lg:text-[60px] leading-[1.05] font-medium">
+          <h2 className="mt-6 text-[#FFFFFF] text-3xl sm:text-5xl lg:text-[60px] leading-[1.05] font-medium">
             Our Development Offerings
           </h2>
         </div>
@@ -175,7 +175,7 @@ const DevelopmentOfferingsSection: React.FC = () => {
         <div className="mt-10 flex justify-center">
           <a
             href="/contact"
-            className="inline-flex items-center rounded-[8px] bg-[#F29335] px-7 py-3 text-[#FFFFFF] text-[16px] font-medium hover:bg-[#e7862b] transition-colors"
+            className="inline-flex items-center rounded-[8px] bg-[#F29335] px-6 sm:px-7 py-3 text-[#FFFFFF] text-[14px] sm:text-[16px] font-medium hover:bg-[#e7862b] transition-colors"
           >
             Start Your Development Project
           </a>

@@ -69,7 +69,7 @@ const Homefour: React.FC = () => {
           <p className="text-sm lg:text-base text-gray-600 max-w-md leading-relaxed">
             From strategy to execution, our numbers reflect the growth we create for our clients.
           </p>
-          <div className="text-right lg:pr-4">
+          <div className="text-left lg:text-right lg:pr-4">
             <h2 className="text-3xl lg:text-4xl font-extrabold text-gray-900 leading-tight">
               Proven Results
               <br />

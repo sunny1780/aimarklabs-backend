@@ -17,7 +17,7 @@ const DevelopmentServices: React.FC<DevelopmentServicesProps> = ({
   onLoginClick
 }) => {
   return (
-    <div className="min-h-screen bg-[#F7F9FB]">
+    <div className="min-h-screen bg-[#F7F9FB] overflow-x-hidden">
       <Navbar onLoginClick={onLoginClick} />
       <DevelopmentHero />
       <DevelopmentInfrastructureSection />

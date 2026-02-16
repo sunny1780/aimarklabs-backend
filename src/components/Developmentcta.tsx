@@ -36,7 +36,7 @@ const Developmentcta: React.FC = () => {
         style={{ fontFamily: "'Manrope', 'Segoe UI', sans-serif" }}
       >
         <div className="max-w-6xl mx-auto">
-          <div className="homecta-card bg-[#272D55] rounded-[40px] p-8 lg:p-10 relative overflow-hidden">
+          <div className="homecta-card bg-[#272D55] rounded-[24px] sm:rounded-[40px] p-6 sm:p-8 lg:p-10 relative overflow-hidden">
             {/* Arrow Image */}
             <div className="absolute right-20 bottom-8 hidden lg:block">
               <img
@@ -52,12 +52,10 @@ const Developmentcta: React.FC = () => {
               style={contentStyle}
             >
               <h2
-                className="homecta-heading mb-6 uppercase"
+                className="homecta-heading mb-5 sm:mb-6 uppercase text-3xl sm:text-5xl lg:text-[70px] leading-tight"
                 style={{
                   fontFamily: "'Manrope', 'Segoe UI', sans-serif",
                   fontWeight: 700,
-                  fontSize: '70px',
-                  lineHeight: '104.68px',
                   letterSpacing: '0%',
                   textAlign: 'center',
                   color: '#F29335',
@@ -65,15 +63,15 @@ const Developmentcta: React.FC = () => {
               >
                 **READY TO DEVELOP
               </h2>
-              <h3 className="text-white text-4xl lg:text-5xl font-bold leading-tight mb-6">
+              <h3 className="text-white text-2xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 sm:mb-6">
                 HIGH-PERFORMANCE{' '}
                 <span className="underline">SOLUTIONS</span>
               </h3>
-              <p className="text-white/90 text-lg leading-relaxed mb-8">
+              <p className="text-white/90 text-base sm:text-lg leading-relaxed mb-7 sm:mb-8">
                 <strong>Launch scalable platforms</strong> engineered for speed,growth, and impact.
               </p>
               <div className="flex justify-center">
-                <button className="relative group bg-[#F29335] text-black px-8 py-4 rounded-lg font-semibold text-base overflow-hidden">
+                <button className="relative group bg-[#F29335] text-black px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-sm sm:text-base overflow-hidden">
                   <span className="relative z-10">
                     Book a Free Consultation
                   </span>

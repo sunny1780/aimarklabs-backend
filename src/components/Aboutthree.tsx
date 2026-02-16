@@ -40,7 +40,7 @@ const Aboutthree = () => {
         {/* Paragraph */}
         <div ref={textRef} className="mb-8">
           <p
-            className="text-center text-2xl sm:text-3xl lg:text-[48px]"
+            className="text-center text-lg sm:text-3xl lg:text-[48px]"
             style={{
               fontFamily: "'Manrope', 'Segoe UI', sans-serif",
               fontWeight: 400,
@@ -68,7 +68,7 @@ const Aboutthree = () => {
         </div>
 
         {/* CTA Button */}
-        <button className="bg-[#F29335] text-white font-bold px-8 py-4 rounded-lg hover:bg-[#e0852a] transition-colors">
+        <button className="bg-[#F29335] text-white font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-lg hover:bg-[#e0852a] transition-colors text-sm sm:text-base">
           Book a Free Strategy Call
         </button>
       </div>

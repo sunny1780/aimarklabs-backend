@@ -151,7 +151,7 @@ const MarketingOfferingsSection: React.FC = () => {
           <span className="inline-flex items-center px-4 py-2 rounded-[8px] bg-[#D7DDFC] border border-[#B3BDEF] text-[#272D55] text-[14px] font-medium">
             What We Deliver
           </span>
-          <h2 className="mt-6 text-[#FFFFFF] text-4xl sm:text-5xl lg:text-[72px] leading-[1.05] font-medium">
+          <h2 className="mt-6 text-[#FFFFFF] text-3xl sm:text-5xl lg:text-[72px] leading-[1.05] font-medium">
             Our Marketing Offerings
           </h2>
         </div>
@@ -178,7 +178,7 @@ const MarketingOfferingsSection: React.FC = () => {
         <div className="mt-10 flex justify-center">
           <a
             href="/contact"
-            className="inline-flex items-center rounded-[8px] bg-[#F29335] px-7 py-3 text-[#FFFFFF] text-[16px] font-medium hover:bg-[#e7862b] transition-colors"
+            className="inline-flex items-center rounded-[8px] bg-[#F29335] px-6 sm:px-7 py-3 text-[#FFFFFF] text-[14px] sm:text-[16px] font-medium hover:bg-[#e7862b] transition-colors"
           >
             Scale Your Business Growth
           </a>

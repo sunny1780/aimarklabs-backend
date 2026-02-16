@@ -14,7 +14,7 @@ interface AboutusProps {
 
 const Aboutus: React.FC<AboutusProps> = ({ onLoginClick }) => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen overflow-x-hidden">
       <Navbar onLoginClick={onLoginClick} />
       <AboutHero />
       <Abouttwo />

@@ -11,6 +11,8 @@ type DashboardClient = {
   metaAdsEmbedUrl: string;
   auditReportPreviewUrl: string;
   auditReportDownloadUrl: string;
+  hasAnalyticsData: boolean;
+  showAuditPreview: boolean;
 };
 
 const DASHBOARD_CLIENTS: Record<string, DashboardClient> = {
@@ -25,6 +27,8 @@ const DASHBOARD_CLIENTS: Record<string, DashboardClient> = {
       'https://docs.google.com/document/d/1C5WM69kPVt29Jdk-gPMpyOTqyUzpJP49JpY7R2vzgHY/preview',
     auditReportDownloadUrl:
       'https://docs.google.com/document/d/1C5WM69kPVt29Jdk-gPMpyOTqyUzpJP49JpY7R2vzgHY/export?format=pdf',
+    hasAnalyticsData: true,
+    showAuditPreview: true,
   },
   'cash-for-gold': {
     name: 'Cash For Gold Beckley',
@@ -37,6 +41,33 @@ const DASHBOARD_CLIENTS: Record<string, DashboardClient> = {
       'https://docs.google.com/document/d/1sAEEpYjvi4MRlPrbXNywfqmKiWLz80-zqV0KDt49pmM/preview',
     auditReportDownloadUrl:
       'https://docs.google.com/document/d/1sAEEpYjvi4MRlPrbXNywfqmKiWLz80-zqV0KDt49pmM/export?format=pdf',
+    hasAnalyticsData: true,
+    showAuditPreview: true,
+  },
+  'karachi-bbq': {
+    name: 'Karachi BBQ',
+    brandLabel: 'Karachi BBQ',
+    webTrafficEmbedUrl: '',
+    metaAdsEmbedUrl: '',
+    auditReportPreviewUrl:
+      '/images/Karachi-BBQ-Tonight-Digital-Marketing-Audit.pdf',
+    auditReportDownloadUrl:
+      '/images/Karachi-BBQ-Tonight-Digital-Marketing-Audit.pdf',
+    hasAnalyticsData: false,
+    showAuditPreview: true,
+  },
+  'evolo-ai': {
+    name: 'Evolo AI',
+    brandLabel: 'Evolo AI',
+    webTrafficEmbedUrl:
+      'https://lookerstudio.google.com/embed/reporting/1d83589b-34cf-4981-a208-2b83d841dece/page/w4gkE',
+    metaAdsEmbedUrl: '',
+    auditReportPreviewUrl:
+      'https://docs.google.com/document/d/1C5WM69kPVt29Jdk-gPMpyOTqyUzpJP49JpY7R2vzgHY/preview',
+    auditReportDownloadUrl:
+      'https://docs.google.com/document/d/1C5WM69kPVt29Jdk-gPMpyOTqyUzpJP49JpY7R2vzgHY/export?format=pdf',
+    hasAnalyticsData: true,
+    showAuditPreview: true,
   },
 };
 
@@ -60,6 +91,12 @@ const AnalyticsDashboard: React.FC = () => {
       localStorage.getItem('dashboard_active_client_slug') || 'little-sicily';
     return DASHBOARD_CLIENTS[clientSlug] || DASHBOARD_CLIENTS['little-sicily'];
   }, []);
+  const isAuditPdf = activeClient.auditReportPreviewUrl
+    .toLowerCase()
+    .includes('.pdf');
+  const auditPdfPreviewUrl = isAuditPdf
+    ? `${activeClient.auditReportPreviewUrl}#toolbar=0&navpanes=0&scrollbar=1&view=FitH`
+    : activeClient.auditReportPreviewUrl;
 
   return (
     <div className="analytics-app">
@@ -242,7 +279,23 @@ const AnalyticsDashboard: React.FC = () => {
             </aside>
           </section>
         )}
-        {!showCheckout && !showThankYou && activeSection === 'analytics' && (
+        {!showCheckout &&
+          !showThankYou &&
+          activeSection === 'analytics' &&
+          !activeClient.hasAnalyticsData && (
+          <section className="card">
+            <header className="card-header">
+              <h2 className="card-title">Analytics</h2>
+              <p className="card-subtitle">
+                Analytics data is currently not available. Professional insights will appear here once reporting is configured.
+              </p>
+            </header>
+          </section>
+        )}
+        {!showCheckout &&
+          !showThankYou &&
+          activeSection === 'analytics' &&
+          activeClient.hasAnalyticsData && (
         <>
         <section className="tab-row">
           <button
@@ -284,136 +337,29 @@ const AnalyticsDashboard: React.FC = () => {
         </section>
 
         {activeTab === 'monthly' && (
-        <section className="card">
-          <header className="card-header">
-            <h2 className="card-title">{`February Strategy For ${activeClient.name}`}</h2>
-            <p className="card-subtitle">
-              In February, we&apos;ll enhance online presence, improve website
-              functionality, connect with customers through Valentine&apos;s Day
-              promotions on social media, and run targeted ads focused on the
-              Beckley area.
-            </p>
-          </header>
-
-          <div className="strategy-table">
-            <div className="strategy-row strategy-row--header">
-              <div>Category</div>
-              <div>Actions</div>
-              <div>Details</div>
+          <>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '12px' }}>
+              <a
+                className="audit-button"
+                href={activeClient.auditReportDownloadUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Download Monthly Plan
+              </a>
             </div>
-
-            <div className="strategy-section-title">Social Media</div>
-
-            <div className="strategy-row">
-              <div className="cell-label">Platform Focus</div>
-              <div>Facebook, Instagram, Google My Business,</div>
-              <div />
-            </div>
-
-            <div className="strategy-row">
-              <div className="cell-label">Content Focus</div>
-              <div>
-                <ul className="bullet-list">
-                  <li>Success Stories: Highlight customer experiences.</li>
-                  <li>
-                    Educational Tips: Offer tips for selling gold, silver, and
-                    platinum.
-                  </li>
-                  <li>
-                    Valentine&apos;s Day Promotions: Special offers for those
-                    selling gold or buying gifts.
-                  </li>
-                  <li>
-                    Polls &amp; Q&amp;A: Engage followers with polls and answer
-                    common questions about selling precious metals.
-                  </li>
-                </ul>
+            <section className="card audit-card">
+              <div style={{ width: '100%', minHeight: '80vh', borderRadius: '20px', overflow: 'hidden' }}>
+                <iframe
+                  title="Monthly Plan"
+                  src={activeClient.auditReportPreviewUrl}
+                  width="100%"
+                  height="900"
+                  style={{ border: 0, background: '#fff' }}
+                />
               </div>
-              <div />
-            </div>
-
-            <div className="strategy-row">
-              <div className="cell-label">Organic Posting/Engagement</div>
-              <div>
-                Reply to comments, messages, and engage with user-generated
-                content
-              </div>
-              <div />
-            </div>
-
-            <div className="strategy-row">
-              <div className="cell-label">Short Video</div>
-              <div>1 short video (will be produced exclusively by our team)</div>
-              <div />
-            </div>
-
-            <div className="strategy-row">
-              <div className="cell-label">Paid Ads</div>
-              <div>Run Ads as per client requirements</div>
-              <div />
-            </div>
-
-            <div className="strategy-row">
-              <div className="cell-label">Target Audience</div>
-              <div>
-                Focus on Beckley and surrounding areas. Highlight New Year
-                promotions
-              </div>
-              <div />
-            </div>
-
-            <div className="strategy-section-title">Onsite SEO</div>
-
-            <div className="strategy-row">
-              <div className="cell-label">Keyword Research</div>
-              <div>Focus on best keywords</div>
-              <div />
-            </div>
-
-            <div className="strategy-row">
-              <div className="cell-label">Blog Writing/Topic</div>
-              <div>
-                <strong>Topic:</strong> &quot;Top 5 Things to Consider When
-                Selling Scrap Metals Like Gold, Silver, and Platinum&quot;
-                <br />
-                <strong>Goal:</strong> Educate customers on evaluating scrap
-                metals and pricing factors.
-              </div>
-              <div />
-            </div>
-
-            <div className="strategy-row">
-              <div className="cell-label">Internal Linking</div>
-              <div>Link to homepage and service pages</div>
-              <div />
-            </div>
-
-            <div className="strategy-section-title">Technical SEO</div>
-
-            <div className="strategy-row">
-              <div className="cell-label">Page Speed Optimization</div>
-              <div>Ensure fast loading times post-holiday traffic surge.</div>
-              <div />
-            </div>
-
-            <div className="strategy-row">
-              <div className="cell-label">Mobile Optimization</div>
-              <div>
-                Optimize the website for mobile usability, simplify forms for
-                lead generation forms for lead generation
-              </div>
-              <div />
-            </div>
-
-            <div className="strategy-row">
-              <div className="cell-label">Schema Markup Updates</div>
-              <div>
-                Update structured data to improve local search visibility
-              </div>
-              <div />
-            </div>
-          </div>
-        </section>
+            </section>
+          </>
         )}
 
         {activeTab === 'siteHealth' && (
@@ -544,12 +490,6 @@ const AnalyticsDashboard: React.FC = () => {
           <section className="card">
             <header className="card-header">
               <h2 className="card-title">{`Web Traffic For ${activeClient.name}`}</h2>
-              <p className="card-subtitle">
-                In February, we&apos;ll enhance online presence, improve website
-                functionality, connect with customers through Valentine&apos;s Day
-                promotions on social media, and run targeted ads focused on the
-                Beckley area.
-              </p>
             </header>
 
             <div className="web-traffic-layout">
@@ -641,17 +581,38 @@ const AnalyticsDashboard: React.FC = () => {
                 Download Report
               </a>
             </div>
-            <section className="card audit-card">
-            <div style={{ width: '100%', minHeight: '80vh', borderRadius: '20px', overflow: 'hidden' }}>
-              <iframe
-                title="Audit Report"
-                src={activeClient.auditReportPreviewUrl}
-                width="100%"
-                height="900"
-                style={{ border: 0, background: '#fff' }}
-              />
-            </div>
-            </section>
+            {activeClient.showAuditPreview ? (
+              <section className="card audit-card">
+                <div style={{ width: '100%', minHeight: '80vh', borderRadius: '20px', overflow: 'hidden' }}>
+                  {isAuditPdf ? (
+                    <iframe
+                      title="Audit Report PDF Read Only"
+                      src={auditPdfPreviewUrl}
+                      width="100%"
+                      height="900"
+                      style={{ border: 0, background: '#fff' }}
+                    />
+                  ) : (
+                    <iframe
+                      title="Audit Report"
+                      src={activeClient.auditReportPreviewUrl}
+                      width="100%"
+                      height="900"
+                      style={{ border: 0, background: '#fff' }}
+                    />
+                  )}
+                </div>
+              </section>
+            ) : (
+              <section className="card">
+                <header className="card-header">
+                  <h2 className="card-title">Audit Report</h2>
+                  <p className="card-subtitle">
+                    Preview is not available here. Please use the Download Report button.
+                  </p>
+                </header>
+              </section>
+            )}
           </>
         )}
 

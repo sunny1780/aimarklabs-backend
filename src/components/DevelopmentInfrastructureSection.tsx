@@ -11,7 +11,7 @@ We develop seamless digital experiences combining functionality, speed, and scal
 
 
           <div>
- <h2 className="text-[36px] leading-[1.1] font-semibold text-[#1D1F24]">
+ <h2 className="text-2xl sm:text-[36px] leading-[1.1] font-semibold text-[#1D1F24]">
   Technical Infrastructure
 </h2>
 

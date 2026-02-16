@@ -52,12 +52,10 @@ const Homecta: React.FC = () => {
               style={contentStyle}
             >
               <h2
-                className="homecta-heading mb-6 uppercase"
+                className="homecta-heading mb-6 uppercase text-3xl sm:text-5xl lg:text-[70px] leading-tight"
                 style={{
                   fontFamily: "'Manrope', 'Segoe UI', sans-serif",
                   fontWeight: 700,
-                  fontSize: '70px',
-                  lineHeight: '104.68px',
                   letterSpacing: '0%',
                   textAlign: 'center',
                   color: '#F29335',

@@ -38,13 +38,11 @@ const Homethree: React.FC = () => {
         {/* Left text block */}
         <div className="min-w-0 text-left text-[#9CA9FF] order-1">
           <h2
-            className="group inline-flex items-center gap-2 mb-3 uppercase text-[#57609B] hover:text-[#C7CFFA] cursor-pointer"
+            className="group flex flex-wrap items-center gap-2 mb-3 uppercase text-[#57609B] hover:text-[#C7CFFA] cursor-pointer text-[56px] sm:text-[92px] lg:text-[140px] xl:text-[160px] leading-[0.95]"
             onMouseEnter={() => setActiveService('marketing')}
             style={{
               fontFamily: "'Anton', sans-serif",
               fontWeight: 400,
-              fontSize: '155px',
-              lineHeight: '100%',
               letterSpacing: 0,
               fontStyle: 'normal',
             }}
@@ -55,12 +53,10 @@ const Homethree: React.FC = () => {
             </span>
           </h2>
           <h2
-            className="group inline-flex items-center gap-2 mb-3 uppercase transition-colors duration-200 text-[#57609B] hover:text-[#C7CFFA] cursor-pointer"
+            className="group flex flex-wrap items-center gap-2 mb-3 uppercase transition-colors duration-200 text-[#57609B] hover:text-[#C7CFFA] cursor-pointer text-[56px] sm:text-[92px] lg:text-[140px] xl:text-[160px] leading-[0.95]"
             style={{
               fontFamily: "'Anton', sans-serif",
               fontWeight: 400,
-              fontSize: '155px',
-              lineHeight: '100%',
               letterSpacing: 0,
               fontStyle: 'normal',
             }}
@@ -72,12 +68,10 @@ const Homethree: React.FC = () => {
             </span>
           </h2>
           <h2
-            className="group inline-flex items-center gap-2 mb-3 uppercase text-[#57609B] hover:text-[#C7CFFA] cursor-pointer"
+            className="group flex flex-wrap items-center gap-2 mb-3 uppercase text-[#57609B] hover:text-[#C7CFFA] cursor-pointer text-[56px] sm:text-[92px] lg:text-[140px] xl:text-[160px] leading-[0.95]"
             style={{
               fontFamily: "'Anton', sans-serif",
               fontWeight: 400,
-              fontSize: '155px',
-              lineHeight: '100%',
               letterSpacing: 0,
               fontStyle: 'normal',
             }}
@@ -89,12 +83,10 @@ const Homethree: React.FC = () => {
             </span>
           </h2>
           <h2
-            className="group inline-flex items-center gap-2 uppercase text-[#57609B] hover:text-[#C7CFFA] cursor-pointer"
+            className="group flex flex-wrap items-center gap-2 uppercase text-[#57609B] hover:text-[#C7CFFA] cursor-pointer text-[56px] sm:text-[92px] lg:text-[140px] xl:text-[160px] leading-[0.95]"
             style={{
               fontFamily: "'Anton', sans-serif",
               fontWeight: 400,
-              fontSize: '155px',
-              lineHeight: '100%',
               letterSpacing: 0,
               fontStyle: 'normal',
             }}
@@ -133,7 +125,7 @@ const Homethree: React.FC = () => {
             <img
               src="/images/steric.png"
               alt="Star accent"
-              className="absolute -bottom-32 right-24 w-24 h-24 sm:w-20 sm:h-20 object-contain"
+              className="hidden sm:block absolute -bottom-24 sm:-bottom-28 right-8 sm:right-12 w-16 h-16 sm:w-20 sm:h-20 object-contain"
             />
           </div>
         </div>

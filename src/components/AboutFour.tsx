@@ -30,7 +30,7 @@ const AboutFour: React.FC = () => {
             </div>
 
             {/* Our Vision */}
-            <div className="about-four-block pt-40">
+            <div className="about-four-block pt-4 lg:pt-40">
               <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
                 Our Vision
               </h2>

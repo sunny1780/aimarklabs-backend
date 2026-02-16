@@ -35,7 +35,7 @@ const Home: React.FC<HomeProps> = ({ onLoginClick }) => {
   }, [enterInView, exitInView, nextInView]);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen overflow-x-hidden">
       <Navbar onLoginClick={onLoginClick} />
       <LayoutGroup id="home-shared-video-group">
         <Hero nextInView={nextInView} />

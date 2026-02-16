@@ -54,7 +54,7 @@ const MarketingFaqs = () => {
               FAQ&apos;s
             </span>
 
-<h2 className="mt-6 text-[#111111] text-4xl sm:text-5xl lg:text-[60px] leading-[1.02] font-medium">
+<h2 className="mt-6 text-[#111111] text-3xl sm:text-5xl lg:text-[60px] leading-[1.02] font-medium">
   Marketing Questions?
 
 </h2>
@@ -62,7 +62,7 @@ const MarketingFaqs = () => {
 
 
 
-           <p className="mt-4 text-[#5A666E] text-[18px] leading-relaxed max-w-[420px]">
+           <p className="mt-4 text-[#5A666E] text-[16px] sm:text-[18px] leading-relaxed max-w-[420px]">
 Answers about campaigns, performance tracking, budgets, and growth strategy.
 
 </p>

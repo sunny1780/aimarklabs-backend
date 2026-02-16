@@ -14,7 +14,7 @@ interface BrandingServicesProps {
 
 const BrandingServices: React.FC<BrandingServicesProps> = ({ onLoginClick }) => {
   return (
-    <div className="min-h-screen bg-[#F7F9FB]">
+    <div className="min-h-screen bg-[#F7F9FB] overflow-x-hidden">
       <Navbar onLoginClick={onLoginClick} />
       <BrandingHero />
       <BrandArchitectureSection />
