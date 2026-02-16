@@ -43,7 +43,7 @@ const Homethree: React.FC = () => {
             style={{
               fontFamily: "'Anton', sans-serif",
               fontWeight: 400,
-              fontSize: '160px',
+              fontSize: '155px',
               lineHeight: '100%',
               letterSpacing: 0,
               fontStyle: 'normal',
@@ -59,7 +59,7 @@ const Homethree: React.FC = () => {
             style={{
               fontFamily: "'Anton', sans-serif",
               fontWeight: 400,
-              fontSize: '160px',
+              fontSize: '155px',
               lineHeight: '100%',
               letterSpacing: 0,
               fontStyle: 'normal',
@@ -76,7 +76,7 @@ const Homethree: React.FC = () => {
             style={{
               fontFamily: "'Anton', sans-serif",
               fontWeight: 400,
-              fontSize: '160px',
+              fontSize: '155px',
               lineHeight: '100%',
               letterSpacing: 0,
               fontStyle: 'normal',
@@ -93,7 +93,7 @@ const Homethree: React.FC = () => {
             style={{
               fontFamily: "'Anton', sans-serif",
               fontWeight: 400,
-              fontSize: '160px',
+              fontSize: '155px',
               lineHeight: '100%',
               letterSpacing: 0,
               fontStyle: 'normal',
