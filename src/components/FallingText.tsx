@@ -1,26 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
-
-type MatterLike = {
-  Engine: any;
-  Render: any;
-  World: any;
-  Bodies: any;
-  Runner: any;
-  Mouse: any;
-  MouseConstraint: any;
-  Body: any;
-};
-
-const loadMatterSafely = (): MatterLike | null => {
-  try {
-    // Avoid static resolution when dependency is not installed in offline environments.
-    // eslint-disable-next-line no-eval
-    const runtimeRequire = (0, eval)('require') as (id: string) => MatterLike;
-    return runtimeRequire('matter-js');
-  } catch {
-    return null;
-  }
-};
+import Matter from 'matter-js';
 
 interface FallingTextProps {
   text?: string;
@@ -89,9 +68,6 @@ const FallingText: React.FC<FallingTextProps> = ({
 
   useEffect(() => {
     if (!effectStarted) return;
-
-    const Matter = loadMatterSafely();
-    if (!Matter) return;
 
     const { Engine, Render, World, Bodies, Runner, Mouse, MouseConstraint } = Matter;
 
