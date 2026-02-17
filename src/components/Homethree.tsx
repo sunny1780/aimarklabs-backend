@@ -100,7 +100,7 @@ const Homethree: React.FC = () => {
         </div>
 
         {/* Right card block */}
-        <div className="relative w-full max-w-[380px] mx-auto lg:mx-0 lg:max-w-none flex justify-center lg:justify-end lg:translate-x-20 xl:translate-x-28 order-2">
+        <div className="relative w-full max-w-[380px] mx-auto lg:mx-0 lg:max-w-none flex justify-center lg:justify-end lg:translate-x-20 xl:translate-x-28 lg:-translate-y-16 order-2">
           <div className="relative flex flex-col gap-2.5 rounded-[28px] p-4 sm:p-5 w-full lg:w-[315px] shrink-0 h-[405px]">
             {/* Top pill "Our Services" */}
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/90 text-[#272D55] text-xs font-semibold shadow-sm w-fit">
@@ -125,7 +125,7 @@ const Homethree: React.FC = () => {
             <img
               src="/images/steric.png"
               alt="Star accent"
-              className="hidden sm:block absolute -bottom-24 sm:-bottom-28 right-8 sm:right-12 w-16 h-16 sm:w-20 sm:h-20 object-contain"
+              className="hidden sm:block absolute -bottom-24 sm:-bottom-28 right-20 sm:right-28 w-20 h-20 sm:w-28 sm:h-28 object-contain"
             />
           </div>
         </div>

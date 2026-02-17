@@ -10,11 +10,20 @@ const Homefive: React.FC = () => {
         {/* Header */}
         <div className="text-center mb-12">
           <div className="mb-6">
-            <span className="inline-flex items-center px-5 py-3 rounded-md text-[16px] font-semibold tracking-wide text-[#272D55] bg-[#D7DDFC] shadow-sm border border-[#B3BDEF]">
+            <span className="inline-flex items-center justify-center h-9 px-3 py-2 rounded border border-[#B3BDEF] text-[16px] font-semibold tracking-wide text-[#272D55] bg-[#D7DDFC]">
               Testimonials
             </span>
           </div>
-          <h2 className="text-4xl sm:text-5xl lg:text-[60px] font-extrabold text-gray-900 leading-tight mb-4">
+          <h2
+            className="text-gray-900 mb-4 w-[687px] max-w-full mx-auto text-center"
+            style={{
+              fontFamily: "'Manrope', sans-serif",
+              fontWeight: 500,
+              fontSize: '60px',
+              lineHeight: '100%',
+              letterSpacing: '0.5%'
+            }}
+          >
             Hear What Our Clients Have to Say
           </h2>
           <p className="text-gray-600 text-base leading-relaxed max-w-2xl mx-auto">

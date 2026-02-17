@@ -42,7 +42,7 @@ const Homeseven: React.FC = () => {
           <img
             src="/images/one.png"
             alt=""
-            className="h-14 sm:h-16 lg:h-[72px] xl:h-20 w-28 sm:w-32 lg:w-40 xl:w-44 rounded-full object-cover flex-shrink-0"
+            className="h-[68px] w-[235px] max-w-full rounded-full object-cover flex-shrink-0"
           />
           <span className="text-white text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold uppercase tracking-tight">
             YOUR BRAND*
@@ -57,7 +57,7 @@ const Homeseven: React.FC = () => {
           <img
             src="/images/two.png"
             alt=""
-            className="h-14 sm:h-16 lg:h-[72px] xl:h-20 w-28 sm:w-32 lg:w-40 xl:w-44 rounded-full object-cover flex-shrink-0"
+            className="h-14 sm:h-16 lg:h-[72px] xl:h-20 w-36 sm:w-40 lg:w-48 xl:w-52 rounded-full object-cover flex-shrink-0"
           />
           <span className="text-white text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold uppercase tracking-tight">
             RIGHT PLATFORM
@@ -72,7 +72,7 @@ const Homeseven: React.FC = () => {
           <img
             src="/images/three.png"
             alt=""
-            className="h-14 sm:h-16 lg:h-[72px] xl:h-20 w-28 sm:w-32 lg:w-40 xl:w-44 rounded-full object-cover flex-shrink-0"
+            className="h-[68px] w-[442px] max-w-full rounded-full object-cover flex-shrink-0"
           />
           <span className="text-white text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold uppercase tracking-tight border border-white px-3 py-1 inline-block">
             THE RIGHT TIME
@@ -87,7 +87,7 @@ const Homeseven: React.FC = () => {
           <img
             src="/images/four.png"
             alt=""
-            className="h-14 sm:h-16 lg:h-[72px] xl:h-20 w-28 sm:w-32 lg:w-40 xl:w-44 rounded-full object-cover flex-shrink-0"
+            className="h-[68px] w-[334px] max-w-full rounded-full object-cover flex-shrink-0"
           />
           <span className="text-white text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold uppercase tracking-tight">
             SMART PLAN.&quot;
