@@ -28,7 +28,7 @@ const Aboutthree = () => {
     >
       <div className="max-w-6xl mx-auto text-center">
         {/* Tag */}
-        <span className="inline-flex items-center px-5 py-2.5 rounded-lg text-sm font-semibold tracking-wide text-[#272D55] bg-[#D7DDFC] border border-[#B3BDEF] mb-6">
+        <span className="inline-flex items-center justify-center rounded-lg text-sm font-semibold tracking-wide text-[#272D55] bg-[#D7DDFC] border border-[#B3BDEF] mb-6 w-[124px] h-[36px]">
           Tag Comes here
         </span>
 

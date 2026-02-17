@@ -48,8 +48,8 @@ const AboutHero: React.FC = () => {
           {/* CTA Button */}
           <button className="relative bg-[#F29335] text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-lg inline-flex items-center gap-2 overflow-hidden group">
             <span className="relative z-10">Lets Talk</span>
-            <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-1">
-              →
+            <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-1 inline-flex items-center shrink-0">
+              <img src="/images/iconsarow.svg" alt="" className="w-5 h-5" />
             </span>
             {/* Button shine */}
             <span className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
