@@ -52,6 +52,9 @@ const Servicehero = () => {
                 randomRotation={false}
                 sensitivity={200}
                 sendToBackOnClick={false}
+                autoplay={true}
+                autoplayDelay={2500}
+                hoverToCycle={false}
                 cards={serviceImages.map((src, i) => (
                   <div key={i} className="relative w-full h-full rounded-2xl overflow-hidden">
                     <img 
@@ -67,10 +70,7 @@ const Servicehero = () => {
                     </div>
                   </div>
                 ))}
-                autoplay={false}
-                autoplayDelay={2000}
                 pauseOnHover={false}
-                hoverToCycle={true}
               />
             </div>
           </div>

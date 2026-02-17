@@ -18,11 +18,10 @@ const Footer: React.FC = () => {
   ];
 
   const columnTwoLinks = [
-    { label: 'Creative Services', to: '/services/creative-services' },
-    { label: 'Branding Services', to: '/services/branding-services' },
-    { label: 'Development Services', to: '/services/development-services' },
-    { label: 'Marketing Services', to: '/services/marketing-services' },
-    // { label: 'Sign Up', to: '/signup' },
+    { label: 'Creative', to: '/services/creative-services' },
+    { label: 'Branding', to: '/services/branding-services' },
+    { label: 'Development', to: '/services/development-services' },
+    { label: 'Marketing', to: '/services/marketing-services' },
   ];
 
   const socialLinks = [
@@ -41,7 +40,7 @@ const Footer: React.FC = () => {
 
   return (
     <footer
-      className="bg-[#272D55] text-white"
+      className="bg-[#21213D] text-white"
       style={{ fontFamily: "'Manrope', 'Segoe UI', sans-serif" }}
     >
       {/* Newsletter Section */}
@@ -74,30 +73,59 @@ const Footer: React.FC = () => {
       </div>
 
       {/* Separator */}
-      <div className="border-t border-gray-600"></div>
+      <div className="border-t border-white/20"></div>
 
       {/* Main Footer Content */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Logo & Copyright */}
-          <div className="lg:col-span-1">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1fr_auto_auto] gap-10 lg:gap-16">
+          {/* Left: Logo, Slogan, Contact, Social */}
+          <div>
             <div className="mb-4">
-              <img src="/images/logofooter.png" alt="AiMarkLabs Logo" className="h-14" />
+              <img src="/images/logofooter.png" alt="AiMarkLabs Logo" className="h-12" />
             </div>
-            <p className="text-white/80 text-sm mb-2">Amplify Your Brand Presence.</p>
-            <p className="text-white/60 text-xs">© 2025 AiMarkLabs. All rights reserved.</p>
+            <p className="text-white/70 text-sm mb-6">Amplify Your Brand Presence.</p>
+            <div className="flex flex-wrap gap-x-8 gap-y-4 mb-6">
+              <div>
+                <p className="text-white/50 text-xs font-semibold uppercase tracking-wider mb-1">Phone</p>
+                <a href="tel:+18055382647" className="text-white text-sm font-medium">+1 (805) 538-2647</a>
+              </div>
+              <div>
+                <p className="text-white/50 text-xs font-semibold uppercase tracking-wider mb-1">Email</p>
+                <a href="mailto:sales@aimarklabs.com" className="text-white text-sm font-medium">sales@aimarklabs.com</a>
+              </div>
+              <div>
+                <p className="text-white/50 text-xs font-semibold uppercase tracking-wider mb-1">Location</p>
+                <p className="text-white text-sm font-medium max-w-[220px]">AI Mark Labs, LLC 1110 N Virgil Ave PMB 98121 Los Angeles, CA 90029</p>
+              </div>
+            </div>
+            <div className="flex gap-2">
+              {socialLinks.map((social, index) => {
+                const IconComponent = social.icon as React.ComponentType<React.SVGProps<SVGSVGElement>>;
+                return (
+                  <a
+                    key={index}
+                    href={social.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-10 h-10 flex items-center justify-center rounded border border-white/30 text-white hover:bg-white/10 transition-colors"
+                  >
+                    <IconComponent className="w-5 h-5" />
+                  </a>
+                );
+              })}
+            </div>
           </div>
 
-          {/* Column One Links */}
+          {/* Company Links */}
           <div>
-            <h4 className="font-bold text-white mb-4">Quick  Link</h4>
+            <h4 className="font-bold text-white mb-4">Company</h4>
             <ul className="space-y-2">
               {columnOneLinks.map((link) => (
                 <li key={link.to}>
                   <Link
                     to={link.to}
                     onClick={handleInternalNavClick}
-                    className="text-white/80 hover:text-white text-sm transition-colors"
+                    className="text-white/70 hover:text-white text-sm transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -106,16 +134,16 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Column Two Links */}
+          {/* Services Links */}
           <div>
-            <h4 className="font-bold text-white mb-4">Quick  Link</h4>
+            <h4 className="font-bold text-white mb-4">Services</h4>
             <ul className="space-y-2">
               {columnTwoLinks.map((link, index) => (
                 <li key={index}>
                   <Link
                     to={link.to}
                     onClick={handleInternalNavClick}
-                    className="text-white/80 hover:text-white text-sm transition-colors"
+                    className="text-white/70 hover:text-white text-sm transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -123,30 +151,15 @@ const Footer: React.FC = () => {
               ))}
             </ul>
           </div>
-
-          {/* Follow Us / Social Media */}
-          <div>
-            <h4 className="font-bold text-white mb-4">Follow Us</h4>
-            <ul className="space-y-3">
-              {socialLinks.map((social, index) => {
-                const IconComponent = social.icon as React.ComponentType<React.SVGProps<SVGSVGElement>>;
-                return (
-                  <li key={index}>
-                    <a
-                      href={social.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="flex items-center gap-2 text-white/80 hover:text-white text-sm transition-colors"
-                    >
-                      <IconComponent className="w-5 h-5 text-white" />
-                      <span>{social.name}</span>
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
         </div>
+      </div>
+
+      {/* Separator */}
+      <div className="border-t border-white/20"></div>
+
+      {/* Copyright Bottom */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 py-5">
+        <p className="text-white/60 text-sm">© 2025 AlMarkLabs. All rights reserved.</p>
       </div>
     </footer>
   );

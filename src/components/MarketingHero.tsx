@@ -4,6 +4,7 @@ import TextType from './TextType';
 
 const marketingImages = [
   '/images/Marketing-hero.png',
+  '/images/9.png',
   '/images/11.png',
   '/images/12.png',
   '/images/13.png'
@@ -11,9 +12,10 @@ const marketingImages = [
 
 const transformStyles = [
   'rotate(5deg) translate(-150px)',
-  'rotate(0deg) translate(-70px)',
-  'rotate(-5deg)',
-  'rotate(5deg) translate(70px)'
+  'rotate(2deg) translate(-75px)',
+  'rotate(0deg) translate(-20px)',
+  'rotate(-5deg) translate(35px)',
+  'rotate(5deg) translate(90px)'
 ];
 
 const MarketingHero: React.FC = () => {
@@ -28,9 +30,10 @@ const MarketingHero: React.FC = () => {
 
   const mobileTransformStyles = [
     'rotate(5deg) translate(-88px)',
-    'rotate(0deg) translate(-42px)',
-    'rotate(-5deg)',
-    'rotate(5deg) translate(42px)'
+    'rotate(2deg) translate(-50px)',
+    'rotate(0deg) translate(-15px)',
+    'rotate(-5deg) translate(20px)',
+    'rotate(5deg) translate(55px)'
   ];
 
   return (
@@ -67,13 +70,14 @@ const MarketingHero: React.FC = () => {
             <BounceCards
               className="custom-bounceCards"
               images={marketingImages}
-              containerWidth={isMobile ? 300 : 500}
-              containerHeight={isMobile ? 190 : 250}
+              containerWidth={isMobile ? 320 : 520}
+              containerHeight={isMobile ? 200 : 260}
               animationDelay={1}
               animationStagger={0.08}
               easeType="elastic.out(1, 0.5)"
               transformStyles={isMobile ? mobileTransformStyles : transformStyles}
               enableHover={false}
+              cardBorderClassName="border-2"
             />
           </div>
         </div>
