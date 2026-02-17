@@ -1,8 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const HomeBlog = () => {
-  const sectionRef = useRef(null);
+interface BlogCard {
+  image: string;
+  buttonText: string;
+  title: string;
+  description: string;
+  link: string;
+}
+
+const HomeBlog: React.FC = () => {
+  const sectionRef = useRef<HTMLElement | null>(null);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -29,12 +37,12 @@ const HomeBlog = () => {
       'transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s ease',
   };
 
-  const cardStyle = (delay) => ({
+  const cardStyle = (delay: number) => ({
     transform: visible ? 'translateY(0)' : 'translateY(40px)',
     opacity: visible ? 1 : 0,
     transition: `transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms, opacity 0.5s ease ${delay}ms`,
   });
-  const blogCards = [
+  const blogCards: BlogCard[] = [
     {
       image: '/images/SEOBLOG.webp',
       buttonText: 'SEO',
@@ -71,13 +79,13 @@ const HomeBlog = () => {
         <div style={headerStyle}>
           {/* Tag */}
           <div className="text-center mb-4">
-            <span className="inline-flex items-center px-5 py-2.5 rounded-lg text-sm font-semibold tracking-wide text-[#272D55] bg-[#D7DDFC] border border-[#B3BDEF]">
+            <span className="inline-flex items-center justify-center h-9 px-3 py-2 rounded border border-[#B3BDEF] text-sm font-semibold tracking-wide text-[#272D55] bg-[#D7DDFC]">
               Resources
             </span>
           </div>
 
           {/* Heading */}
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 text-center mb-10">
+          <h2 className="w-full max-w-[1280px] mx-auto text-center text-[60px] font-medium leading-[1] tracking-[0.005em] text-gray-900 mb-10" style={{ fontFamily: "'Manrope', 'Segoe UI', sans-serif" }}>
             Latest Blogs
           </h2>
         </div>

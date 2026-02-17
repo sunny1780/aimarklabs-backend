@@ -78,7 +78,16 @@ const HomeFaqs: React.FC = () => {
                 FAQ's
               </span>
             </div>
-            <h2 className="text-4xl sm:text-5xl lg:text-[60px] font-extrabold text-gray-900 leading-tight mb-4">
+            <h2
+              className="text-gray-900 mb-4 max-w-[457px] text-left pl-0"
+              style={{
+                fontFamily: "'Manrope', sans-serif",
+                fontWeight: 500,
+                fontSize: '55px',
+                lineHeight: '100%',
+                letterSpacing: '0.5%'
+              }}
+            >
               Got a Question?
             </h2>
             <p className="text-gray-600 text-base leading-relaxed mb-8">
