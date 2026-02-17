@@ -34,11 +34,11 @@ const Homethree: React.FC = () => {
         <div className="absolute inset-0 bg-[#050824]/60" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_minmax(320px,420px)] items-center gap-12 lg:gap-16 xl:gap-20">
+      <div className="relative max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[minmax(0,1.4fr)_minmax(320px,420px)] items-center gap-12 lg:gap-16 xl:gap-20">
         {/* Left text block */}
-        <div className="min-w-0 text-left text-[#9CA9FF] order-1">
+        <div className="min-w-0 w-full text-left text-[#9CA9FF] order-1">
           <h2
-            className="group flex flex-wrap items-center gap-2 mb-3 uppercase text-[#57609B] hover:text-[#C7CFFA] cursor-pointer text-[56px] sm:text-[92px] lg:text-[140px] xl:text-[160px] leading-[0.95]"
+            className="group flex flex-nowrap items-center gap-2 mb-3 uppercase text-[#57609B] hover:text-[#C7CFFA] cursor-pointer text-[44px] sm:text-[78px] lg:text-[118px] xl:text-[135px] leading-[0.95]"
             onMouseEnter={() => setActiveService('marketing')}
             style={{
               fontFamily: "'Anton', sans-serif",
@@ -53,7 +53,7 @@ const Homethree: React.FC = () => {
             </span>
           </h2>
           <h2
-            className="group flex flex-wrap items-center gap-2 mb-3 uppercase transition-colors duration-200 text-[#57609B] hover:text-[#C7CFFA] cursor-pointer text-[56px] sm:text-[92px] lg:text-[140px] xl:text-[160px] leading-[0.95]"
+            className="group flex flex-nowrap items-center gap-2 mb-3 uppercase transition-colors duration-200 text-[#57609B] hover:text-[#C7CFFA] cursor-pointer text-[44px] sm:text-[78px] lg:text-[118px] xl:text-[135px] leading-[0.95]"
             style={{
               fontFamily: "'Anton', sans-serif",
               fontWeight: 400,
@@ -68,7 +68,7 @@ const Homethree: React.FC = () => {
             </span>
           </h2>
           <h2
-            className="group flex flex-wrap items-center gap-2 mb-3 uppercase text-[#57609B] hover:text-[#C7CFFA] cursor-pointer text-[56px] sm:text-[92px] lg:text-[140px] xl:text-[160px] leading-[0.95]"
+            className="group flex flex-nowrap items-center gap-2 mb-3 uppercase text-[#57609B] hover:text-[#C7CFFA] cursor-pointer text-[44px] sm:text-[78px] lg:text-[118px] xl:text-[135px] leading-[0.95]"
             style={{
               fontFamily: "'Anton', sans-serif",
               fontWeight: 400,
@@ -83,7 +83,7 @@ const Homethree: React.FC = () => {
             </span>
           </h2>
           <h2
-            className="group flex flex-wrap items-center gap-2 uppercase text-[#57609B] hover:text-[#C7CFFA] cursor-pointer text-[56px] sm:text-[92px] lg:text-[140px] xl:text-[160px] leading-[0.95]"
+            className="group flex flex-nowrap items-center gap-2 uppercase text-[#57609B] hover:text-[#C7CFFA] cursor-pointer text-[44px] sm:text-[78px] lg:text-[118px] xl:text-[135px] leading-[0.95]"
             style={{
               fontFamily: "'Anton', sans-serif",
               fontWeight: 400,
@@ -100,24 +100,24 @@ const Homethree: React.FC = () => {
         </div>
 
         {/* Right card block */}
-        <div className="relative w-full max-w-[380px] mx-auto lg:mx-0 lg:max-w-none flex justify-center lg:justify-end lg:translate-x-10 xl:translate-x-16 order-2">
-          <div className="relative rounded-[28px] p-4 sm:p-5 w-full lg:w-[340px] xl:w-[380px] shrink-0">
+        <div className="relative w-full max-w-[380px] mx-auto lg:mx-0 lg:max-w-none flex justify-center lg:justify-end lg:translate-x-20 xl:translate-x-28 order-2">
+          <div className="relative flex flex-col gap-2.5 rounded-[28px] p-4 sm:p-5 w-full lg:w-[315px] shrink-0 h-[405px]">
             {/* Top pill "Our Services" */}
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/90 text-[#272D55] text-xs font-semibold mb-3 shadow-sm">
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/90 text-[#272D55] text-xs font-semibold shadow-sm w-fit">
               Our Services
             </div>
 
             {/* Main image inside card */}
-            <div className="overflow-hidden rounded-[22px] border border-white/20 mb-3 w-full">
+            <div className="flex-1 min-h-0 overflow-hidden rounded-[22px] border border-white/20 w-full">
               <img
                 src={getServiceImage()}
                 alt="Our services preview"
-                className="w-full h-[320px] sm:h-[360px] xl:h-[400px] object-cover transition-transform duration-500"
+                className="w-full h-full object-cover transition-transform duration-500"
               />
             </div>
 
             {/* Caption text */}
-            <p className="text-[11px] sm:text-xs text-[#C8D0FF] mt-1">
+            <p className="text-[11px] sm:text-xs text-[#C8D0FF] shrink-0">
               {'//'}Where creativity meets bold growth...
             </p>
 
