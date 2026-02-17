@@ -7,29 +7,29 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ nextInView }) => {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-[#dbeafe] via-[#ffe4e6] to-[#fef9c3] min-h-[360px] sm:min-h-[500px] flex items-center">
+    <section className="relative overflow-hidden bg-gradient-to-br from-[#dbeafe] via-[#ffe4e6] to-[#fef9c3] min-h-[87vh] flex items-center">
       {/* Corner video */}
       {!nextInView && (
         <SharedVideo
           src="/images/video.mp4"
           layoutId="home-shared-video"
-          className="absolute bottom-4 right-3 sm:bottom-0 sm:right-0 z-20 w-[220px] h-[140px] sm:w-64 sm:h-40"
+          className="absolute bottom-4 right-3 sm:bottom-6 sm:right-6 md:bottom-0 md:right-0 z-20 w-[180px] h-[110px] sm:w-[220px] sm:h-[140px] md:w-64 md:h-40"
         />
       )}
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-10 w-full relative py-10 sm:py-0">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10 w-full relative py-8 sm:py-12 lg:py-0">
         {/* Big background text - absolutely centered */}
-        <h1 className="hidden sm:block absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[90px] lg:text-[160px] xl:text-[200px] leading-none font-bold text-[#d4d4d8] tracking-tight select-none z-0">
+        <h1 className="hidden sm:block absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[70px] sm:text-[90px] md:text-[120px] lg:text-[160px] xl:text-[200px] leading-none font-bold text-[#d4d4d8] tracking-tight select-none z-0">
           AlMarkLabs
         </h1>
 
         {/* Main layout */}
-        <div className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between min-h-[320px] sm:min-h-[360px] z-10 pt-8 sm:pt-0">
+        <div className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between min-h-[280px] sm:min-h-0 z-10 pt-6 sm:pt-0">
           <div className="sm:hidden mb-4">
-            <h1 className="text-3xl font-extrabold text-[#272D55] leading-tight">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#272D55] leading-tight">
               AI Mark Labs
             </h1>
-            <p className="text-sm text-gray-700 mt-1">
+            <p className="text-xs sm:text-sm text-gray-700 mt-1">
               Creative marketing and development that drives growth.
             </p>
           </div>
@@ -66,7 +66,7 @@ const Hero: React.FC<HeroProps> = ({ nextInView }) => {
 
           {/* Right side - services list */}
           <div className="flex-1 flex justify-start sm:justify-end w-full">
-            <div className="mt-2 sm:-mt-[112px] sm:mr-24 text-left space-y-1 text-[15px] sm:text-[16px] text-gray-700 pr-[210px] sm:pr-0">
+            <div className="mt-2 sm:-mt-[80px] md:-mt-[112px] sm:mr-12 md:mr-24 text-left space-y-1 text-[14px] sm:text-[15px] md:text-[16px] text-gray-700 pr-[160px] sm:pr-0">
               <div>
                 <p>ui/ux design</p>
                 <img src="/images/Line.png" alt="line" className="hero-float-1 mt-1" />

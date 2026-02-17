@@ -11,11 +11,11 @@ const marketingImages = [
 ];
 
 const transformStyles = [
-  'rotate(5deg) translate(-150px)',
-  'rotate(2deg) translate(-75px)',
-  'rotate(0deg) translate(-20px)',
-  'rotate(-5deg) translate(35px)',
-  'rotate(5deg) translate(90px)'
+  'rotate(5deg) translate(-155px)',
+  'rotate(2deg) translate(-78px)',
+  'rotate(0deg) translate(-22px)',
+  'rotate(-5deg) translate(38px)',
+  'rotate(5deg) translate(95px)'
 ];
 
 const MarketingHero: React.FC = () => {
@@ -29,11 +29,11 @@ const MarketingHero: React.FC = () => {
   }, []);
 
   const mobileTransformStyles = [
-    'rotate(5deg) translate(-88px)',
-    'rotate(2deg) translate(-50px)',
+    'rotate(5deg) translate(-92px)',
+    'rotate(2deg) translate(-52px)',
     'rotate(0deg) translate(-15px)',
-    'rotate(-5deg) translate(20px)',
-    'rotate(5deg) translate(55px)'
+    'rotate(-5deg) translate(21px)',
+    'rotate(5deg) translate(56px)'
   ];
 
   return (
@@ -70,8 +70,9 @@ const MarketingHero: React.FC = () => {
             <BounceCards
               className="custom-bounceCards"
               images={marketingImages}
-              containerWidth={isMobile ? 320 : 520}
-              containerHeight={isMobile ? 200 : 260}
+              containerWidth={isMobile ? 340 : 550}
+              containerHeight={isMobile ? 220 : 280}
+              cardSize={isMobile ? 160 : 220}
               animationDelay={1}
               animationStagger={0.08}
               easeType="elastic.out(1, 0.5)"
