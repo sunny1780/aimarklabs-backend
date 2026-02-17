@@ -43,7 +43,7 @@ const Homethree: React.FC = () => {
             style={{
               fontFamily: "'Anton', sans-serif",
               fontWeight: 400,
-              letterSpacing: 0,
+              letterSpacing: '0.02em',
               fontStyle: 'normal',
             }}
           >
@@ -57,7 +57,7 @@ const Homethree: React.FC = () => {
             style={{
               fontFamily: "'Anton', sans-serif",
               fontWeight: 400,
-              letterSpacing: 0,
+              letterSpacing: '0.02em',
               fontStyle: 'normal',
             }}
             onMouseEnter={() => setActiveService('branding')}
@@ -72,7 +72,7 @@ const Homethree: React.FC = () => {
             style={{
               fontFamily: "'Anton', sans-serif",
               fontWeight: 400,
-              letterSpacing: 0,
+              letterSpacing: '0.02em',
               fontStyle: 'normal',
             }}
             onMouseEnter={() => setActiveService('development')}
@@ -87,7 +87,7 @@ const Homethree: React.FC = () => {
             style={{
               fontFamily: "'Anton', sans-serif",
               fontWeight: 400,
-              letterSpacing: 0,
+              letterSpacing: '0.02em',
               fontStyle: 'normal',
             }}
             onMouseEnter={() => setActiveService('uiux')}
@@ -101,7 +101,7 @@ const Homethree: React.FC = () => {
 
         {/* Right card block */}
         <div className="relative w-full max-w-[380px] mx-auto lg:mx-0 lg:max-w-none flex justify-center lg:justify-end lg:translate-x-20 xl:translate-x-28 lg:-translate-y-16 order-2">
-          <div className="relative flex flex-col gap-2.5 rounded-[28px] p-4 sm:p-5 w-full lg:w-[315px] shrink-0 h-[405px]">
+          <div className="relative flex flex-col gap-2.5 rounded-[28px] p-4 sm:p-5 w-full lg:w-[315px] shrink-0 h-[450px]">
             {/* Top pill "Our Services" */}
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/90 text-[#272D55] text-xs font-semibold shadow-sm w-fit">
               Our Services
