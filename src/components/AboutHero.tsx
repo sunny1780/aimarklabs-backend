@@ -36,7 +36,7 @@ const AboutHero: React.FC = () => {
               <img
                 src="/images/venga.png"
                 alt=""
-                className="h-auto w-auto max-w-full flex-shrink-0 align-middle rounded-xl about-hero-people"
+                className="h-auto w-[70px] sm:w-[140px] lg:w-[220px] max-w-full flex-shrink-0 align-middle rounded-xl about-hero-people"
               />
               <span className="whitespace-nowrap">Our Strategy.</span>
             </span>
@@ -44,7 +44,9 @@ const AboutHero: React.FC = () => {
 
           {/* Subheading */}
           <p className="text-gray-600 text-sm sm:text-lg lg:text-xl max-w-2xl mx-auto mb-7 sm:mb-8 leading-relaxed">
-          At AIMarkLabs, growth isn’t accidental; it’s engineered.? By combining artificial intelligence, deep market insight, and creative execution, we help brands scale with precision, clarity, and measurable impact.
+          At AIMarkLabs, growth isn’t accidental; it’s engineered.
+          <br />
+           By combining artificial intelligence, deep market insight, and creative execution, we help brands scale with precision, clarity, and measurable impact.
           </p>
 
           {/* CTA Button */}

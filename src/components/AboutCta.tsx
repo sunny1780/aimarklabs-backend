@@ -71,7 +71,7 @@ const AboutCta: React.FC = () => {
                 <strong>Driven by strategy</strong>, powered by creativity,focused on measurable growth.
               </p>
               <div className="flex justify-center">
-                <button className="relative group bg-[#F29335] text-black px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-sm sm:text-base overflow-hidden">
+                <button className="relative group bg-[#F29335] text-black px-4 py-2 sm:px-5 sm:py-2.5 rounded-lg font-semibold text-xs sm:text-sm overflow-hidden inline-flex items-center justify-center">
                   <span className="relative z-10">
                     Book a Free Consultation
                   </span>

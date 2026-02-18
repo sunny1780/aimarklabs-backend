@@ -20,7 +20,7 @@ const Team: React.FC = () => {
         {/* Header */}
         <div className="text-center mb-12">
           <div className="mb-6">
-            <span className="inline-flex items-center px-5 py-3 rounded-md text-[16px] font-semibold tracking-wide text-[#272D55] bg-[#D7DDFC] shadow-sm border border-[#B3BDEF]">
+            <span className="inline-flex items-center justify-center min-w-[100px] sm:min-w-[120px] lg:min-w-[133px] h-[32px] sm:h-[36px] px-4 sm:px-5 rounded-md text-[14px] sm:text-[16px] font-semibold tracking-wide text-[#272D55] bg-[#D7DDFC] shadow-sm border border-[#B3BDEF]">
               Team Members
             </span>
           </div>
