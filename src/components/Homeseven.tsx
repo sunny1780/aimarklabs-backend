@@ -72,7 +72,7 @@ const Homeseven: React.FC = () => {
           <img
             src="/images/three.png"
             alt=""
-            className="h-[68px] w-[442px] max-w-full rounded-full object-cover flex-shrink-0"
+            className="h-[68px] w-[280px] sm:w-[320px] lg:w-[360px] max-w-full rounded-full object-cover flex-shrink-0"
           />
           <span className="text-white text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold uppercase tracking-tight border border-white px-3 py-1 inline-block">
             THE RIGHT TIME
@@ -87,7 +87,7 @@ const Homeseven: React.FC = () => {
           <img
             src="/images/four.png"
             alt=""
-            className="h-[68px] w-[334px] max-w-full rounded-full object-cover flex-shrink-0"
+            className="h-[68px] w-[220px] sm:w-[260px] lg:w-[280px] max-w-full rounded-full object-cover flex-shrink-0"
           />
           <span className="text-white text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold uppercase tracking-tight">
             SMART PLAN.&quot;

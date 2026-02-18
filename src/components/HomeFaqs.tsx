@@ -93,7 +93,7 @@ const HomeFaqs: React.FC = () => {
             <p className="text-gray-600 text-base leading-relaxed mb-8">
               Quick answers to common questions about our services, process, and results.
             </p>
-            <button className="bg-[#F97316] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#ea6a0d] transition-colors flex items-center gap-2">
+            <button className="bg-[#F29335] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#e0852a] transition-colors flex items-center gap-2">
               Contact Now
               <span>→</span>
             </button>

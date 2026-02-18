@@ -63,9 +63,9 @@ const Homecta: React.FC = () => {
               >
                 **READY TO BOOST
               </h2>
-              <h3 className="text-white text-4xl lg:text-5xl font-bold leading-tight mb-6">
+              <h3 className="text-white text-4xl lg:text-5xl font-bold leading-tight mb-6 whitespace-nowrap">
                 YOUR DIGITAL BUSINESS{' '}
-                <span className="underline">GROWTH</span>
+                <span className="underline italic">GROWTH</span>
               </h3>
               <p className="text-white/90 text-lg leading-relaxed mb-8">
                 <strong>Grow your business</strong> online with smart strategies. Let's take your brand to the next level!

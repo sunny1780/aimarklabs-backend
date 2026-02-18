@@ -54,11 +54,16 @@ const Homesix: React.FC = () => {
         {/* Header */}
         <div className="text-center mb-12" style={headerStyle}>
           <div className="mb-6">
-            <span className="inline-flex items-center px-5 py-3 rounded-md text-[16px] font-semibold tracking-wide text-[#272D55] bg-[#D7DDFC] shadow-sm border border-[#B3BDEF]">
+            <span
+              className="inline-flex items-center justify-center min-w-[100px] sm:min-w-[120px] lg:min-w-[133px] h-[32px] sm:h-[36px] px-4 sm:px-5 rounded-md text-[14px] sm:text-[16px] font-semibold tracking-wide text-[#272D55] bg-[#D7DDFC] border border-[#B3BDEF]"
+            >
               Team Members
             </span>
           </div>
-          <h2 className="text-4xl sm:text-5xl lg:text-[60px] font-extrabold text-gray-900 leading-tight mb-4">
+          <h2
+            className="w-full max-w-[1152px] mx-auto text-center text-[32px] sm:text-[44px] md:text-[52px] lg:text-[60px] font-medium leading-[1] tracking-[0.005em] text-gray-900 mb-4"
+            style={{ fontFamily: "'Manrope', 'Segoe UI', sans-serif" }}
+          >
             Meet Our Team
           </h2>
         </div>
