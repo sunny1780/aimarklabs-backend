@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { FaFacebook, FaInstagram, FaLinkedin,  } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
@@ -25,11 +24,9 @@ const Footer: React.FC = () => {
   ];
 
   const socialLinks = [
-    { name: 'Facebook', icon: FaFacebook, href: 'https://www.facebook.com/people/AI-Mark-Labs/61555229655979/' },
-    { name: 'Instagram', icon: FaInstagram, href: 'https://www.instagram.com/aimarklab/' },
-    // { name: 'X', icon: FaXTwitter, href: 'https://x.com' },
-    { name: 'LinkedIn', icon: FaLinkedin, href: 'https://www.linkedin.com/company/ai-mark-labs/' },
-    // { name: 'YouTube', icon: FaYoutube, href: 'https://www.youtube.com' },
+    { name: 'Facebook', iconSrc: '/images/facebok.svg', href: 'https://www.facebook.com/people/AI-Mark-Labs/61555229655979/' },
+    { name: 'Instagram', iconSrc: '/images/instra.svg', href: 'https://www.instagram.com/aimarklab/' },
+    { name: 'LinkedIn', iconSrc: '/images/LinkedIn.svg', href: 'https://www.linkedin.com/company/ai-mark-labs/' },
   ];
 
   const handleSubscribe = (e: React.FormEvent) => {
@@ -102,16 +99,16 @@ const Footer: React.FC = () => {
             </div>
             <div className="flex gap-2">
               {socialLinks.map((social, index) => {
-                const IconComponent = social.icon as React.ComponentType<React.SVGProps<SVGSVGElement>>;
                 return (
                   <a
                     key={index}
                     href={social.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="w-10 h-10 flex items-center justify-center rounded border border-white/30 text-white hover:bg-white/10 transition-colors"
+                    aria-label={social.name}
+                    className="w-10 h-10 flex items-center justify-center rounded text-white hover:bg-white/10 transition-colors"
                   >
-                    <IconComponent className="w-5 h-5" />
+                    <img src={social.iconSrc} alt={social.name} className="w-5 h-5 object-contain" />
                   </a>
                 );
               })}
@@ -119,7 +116,7 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Company Links */}
-          <div>
+          <div className="lg:-ml-6">
             <h4 className="font-bold text-white mb-4">Company</h4>
             <ul className="space-y-2">
               {columnOneLinks.map((link) => (
@@ -137,7 +134,7 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Services Links */}
-          <div>
+          <div className="lg:ml-10">
             <h4 className="font-bold text-white mb-4">Services</h4>
             <ul className="space-y-2">
               {columnTwoLinks.map((link, index) => (
