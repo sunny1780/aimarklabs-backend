@@ -63,9 +63,9 @@ const DASHBOARD_CLIENTS: Record<string, DashboardClient> = {
       'https://lookerstudio.google.com/embed/reporting/1d83589b-34cf-4981-a208-2b83d841dece/page/w4gkE',
     metaAdsEmbedUrl: '',
     auditReportPreviewUrl:
-      'https://docs.google.com/document/d/1C5WM69kPVt29Jdk-gPMpyOTqyUzpJP49JpY7R2vzgHY/preview',
+      'https://docs.google.com/document/d/1dBS41EjruxDPe64a8aQX-B2XGh1Uq4Mg18kwU6CT5kA/preview',
     auditReportDownloadUrl:
-      'https://docs.google.com/document/d/1C5WM69kPVt29Jdk-gPMpyOTqyUzpJP49JpY7R2vzgHY/export?format=pdf',
+      'https://docs.google.com/document/d/1dBS41EjruxDPe64a8aQX-B2XGh1Uq4Mg18kwU6CT5kA/export?format=pdf',
     hasAnalyticsData: true,
     showAuditPreview: true,
   },
@@ -97,6 +97,14 @@ const AnalyticsDashboard: React.FC = () => {
   const auditPdfPreviewUrl = isAuditPdf
     ? `${activeClient.auditReportPreviewUrl}#toolbar=0&navpanes=0&scrollbar=1&view=FitH`
     : activeClient.auditReportPreviewUrl;
+
+  const handleLogout = () => {
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('dashboard_active_client_slug');
+      localStorage.removeItem('dashboard_active_email');
+      window.location.href = '/login';
+    }
+  };
 
   return (
     <div className="analytics-app">
@@ -1496,10 +1504,18 @@ const AnalyticsDashboard: React.FC = () => {
                   AI Mark Labs account?
                 </p>
                 <div className="logout-actions">
-                  <button type="button" className="logout-btn secondary">
+                  <button
+                    type="button"
+                    className="logout-btn secondary"
+                    onClick={() => setActiveAccountTab('subscription')}
+                  >
                     Cancel
                   </button>
-                  <button type="button" className="logout-btn primary">
+                  <button
+                    type="button"
+                    className="logout-btn primary"
+                    onClick={handleLogout}
+                  >
                     Log Out
                   </button>
                 </div>

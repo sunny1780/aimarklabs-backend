@@ -66,38 +66,38 @@ const Login: React.FC<LoginProps> = ({ onGoToSignUp, onLoginSuccess }) => {
   };
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen flex-col lg:flex-row">
       {/* Left Side - Dark Blue Section */}
-      <div className="relative w-1/2 bg-[#1e2749] flex items-center justify-center overflow-hidden">
+      <div className="relative order-2 w-full bg-[#1e2749] flex flex-col items-center justify-center overflow-hidden px-5 py-10 sm:px-8 lg:order-1 lg:w-1/2 lg:px-0 lg:py-0">
         {/* Background Decorative Logos */}
         <img 
           src="/images/LtLogo.png" 
           alt="Left Top Decoration" 
-          className="absolute top-0 left-0 opacity-70"
+          className="absolute top-0 left-0 opacity-70 w-28 sm:w-auto"
         />
         <img 
           src="/images/RtLogo.png" 
           alt="Right Top Decoration" 
-          className="absolute top-0 right-0 opacity-60"
+          className="absolute top-0 right-0 opacity-60 w-28 sm:w-auto"
         />
         <img 
           src="/images/RbLogo.png" 
           alt="Right Bottom Decoration" 
-          className="absolute bottom-0 right-0 opacity-60"
+          className="absolute bottom-0 right-0 opacity-60 w-24 sm:w-auto"
         />
         
         {/* Main Content - Centered */}
-        <div className="relative z-10 text-center px-16 max-w-xl">
-          <h1 className="text-white text-5xl font-bold leading-tight mb-4">
+        <div className="relative z-10 text-center max-w-xl px-2 sm:px-10 lg:px-16">
+          <h1 className="text-white text-4xl sm:text-5xl font-bold leading-tight mb-2 sm:mb-4">
             Digital Marketing
           </h1>
-          <h2 className="text-[#f39c12] text-5xl font-bold mb-12">
+          <h2 className="text-[#f39c12] text-4xl sm:text-5xl font-bold mb-4 sm:mb-12">
             Agency
           </h2>
         </div>
 
         {/* Bottom Content - Paragraph and Pagination Dots */}
-        <div className="absolute bottom-20 left-0 right-0 px-16 max-w-xl mx-auto">
+        <div className="relative z-10 mt-4 max-w-xl mx-auto px-2 sm:px-10 lg:absolute lg:bottom-20 lg:left-0 lg:right-0 lg:px-16">
           <p className="text-gray-300 text-sm leading-relaxed mb-6 text-justify">
             Transform your brand&apos;s digital presence with intelligent marketing automation.
             We combine AI-driven insights with creative strategy to deliver measurable growth
@@ -115,13 +115,13 @@ const Login: React.FC<LoginProps> = ({ onGoToSignUp, onLoginSuccess }) => {
       </div>
 
       {/* Right Side - White Section */}
-      <div className="relative w-1/2 bg-white">
+      <div className="relative order-1 w-full bg-white lg:order-2 lg:w-1/2">
         {/* Top Row - Logo and Register Button - Bilkul top par */}
-        <div className="flex items-center justify-between bg-[#1e2749] w-full px-8 py-4">
+        <div className="flex items-center justify-between bg-[#1e2749] w-full px-4 sm:px-6 lg:px-8 py-4">
           <img
             src="/images/logo.png"
             alt="AI Mark Labs Logo"
-            className="w-35 h-10"
+            className="h-8 sm:h-10 w-auto"
           />
           {/*
           <button
@@ -135,11 +135,11 @@ const Login: React.FC<LoginProps> = ({ onGoToSignUp, onLoginSuccess }) => {
         </div>
         
         {/* Login Form Container */}
-        <div className="flex items-center justify-center min-h-[calc(100vh-80px)]">
-          <div className="w-full max-w-md px-8">
+        <div className="flex items-center justify-center py-10 sm:py-12 lg:min-h-[calc(100vh-80px)] lg:py-0">
+          <div className="w-full max-w-md px-4 sm:px-6 lg:px-8">
             {/* Welcome Text */}
             <div className="mb-8">
-              <h2 className="text-3xl font-bold text-gray-900 mb-2">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
                 Welcome to AI Mark Labs
               </h2>
               <p className="text-gray-500 text-sm">

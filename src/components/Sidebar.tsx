@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 type ActiveSection = 'analytics' | 'audit' | 'packages' | 'account';
 
@@ -8,6 +8,7 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ activeSection, onChangeSection }) => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const activeEmail =
     typeof window !== 'undefined' ? localStorage.getItem('dashboard_active_email') || '' : '';
   const activeClientSlug =
@@ -30,6 +31,11 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, onChangeSection }) => 
     typeof window !== 'undefined' &&
     localStorage.getItem('dashboard_active_email') === 'karachibbq@gmail.com';
 
+  const handleSectionChange = (section: ActiveSection) => {
+    onChangeSection(section);
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <aside className="sidebar">
       <div className="sidebar-brand">
@@ -38,13 +44,21 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, onChangeSection }) => 
           alt="AI Mark Lab Logo"
           className="w-28 h-auto object-contain"
         />
+        <button
+          type="button"
+          className="sidebar-menu-toggle"
+          aria-label="Toggle menu"
+          onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+        >
+          ☰
+        </button>
       </div>
 
-      <nav className="sidebar-nav">
+      <nav className={`sidebar-nav ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
         <button
           type="button"
           className={`nav-item ${activeSection === 'analytics' ? 'active' : ''}`}
-          onClick={() => onChangeSection('analytics')}
+          onClick={() => handleSectionChange('analytics')}
         >
           <span className="nav-dot" />
           <span>Analytics</span>
@@ -53,7 +67,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, onChangeSection }) => 
           <button
             type="button"
             className={`nav-item ${activeSection === 'audit' ? 'active' : ''}`}
-            onClick={() => onChangeSection('audit')}
+            onClick={() => handleSectionChange('audit')}
           >
             <span className="nav-dot" />
             <span>Audit Report</span>
@@ -62,7 +76,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, onChangeSection }) => 
         <button
           type="button"
           className={`nav-item ${activeSection === 'packages' ? 'active' : ''}`}
-          onClick={() => onChangeSection('packages')}
+          onClick={() => handleSectionChange('packages')}
         >
           <span className="nav-dot" />
           <span>Packages</span>
@@ -70,7 +84,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, onChangeSection }) => 
         <button
           type="button"
           className={`nav-item ${activeSection === 'account' ? 'active' : ''}`}
-          onClick={() => onChangeSection('account')}
+          onClick={() => handleSectionChange('account')}
         >
           <span className="nav-dot" />
           <span>Account</span>
