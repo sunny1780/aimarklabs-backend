@@ -74,11 +74,12 @@ const Hometwo: React.FC<HometwoProps> = ({ nextInView }) => {
           <div className="relative overflow-x-hidden">
             <div ref={leftTextRef} style={leftTextStyle}>
               <div className="mb-8">
-                <span
-                  className="inline-flex items-center justify-center gap-2.5 h-9 px-2.5 py-2 rounded border border-[#B3BDEF] text-[16px] font-semibold tracking-wide text-[#272D55] bg-[#D7DDFC]"
-                >
-                  Why choose us
-                </span>
+               <span
+  className="inline-flex items-center justify-center gap-2.5 h-9 px-2.5 py-2 rounded border border-[#B3BDEF] text-[14px] font-medium tracking-wide text-[#272D55] bg-[#D7DDFC] font-manrope"
+>
+  Why choose us
+</span>
+
               </div>
               <h2
                 className="text-gray-900 mb-5 max-w-[633px]"

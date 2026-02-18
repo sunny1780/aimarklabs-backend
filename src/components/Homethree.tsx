@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 type ServiceKey = 'marketing' | 'branding' | 'development' | 'uiux';
 
@@ -37,9 +38,11 @@ const Homethree: React.FC = () => {
       <div className="relative max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[minmax(0,1.4fr)_minmax(320px,420px)] items-center gap-12 lg:gap-16 xl:gap-20">
         {/* Left text block */}
         <div className="min-w-0 w-full text-left text-[#9CA9FF] order-1">
-          <h2
+          <Link
+            to="/services/marketing-services"
             className="group flex flex-nowrap items-center gap-2 mb-3 uppercase text-[#57609B] hover:text-[#C7CFFA] cursor-pointer text-[44px] sm:text-[78px] lg:text-[118px] xl:text-[135px] leading-[0.95]"
             onMouseEnter={() => setActiveService('marketing')}
+            onFocus={() => setActiveService('marketing')}
             style={{
               fontFamily: "'Anton', sans-serif",
               fontWeight: 400,
@@ -51,8 +54,9 @@ const Homethree: React.FC = () => {
             <span className="text-xs sm:text-sm tracking-[0.3em] text-[#57609B] group-hover:text-[#C7CFFA]">
               (01)
             </span>
-          </h2>
-          <h2
+          </Link>
+          <Link
+            to="/services/branding-services"
             className="group flex flex-nowrap items-center gap-2 mb-3 uppercase transition-colors duration-200 text-[#57609B] hover:text-[#C7CFFA] cursor-pointer text-[44px] sm:text-[78px] lg:text-[118px] xl:text-[135px] leading-[0.95]"
             style={{
               fontFamily: "'Anton', sans-serif",
@@ -61,13 +65,15 @@ const Homethree: React.FC = () => {
               fontStyle: 'normal',
             }}
             onMouseEnter={() => setActiveService('branding')}
+            onFocus={() => setActiveService('branding')}
           >
             BRANDING
             <span className="text-xs sm:text-sm tracking-[0.3em] text-[#57609B] group-hover:text-[#C7CFFA]">
               (02)
             </span>
-          </h2>
-          <h2
+          </Link>
+          <Link
+            to="/services/development-services"
             className="group flex flex-nowrap items-center gap-2 mb-3 uppercase text-[#57609B] hover:text-[#C7CFFA] cursor-pointer text-[44px] sm:text-[78px] lg:text-[118px] xl:text-[135px] leading-[0.95]"
             style={{
               fontFamily: "'Anton', sans-serif",
@@ -76,13 +82,15 @@ const Homethree: React.FC = () => {
               fontStyle: 'normal',
             }}
             onMouseEnter={() => setActiveService('development')}
+            onFocus={() => setActiveService('development')}
           >
             Development
             <span className="text-xs sm:text-sm tracking-[0.3em] text-[#57609B] group-hover:text-[#C7CFFA]">
               (03)
             </span>
-          </h2>
-          <h2
+          </Link>
+          <Link
+            to="/services/creative-services"
             className="group flex flex-nowrap items-center gap-2 uppercase text-[#57609B] hover:text-[#C7CFFA] cursor-pointer text-[44px] sm:text-[78px] lg:text-[118px] xl:text-[135px] leading-[0.95]"
             style={{
               fontFamily: "'Anton', sans-serif",
@@ -91,21 +99,23 @@ const Homethree: React.FC = () => {
               fontStyle: 'normal',
             }}
             onMouseEnter={() => setActiveService('uiux')}
+            onFocus={() => setActiveService('uiux')}
           >
             Creative
             <span className="text-xs sm:text-sm tracking-[0.3em] text-[#57609B] group-hover:text-[#C7CFFA]">
               (04)
             </span>
-          </h2>
+          </Link>
         </div>
 
         {/* Right card block */}
         <div className="relative w-full max-w-[380px] mx-auto lg:mx-0 lg:max-w-none flex justify-center lg:justify-end lg:translate-x-20 xl:translate-x-28 lg:-translate-y-16 order-2">
           <div className="relative flex flex-col gap-2.5 rounded-[28px] p-4 sm:p-5 w-full lg:w-[315px] shrink-0 h-[450px]">
             {/* Top pill "Our Services" */}
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/90 text-[#272D55] text-xs font-semibold shadow-sm w-fit">
-              Our Services
-            </div>
+       <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#B3BDEF] text-[#272D55] text-[14px] font-medium shadow-sm w-fit font-manrope">
+  Our Services
+</div>
+
 
             {/* Main image inside card */}
             <div className="flex-1 min-h-0 overflow-hidden rounded-[22px] border border-white/20 w-full">

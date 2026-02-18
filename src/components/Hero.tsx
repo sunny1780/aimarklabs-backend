@@ -66,18 +66,18 @@ const Hero: React.FC<HeroProps> = ({ nextInView }) => {
 
           {/* Right side - services list */}
           <div className="flex-1 flex justify-start sm:justify-end w-full">
-            <div className="mt-2 sm:-mt-[80px] md:-mt-[112px] sm:mr-12 md:mr-24 text-left space-y-1 text-[14px] sm:text-[15px] md:text-[16px] text-gray-700 pr-[160px] sm:pr-0">
+            <div className="-mt-4 sm:-mt-[104px] md:-mt-[136px] sm:mr-12 md:mr-24 text-left space-y-1 text-[14px] sm:text-[15px] md:text-[16px] text-gray-700 pr-[160px] sm:pr-0">
               <div>
                 <p>ui/ux design</p>
-                <img src="/images/Line.png" alt="line" className="hero-float-1 mt-1" />
+                <img src="/images/Line.png" alt="line" className="mt-1" />
               </div>
               <div>
                 <p>digital marketing</p>
-                <img src="/images/Line.png" alt="line" className="hero-float-2 mt-1" />
+                <img src="/images/Line.png" alt="line" className="mt-1" />
               </div>
               <div>
                 <p>web development</p>
-                <img src="/images/Line.png" alt="line" className="hero-float-3 mt-1" />
+                <img src="/images/Line.png" alt="line" className="mt-1" />
               </div>
             </div>
           </div>

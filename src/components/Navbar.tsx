@@ -27,13 +27,13 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
     <nav className="w-full px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 via-orange-50 to-white">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo Section */}
-        <div className="flex items-center">
+        <Link to="/" className="flex items-center" aria-label="Go to home page">
           <img
             src="/images/logo1.png"
             alt="a Mark Lous Logo"
             className="h-12 w-auto object-contain"
           />
-        </div>
+        </Link>
 
         {/* Desktop Navigation */}
         <div className="hidden lg:flex items-center gap-8">
