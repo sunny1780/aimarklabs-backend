@@ -16,9 +16,12 @@ const AboutHero: React.FC = () => {
           />
         </div>
 
-        <div className="relative z-10 max-w-4xl mx-auto text-center about-hero-content px-1">
+        <div className="relative z-10 max-w-5xl mx-auto text-center about-hero-content px-1">
           {/* Main Heading */}
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 leading-tight mb-5 sm:mb-6">
+          <h1
+            className="w-full max-w-[900px] mx-auto text-center text-[40px] sm:text-[56px] md:text-[72px] xl:text-[80px] font-bold text-gray-900 leading-[1] tracking-[0.005em] mb-5 sm:mb-6"
+            style={{ fontFamily: "'Manrope', 'Segoe UI', sans-serif" }}
+          >
             <span className="block">
               Your Growth,
               <span className="inline-flex items-center ml-2 align-middle about-hero-icon">
@@ -29,14 +32,13 @@ const AboutHero: React.FC = () => {
                 />
               </span>
             </span>
-            <span className="block mt-2 inline-flex flex-wrap items-center justify-center gap-2 about-hero-row">
+            <span className="block mt-2 flex flex-nowrap items-center justify-center gap-2 about-hero-row">
               <img
                 src="/images/venga.png"
                 alt=""
-                className="h-auto max-w-full flex-shrink-0 align-middle rounded-2xl about-hero-people"
+                className="h-auto w-auto max-w-full flex-shrink-0 align-middle rounded-xl about-hero-people"
               />
-              <span>Our</span>
-              <span>Strategy.</span>
+              <span className="whitespace-nowrap">Our Strategy.</span>
             </span>
           </h1>
 
@@ -79,7 +81,6 @@ const AboutHero: React.FC = () => {
 
           .about-hero-people {
             display: block;
-            box-shadow: 0 25px 50px rgba(15, 23, 42, 0.18);
           }
 
           .about-hero-row span {

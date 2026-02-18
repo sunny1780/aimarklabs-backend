@@ -49,7 +49,7 @@ const Abouttwo = () => {
         {sections.map((section, index) => (
             <div
               key={index}
-              className="about-two-card group relative flex flex-col items-center justify-center text-center p-8 lg:p-10 min-h-[280px] transition-all duration-300 hover:opacity-100"
+              className="about-two-card group relative flex flex-col items-center justify-center text-center p-8 lg:p-10 w-full max-w-[360px] min-h-[328px] mx-auto transition-all duration-300 hover:opacity-100"
               style={{
                 backgroundColor: section.bg,
                 animationDelay: `${index * 0.08}s`,
@@ -63,10 +63,16 @@ const Abouttwo = () => {
               <div className={`about-two-icon mb-4 ${section.iconColor || 'text-gray-800'}`}>
                 <img src={section.icon} alt="" className="w-12 h-12 object-contain" />
               </div>
-              <h3 className={`font-bold text-lg lg:text-xl mb-2 ${section.textColor}`}>
+              <h3
+                className="w-full max-w-[264px] mx-auto text-[20px] sm:text-[24px] lg:text-[30px] font-bold leading-[24px] sm:leading-[28px] lg:leading-[36px] tracking-[0.005em] mb-2 text-[#272D55]"
+                style={{ fontFamily: "'Manrope', 'Segoe UI', sans-serif" }}
+              >
                 {section.title}
               </h3>
-              <p className={`text-sm lg:text-base ${section.descColor}`}>
+              <p
+                className="w-full max-w-[264px] mx-auto text-[14px] sm:text-[16px] lg:text-[18px] font-normal leading-[22px] sm:leading-[24px] lg:leading-[28px] tracking-[0.005em] opacity-50 text-[#272D55]"
+                style={{ fontFamily: "'Manrope', 'Segoe UI', sans-serif" }}
+              >
                 {section.description}
               </p>
             </div>

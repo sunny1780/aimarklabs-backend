@@ -29,11 +29,14 @@ const Aboutthree = () => {
       <div className="max-w-6xl mx-auto text-center">
         {/* Tag */}
         <span className="inline-flex items-center justify-center rounded-lg text-sm font-semibold tracking-wide text-[#272D55] bg-[#D7DDFC] border border-[#B3BDEF] mb-6 w-[124px] h-[36px]">
-          Tag Comes here
+        How We Think
         </span>
 
         {/* Heading */}
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+        <h2
+          className="w-full max-w-[1280px] mx-auto text-center text-[32px] sm:text-[44px] md:text-[52px] lg:text-[60px] font-medium leading-[1] tracking-[0.005em] text-gray-900 mb-6"
+          style={{ fontFamily: "'Manrope', 'Segoe UI', sans-serif" }}
+        >
           Our Philosophy
         </h2>
 
@@ -68,7 +71,10 @@ const Aboutthree = () => {
         </div>
 
         {/* CTA Button */}
-        <button className="bg-[#F29335] text-white font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-lg hover:bg-[#e0852a] transition-colors text-sm sm:text-base">
+        <button
+          className="inline-flex items-center justify-center min-w-[188px] min-h-[41px] py-3 px-6 bg-[#F29335] text-white font-medium text-[16px] leading-[24px] tracking-[0.005em] rounded-lg hover:bg-[#e0852a] transition-colors text-center"
+          style={{ fontFamily: "'Manrope', 'Segoe UI', sans-serif" }}
+        >
           Book a Free Strategy Call
         </button>
       </div>

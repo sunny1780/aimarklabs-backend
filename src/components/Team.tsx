@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Team: React.FC = () => {
   return (
@@ -23,7 +24,10 @@ const Team: React.FC = () => {
               Team Members
             </span>
           </div>
-          <h2 className="text-4xl sm:text-5xl lg:text-[60px] font-extrabold text-gray-900 leading-tight mb-4">
+          <h2
+            className="w-full max-w-[1152px] mx-auto text-center text-[32px] sm:text-[44px] md:text-[52px] lg:text-[60px] font-medium leading-[1] tracking-[0.005em] text-gray-900 mb-4"
+            style={{ fontFamily: "'Manrope', 'Segoe UI', sans-serif" }}
+          >
             Meet Our Team
           </h2>
         </div>
@@ -68,6 +72,16 @@ const Team: React.FC = () => {
             <h3 className="font-bold text-gray-900 text-xl mb-1">Mohammad Farghaly</h3>
             <p className="text-gray-600">Client Relations</p>
           </div>
+        </div>
+
+        {/* View all button */}
+        <div className="text-center mt-10">
+          <Link
+            to="/team"
+            className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-[#F29335] text-white font-medium hover:bg-[#e0852a] transition-colors"
+          >
+            View all
+          </Link>
         </div>
       </div>
     </section>

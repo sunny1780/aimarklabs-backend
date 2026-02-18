@@ -20,7 +20,7 @@ const AboutFour: React.FC = () => {
                 Our Mission
               </h2>
               <div className="relative pt-4">
-                <div className="about-four-card bg-[#F7F9FB] border border-[#F29335]/50 rounded-lg p-6 pr-8 pt-12">
+                <div className="about-four-card bg-white border border-[#F29335]/50 rounded-lg p-6 pr-8 pt-12">
                   <p className="text-gray-800 text-base sm:text-lg leading-relaxed">
                     {missionContent}
                   </p>
@@ -37,7 +37,7 @@ const AboutFour: React.FC = () => {
                 Our Vision
               </h2>
               <div className="relative pt-4">
-                <div className="about-four-card bg-[#F7F9FB] border border-[#F29335]/50 rounded-lg p-6 pr-8 pt-12">
+                <div className="about-four-card bg-white border border-[#F29335]/50 rounded-lg p-6 pr-8 pt-12">
                   <p className="text-gray-800 text-base sm:text-lg leading-relaxed">
                     {visionContent}
                   </p>
@@ -91,7 +91,7 @@ const AboutFour: React.FC = () => {
             transform: translateY(-6px);
             box-shadow: 0 20px 50px rgba(15, 23, 42, 0.14);
             border-color: rgba(242, 147, 53, 0.7);
-            background-color: #f8fafc;
+            background-color: #ffffff;
           }
 
           .about-four-block:hover .about-four-card::before {

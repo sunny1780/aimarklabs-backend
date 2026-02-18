@@ -40,7 +40,7 @@ const AboutCta: React.FC = () => {
             {/* Arrow Image */}
             <div className="absolute right-20 bottom-8 hidden lg:block">
               <img
-                src="/images/Arrow.png"
+                src="/images/arow.svg"
                 alt="Arrow"
                 className="w-24 h-24 object-contain opacity-80 animate-arrow-float"
               />
@@ -65,7 +65,7 @@ const AboutCta: React.FC = () => {
               </h2>
               <h3 className="text-white text-2xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5 sm:mb-6">
                 WITH A TEAM THAT{' '}
-                <span className="underline">DELIVERS</span>
+                <span className="underline italic">DELIVERS</span>
               </h3>
               <p className="text-white/90 text-base sm:text-lg leading-relaxed mb-7 sm:mb-8">
                 <strong>Driven by strategy</strong>, powered by creativity,focused on measurable growth.
