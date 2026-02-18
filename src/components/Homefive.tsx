@@ -44,7 +44,7 @@ const Homefive: React.FC = () => {
           {/* Card 1 */}
           <div className="wave-card wave-delay-0 bg-gradient-to-br from-[#F2F2F4]/80 via-[#F2F2F4]/40 to-[#F2F2F4]/20 backdrop-blur-xl rounded-3xl px-8 py-8 border border-[#656565]/10 shadow-lg hover:shadow-xl transition-shadow">
             <div className="flex items-start gap-4 mb-6">
-              <div className="w-16 h-16 rounded-full bg-gray-300 flex-shrink-0"></div>
+              {/* <div className="w-16 h-16 rounded-full bg-gray-300 flex-shrink-0"></div> */}
               <div className="pt-2">
                 <h3 className="font-bold text-gray-900 text-lg mb-1">Courtney</h3>
                 <p className="text-sm text-gray-500 leading-relaxed">
@@ -60,7 +60,7 @@ const Homefive: React.FC = () => {
           {/* Card 2 */}
           <div className="wave-card wave-delay-1 bg-gradient-to-br from-[#F2F2F4]/80 via-[#F2F2F4]/40 to-[#F2F2F4]/20 backdrop-blur-xl rounded-3xl px-8 py-8 border border-[#656565]/10 shadow-lg hover:shadow-xl transition-shadow">
             <div className="flex items-start gap-4 mb-6">
-              <div className="w-16 h-16 rounded-full bg-gray-300 flex-shrink-0"></div>
+              {/* <div className="w-16 h-16 rounded-full bg-gray-300 flex-shrink-0"></div> */}
               <div className="pt-2">
                 <h3 className="font-bold text-gray-900 text-lg mb-1">Quan</h3>
                 <p className="text-sm text-gray-500 leading-relaxed"> Founder, Trading Services</p>
@@ -74,7 +74,7 @@ const Homefive: React.FC = () => {
           {/* Card 3 */}
           <div className="wave-card wave-delay-2 bg-gradient-to-br from-[#F2F2F4]/80 via-[#F2F2F4]/40 to-[#F2F2F4]/20 backdrop-blur-xl rounded-3xl px-8 py-8 border border-[#656565]/10 shadow-lg hover:shadow-xl transition-shadow">
             <div className="flex items-start gap-4 mb-6">
-              <div className="w-16 h-16 rounded-full bg-gray-300 flex-shrink-0"></div>
+              {/* <div className="w-16 h-16 rounded-full bg-gray-300 flex-shrink-0"></div> */}
               <div className="pt-2">
                 <h3 className="font-bold text-gray-900 text-lg mb-1">Joslene</h3>
                 <p className="text-sm text-gray-500 leading-relaxed">Director</p>
@@ -88,7 +88,7 @@ const Homefive: React.FC = () => {
           {/* Card 4 */}
           <div className="wave-card wave-delay-0 bg-gradient-to-br from-[#F2F2F4]/80 via-[#F2F2F4]/40 to-[#F2F2F4]/20 backdrop-blur-xl rounded-3xl px-8 py-8 border border-[#656565]/10 shadow-lg hover:shadow-xl transition-shadow">
             <div className="flex items-start gap-4 mb-6">
-              <div className="w-16 h-16 rounded-full bg-gray-300 flex-shrink-0"></div>
+              {/* <div className="w-16 h-16 rounded-full bg-gray-300 flex-shrink-0"></div> */}
               <div className="pt-2">
                 <h3 className="font-bold text-gray-900 text-lg mb-1">Shahid Pervaiz</h3>
                 <p className="text-sm text-gray-500 leading-relaxed"> Founder</p>
@@ -102,7 +102,7 @@ const Homefive: React.FC = () => {
           {/* Card 5 */}
           <div className="wave-card wave-delay-1 bg-gradient-to-br from-[#F2F2F4]/80 via-[#F2F2F4]/40 to-[#F2F2F4]/20 backdrop-blur-xl rounded-3xl px-8 py-8 border border-[#656565]/10 shadow-lg hover:shadow-xl transition-shadow">
             <div className="flex items-start gap-4 mb-6">
-              <div className="w-16 h-16 rounded-full bg-gray-300 flex-shrink-0"></div>
+              {/* <div className="w-16 h-16 rounded-full bg-gray-300 flex-shrink-0"></div> */}
               <div className="pt-2">
                 <h3 className="font-bold text-gray-900 text-lg mb-1">Jacob</h3>
                 <p className="text-sm text-gray-500 leading-relaxed">CEO</p>
@@ -116,7 +116,7 @@ const Homefive: React.FC = () => {
           {/* Card 6 */}
           <div className="wave-card wave-delay-2 bg-gradient-to-br from-[#F2F2F4]/80 via-[#F2F2F4]/40 to-[#F2F2F4]/20 backdrop-blur-xl rounded-3xl px-8 py-8 border border-[#656565]/10 shadow-lg hover:shadow-xl transition-shadow">
             <div className="flex items-start gap-4 mb-6">
-              <div className="w-16 h-16 rounded-full bg-gray-300 flex-shrink-0"></div>
+              {/* <div className="w-16 h-16 rounded-full bg-gray-300 flex-shrink-0"></div> */}
               <div className="pt-2">
                 <h3 className="font-bold text-gray-900 text-lg mb-1">Mark</h3>
                 <p className="text-sm text-gray-500 leading-relaxed">CEO</p>

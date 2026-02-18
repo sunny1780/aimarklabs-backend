@@ -68,7 +68,7 @@ const MetaAnalyticsSection: React.FC<MetaAnalyticsSectionProps> = ({
     return (
       <section className="card">
         <header className="card-header">
-          <h2 className="card-title">{`Meta Analytics For ${clientName}`}</h2>
+          <h2 className="card-title">Meta Analytics &amp; Performance</h2>
           <p className="card-subtitle">Loading data from Metricool...</p>
         </header>
       </section>
@@ -79,12 +79,11 @@ const MetaAnalyticsSection: React.FC<MetaAnalyticsSectionProps> = ({
     return (
       <section className="card">
         <header className="card-header">
-          <h2 className="card-title">{`Meta Analytics For ${clientName}`}</h2>
+          <h2 className="card-title">Meta Analytics &amp; Performance</h2>
           <p className="card-subtitle">
-            In February, we&apos;ll enhance online presence, improve website
-            functionality, connect with customers through Valentine&apos;s Day
-            promotions on social media, and run targeted ads focused on the
-            Beckley area.
+            We continuously track and analyze your Meta platform data, monitor ad
+            performance, measure audience engagement, and use actionable insights
+            to refine your social media strategy for consistent growth.
           </p>
         </header>
         <div className="meta-layout">
@@ -166,12 +165,11 @@ const MetaAnalyticsSection: React.FC<MetaAnalyticsSectionProps> = ({
   return (
     <section className="card">
       <header className="card-header">
-        <h2 className="card-title">{`Meta Analytics For ${clientName}`}</h2>
+        <h2 className="card-title">Meta Analytics &amp; Performance</h2>
         <p className="card-subtitle">
-          In February, we&apos;ll enhance online presence, improve website
-          functionality, connect with customers through Valentine&apos;s Day
-          promotions on social media, and run targeted ads focused on the
-          Beckley area.
+          We continuously track and analyze your Meta platform data, monitor ad
+          performance, measure audience engagement, and use actionable insights
+          to refine your social media strategy for consistent growth.
         </p>
       </header>
 

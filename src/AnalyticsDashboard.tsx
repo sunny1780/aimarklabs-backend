@@ -338,6 +338,20 @@ const AnalyticsDashboard: React.FC = () => {
 
         {activeTab === 'monthly' && (
           <>
+            <section className="card" style={{ marginBottom: '12px', padding: '14px 16px', background: '#f3f4f6' }}>
+              <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '12px' }}>
+                <div>
+                  <h2 className="card-title" style={{ marginBottom: '8px' }}>
+                    Your Digital Growth Strategy
+                  </h2>
+                  <p className="card-subtitle" style={{ margin: 0 }}>
+                    Our ongoing strategy focuses on strengthening your online presence, maximizing website
+                    performance, building customer engagement through social media, and delivering targeted
+                    advertising to reach the right audience.
+                  </p>
+                </div>
+              </div>
+            </section>
             <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '12px' }}>
               <a
                 className="audit-button"
@@ -365,12 +379,11 @@ const AnalyticsDashboard: React.FC = () => {
         {activeTab === 'siteHealth' && (
           <section className="card">
             <header className="card-header">
-              <h2 className="card-title">{`Site Health For ${activeClient.name}`}</h2>
+              <h2 className="card-title">Site Health Overview</h2>
               <p className="card-subtitle">
-                In February, we&apos;ll enhance online presence, improve website
-                functionality, connect with customers through Valentine&apos;s Day
-                promotions on social media, and run targeted ads focused on the
-                Beckley area.
+                We continuously monitor and improve your website&apos;s performance,
+                fix technical issues, enhance user experience, and ensure your
+                site is fully optimized to attract and convert visitors.
               </p>
             </header>
 
@@ -489,7 +502,12 @@ const AnalyticsDashboard: React.FC = () => {
         {activeTab === 'webTraffic' && (
           <section className="card">
             <header className="card-header">
-              <h2 className="card-title">{`Web Traffic For ${activeClient.name}`}</h2>
+              <h2 className="card-title">Web Traffic &amp; Online Visibility</h2>
+              <p className="card-subtitle">
+                We continuously analyze and improve your website traffic, optimize
+                search rankings, expand your online reach, and implement data-driven
+                strategies to attract more visitors and grow your audience.
+              </p>
             </header>
 
             <div className="web-traffic-layout">
@@ -518,12 +536,11 @@ const AnalyticsDashboard: React.FC = () => {
         {activeTab === 'googleAds' && (
           <section className="card">
             <header className="card-header">
-              <h2 className="card-title">{`Google Ads For ${activeClient.name}`}</h2>
+              <h2 className="card-title">Google Ads &amp; Paid Performance</h2>
               <p className="card-subtitle">
-                In February, we&apos;ll enhance online presence, improve website
-                functionality, connect with customers through Valentine&apos;s Day
-                promotions on social media, and run targeted ads focused on the
-                Beckley area.
+                We continuously manage and optimize your Google Ad campaigns, target
+                the right audience, monitor spend efficiency, and refine strategies
+                to maximize clicks, conversions, and return on your ad investment.
               </p>
             </header>
 
@@ -543,12 +560,11 @@ const AnalyticsDashboard: React.FC = () => {
         {activeTab === 'googleBusiness' && (
           <section className="card">
             <header className="card-header">
-              <h2 className="card-title">{`Google Ads For ${activeClient.name}`}</h2>
+              <h2 className="card-title">Google Business Profile &amp; Local Presence</h2>
               <p className="card-subtitle">
-                In February, we&apos;ll enhance online presence, improve website
-                functionality, connect with customers through Valentine&apos;s Day
-                promotions on social media, and run targeted ads focused on the
-                Beckley area.
+                Your Google Business Profile is often the first impression
+                customers get. We keep it sharp, accurate, and active - so when
+                someone finds you, they have every reason to choose you.
               </p>
             </header>
 
@@ -984,19 +1000,19 @@ const AnalyticsDashboard: React.FC = () => {
                 <div className="package-card">
                   <h3 className="package-name">Essentials</h3>
                   <p className="package-subtitle">
-                    Free Trail Insights Art Plan
-                    <br />
-                    Ideal for beginner artists.
+                    Professional Business Website
                   </p>
                   <div className="package-price-row">
                     <span className="package-price">$499</span>
                     <span className="package-period">per month</span>
                   </div>
                   <ul className="package-features">
-                    <li>Number of pages: 4</li>
-                    <li>Google Site Kit</li>
-                    <li>Write Copy Content: up to 1000 words</li>
-                    <li>Setting up Domain &amp; Hosting</li>
+                    <li>Professional Business Website</li>
+                    <li>Core UI/UX Design</li>
+                    <li>Domain &amp; Hosting Setup</li>
+                    <li>Foundational SEO</li>
+                    <li>Basic Keyword Research</li>
+                    <li>Analytics Integration</li>
                   </ul>
                   <button className="package-button">Add To Cart</button>
                 </div>
@@ -1004,19 +1020,22 @@ const AnalyticsDashboard: React.FC = () => {
                 <div className="package-card">
                   <h3 className="package-name">Foundation</h3>
                   <p className="package-subtitle">
-                    Free Trail Insights Art Plan
-                    <br />
-                    Ideal for beginner artists.
+                    Professional Business Website
                   </p>
                   <div className="package-price-row">
                     <span className="package-price">$799</span>
                     <span className="package-period">per month</span>
                   </div>
                   <ul className="package-features">
-                    <li>Number of pages: 6</li>
-                    <li>Google Site Kit</li>
-                    <li>Write Copy Content: up to 2000 words</li>
-                    <li>Setting up Domain &amp; Hosting</li>
+                    <li>Professional Business Website</li>
+                    <li>Enhanced UI/UX Design</li>
+                    <li>Domain &amp; Hosting Setup</li>
+                    <li>Foundational SEO</li>
+                    <li>Strategic Keyword Research</li>
+                    <li>Advanced On-Page SEO</li>
+                    <li>Competitor Analysis</li>
+                    <li>Lead Capture System</li>
+                    <li>Analytics &amp; Tracking Setup</li>
                   </ul>
                   <button className="package-button">Add To Cart</button>
                 </div>
@@ -1024,21 +1043,24 @@ const AnalyticsDashboard: React.FC = () => {
                 <div className="package-card">
                   <h3 className="package-name">Evolution</h3>
                   <p className="package-subtitle">
-                    Free Trail Insights Art Plan
-                    <br />
-                    Ideal for beginner artists.
+                    Professional Business Website
                   </p>
                   <div className="package-price-row">
                     <span className="package-price">$999</span>
                     <span className="package-period">per month</span>
                   </div>
                   <ul className="package-features">
-                    <li>Number of pages: 10</li>
-                    <li>Google Site Kit</li>
-                    <li>Write Copy Content: up to 3000 words</li>
-                    <li>Setting up Domain &amp; Hosting</li>
-                    <li>On-site SEO for Content and Tags</li>
-                    <li>Blog Uploads</li>
+                    <li>Professional Business Website</li>
+                    <li>Conversion-Focused UI/UX</li>
+                    <li>Domain &amp; Hosting Optimization</li>
+                    <li>Complete SEO Strategy</li>
+                    <li>Advanced Keyword Mapping</li>
+                    <li>Technical SEO Optimization</li>
+                    <li>Competitor &amp; Market Analysis</li>
+                    <li>Lead Generation System</li>
+                    <li>Local SEO Setup</li>
+                    <li>Conversion Tracking</li>
+                    <li>Monthly Performance Review</li>
                   </ul>
                   <button className="package-button">Add To Cart</button>
                 </div>
@@ -1046,24 +1068,25 @@ const AnalyticsDashboard: React.FC = () => {
                 <div className="package-card">
                   <h3 className="package-name">Luxe</h3>
                   <p className="package-subtitle">
-                    Free Trail Insights Art Plan
-                    <br />
-                    Ideal for beginner artists.
+                    Fully Customized Business Website
                   </p>
                   <div className="package-price-row">
                     <span className="package-price">$1499</span>
                     <span className="package-period">per month</span>
                   </div>
                   <ul className="package-features">
-                    <li>Number of pages: 14</li>
-                    <li>Google Site Kit</li>
-                    <li>Write Copy Content: up to 4000 words</li>
-                    <li>Setting up Domain &amp; Hosting</li>
-                    <li>On-site SEO for Content and Tags</li>
-                    <li>Blog Uploads</li>
-                    <li>Custom UI/UX Designs</li>
-                    <li>Plugin Integration</li>
-                    <li>Revisions</li>
+                    <li>Fully Customized Business Website</li>
+                    <li>Advanced Conversion UI/UX</li>
+                    <li>Premium Hosting Optimization</li>
+                    <li>Advanced SEO Execution &amp; Monitoring</li>
+                    <li>Comprehensive Keyword Strategy</li>
+                    <li>Technical &amp; Structured Data SEO</li>
+                    <li>Market Expansion Strategy</li>
+                    <li>CRM &amp; Automation Integration</li>
+                    <li>Funnel &amp; Revenue Optimization</li>
+                    <li>Advanced Analytics &amp; Reporting</li>
+                    <li>Ongoing Growth Strategy</li>
+                    <li>Priority Support</li>
                   </ul>
                   <button className="package-button">Add To Cart</button>
                 </div>

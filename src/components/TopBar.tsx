@@ -20,27 +20,29 @@ const TopBar: React.FC<TopBarProps> = ({
   const showCheckoutFlow = showCheckout || showThankYou;
 
   let title: string;
+  let subtitle: string;
   if (showCheckoutFlow) {
     title = 'CHECKOUT';
+    subtitle = 'Shipping & Billing';
   } else if (activeSection === 'analytics') {
     title = 'Analytics';
+    subtitle = 'View Recent Schemas Below, See All in Schema History.';
   } else if (activeSection === 'audit') {
     title = 'Audit Report';
+    subtitle = 'View Recent Schemas Below, See All in Schema History.';
   } else if (activeSection === 'packages') {
     title = 'Packages';
+    subtitle = 'Choose the plan that fits your business and start growing today.';
   } else {
     title = 'Account';
+    subtitle = 'Manage your subscription, update your details, and keep everything in one place.';
   }
 
   return (
     <header className="top-bar">
       <div>
         <h1 className="page-title">{title}</h1>
-        <p className="page-subtitle">
-          {showCheckoutFlow
-            ? 'Shipping & Billing'
-            : 'View Recent Schemas Below, See All in Schema History.'}
-        </p>
+        <p className="page-subtitle">{subtitle}</p>
       </div>
       {showCheckoutFlow ? (
         <button className="cart-button" type="button" onClick={onBackToDashboards}>
@@ -56,5 +58,3 @@ const TopBar: React.FC<TopBarProps> = ({
 };
 
 export default TopBar;
-
-

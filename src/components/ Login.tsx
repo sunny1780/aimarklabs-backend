@@ -31,6 +31,7 @@ const Login: React.FC<LoginProps> = ({ onGoToSignUp, onLoginSuccess }) => {
       }
       if (typeof window !== 'undefined') {
         localStorage.setItem('dashboard_active_client_slug', dashboardUser.clientSlug);
+        localStorage.setItem('dashboard_active_email', username);
       }
       onLoginSuccess?.(dashboardUser.destination);
       return;
@@ -39,6 +40,9 @@ const Login: React.FC<LoginProps> = ({ onGoToSignUp, onLoginSuccess }) => {
       if (password !== ADMIN_PASSWORD) {
         setError('Invalid username or password.');
         return;
+      }
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('dashboard_active_email', username);
       }
       onLoginSuccess?.('/admin');
       return;
@@ -51,6 +55,9 @@ const Login: React.FC<LoginProps> = ({ onGoToSignUp, onLoginSuccess }) => {
     const destination = user.clientSlug
       ? `/admin/client/${user.clientSlug}`
       : '/dashboard';
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('dashboard_active_email', username);
+    }
     onLoginSuccess?.(destination);
   };
 
@@ -92,10 +99,9 @@ const Login: React.FC<LoginProps> = ({ onGoToSignUp, onLoginSuccess }) => {
         {/* Bottom Content - Paragraph and Pagination Dots */}
         <div className="absolute bottom-20 left-0 right-0 px-16 max-w-xl mx-auto">
           <p className="text-gray-300 text-sm leading-relaxed mb-6 text-justify">
-            Pellentibus est feugiat sed ut dui eget eget. Arcu arnet tempor tristique nunc lacus 
-            ullamcorper denean denean. Id nisl est consectetur et. Eu viverra dignissim sit 
-            posuere. Urna lectus viverra pretium aliquam morbi ut egestas elit consequat. 
-            Odio laoreet cursus consectetur platea interdum nullam.
+            Transform your brand&apos;s digital presence with intelligent marketing automation.
+            We combine AI-driven insights with creative strategy to deliver measurable growth
+            for your business in every channel.
           </p>
           
           {/* Pagination Dots */}
@@ -117,6 +123,7 @@ const Login: React.FC<LoginProps> = ({ onGoToSignUp, onLoginSuccess }) => {
             alt="AI Mark Labs Logo"
             className="w-35 h-10"
           />
+          {/*
           <button
             type="button"
             onClick={onGoToSignUp}
@@ -124,6 +131,7 @@ const Login: React.FC<LoginProps> = ({ onGoToSignUp, onLoginSuccess }) => {
           >
             Register
           </button>
+          */}
         </div>
         
         {/* Login Form Container */}
@@ -135,7 +143,7 @@ const Login: React.FC<LoginProps> = ({ onGoToSignUp, onLoginSuccess }) => {
                 Welcome to AI Mark Labs
               </h2>
               <p className="text-gray-500 text-sm">
-                Login to continue the app.
+                Login to access your marketing dashboard and campaigns.
               </p>
             </div>
 
@@ -199,6 +207,7 @@ const Login: React.FC<LoginProps> = ({ onGoToSignUp, onLoginSuccess }) => {
               </button>
 
               {/* Forget Links */}
+              {/*
               <div className="flex justify-center items-center gap-3 text-sm pt-2">
                 <a href="/" className="text-gray-600 hover:text-gray-900 transition">
                   Forget Username
@@ -208,6 +217,7 @@ const Login: React.FC<LoginProps> = ({ onGoToSignUp, onLoginSuccess }) => {
                   Forget Pin
                 </a>
               </div>
+              */}
             </form>
 
             {/* Footer Text */}

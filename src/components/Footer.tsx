@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
   const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [subscribeMessage, setSubscribeMessage] = useState<string | null>(null);
 
   const handleInternalNavClick = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -29,10 +32,37 @@ const Footer: React.FC = () => {
     { name: 'LinkedIn', iconSrc: '/images/LinkedIn.svg', href: 'https://www.linkedin.com/company/ai-mark-labs/' },
   ];
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle subscription logic here
-    setEmail('');
+    const normalizedEmail = email.trim();
+    if (!normalizedEmail) return;
+
+    setIsSubmitting(true);
+    setSubscribeMessage(null);
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/newsletter/subscribe`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: normalizedEmail,
+        }),
+      });
+
+      if (!response.ok) {
+        const payload = await response.json().catch(() => null);
+        throw new Error(payload?.message || 'Subscription request failed');
+      }
+
+      setEmail('');
+      setSubscribeMessage('Thanks! Your email has been submitted.');
+    } catch (error: any) {
+      setSubscribeMessage(error?.message || 'Submission failed. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -55,17 +85,22 @@ const Footer: React.FC = () => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              name="email"
               placeholder="Enter Email"
               className="flex-1 w-full sm:w-auto px-4 py-3 rounded-lg bg-white/10 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:border-[#F29335]"
               required
             />
             <button
               type="submit"
+              disabled={isSubmitting}
               className="bg-[#F29335] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#e0852a] transition-colors"
             >
-              Subscribe
+              {isSubmitting ? 'Submitting...' : 'Subscribe'}
             </button>
           </form>
+          {subscribeMessage && (
+            <p className="text-white/80 text-sm mt-3">{subscribeMessage}</p>
+          )}
         </div>
       </div>
 

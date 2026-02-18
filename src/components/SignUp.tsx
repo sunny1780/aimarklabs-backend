@@ -114,10 +114,9 @@ const SignUp: React.FC<SignUpProps> = ({ onGoToLogin, onSignUpSuccess }) => {
         {/* Bottom Content - Paragraph and Pagination Dots */}
         <div className="absolute bottom-20 left-0 right-0 px-16 max-w-xl mx-auto">
           <p className="text-gray-300 text-sm leading-relaxed mb-6 text-justify">
-            Pellentibus est feugiat sed ut dui eget eget. Arcu arnet tempor tristique nunc lacus 
-            ullamcorper denean denean. Id nisl est consectetur et. Eu viverra dignissim sit 
-            posuere. Urna lectus viverra pretium aliquam morbi ut egestas elit consequat. 
-            Odio laoreet cursus consectetur platea interdum nullam.
+            Transform your brand&apos;s digital presence with intelligent marketing automation.
+            We combine AI-driven insights with creative strategy to deliver measurable growth
+            for your business in every channel.
           </p>
           
           {/* Pagination Dots */}

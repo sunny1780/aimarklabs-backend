@@ -14,9 +14,12 @@ const Servicehero = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col-reverse md:flex-row items-center gap-8 sm:gap-12">
           {/* LEFT CONTENT */}
           <div className="w-full md:w-1/2 service-hero-left">
-            <span className="inline-block bg-[#E8ECFF] text-[#4B5CFF] text-sm px-4 py-1 rounded-full mb-4">
-             Creative
-            </span>
+<span className="inline-block bg-[#E8ECFF] text-[#272D55] text-[14px] px-4 py-1 rounded-[8px] mb-4 border-[8px] border-[#E8ECFF] font-medium font-manrope">
+  Creative
+</span>
+
+
+
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-4">
               <TextType

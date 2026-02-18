@@ -8,6 +8,28 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ activeSection, onChangeSection }) => {
+  const activeEmail =
+    typeof window !== 'undefined' ? localStorage.getItem('dashboard_active_email') || '' : '';
+  const activeClientSlug =
+    typeof window !== 'undefined' ? localStorage.getItem('dashboard_active_client_slug') || '' : '';
+
+  const clientNameBySlug: Record<string, string> = {
+    'little-sicily': 'Little Sicily',
+    'cash-for-gold': 'Cash For Gold Beckley',
+    'karachi-bbq': 'Karachi BBQ',
+    'evolo-ai': 'Evolo AI',
+  };
+
+  const displayName = clientNameBySlug[activeClientSlug]
+    || (activeEmail.includes('@') ? activeEmail.split('@')[0] : activeEmail)
+    || 'Guest User';
+  const displaySubtext = activeEmail || 'Client Account';
+  const avatarLetter = displayName.charAt(0).toUpperCase() || 'U';
+
+  const canViewAuditReport =
+    typeof window !== 'undefined' &&
+    localStorage.getItem('dashboard_active_email') === 'karachibbq@gmail.com';
+
   return (
     <aside className="sidebar">
       <div className="sidebar-brand">
@@ -27,14 +49,16 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, onChangeSection }) => 
           <span className="nav-dot" />
           <span>Analytics</span>
         </button>
-        <button
-          type="button"
-          className={`nav-item ${activeSection === 'audit' ? 'active' : ''}`}
-          onClick={() => onChangeSection('audit')}
-        >
-          <span className="nav-dot" />
-          <span>Audit Report</span>
-        </button>
+        {canViewAuditReport ? (
+          <button
+            type="button"
+            className={`nav-item ${activeSection === 'audit' ? 'active' : ''}`}
+            onClick={() => onChangeSection('audit')}
+          >
+            <span className="nav-dot" />
+            <span>Audit Report</span>
+          </button>
+        ) : null}
         <button
           type="button"
           className={`nav-item ${activeSection === 'packages' ? 'active' : ''}`}
@@ -54,10 +78,10 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, onChangeSection }) => 
       </nav>
 
       <div className="sidebar-user">
-        <div className="user-avatar">W</div>
+        <div className="user-avatar">{avatarLetter}</div>
         <div className="user-info">
-          <div className="user-name">Wade Warren</div>
-          <div className="user-role">Engineer</div>
+          <div className="user-name">{displayName}</div>
+          <div className="user-role">{displaySubtext}</div>
         </div>
       </div>
     </aside>
@@ -65,5 +89,3 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, onChangeSection }) => 
 };
 
 export default Sidebar;
-
-
