@@ -49,7 +49,7 @@ const Aboutthree = () => {
             }}
           >
             {(
-              'we believe that every challenge hides a chance to grow stronger. Our mission is to transform complex business problems into strategic advantages through innovation, insight, and intelligent execution.'
+              'Our philosophy centers on transforming your toughest marketing challenges into competitive advantages using data-driven strategies, creative firepower, and AI technology that delivers proven results.'
             )
               .split(' ')
               .map((word, index) => (

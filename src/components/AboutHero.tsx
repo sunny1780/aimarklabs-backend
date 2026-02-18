@@ -31,9 +31,9 @@ const AboutHero: React.FC = () => {
             </span>
             <span className="block mt-2 inline-flex flex-wrap items-center justify-center gap-2 about-hero-row">
               <img
-                src="/images/people.png"
+                src="/images/venga.png"
                 alt=""
-                className="w-[170px] sm:w-auto h-auto max-w-full rounded-2xl flex-shrink-0 align-middle about-hero-people"
+                className="h-auto max-w-full flex-shrink-0 align-middle rounded-2xl about-hero-people"
               />
               <span>Our</span>
               <span>Strategy.</span>
@@ -42,7 +42,7 @@ const AboutHero: React.FC = () => {
 
           {/* Subheading */}
           <p className="text-gray-600 text-sm sm:text-lg lg:text-xl max-w-2xl mx-auto mb-7 sm:mb-8 leading-relaxed">
-            We help businesses build powerful online identities through tailored strategies, creative content, and data-driven campaigns.
+          At AIMarkLabs, growth isn’t accidental; it’s engineered.? By combining artificial intelligence, deep market insight, and creative execution, we help brands scale with precision, clarity, and measurable impact.
           </p>
 
           {/* CTA Button */}
@@ -78,8 +78,8 @@ const AboutHero: React.FC = () => {
           }
 
           .about-hero-people {
+            display: block;
             box-shadow: 0 25px 50px rgba(15, 23, 42, 0.18);
-            animation: aboutHeroFloat 7s ease-in-out infinite;
           }
 
           .about-hero-row span {

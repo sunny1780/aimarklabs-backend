@@ -1,40 +1,39 @@
 import React from 'react';
-import { FaUsers, FaPalette, FaChartLine, FaGlobe } from 'react-icons/fa6';
 
 const Abouttwo = () => {
   const sections = [
     {
       bg: '#F7F9FB',
-      icon: FaUsers,
+      icon: '/images/21.svg',
       title: 'Creative Team',
-      description: 'Skilled experts in strategy & content.',
+      description: 'Brilliant minds crafting campaigns that convert.',
       textColor: 'text-gray-900',
       descColor: 'text-gray-600',
       iconColor: 'text-gray-800',
     },
     {
       bg: '#F29335',
-      icon: FaPalette,
-      title: 'Unique Ideas',
-      description: 'Fresh concepts tailored to your brand.',
+      icon: '/images/22.svg',
+      title: 'Vision Based',
+      description: 'Future-focused strategies that anticipate market trends.',
       textColor: 'text-white',
       descColor: 'text-white/90',
       iconColor: 'text-white',
     },
     {
       bg: '#F7F9FB',
-      icon: FaChartLine,
-      title: 'Proven Growth',
-      description: 'Data-backed campaigns with real impact.',
+      icon: '/images/23.svg',
+      title: 'Design Growth',
+      description: 'Beautiful designs engineered to drive revenue.',
       textColor: 'text-gray-900',
       descColor: 'text-gray-600',
       iconColor: 'text-gray-800',
     },
     {
       bg: '#B3BDEF',
-      icon: FaGlobe,
-      title: 'Global Reach',
-      description: 'Strategies that expand your audience.',
+      icon: '/images/24.svg',
+      title: 'AI-Feedback',
+      description: 'Smart algorithms optimizing your ROI 24/7.',
       textColor: 'text-gray-900',
       descColor: 'text-gray-800',
       iconColor: 'text-gray-800',
@@ -47,9 +46,7 @@ const Abouttwo = () => {
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
         style={{ fontFamily: "'Manrope', 'Segoe UI', sans-serif" }}
       >
-        {sections.map((section, index) => {
-          const IconComponent = section.icon as React.ComponentType<React.SVGProps<SVGSVGElement>>;
-          return (
+        {sections.map((section, index) => (
             <div
               key={index}
               className="about-two-card group relative flex flex-col items-center justify-center text-center p-8 lg:p-10 min-h-[280px] transition-all duration-300 hover:opacity-100"
@@ -64,7 +61,7 @@ const Abouttwo = () => {
               </div>
 
               <div className={`about-two-icon mb-4 ${section.iconColor || 'text-gray-800'}`}>
-                <IconComponent className="w-12 h-12" />
+                <img src={section.icon} alt="" className="w-12 h-12 object-contain" />
               </div>
               <h3 className={`font-bold text-lg lg:text-xl mb-2 ${section.textColor}`}>
                 {section.title}
@@ -73,8 +70,7 @@ const Abouttwo = () => {
                 {section.description}
               </p>
             </div>
-          );
-        })}
+          ))}
       </section>
 
       {/* Local styles for professional motion */}

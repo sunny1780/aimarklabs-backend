@@ -1,8 +1,10 @@
 import React from 'react';
 
 const AboutFour: React.FC = () => {
-  const content =
-    'we believe that every challenge hides a chance to grow stronger. Our mission is to transform complex business problems into strategic advantages through innovation, insight, and intelligent execution.';
+  const missionContent =
+    "Our mission is to combine AI precision with human creativity to build campaigns that don't just perform, they print money while you sleep.";
+  const visionContent =
+    "Our vision is building an agency that doesn't follow trends but creates them, setting new benchmarks for what's possible in marketing.";
 
   return (
     <>
@@ -20,11 +22,11 @@ const AboutFour: React.FC = () => {
               <div className="relative pt-4">
                 <div className="about-four-card bg-[#F7F9FB] border border-[#F29335]/50 rounded-lg p-6 pr-8 pt-12">
                   <p className="text-gray-800 text-base sm:text-lg leading-relaxed">
-                    {content}
+                    {missionContent}
                   </p>
                 </div>
-                <div className="about-four-badge absolute -top-2 -right-2 w-12 h-12 bg-[#F29335] rounded-lg flex items-center justify-center shadow-md p-2">
-                  <img src="/images/comma.svg" alt="" className="w-full h-full object-contain" />
+                <div className="about-four-badge absolute -top-2 -right-2 w-12 h-12 bg-[#F29335] rounded-lg flex items-center justify-center shadow-md">
+                  <span className="text-white font-bold text-lg">99</span>
                 </div>
               </div>
             </div>
@@ -37,11 +39,11 @@ const AboutFour: React.FC = () => {
               <div className="relative pt-4">
                 <div className="about-four-card bg-[#F7F9FB] border border-[#F29335]/50 rounded-lg p-6 pr-8 pt-12">
                   <p className="text-gray-800 text-base sm:text-lg leading-relaxed">
-                    {content}
+                    {visionContent}
                   </p>
                 </div>
-                <div className="about-four-badge absolute -top-2 -right-2 w-12 h-12 bg-[#F29335] rounded-lg flex items-center justify-center shadow-md p-2">
-                  <img src="/images/comma.svg" alt="" className="w-full h-full object-contain" />
+                <div className="about-four-badge absolute -top-2 -right-2 w-12 h-12 bg-[#F29335] rounded-lg flex items-center justify-center shadow-md">
+                  <span className="text-white font-bold text-lg">99</span>
                 </div>
               </div>
             </div>
