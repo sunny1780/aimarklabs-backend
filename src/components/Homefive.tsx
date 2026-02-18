@@ -32,7 +32,15 @@ const Homefive: React.FC = () => {
         </div>
 
         {/* Testimonial Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div
+          className="relative rounded-3xl py-8 px-4 sm:px-6 bg-no-repeat"
+          style={{
+            backgroundImage: "url('/images/bbgg.png')",
+            backgroundSize: '60%',
+            backgroundPosition: 'center 70%'
+          }}
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
           {/* Card 1 */}
           <div className="wave-card wave-delay-0 bg-gradient-to-br from-[#F2F2F4]/80 via-[#F2F2F4]/40 to-[#F2F2F4]/20 backdrop-blur-xl rounded-3xl px-8 py-8 border border-[#656565]/10 shadow-lg hover:shadow-xl transition-shadow">
             <div className="flex items-start gap-4 mb-6">
@@ -117,6 +125,7 @@ const Homefive: React.FC = () => {
             <p className="text-gray-700 leading-relaxed text-base">
              "Exceptional digital marketing services by Al Mark Labs. Saw a significant increase in traffic and engagement. I highly recommend their approach."
              </p>
+          </div>
           </div>
         </div>
       </div>
