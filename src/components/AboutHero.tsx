@@ -16,7 +16,7 @@ const AboutHero: React.FC = () => {
           />
         </div>
 
-        <div className="relative z-10 max-w-5xl mx-auto text-center about-hero-content px-1">
+        <div className="relative z-10 max-w-5xl mx-auto text-center about-hero-content px-4 sm:px-6 lg:px-8">
           {/* Main Heading */}
           <h1
             className="w-full max-w-[900px] mx-auto text-center text-[40px] sm:text-[56px] md:text-[72px] xl:text-[80px] font-bold text-gray-900 leading-[1] tracking-[0.005em] mb-5 sm:mb-6"
@@ -32,7 +32,7 @@ const AboutHero: React.FC = () => {
                 />
               </span>
             </span>
-            <span className="block mt-2 flex flex-nowrap items-center justify-center gap-2 about-hero-row">
+            <span className="block mt-2 flex flex-wrap sm:flex-nowrap items-center justify-center gap-2 about-hero-row">
               <img
                 src="/images/venga.png"
                 alt=""
