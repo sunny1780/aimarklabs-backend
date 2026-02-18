@@ -57,7 +57,7 @@ const Homeseven: React.FC = () => {
           <img
             src="/images/two.png"
             alt=""
-            className="h-14 sm:h-16 lg:h-[72px] xl:h-20 w-36 sm:w-40 lg:w-48 xl:w-52 rounded-full object-cover flex-shrink-0"
+            className="h-10 sm:h-12 lg:h-14 xl:h-16 w-36 sm:w-40 lg:w-48 xl:w-52 rounded-full object-cover flex-shrink-0"
           />
           <span className="text-white text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold uppercase tracking-tight">
             RIGHT PLATFORM

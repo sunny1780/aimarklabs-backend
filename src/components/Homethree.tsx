@@ -113,7 +113,7 @@ const Homethree: React.FC = () => {
           <div className="relative flex flex-col gap-2.5 rounded-[28px] p-4 sm:p-5 w-full lg:w-[315px] shrink-0 h-[450px]">
             {/* Top pill "Our Services" */}
        <div
-            className="inline-flex items-center justify-center px-5 py-3 rounded-2xl bg-[#D7DDFC] text-[#272D55] text-[14px] font-medium w-fit"
+            className="inline-flex items-center justify-center px-5 py-3 rounded-lg bg-[#B3BDEF] text-[#272D55] text-[14px] font-medium w-fit"
             style={{ fontFamily: "'Manrope', 'Segoe UI', sans-serif" }}
           >
             Our Services

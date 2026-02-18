@@ -94,7 +94,7 @@ const Homefour: React.FC = () => {
             <div className="inline-flex items-center px-4 py-3 mb-4 rounded-md bg-[#D7DDFC] text-[#272D55] text-xs font-medium">
               Experience
             </div>
-            <div className="text-[#F97316] text-[64px] sm:text-[92px] lg:text-[128px] font-extrabold leading-none mb-6">
+            <div className="text-[#E68826] text-[64px] sm:text-[92px] lg:text-[128px] font-extrabold leading-none mb-6">
               {experience}y+
             </div>
             <p className="text-gray-600 text-sm leading-relaxed">
@@ -107,7 +107,7 @@ const Homefour: React.FC = () => {
             <div className="inline-flex items-center px-4 py-3 mb-4 rounded-md bg-[#D7DDFC] text-[#272D55] text-xs font-medium">
               Satisfied Clients
             </div>
-            <div className="text-[#F97316] text-[64px] sm:text-[92px] lg:text-[128px] font-extrabold leading-none mb-6">
+            <div className="text-[#E68826] text-[64px] sm:text-[92px] lg:text-[128px] font-extrabold leading-none mb-6">
               {clients}+
             </div>
             <p className="text-gray-600 text-sm leading-relaxed">
@@ -120,7 +120,7 @@ const Homefour: React.FC = () => {
             <div className="inline-flex items-center px-4 py-3 mb-4 rounded-md bg-[#D7DDFC] text-[#272D55] text-xs font-medium">
               Marketing Experts
             </div>
-            <div className="text-[#F97316] text-[64px] sm:text-[92px] lg:text-[128px] font-extrabold leading-none mb-6">
+            <div className="text-[#E68826] text-[64px] sm:text-[92px] lg:text-[128px] font-extrabold leading-none mb-6">
               {experts}+
             </div>
             <p className="text-gray-600 text-sm leading-relaxed">

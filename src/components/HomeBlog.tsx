@@ -101,7 +101,7 @@ const HomeBlog: React.FC = () => {
                   className="w-full h-48 object-cover rounded-t-xl"
                 />
                 <div className="p-6 flex flex-col flex-1">
-                  <button className="bg-[#D4DAFF] text-[#514a6e] text-sm font-medium px-6 py-2 rounded-lg mb-3 uppercase tracking-wide text-center w-fit border border-[#C8C3E1]">
+                  <button className="bg-[#D4DAFF] text-[#514a6e] text-sm font-medium px-6 py-2 rounded-lg mb-3 tracking-wide text-center w-fit border border-[#C8C3E1]">
                     {card.buttonText}
                   </button>
                   <h3 className="text-lg font-bold text-gray-900 mb-0.5 min-h-[38px]">
