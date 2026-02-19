@@ -9,6 +9,8 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [activeEmail, setActiveEmail] = useState('');
+  const [displayName, setDisplayName] = useState('');
   const servicesRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -23,9 +25,39 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
     return () => document.removeEventListener('mousedown', handleOutsideClick);
   }, []);
 
+  useEffect(() => {
+    const syncUserFromStorage = () => {
+      if (typeof window === 'undefined') return;
+      const email = localStorage.getItem('dashboard_active_email') || '';
+      const slug = localStorage.getItem('dashboard_active_client_slug') || '';
+      const nameBySlug: Record<string, string> = {
+        'little-sicily': 'Little Sicily',
+        'cash-for-gold': 'Cash For Gold Beckley',
+        'karachi-bbq': 'Karachi BBQ',
+        'evolo-ai': 'Evolo AI',
+      };
+
+      const resolvedName =
+        nameBySlug[slug] ||
+        (email.includes('@') ? email.split('@')[0] : email) ||
+        '';
+
+      setActiveEmail(email);
+      setDisplayName(resolvedName);
+    };
+
+    syncUserFromStorage();
+    window.addEventListener('storage', syncUserFromStorage);
+    return () => window.removeEventListener('storage', syncUserFromStorage);
+  }, []);
+
+  const isLoggedIn = Boolean(activeEmail);
+  const profileInitial = (displayName || activeEmail).charAt(0).toUpperCase() || 'U';
+
   return (
-    <nav className="w-full px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 via-orange-50 to-white">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+    <>
+      <nav className="fixed inset-x-0 top-0 z-[1000] w-full px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 via-orange-50 to-white shadow-sm">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo Section */}
         <Link to="/" className="flex items-center" aria-label="Go to home page">
           <img
@@ -107,17 +139,30 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
 
         {/* Desktop Login */}
         <div className="hidden lg:flex items-center">
-          <button
-            onClick={onLoginClick}
-            className="bg-[#F29335] hover:bg-orange-600 text-white px-6 py-2.5 rounded-lg font-medium text-sm flex items-center gap-2 transition-colors shadow-sm"
-          >
-            <span>Login</span>
-            <img
-              src="/images/btnarow.svg"
-              alt="arrow"
-              className="w-4 h-4"
-            />
-          </button>
+          {isLoggedIn ? (
+            <div className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-3 py-2 shadow-sm">
+              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#1e2749] text-white text-sm font-semibold">
+                {profileInitial}
+              </div>
+              <div className="leading-tight">
+                <div className="text-sm font-semibold text-slate-800 max-w-[180px] truncate">
+                  {displayName || activeEmail}
+                </div>
+              </div>
+            </div>
+          ) : (
+            <button
+              onClick={onLoginClick}
+              className="bg-[#F29335] hover:bg-orange-600 text-white px-6 py-2.5 rounded-lg font-medium text-sm flex items-center gap-2 transition-colors shadow-sm"
+            >
+              <span>Login</span>
+              <img
+                src="/images/btnarow.svg"
+                alt="arrow"
+                className="w-4 h-4"
+              />
+            </button>
+          )}
         </div>
 
         {/* Mobile Toggle */}
@@ -137,47 +182,62 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
             </svg>
           )}
         </button>
-      </div>
-
-      {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden mt-3 max-w-7xl mx-auto rounded-xl border border-gray-200 bg-white shadow-sm p-3">
-          <div className="flex flex-col">
-            <Link to="/" className="px-3 py-2 text-sm text-gray-800" onClick={() => setMobileMenuOpen(false)}>Home</Link>
-            <Link to="/about" className="px-3 py-2 text-sm text-gray-800" onClick={() => setMobileMenuOpen(false)}>About Us</Link>
-            <button
-              type="button"
-              onClick={() => setMobileServicesOpen((prev) => !prev)}
-              className="px-3 py-2 text-sm text-gray-800 flex items-center justify-between"
-            >
-              Services
-              <svg className={`w-4 h-4 transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            {mobileServicesOpen && (
-              <div className="ml-2 border-l border-gray-200 pl-3">
-                <Link to="/services/creative-services" className="block px-2 py-2 text-sm text-gray-700" onClick={() => setMobileMenuOpen(false)}>Creative Services</Link>
-                <Link to="/services/branding-services" className="block px-2 py-2 text-sm text-gray-700" onClick={() => setMobileMenuOpen(false)}>Branding Services</Link>
-                <Link to="/services/development-services" className="block px-2 py-2 text-sm text-gray-700" onClick={() => setMobileMenuOpen(false)}>Development Services</Link>
-                <Link to="/services/marketing-services" className="block px-2 py-2 text-sm text-gray-700" onClick={() => setMobileMenuOpen(false)}>Marketing Services</Link>
-              </div>
-            )}
-            <Link to="/industries" className="px-3 py-2 text-sm text-gray-800" onClick={() => setMobileMenuOpen(false)}>Industries</Link>
-            {/* <Link to="/team" className="px-3 py-2 text-sm text-gray-800" onClick={() => setMobileMenuOpen(false)}>Team</Link> */}
-            <Link to="/blog" className="px-3 py-2 text-sm text-gray-800" onClick={() => setMobileMenuOpen(false)}>Blog</Link>
-            <Link to="/contact" className="px-3 py-2 text-sm text-gray-800" onClick={() => setMobileMenuOpen(false)}>Contact</Link>
-            <button
-              onClick={onLoginClick}
-              className="mt-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg font-medium text-sm flex items-center justify-center gap-2 transition-colors"
-            >
-              <span>Login</span>
-              <img src="/images/btnarow.svg" alt="arrow" className="w-4 h-4" />
-            </button>
-          </div>
         </div>
-      )}
-    </nav>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden mt-3 max-w-7xl mx-auto rounded-xl border border-gray-200 bg-white shadow-sm p-3">
+            <div className="flex flex-col">
+              <Link to="/" className="px-3 py-2 text-sm text-gray-800" onClick={() => setMobileMenuOpen(false)}>Home</Link>
+              <Link to="/about" className="px-3 py-2 text-sm text-gray-800" onClick={() => setMobileMenuOpen(false)}>About Us</Link>
+              <button
+                type="button"
+                onClick={() => setMobileServicesOpen((prev) => !prev)}
+                className="px-3 py-2 text-sm text-gray-800 flex items-center justify-between"
+              >
+                Services
+                <svg className={`w-4 h-4 transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              {mobileServicesOpen && (
+                <div className="ml-2 border-l border-gray-200 pl-3">
+                  <Link to="/services/creative-services" className="block px-2 py-2 text-sm text-gray-700" onClick={() => setMobileMenuOpen(false)}>Creative Services</Link>
+                  <Link to="/services/branding-services" className="block px-2 py-2 text-sm text-gray-700" onClick={() => setMobileMenuOpen(false)}>Branding Services</Link>
+                  <Link to="/services/development-services" className="block px-2 py-2 text-sm text-gray-700" onClick={() => setMobileMenuOpen(false)}>Development Services</Link>
+                  <Link to="/services/marketing-services" className="block px-2 py-2 text-sm text-gray-700" onClick={() => setMobileMenuOpen(false)}>Marketing Services</Link>
+                </div>
+              )}
+              <Link to="/industries" className="px-3 py-2 text-sm text-gray-800" onClick={() => setMobileMenuOpen(false)}>Industries</Link>
+              {/* <Link to="/team" className="px-3 py-2 text-sm text-gray-800" onClick={() => setMobileMenuOpen(false)}>Team</Link> */}
+              <Link to="/blog" className="px-3 py-2 text-sm text-gray-800" onClick={() => setMobileMenuOpen(false)}>Blog</Link>
+              <Link to="/contact" className="px-3 py-2 text-sm text-gray-800" onClick={() => setMobileMenuOpen(false)}>Contact</Link>
+              {isLoggedIn ? (
+                <div className="mt-2 flex items-center gap-3 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#1e2749] text-white text-xs font-semibold">
+                    {profileInitial}
+                  </div>
+                  <div className="min-w-0">
+                    <div className="text-sm font-semibold text-slate-800 truncate">
+                      {displayName || activeEmail}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <button
+                  onClick={onLoginClick}
+                  className="mt-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg font-medium text-sm flex items-center justify-center gap-2 transition-colors"
+                >
+                  <span>Login</span>
+                  <img src="/images/btnarow.svg" alt="arrow" className="w-4 h-4" />
+                </button>
+              )}
+            </div>
+          </div>
+        )}
+      </nav>
+      <div className="h-[84px] sm:h-[88px]" aria-hidden />
+    </>
   );
 };
 

@@ -197,7 +197,7 @@ const Footer: React.FC = () => {
 
       {/* Copyright Bottom */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 py-5">
-        <p className="text-white/60 text-sm">© 2025 AlMarkLabs. All rights reserved.</p>
+        <p className="text-white/60 text-sm">© 2025 Al Mark Labs. All rights reserved.</p>
       </div>
     </footer>
   );

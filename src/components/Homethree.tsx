@@ -36,6 +36,12 @@ const Homethree: React.FC = () => {
       </div>
 
       <div className="relative max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[minmax(0,1.4fr)_minmax(320px,420px)] items-center gap-12 lg:gap-16 xl:gap-20">
+        <img
+          src="/images/steric.png"
+          alt="Star accent"
+          className="sm:hidden absolute right-3 top-1/2 -translate-y-1/2 w-12 h-12 object-contain opacity-95"
+        />
+
         {/* Left text block */}
         <div className="min-w-0 w-full text-left text-[#9CA9FF] order-1">
           <Link
@@ -109,7 +115,7 @@ const Homethree: React.FC = () => {
         </div>
 
         {/* Right card block */}
-        <div className="relative w-full max-w-[380px] mx-auto lg:mx-0 lg:max-w-none flex justify-center lg:justify-end lg:translate-x-20 xl:translate-x-28 lg:-translate-y-16 order-2">
+        <div className="hidden sm:flex relative w-full max-w-[380px] mx-auto lg:mx-0 lg:max-w-none justify-center lg:justify-end lg:translate-x-20 xl:translate-x-28 lg:-translate-y-16 order-2">
           <div className="relative flex flex-col gap-2.5 rounded-[28px] p-4 sm:p-5 w-full lg:w-[315px] shrink-0 h-[450px]">
             {/* Top pill "Our Services" */}
        <div
