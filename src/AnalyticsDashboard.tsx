@@ -264,7 +264,7 @@ const AnalyticsDashboard: React.FC = () => {
                   <div>
                     <div className="cart-item-title">Revenue Rocket</div>
                     <div className="cart-item-subtitle">
-                      Free Trail Insights Art Plan Ideal for beginner artists.
+                      {/* Free Trail Insights Art Plan Ideal for beginner artists. */}
                     </div>
                   </div>
                   <button type="button" className="cart-item-remove">
@@ -276,7 +276,7 @@ const AnalyticsDashboard: React.FC = () => {
                   <div>
                     <div className="cart-item-title">Revenue Rocket</div>
                     <div className="cart-item-subtitle">
-                      Free Trail Insights Art Plan Ideal for beginner artists.
+                      {/* Free Trail Insights Art Plan Ideal for beginner artists. */}
                     </div>
                   </div>
                   <button type="button" className="cart-item-remove">
@@ -708,9 +708,9 @@ const AnalyticsDashboard: React.FC = () => {
                 <div className="package-card">
                   <h3 className="package-name">Revenue Rocket</h3>
                   <p className="package-subtitle">
-                    Free Trail Insights Art Plan
+                    {/* Free Trail Insights Art Plan */}
                     <br />
-                    Ideal for beginner artists.
+                    {/* Ideal for beginner artists. */}
                   </p>
                   <div className="package-price-row">
                     <span className="package-price">$349</span>
@@ -735,9 +735,9 @@ const AnalyticsDashboard: React.FC = () => {
                 <div className="package-card">
                   <h3 className="package-name">Profit Prodigy</h3>
                   <p className="package-subtitle">
-                    Free Trail Insights Art Plan
+                    {/* Free Trail Insights Art Plan */}
                     <br />
-                    Ideal for beginner artists.
+                    {/* Ideal for beginner artists. */}
                   </p>
                   <div className="package-price-row">
                     <span className="package-price">$799</span>
@@ -762,9 +762,9 @@ const AnalyticsDashboard: React.FC = () => {
                 <div className="package-card">
                   <h3 className="package-name">Growth Gator</h3>
                   <p className="package-subtitle">
-                    Free Trail Insights Art Plan
+                    {/* Free Trail Insights Art Plan */}
                     <br />
-                    Ideal for beginner artists.
+                    {/* Ideal for beginner artists. */}
                   </p>
                   <div className="package-price-row">
                     <span className="package-price">$999</span>
@@ -789,9 +789,9 @@ const AnalyticsDashboard: React.FC = () => {
                 <div className="package-card">
                   <h3 className="package-name">Domination Decoder</h3>
                   <p className="package-subtitle">
-                    Free Trail Insights Art Plan
+                    {/* Free Trail Insights Art Plan */}
                     <br />
-                    Ideal for beginner artists.
+                    {/* Ideal for beginner artists. */}
                   </p>
                   <div className="package-price-row">
                     <span className="package-price">$1499</span>
@@ -820,9 +820,9 @@ const AnalyticsDashboard: React.FC = () => {
                 <div className="package-card">
                   <h3 className="package-name">Essentials</h3>
                   <p className="package-subtitle">
-                    Free Trail Insights Art Plan
+                    {/* Free Trail Insights Art Plan */}
                     <br />
-                    Ideal for beginner artists.
+                    {/* Ideal for beginner artists. */}
                   </p>
                   <div className="package-price-row">
                     <span className="package-price">$299</span>
@@ -841,9 +841,9 @@ const AnalyticsDashboard: React.FC = () => {
                 <div className="package-card">
                   <h3 className="package-name">Foundation</h3>
                   <p className="package-subtitle">
-                    Free Trail Insights Art Plan
+                    {/* Free Trail Insights Art Plan */}
                     <br />
-                    Ideal for beginner artists.
+                    {/* Ideal for beginner artists. */}
                   </p>
                   <div className="package-price-row">
                     <span className="package-price">$799</span>
@@ -862,9 +862,9 @@ const AnalyticsDashboard: React.FC = () => {
                 <div className="package-card">
                   <h3 className="package-name">Evolution</h3>
                   <p className="package-subtitle">
-                    Free Trail Insights Art Plan
+                    {/* Free Trail Insights Art Plan */}
                     <br />
-                    Ideal for beginner artists.
+                    {/* Ideal for beginner artists. */}
                   </p>
                   <div className="package-price-row">
                     <span className="package-price">$1199</span>
@@ -883,9 +883,9 @@ const AnalyticsDashboard: React.FC = () => {
                 <div className="package-card">
                   <h3 className="package-name">Luxe</h3>
                   <p className="package-subtitle">
-                    Free Trail Insights Art Plan
+                    {/* Free Trail Insights Art Plan */}
                     <br />
-                    Ideal for beginner artists.
+                    {/* Ideal for beginner artists. */}
                   </p>
                   <div className="package-price-row">
                     <span className="package-price">$2299</span>
@@ -908,9 +908,9 @@ const AnalyticsDashboard: React.FC = () => {
                 <div className="package-card">
                   <h3 className="package-name">Essentials</h3>
                   <p className="package-subtitle">
-                    Free Trail Insights Art Plan
+                    {/* Free Trail Insights Art Plan */}
                     <br />
-                    Ideal for beginner artists.
+                    {/* Ideal for beginner artists. */}
                   </p>
                   <div className="package-price-row">
                     <span className="package-price">$149</span>
@@ -926,9 +926,9 @@ const AnalyticsDashboard: React.FC = () => {
                 <div className="package-card">
                   <h3 className="package-name">Foundation</h3>
                   <p className="package-subtitle">
-                    Free Trail Insights Art Plan
+                    {/* Free Trail Insights Art Plan */}
                     <br />
-                    Ideal for beginner artists.
+                    {/* Ideal for beginner artists. */}
                   </p>
                   <div className="package-price-row">
                     <span className="package-price">$299</span>
@@ -948,9 +948,9 @@ const AnalyticsDashboard: React.FC = () => {
                 <div className="package-card">
                   <h3 className="package-name">Evolution</h3>
                   <p className="package-subtitle">
-                    Free Trail Insights Art Plan
+                    {/* Free Trail Insights Art Plan */}
                     <br />
-                    Ideal for beginner artists.
+                    {/* Ideal for beginner artists. */}
                   </p>
                   <div className="package-price-row">
                     <span className="package-price">$499</span>
@@ -974,9 +974,9 @@ const AnalyticsDashboard: React.FC = () => {
                 <div className="package-card">
                   <h3 className="package-name">Luxe</h3>
                   <p className="package-subtitle">
-                    Free Trail Insights Art Plan
+                    {/* Free Trail Insights Art Plan */}
                     <br />
-                    Ideal for beginner artists.
+                    {/* Ideal for beginner artists. */}
                   </p>
                   <div className="package-price-row">
                     <span className="package-price">$599</span>
@@ -1110,9 +1110,9 @@ const AnalyticsDashboard: React.FC = () => {
                 <div className="package-card">
                   <h3 className="package-name">Essentials</h3>
                   <p className="package-subtitle">
-                    Free Trail Insights Art Plan
+                    {/* Free Trail Insights Art Plan */}
                     <br />
-                    Ideal for beginner artists.
+                    {/* Ideal for beginner artists. */}
                   </p>
                   <div className="package-price-row">
                     <span className="package-price">$1999</span>
@@ -1132,9 +1132,9 @@ const AnalyticsDashboard: React.FC = () => {
                 <div className="package-card">
                   <h3 className="package-name">Foundation</h3>
                   <p className="package-subtitle">
-                    Free Trail Insights Art Plan
+                    {/* Free Trail Insights Art Plan */}
                     <br />
-                    Ideal for beginner artists.
+                    {/* Ideal for beginner artists. */}
                   </p>
                   <div className="package-price-row">
                     <span className="package-price">$2999</span>
@@ -1154,9 +1154,9 @@ const AnalyticsDashboard: React.FC = () => {
                 <div className="package-card">
                   <h3 className="package-name">Evolution</h3>
                   <p className="package-subtitle">
-                    Free Trail Insights Art Plan
+                    {/* Free Trail Insights Art Plan */}
                     <br />
-                    Ideal for beginner artists.
+                    {/* Ideal for beginner artists. */}
                   </p>
                   <div className="package-price-row">
                     <span className="package-price">$3499</span>
@@ -1177,9 +1177,9 @@ const AnalyticsDashboard: React.FC = () => {
                 <div className="package-card">
                   <h3 className="package-name">Luxe</h3>
                   <p className="package-subtitle">
-                    Free Trail Insights Art Plan
+                    {/* Free Trail Insights Art Plan */}
                     <br />
-                    Ideal for beginner artists.
+                    {/* Ideal for beginner artists. */}
                   </p>
                   <div className="package-price-row">
                     <span className="package-price">$4999</span>
@@ -1212,9 +1212,9 @@ const AnalyticsDashboard: React.FC = () => {
                 <div className="package-card">
                   <h3 className="package-name">Essentials</h3>
                   <p className="package-subtitle">
-                    Free Trail Insights Art Plan
+                    {/* Free Trail Insights Art Plan */}
                     <br />
-                    Ideal for beginner artists.
+                    {/* Ideal for beginner artists. */}
                   </p>
                   <div className="package-price-row">
                     <span className="package-price">$599</span>
@@ -1247,9 +1247,9 @@ const AnalyticsDashboard: React.FC = () => {
                 <div className="package-card">
                   <h3 className="package-name">Foundation</h3>
                   <p className="package-subtitle">
-                    Free Trail Insights Art Plan
+                    {/* Free Trail Insights Art Plan */}
                     <br />
-                    Ideal for beginner artists.
+                    {/* Ideal for beginner artists. */}
                   </p>
                   <div className="package-price-row">
                     <span className="package-price">$999</span>
@@ -1282,9 +1282,9 @@ const AnalyticsDashboard: React.FC = () => {
                 <div className="package-card">
                   <h3 className="package-name">Evolution</h3>
                   <p className="package-subtitle">
-                    Free Trail Insights Art Plan
+                    {/* Free Trail Insights Art Plan */}
                     <br />
-                    Ideal for beginner artists.
+                    {/* Ideal for beginner artists. */}
                   </p>
                   <div className="package-price-row">
                     <span className="package-price">$1499</span>
@@ -1317,9 +1317,9 @@ const AnalyticsDashboard: React.FC = () => {
                 <div className="package-card">
                   <h3 className="package-name">Luxe</h3>
                   <p className="package-subtitle">
-                    Free Trail Insights Art Plan
+                    {/* Free Trail Insights Art Plan */}
                     <br />
-                    Ideal for beginner artists.
+                    {/* Ideal for beginner artists. */}
                   </p>
                   <div className="package-price-row">
                     <span className="package-price">$2499</span>
@@ -1554,7 +1554,7 @@ const AnalyticsDashboard: React.FC = () => {
                 <div>
                   <div className="cart-item-title">Revenue Rocket</div>
                   <div className="cart-item-subtitle">
-                    Free Trail Insights Art Plan Ideal for beginner artists.
+                    {/* Free Trail Insights Art Plan Ideal for beginner artists. */}
                   </div>
                 </div>
                 <button type="button" className="cart-item-remove">
@@ -1566,7 +1566,7 @@ const AnalyticsDashboard: React.FC = () => {
                 <div>
                   <div className="cart-item-title">Revenue Rocket</div>
                   <div className="cart-item-subtitle">
-                    Free Trail Insights Art Plan Ideal for beginner artists.
+                    {/* Free Trail Insights Art Plan Ideal for beginner artists. */}
                   </div>
                 </div>
                 <button type="button" className="cart-item-remove">

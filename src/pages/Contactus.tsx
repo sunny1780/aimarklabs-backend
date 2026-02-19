@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { buildApiUrl } from '../utils/api';
 
 interface ContactusProps {
   onLoginClick: () => void;
 }
 
 const Contactus: React.FC<ContactusProps> = ({ onLoginClick }) => {
-  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
   const availableServices = [
     'Digital Marketing',
     'Branding',
@@ -46,7 +46,7 @@ const Contactus: React.FC<ContactusProps> = ({ onLoginClick }) => {
 
     setIsSubmitting(true);
     try {
-      const response = await fetch(`${API_BASE_URL}/api/contact`, {
+      const response = await fetch(buildApiUrl('/api/contact'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -76,6 +76,10 @@ const Contactus: React.FC<ContactusProps> = ({ onLoginClick }) => {
       setServices([]);
       setProjectDetails('');
     } catch (error: any) {
+      if (error instanceof TypeError) {
+        setSubmitMessage('Unable to reach server. Please try again in a moment.');
+        return;
+      }
       setSubmitMessage(error?.message || 'Submission failed. Please try again.');
     } finally {
       setIsSubmitting(false);

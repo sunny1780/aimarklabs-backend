@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { buildApiUrl } from '../utils/api';
 
 const Footer: React.FC = () => {
-  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [subscribeMessage, setSubscribeMessage] = useState<string | null>(null);
@@ -41,7 +41,7 @@ const Footer: React.FC = () => {
     setSubscribeMessage(null);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/newsletter/subscribe`, {
+      const response = await fetch(buildApiUrl('/api/newsletter/subscribe'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -59,6 +59,10 @@ const Footer: React.FC = () => {
       setEmail('');
       setSubscribeMessage('Thanks! Your email has been submitted.');
     } catch (error: any) {
+      if (error instanceof TypeError) {
+        setSubscribeMessage('Unable to reach server. Please try again in a moment.');
+        return;
+      }
       setSubscribeMessage(error?.message || 'Submission failed. Please try again.');
     } finally {
       setIsSubmitting(false);

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 type ActiveSection = 'analytics' | 'audit' | 'packages' | 'account';
 
@@ -40,11 +41,13 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, onChangeSection, onLog
   return (
     <aside className="sidebar">
       <div className="sidebar-brand">
-        <img
-          src="/images/logo.png"
-          alt="AI Mark Lab Logo"
-          className="w-28 h-auto object-contain"
-        />
+        <Link to="/" aria-label="Go to landing page">
+          <img
+            src="/images/logo.png"
+            alt="AI Mark Lab Logo"
+            className="w-28 h-auto object-contain"
+          />
+        </Link>
         <button
           type="button"
           className="sidebar-menu-toggle"
