@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 type ActiveSection = 'analytics' | 'audit' | 'packages' | 'account';
@@ -11,6 +11,8 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ activeSection, onChangeSection, onLogout }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const userMenuRef = useRef<HTMLDivElement | null>(null);
   const activeEmail =
     typeof window !== 'undefined' ? localStorage.getItem('dashboard_active_email') || '' : '';
   const activeClientSlug =
@@ -37,6 +39,28 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, onChangeSection, onLog
     onChangeSection(section);
     setIsMobileMenuOpen(false);
   };
+
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (!userMenuRef.current) return;
+      if (!userMenuRef.current.contains(event.target as Node)) {
+        setIsUserMenuOpen(false);
+      }
+    };
+
+    const handleEsc = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsUserMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleOutsideClick);
+    document.addEventListener('keydown', handleEsc);
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener('keydown', handleEsc);
+    };
+  }, []);
 
   return (
     <aside className="sidebar">
@@ -103,12 +127,33 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, onChangeSection, onLog
         </button>
       </nav>
 
-      <div className="sidebar-user">
-        <div className="user-avatar">{avatarLetter}</div>
-        <div className="user-info">
-          <div className="user-name">{displayName}</div>
-          <div className="user-role">{displaySubtext}</div>
-        </div>
+      <div className="sidebar-user-wrap" ref={userMenuRef}>
+        <button
+          type="button"
+          className="sidebar-user sidebar-user-trigger"
+          onClick={() => setIsUserMenuOpen((prev) => !prev)}
+          aria-expanded={isUserMenuOpen}
+          aria-label="Toggle account options"
+        >
+          <div className="user-avatar">{avatarLetter}</div>
+          <div className="user-info">
+            <div className="user-name">{displayName}</div>
+            <div className="user-role">{displaySubtext}</div>
+          </div>
+          <span className={`sidebar-user-chevron ${isUserMenuOpen ? 'open' : ''}`}>▾</span>
+        </button>
+        {isUserMenuOpen ? (
+          <div className="sidebar-user-menu">
+            <button
+              type="button"
+              className="sidebar-user-menu-item"
+              onClick={onLogout}
+            >
+              <span className="sidebar-user-menu-item-icon">↪</span>
+              <span>Logout</span>
+            </button>
+          </div>
+        ) : null}
       </div>
     </aside>
   );

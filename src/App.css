@@ -159,6 +159,11 @@ a {
   display: none;
 }
 
+.sidebar-user-wrap {
+  margin-top: 40px;
+  position: relative;
+}
+
 .sidebar-user {
   display: flex;
   align-items: center;
@@ -166,7 +171,80 @@ a {
   padding: 16px 14px;
   border-radius: 12px;
   background: rgba(15, 23, 42, 0.9);
-  margin-top: 40px;
+}
+
+.sidebar-user-trigger {
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  text-align: left;
+  border: 1px solid transparent;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.sidebar-user-trigger:hover {
+  border-color: rgba(148, 163, 184, 0.28);
+  background: rgba(15, 23, 42, 0.98);
+}
+
+.sidebar-user-trigger:focus-visible {
+  outline: none;
+  border-color: rgba(242, 147, 53, 0.6);
+  box-shadow: 0 0 0 3px rgba(242, 147, 53, 0.2);
+}
+
+.sidebar-user-chevron {
+  margin-left: auto;
+  font-size: 12px;
+  color: #cbd5e1;
+  transition: transform 0.18s ease, color 0.18s ease;
+}
+
+.sidebar-user-chevron.open {
+  transform: rotate(180deg);
+  color: #f8fafc;
+}
+
+.sidebar-user-menu {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 10px);
+  width: 148px;
+  background: linear-gradient(145deg, #0f1c3a 0%, #0b1631 100%);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  border-radius: 12px;
+  padding: 7px;
+  box-shadow: 0 14px 36px rgba(2, 8, 23, 0.45);
+  backdrop-filter: blur(8px);
+  z-index: 20;
+}
+
+.sidebar-user-menu-item {
+  width: 100%;
+  border: none;
+  border-radius: 9px;
+  background: transparent;
+  color: #f8fafc;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sidebar-user-menu-item:hover {
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.sidebar-user-menu-item-icon {
+  color: #f29335;
+  font-size: 12px;
 }
 
 .user-avatar {
@@ -2540,8 +2618,18 @@ a {
   }
 
   .sidebar-user {
+    align-self: flex-start;
+  }
+
+  .sidebar-user-wrap {
     margin-top: 0;
     align-self: flex-start;
+    pointer-events: none;
+  }
+
+  .sidebar-user-chevron,
+  .sidebar-user-menu {
+    display: none;
   }
 
   .strategy-row {
