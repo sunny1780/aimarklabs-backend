@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   ADMIN_EMAILS,
   ADMIN_PASSWORD,
@@ -118,11 +119,13 @@ const Login: React.FC<LoginProps> = ({ onGoToSignUp, onLoginSuccess }) => {
       <div className="relative order-1 w-full bg-white lg:order-2 lg:w-1/2">
         {/* Top Row - Logo and Register Button - Bilkul top par */}
         <div className="flex items-center justify-between bg-[#1e2749] w-full px-4 sm:px-6 lg:px-8 py-4">
-          <img
-            src="/images/logo.png"
-            alt="AI Mark Labs Logo"
-            className="h-8 sm:h-10 w-auto"
-          />
+          <Link to="/" aria-label="Go to landing page">
+            <img
+              src="/images/logo.png"
+              alt="AI Mark Labs Logo"
+              className="h-8 sm:h-10 w-auto"
+            />
+          </Link>
           {/*
           <button
             type="button"

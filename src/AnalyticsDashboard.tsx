@@ -108,7 +108,11 @@ const AnalyticsDashboard: React.FC = () => {
 
   return (
     <div className="analytics-app">
-      <Sidebar activeSection={activeSection} onChangeSection={setActiveSection} />
+      <Sidebar
+        activeSection={activeSection}
+        onChangeSection={setActiveSection}
+        onLogout={handleLogout}
+      />
 
       <main className="main-content">
         <TopBar

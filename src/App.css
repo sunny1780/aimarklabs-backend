@@ -155,6 +155,10 @@ a {
   background: rgba(255, 255, 255, 0.04);
 }
 
+.nav-item-logout {
+  display: none;
+}
+
 .sidebar-user {
   display: flex;
   align-items: center;
@@ -2529,6 +2533,10 @@ a {
     white-space: normal;
     width: 100%;
     padding: 9px 12px;
+  }
+
+  .nav-item-logout {
+    display: flex;
   }
 
   .sidebar-user {

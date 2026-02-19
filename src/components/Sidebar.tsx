@@ -5,9 +5,10 @@ type ActiveSection = 'analytics' | 'audit' | 'packages' | 'account';
 interface SidebarProps {
   activeSection: ActiveSection;
   onChangeSection: (section: ActiveSection) => void;
+  onLogout: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ activeSection, onChangeSection }) => {
+const Sidebar: React.FC<SidebarProps> = ({ activeSection, onChangeSection, onLogout }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const activeEmail =
     typeof window !== 'undefined' ? localStorage.getItem('dashboard_active_email') || '' : '';
@@ -88,6 +89,14 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, onChangeSection }) => 
         >
           <span className="nav-dot" />
           <span>Account</span>
+        </button>
+        <button
+          type="button"
+          className="nav-item nav-item-logout"
+          onClick={onLogout}
+        >
+          <span className="nav-dot" />
+          <span>Logout</span>
         </button>
       </nav>
 
