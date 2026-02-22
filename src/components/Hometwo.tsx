@@ -111,7 +111,7 @@ const Hometwo: React.FC<HometwoProps> = ({ nextInView }) => {
               <img
                 src="/images/chat bubbles.svg"
                 alt="Chat Bubbles"
-                className="absolute inset-0 w-full h-full object-contain opacity-100 pointer-events-none animate-gentle-float"
+                className="absolute inset-0 hidden h-full w-full object-contain opacity-100 pointer-events-none animate-gentle-float sm:block"
               />
             </div>
           </div>

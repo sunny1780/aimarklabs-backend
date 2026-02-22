@@ -42,6 +42,26 @@ a {
   opacity: 0;
 }
 
+@media (hover: none), (pointer: coarse) {
+  html,
+  body,
+  *,
+  *::before,
+  *::after,
+  input,
+  textarea,
+  select,
+  button,
+  label,
+  a {
+    cursor: auto !important;
+  }
+
+  .custom-cursor {
+    display: none !important;
+  }
+}
+
 .analytics-app {
   display: flex;
   min-height: 100vh;
