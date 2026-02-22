@@ -1,23 +1,29 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { ADMIN_EMAILS } from '../utils/auth';
 
 interface NavbarProps {
   onLoginClick: () => void;
 }
 
 const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
+  const navigate = useNavigate();
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [accountMenuOpen, setAccountMenuOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [activeEmail, setActiveEmail] = useState('');
   const [displayName, setDisplayName] = useState('');
   const servicesRef = useRef<HTMLDivElement | null>(null);
+  const accountMenuRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
-      if (!servicesRef.current) return;
-      if (!servicesRef.current.contains(event.target as Node)) {
+      if (servicesRef.current && !servicesRef.current.contains(event.target as Node)) {
         setServicesOpen(false);
+      }
+      if (accountMenuRef.current && !accountMenuRef.current.contains(event.target as Node)) {
+        setAccountMenuOpen(false);
       }
     };
 
@@ -53,6 +59,19 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
 
   const isLoggedIn = Boolean(activeEmail);
   const profileInitial = (displayName || activeEmail).charAt(0).toUpperCase() || 'U';
+  const dashboardPath = ADMIN_EMAILS.includes(activeEmail) ? '/admin' : '/dashboard';
+
+  const handleLogout = () => {
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('dashboard_active_client_slug');
+      localStorage.removeItem('dashboard_active_email');
+    }
+    setActiveEmail('');
+    setDisplayName('');
+    setAccountMenuOpen(false);
+    setMobileMenuOpen(false);
+    navigate('/');
+  };
 
   return (
       <nav className="sticky top-0 z-[1000] w-full px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 via-orange-50 to-white shadow-sm">
@@ -139,15 +158,42 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
         {/* Desktop Login */}
         <div className="hidden lg:flex items-center">
           {isLoggedIn ? (
-            <div className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-3 py-2 shadow-sm">
-              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#1e2749] text-white text-sm font-semibold">
-                {profileInitial}
-              </div>
-              <div className="leading-tight">
-                <div className="text-sm font-semibold text-slate-800 max-w-[180px] truncate">
-                  {displayName || activeEmail}
+            <div className="relative" ref={accountMenuRef}>
+              <button
+                type="button"
+                onClick={() => setAccountMenuOpen((prev) => !prev)}
+                className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-3 py-2 shadow-sm"
+              >
+                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#1e2749] text-white text-sm font-semibold">
+                  {profileInitial}
                 </div>
-              </div>
+                <div className="leading-tight">
+                  <div className="text-sm font-semibold text-slate-800 max-w-[180px] truncate">
+                    {displayName || activeEmail}
+                  </div>
+                </div>
+                <svg className={`h-4 w-4 text-slate-500 transition-transform ${accountMenuOpen ? 'rotate-180' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              {accountMenuOpen && (
+                <div className="absolute right-0 top-full mt-2 w-44 rounded-xl border border-slate-200 bg-white p-1 shadow-lg">
+                  <Link
+                    to={dashboardPath}
+                    onClick={() => setAccountMenuOpen(false)}
+                    className="block rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+                  >
+                    Dashboard
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={handleLogout}
+                    className="w-full text-left rounded-lg px-3 py-2 text-sm font-medium text-red-600 hover:bg-red-50"
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
             </div>
           ) : (
             <button
@@ -231,6 +277,24 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
                   <img src="/images/btnarow.svg" alt="arrow" className="w-4 h-4" />
                 </button>
               )}
+              {isLoggedIn ? (
+                <div className="mt-2 grid grid-cols-2 gap-2">
+                  <Link
+                    to={dashboardPath}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-center text-sm font-medium text-slate-700"
+                  >
+                    Dashboard
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={handleLogout}
+                    className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm font-medium text-red-600"
+                  >
+                    Logout
+                  </button>
+                </div>
+              ) : null}
             </div>
           </div>
         )}
