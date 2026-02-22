@@ -24,15 +24,26 @@ const Home: React.FC<HomeProps> = ({ onLoginClick }) => {
   const enterInView = useInView(nextRef, { amount: 0.45, margin: '0px 0px -20% 0px' });
   const exitInView = useInView(nextRef, { amount: 0.2, margin: '0px 0px -20% 0px' });
   const [nextInView, setNextInView] = useState(false);
+  const [hasScrolledPastHero, setHasScrolledPastHero] = useState(false);
 
   useEffect(() => {
-    if (!nextInView && enterInView) {
+    const onScroll = () => {
+      setHasScrolledPastHero(window.scrollY > 80);
+    };
+
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    if (!nextInView && hasScrolledPastHero && enterInView) {
       setNextInView(true);
     }
-    if (nextInView && !exitInView) {
+    if (nextInView && (!hasScrolledPastHero || !exitInView)) {
       setNextInView(false);
     }
-  }, [enterInView, exitInView, nextInView]);
+  }, [enterInView, exitInView, hasScrolledPastHero, nextInView]);
 
   return (
     <div className="min-h-screen overflow-x-hidden">

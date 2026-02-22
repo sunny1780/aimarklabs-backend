@@ -133,7 +133,13 @@ const Footer: React.FC = () => {
               </div>
               <div>
                 <p className="text-white/50 text-xs font-semibold uppercase tracking-wider mb-1">Location</p>
-                <p className="text-white text-sm font-medium max-w-[220px]">AI Mark Labs, LLC 1110 N Virgil Ave PMB 98121 Los Angeles, CA 90029</p>
+                <p className="text-white text-sm font-medium max-w-[340px]">
+                  AI Mark Labs,
+                  <br />
+                  LLC 1110 N Virgil Ave PMB 98121 Los Angeles,
+                  <br />
+                  CA 90029
+                </p>
               </div>
             </div>
             <div className="flex gap-2">

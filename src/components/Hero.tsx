@@ -7,20 +7,45 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ nextInView }) => {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-[#dbeafe] via-[#ffe4e6] to-[#fef9c3] min-h-[87vh] flex items-center">
-      {/* Corner video */}
+    <section className="relative overflow-visible sm:overflow-hidden bg-gradient-to-br from-[#dbeafe] via-[#ffe4e6] to-[#fef9c3] min-h-screen sm:min-h-[87vh] sm:flex sm:items-center">
+      {/* Desktop corner content */}
       {!nextInView && (
-        <SharedVideo
-          src="/images/video.mp4"
-          layoutId="home-shared-video"
-          className="absolute bottom-4 right-3 sm:bottom-6 sm:right-6 md:bottom-0 md:right-0 z-20 w-[180px] h-[110px] sm:w-[220px] sm:h-[140px] md:w-64 md:h-40"
-        />
+        <>
+          <div className="hidden sm:block absolute z-30 bottom-6 left-6 md:bottom-4 md:left-8 max-w-[420px]">
+           <p className="font-manrope text-[#182126] text-[18px] sm:text-[20px] leading-[1.35] mb-2">
+              <span className="whitespace-nowrap">From brand identity to digital</span>
+              <br />
+              <span className="whitespace-nowrap">performance, we create marketing</span>
+              <br />
+              <span className="whitespace-nowrap">that delivers measurable impact.</span>
+            </p>
+
+           <button
+  type="button"
+  className="inline-flex items-center gap-2 rounded-lg bg-[#182126] px-4 py-2 text-[#FBFCFD] text-sm font-medium hover:bg-[#24313b] transition-colors"
+>
+  Lets Talk
+  <img 
+    src="/images/ArrowUp.svg" 
+    alt="arrow icon" 
+    className="w-4 h-4"
+  />
+</button>
+
+          </div>
+
+          <SharedVideo
+            src="https://customer-leo8lubv91ct4vwd.cloudflarestream.com/5c3acb77ca3fe6464ff0adce38180240/manifest/video.m3u8"
+            layoutId="home-shared-video"
+            className="hidden sm:block absolute bottom-6 right-6 md:bottom-0 md:right-0 z-20 w-[220px] h-[140px] md:w-64 md:h-40"
+          />
+        </>
       )}
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10 w-full relative py-8 sm:py-12 lg:py-0">
+      <div className="hidden sm:block max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10 w-full relative py-6 sm:py-12 lg:py-0">
         {/* Big background text - absolutely centered */}
-        <h1 className="hidden sm:block absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[70px] sm:text-[90px] md:text-[120px] lg:text-[160px] xl:text-[200px] leading-none font-bold text-[#d4d4d8] tracking-tight select-none z-0">
-          AlMarkLabs
+        <h1 className="hidden sm:block absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[70px] sm:text-[90px] md:text-[120px] lg:text-[160px] xl:text-[200px] leading-none font-bold text-[#d4d4d8] tracking-tight select-none z-0 whitespace-nowrap">
+          AI MARK LABS
         </h1>
 
         {/* Main layout */}
@@ -66,7 +91,7 @@ const Hero: React.FC<HeroProps> = ({ nextInView }) => {
 
           {/* Right side - services list */}
           <div className="flex-1 flex justify-start sm:justify-end w-full">
-            <div className="-mt-4 sm:-mt-[104px] md:-mt-[136px] sm:mr-12 md:mr-24 text-left space-y-1 text-[14px] sm:text-[15px] md:text-[16px] text-gray-700 pr-[160px] sm:pr-0">
+            <div className="-mt-4 sm:-mt-[104px] md:-mt-[166px] sm:mr-12 md:mr-24 text-left space-y-1 text-[14px] sm:text-[15px] md:text-[16px] text-gray-700 pr-[160px] sm:pr-0">
               <div>
                 <p>ui/ux design</p>
                 <img src="/images/Line.png" alt="line" className="mt-1" />
@@ -83,6 +108,68 @@ const Hero: React.FC<HeroProps> = ({ nextInView }) => {
           </div>
         </div>
       </div>
+
+      {/* Mobile corner content in normal flow so hero remains fully visible */}
+      {!nextInView && (
+        <div className="sm:hidden relative w-full px-6 pt-8 pb-10">
+          <img
+            src="/images/star.png"
+            alt="star shape"
+            className="hero-float-1 absolute -left-10 top-12 w-24 h-24 object-contain opacity-35"
+          />
+
+          <div className="relative h-[210px]">
+            <div className="absolute right-0 top-0 space-y-1 text-[14px] leading-[1.05] text-[#6b4f1f] font-medium text-right">
+              <p>ui/ux design</p>
+              <p>digital marketing</p>
+              <p>web development</p>
+            </div>
+
+            <h1 className="absolute left-0 top-[102px] text-[64px] leading-none font-extrabold tracking-tight text-[#c4cad8] whitespace-nowrap">
+              AI Mark Labs
+            </h1>
+
+            <img
+              src="/images/Aa.png"
+              alt="Aa card"
+              className="hero-float-2 absolute top-[102px] left-9 w-11 h-auto object-contain"
+            />
+            <img
+              src="/images/fullstack.png"
+              alt="Full Stack badge"
+              className="hero-float-3 absolute top-[154px] left-[52px] w-14 h-auto object-contain"
+            />
+            <img
+              src="/images/agencies.png"
+              alt="Agencies badge"
+              className="hero-float-2 absolute top-[152px] right-6 w-16 h-auto object-contain"
+            />
+          </div>
+
+          <p className="font-manrope text-[#182126] text-[15px] leading-[1.35] mb-4 max-w-[340px]">
+            <span>From brand identity to digital performance, we create</span>
+            <br />
+            <span>marketing that delivers measurable impact.</span>
+          </p>
+          <button
+            type="button"
+            className="inline-flex items-center gap-2 rounded-lg bg-[#182126] px-4 py-2 text-[#FBFCFD] text-sm font-medium hover:bg-[#24313b] transition-colors"
+          >
+            Lets Talk
+            <img
+              src="/images/ArrowUp.svg"
+              alt="arrow icon"
+              className="w-4 h-4"
+            />
+          </button>
+
+          <SharedVideo
+            src="https://customer-leo8lubv91ct4vwd.cloudflarestream.com/5c3acb77ca3fe6464ff0adce38180240/manifest/video.m3u8"
+            layoutId="home-shared-video"
+            className="mt-5 ml-auto w-[205px] h-[128px]"
+          />
+        </div>
+      )}
     </section>
   );
 };

@@ -55,8 +55,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
   const profileInitial = (displayName || activeEmail).charAt(0).toUpperCase() || 'U';
 
   return (
-    <>
-      <nav className="fixed inset-x-0 top-0 z-[1000] w-full px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 via-orange-50 to-white shadow-sm">
+      <nav className="sticky top-0 z-[1000] w-full px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 via-orange-50 to-white shadow-sm">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo Section */}
         <Link to="/" className="flex items-center" aria-label="Go to home page">
@@ -236,8 +235,6 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
           </div>
         )}
       </nav>
-      <div className="h-[84px] sm:h-[88px]" aria-hidden />
-    </>
   );
 };
 
