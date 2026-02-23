@@ -125,7 +125,7 @@ const Hero: React.FC<HeroProps> = ({ nextInView }) => {
               <p>web development</p>
             </div>
 
-            <h1 className="absolute left-0 top-[102px] text-[64px] leading-none font-extrabold tracking-tight text-[#c4cad8] whitespace-nowrap">
+            <h1 className="absolute left-1/2 top-[102px] -translate-x-1/2 max-w-full px-2 text-[clamp(44px,13vw,64px)] leading-none font-extrabold tracking-tight text-[#c4cad8] whitespace-nowrap">
               AI Mark Labs
             </h1>
 
