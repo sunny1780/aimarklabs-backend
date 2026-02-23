@@ -71,7 +71,7 @@ const Homefour: React.FC = () => {
           </p>
           <div className="text-left lg:text-right lg:pr-4 w-full lg:max-w-[600px] lg:ml-auto">
             <h2
-              className="text-gray-900 max-w-[343px] lg:max-w-none text-[60px] leading-[100%] tracking-[0.005em] font-semibold"
+              className="text-gray-900 max-w-[343px] lg:max-w-none text-[42px] sm:text-[52px] lg:text-[60px] leading-[100%] tracking-[0.005em] font-semibold"
               style={{ fontFamily: "'Manrope', sans-serif" }}
             >
               Proven Results

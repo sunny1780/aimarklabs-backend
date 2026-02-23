@@ -42,7 +42,7 @@ const Homeseven: React.FC = () => {
           <img
             src="/images/one.png"
             alt=""
-            className="h-8 w-32 sm:h-14 sm:w-44 md:h-16 md:w-52 lg:h-[68px] lg:w-[235px] min-w-[100px] sm:min-w-[160px] flex-1 rounded-full object-cover border-2 border-white object-center mx-1 sm:mx-2"
+            className="h-8 w-32 sm:h-14 sm:w-44 md:h-16 md:w-52 lg:h-[68px] lg:w-[235px] min-w-[100px] sm:min-w-[160px] flex-1 rounded-full object-cover border-0 md:border-2 md:border-white object-center mx-1 sm:mx-2"
           />
           <span className="text-white text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-medium uppercase tracking-tight flex-shrink-0">
             YOUR BRAND<sup>*</sup>
@@ -57,7 +57,7 @@ const Homeseven: React.FC = () => {
           <img
             src="/images/two.png"
             alt=""
-            className="h-8 w-24 sm:h-10 sm:w-32 md:h-12 md:w-40 lg:h-14 lg:w-48 xl:h-16 xl:w-52 min-w-[70px] sm:min-w-[100px] flex-1 rounded-full object-cover border-2 border-white object-center mx-1 sm:mx-2"
+            className="h-8 w-24 sm:h-10 sm:w-32 md:h-12 md:w-40 lg:h-14 lg:w-48 xl:h-16 xl:w-52 min-w-[70px] sm:min-w-[100px] flex-1 rounded-full object-cover border-0 md:border-2 md:border-white object-center mx-1 sm:mx-2"
           />
           <span className="text-white text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold uppercase tracking-tight flex-shrink-0">
             RIGHT PLATFORM
@@ -72,7 +72,7 @@ const Homeseven: React.FC = () => {
           <img
             src="/images/three.png"
             alt=""
-            className="h-8 w-28 sm:h-14 sm:w-44 md:h-16 md:w-64 lg:h-[68px] lg:w-[360px] min-w-[90px] sm:min-w-[140px] flex-1 rounded-full object-cover border-2 border-white object-center mx-1 sm:mx-2"
+            className="h-8 w-28 sm:h-14 sm:w-44 md:h-16 md:w-64 lg:h-[68px] lg:w-[360px] min-w-[90px] sm:min-w-[140px] flex-1 rounded-full object-cover border-0 md:border-2 md:border-white object-center mx-1 sm:mx-2"
           />
           <span className="text-white text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-medium uppercase tracking-tight border-2 border-white px-2 py-0.5 sm:px-3 sm:py-1 inline-block flex-shrink-0">
             THE RIGHT TIME
@@ -87,7 +87,7 @@ const Homeseven: React.FC = () => {
           <img
             src="/images/four.png"
             alt=""
-            className="h-8 w-24 sm:h-14 sm:w-40 md:h-16 md:w-52 lg:h-[68px] lg:w-[280px] min-w-[80px] sm:min-w-[130px] flex-1 rounded-full object-cover border-2 border-white not-italic object-center mx-1 sm:mx-2"
+            className="h-8 w-24 sm:h-14 sm:w-40 md:h-16 md:w-52 lg:h-[68px] lg:w-[280px] min-w-[80px] sm:min-w-[130px] flex-1 rounded-full object-cover border-0 md:border-2 md:border-white not-italic object-center mx-1 sm:mx-2"
           />
           <span className="text-white text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-medium uppercase tracking-tight flex-shrink-0">
             SMART PLAN.&quot;

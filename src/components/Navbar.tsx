@@ -271,7 +271,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
               ) : (
                 <button
                   onClick={onLoginClick}
-                  className="mt-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg font-medium text-sm flex items-center justify-center gap-2 transition-colors"
+                  className="mt-2 bg-[#F29335] hover:bg-[#e0852a] text-white px-4 py-2 rounded-lg font-medium text-sm flex items-center justify-center gap-2 transition-colors"
                 >
                   <span>Login</span>
                   <img src="/images/btnarow.svg" alt="arrow" className="w-4 h-4" />

@@ -33,11 +33,9 @@ const Homefive: React.FC = () => {
 
         {/* Testimonial Cards Grid */}
         <div
-          className="relative rounded-3xl py-8 px-4 sm:px-6 bg-no-repeat"
+          className="relative rounded-3xl py-8 px-4 sm:px-6 bg-no-repeat sticky top-0 lg:static bg-[length:95%] md:bg-[length:70%] lg:bg-[length:60%] bg-[center_70%]"
           style={{
-            backgroundImage: "url('/images/bbgg.png')",
-            backgroundSize: '60%',
-            backgroundPosition: 'center 70%'
+            backgroundImage: "url('/images/bbgg.png')"
           }}
         >
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
