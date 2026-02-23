@@ -15,14 +15,7 @@ const Homefive: React.FC = () => {
             </span>
           </div>
           <h2
-            className="text-gray-900 mb-4 w-[687px] max-w-full mx-auto text-center"
-            style={{
-              fontFamily: "'Manrope', sans-serif",
-              fontWeight: 500,
-              fontSize: '60px',
-              lineHeight: '100%',
-              letterSpacing: '0.5%'
-            }}
+            className="text-gray-900 mb-4 max-w-[343px] lg:max-w-[687px] mx-auto text-center text-[42px] sm:text-[52px] lg:text-[60px] leading-[100%] tracking-[0.005em] font-semibold font-manrope"
           >
             Hear What Our Clients Have to Say
           </h2>

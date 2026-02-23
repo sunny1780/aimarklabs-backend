@@ -79,14 +79,7 @@ const HomeFaqs: React.FC = () => {
               </span>
             </div>
             <h2
-              className="text-gray-900 mb-4 max-w-[457px] text-left pl-0"
-              style={{
-                fontFamily: "'Manrope', sans-serif",
-                fontWeight: 500,
-                fontSize: '55px',
-                lineHeight: '100%',
-                letterSpacing: '0.5%'
-              }}
+              className="text-gray-900 mb-4 max-w-[343px] lg:max-w-[457px] text-left pl-0 text-[42px] sm:text-[52px] lg:text-[55px] leading-[100%] tracking-[0.005em] font-semibold font-manrope"
             >
               Got a Question?
             </h2>

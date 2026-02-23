@@ -66,10 +66,10 @@ const Homefour: React.FC = () => {
       <div ref={sectionRef} className="max-w-6xl mx-auto">
         {/* Row 1: Text + Heading */}
         <div className="grid lg:grid-cols-[1.2fr,1fr] gap-10 items-center mb-8">
-          <p className="text-sm lg:text-base text-gray-600 max-w-md leading-relaxed">
+          <p className="order-2 lg:order-1 text-sm lg:text-base text-gray-600 max-w-md leading-relaxed">
             From strategy to execution, our numbers reflect the growth we create for our clients.
           </p>
-          <div className="text-left lg:text-right lg:pr-4 w-full lg:max-w-[600px] lg:ml-auto">
+          <div className="order-1 lg:order-2 text-left lg:text-right lg:pr-4 w-full lg:max-w-[600px] lg:ml-auto">
             <h2
               className="text-gray-900 max-w-[343px] lg:max-w-none text-[42px] sm:text-[52px] lg:text-[60px] leading-[100%] tracking-[0.005em] font-semibold"
               style={{ fontFamily: "'Manrope', sans-serif" }}

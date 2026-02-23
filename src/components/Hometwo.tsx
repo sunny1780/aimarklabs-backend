@@ -82,13 +82,7 @@ const Hometwo: React.FC<HometwoProps> = ({ nextInView }) => {
 
               </div>
               <h2
-                className="text-gray-900 mb-5 max-w-[343px] lg:max-w-[633px] text-[60px] lg:text-[50px]"
-                style={{
-                  fontFamily: "'Manrope', sans-serif",
-                  fontWeight: 500,
-                  lineHeight: '100%',
-                  letterSpacing: '0.005em'
-                }}
+                className="text-gray-900 mb-5 max-w-[343px] lg:max-w-[633px] text-[42px] sm:text-[52px] lg:text-[50px] leading-[100%] tracking-[0.005em] font-semibold font-manrope"
               >
                 We Create Marketing That
                 Works
