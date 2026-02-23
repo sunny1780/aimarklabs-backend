@@ -147,8 +147,8 @@ const Hero: React.FC<HeroProps> = ({ nextInView }) => {
           </div>
 
           <p className="font-manrope text-[#182126] text-[15px] leading-[1.35] mb-4 max-w-[340px]">
-            <span>From brand identity to digital performance, we create</span>
-            <br />
+            <span>From brand identity to digital performance, we create </span>
+            <br className="hidden sm:block" />
             <span>marketing that delivers measurable impact.</span>
           </p>
           <button

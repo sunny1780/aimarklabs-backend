@@ -71,7 +71,7 @@ const Homefour: React.FC = () => {
           </p>
           <div className="text-left lg:text-right lg:pr-4 w-full lg:max-w-[600px] lg:ml-auto">
             <h2
-              className="text-gray-900 text-[40px] sm:text-[52px] lg:text-[60px] leading-[1.05] tracking-[0.005em] font-semibold"
+              className="text-gray-900 max-w-[343px] lg:max-w-none text-[60px] leading-[100%] tracking-[0.005em] font-semibold"
               style={{ fontFamily: "'Manrope', sans-serif" }}
             >
               Proven Results
@@ -88,8 +88,11 @@ const Homefour: React.FC = () => {
             <div className="inline-flex items-center px-4 py-3 mb-4 rounded-md bg-[#D7DDFC] text-[#272D55] text-xs font-medium">
               Experience
             </div>
-            <div className="text-[#E68826] text-[64px] sm:text-[92px] lg:text-[128px] font-extrabold leading-none mb-6">
-              {experience}y+
+            <div
+              className="text-[#E68826] text-[128px] font-bold font-manrope leading-[100%] mb-6 text-left lg:text-right"
+              style={{ letterSpacing: '0.005em' }}
+            >
+              {experience}y<sup>+</sup>
             </div>
             <p className="text-gray-600 text-sm leading-relaxed">
               Delivering proven digital growth strategies.
@@ -101,8 +104,11 @@ const Homefour: React.FC = () => {
             <div className="inline-flex items-center px-4 py-3 mb-4 rounded-md bg-[#D7DDFC] text-[#272D55] text-xs font-medium">
               Satisfied Clients
             </div>
-            <div className="text-[#E68826] text-[64px] sm:text-[92px] lg:text-[128px] font-extrabold leading-none mb-6">
-              {clients}+
+            <div
+              className="text-[#E68826] text-[128px] font-bold font-manrope leading-[100%] mb-6 text-left lg:text-right"
+              style={{ letterSpacing: '0.005em' }}
+            >
+              {clients}<sup>+</sup>
             </div>
             <p className="text-gray-600 text-sm leading-relaxed">
               Trusted by brands that value results.
@@ -114,8 +120,11 @@ const Homefour: React.FC = () => {
             <div className="inline-flex items-center px-4 py-3 mb-4 rounded-md bg-[#D7DDFC] text-[#272D55] text-xs font-medium">
               Marketing Experts
             </div>
-            <div className="text-[#E68826] text-[64px] sm:text-[92px] lg:text-[128px] font-extrabold leading-none mb-6">
-              {experts}+
+            <div
+              className="text-[#E68826] text-[128px] font-bold font-manrope leading-[100%] mb-6 text-left lg:text-right"
+              style={{ letterSpacing: '0.005em' }}
+            >
+              {experts}<sup>+</sup>
             </div>
             <p className="text-gray-600 text-sm leading-relaxed">
               A team driven by strategy, creativity, and AI.

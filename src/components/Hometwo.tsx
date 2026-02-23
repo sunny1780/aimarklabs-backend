@@ -82,19 +82,21 @@ const Hometwo: React.FC<HometwoProps> = ({ nextInView }) => {
 
               </div>
               <h2
-                className="text-gray-900 mb-5 max-w-[633px]"
+                className="text-gray-900 mb-5 max-w-[343px] lg:max-w-[633px] text-[60px] lg:text-[50px]"
                 style={{
                   fontFamily: "'Manrope', sans-serif",
                   fontWeight: 500,
-                  fontSize: '50px',
                   lineHeight: '100%',
-                  letterSpacing: '0.5%'
+                  letterSpacing: '0.005em'
                 }}
               >
                 We Create Marketing That
                 Works
               </h2>
-              <p className="text-base lg:text-lg text-gray-600 mb-8 max-w-md leading-relaxed">
+              <p
+                className="text-gray-600 mb-8 max-w-[343px] lg:max-w-md text-[18px] leading-[28px] font-medium font-manrope align-middle"
+                style={{ letterSpacing: '0.005em' }}
+              >
                 We partner with brands to solve real challenges using AI-powered strategies, creative design, and performance-focused marketing.
               </p>
             </div>
@@ -111,7 +113,7 @@ const Hometwo: React.FC<HometwoProps> = ({ nextInView }) => {
               <img
                 src="/images/chat bubbles.svg"
                 alt="Chat Bubbles"
-                className="absolute inset-0 hidden h-full w-full object-contain opacity-100 pointer-events-none animate-gentle-float sm:block"
+                className="absolute inset-0 h-full w-full object-contain opacity-100 pointer-events-none animate-gentle-float block"
               />
             </div>
           </div>
