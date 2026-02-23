@@ -7,7 +7,7 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ nextInView }) => {
   return (
-    <section className="relative overflow-visible sm:overflow-hidden bg-gradient-to-br from-[#dbeafe] via-[#ffe4e6] to-[#fef9c3] min-h-screen sm:min-h-[87vh] sm:flex sm:items-center">
+    <section className="relative overflow-visible sm:overflow-hidden bg-gradient-to-br from-[#dbeafe] via-[#ffe4e6] to-[#fef9c3] min-h-[72vh] sm:min-h-[87vh] sm:flex sm:items-center">
       {/* Desktop corner content */}
       {!nextInView && (
         <>
@@ -119,7 +119,7 @@ const Hero: React.FC<HeroProps> = ({ nextInView }) => {
           />
 
           <div className="relative h-[210px]">
-            <div className="absolute right-0 top-0 space-y-1 text-[14px] leading-[1.05] text-[#6b4f1f] font-medium text-right">
+            <div className="absolute right-0 top-6 space-y-1 text-[14px] leading-[1.05] text-[#6b4f1f] font-medium text-right">
               <p>ui/ux design</p>
               <p>digital marketing</p>
               <p>web development</p>
