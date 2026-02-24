@@ -42,7 +42,7 @@ const Homesix: React.FC = () => {
       style={{ fontFamily: "'Manrope', 'Segoe UI', sans-serif" }}
     >
       {/* Background Lines */}
-      <div className="absolute bottom-0 left-0 right-0 top-[50%] pointer-events-none">
+      <div className="absolute bottom-0 left-0 right-0 top-[50%] pointer-events-none max-lg:!hidden">
         <img
           src="/images/lines.png"
           alt="Background Lines"
