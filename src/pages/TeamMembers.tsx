@@ -96,9 +96,9 @@ const TeamMembers: React.FC<TeamMembersProps> = ({ onLoginClick }) => {
             {displayedTeam.map((member) => (
               <article
                 key={`${member.name}-${member.title}`}
-                className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm hover:shadow-md transition-shadow"
+                className="rounded-2xl p-5 text-center"
               >
-                <div className="w-full aspect-square rounded-xl overflow-hidden bg-gray-100">
+                <div className="w-full aspect-square rounded-xl overflow-hidden">
                   <img
                     src={member.image}
                     alt={member.name}
