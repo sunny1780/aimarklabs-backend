@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import SharedVideo from './SharedVideo';
 
 interface HeroProps {
@@ -20,8 +21,8 @@ const Hero: React.FC<HeroProps> = ({ nextInView }) => {
               <span className="whitespace-nowrap">that delivers measurable impact.</span>
             </p>
 
-           <button
-  type="button"
+           <Link
+  to="/contact"
   className="inline-flex items-center gap-2 rounded-lg bg-[#182126] px-4 py-2 text-[#FBFCFD] text-sm font-medium hover:bg-[#24313b] transition-colors"
 >
   Lets Talk
@@ -30,7 +31,7 @@ const Hero: React.FC<HeroProps> = ({ nextInView }) => {
     alt="arrow icon" 
     className="w-4 h-4"
   />
-</button>
+</Link>
 
           </div>
 
@@ -62,9 +63,9 @@ const Hero: React.FC<HeroProps> = ({ nextInView }) => {
           <div className="relative flex-1 min-h-[120px] sm:min-h-0">
             {/* Left star image */}
             <img
-              src="/images/star.png"
+              src="/images/sstar.svg"
               alt="star shape"
-              className="hidden lg:block hero-float-1 absolute -left-28 -top-32 w-36 h-36 object-contain"
+              className="hidden lg:block hero-float-1 absolute -left-40 -top-32 w-36 h-36 object-contain"
             />
 
             {/* Floating Aa image */}
@@ -78,7 +79,7 @@ const Hero: React.FC<HeroProps> = ({ nextInView }) => {
             <img
               src="/images/fullstack.png"
               alt="Full Stack badge"
-              className="hidden lg:block hero-float-3 absolute -bottom-36 left-40 w-28 h-auto object-contain"
+              className="hidden lg:block hero-float-3 absolute -bottom-28 left-40 w-28 h-auto object-contain"
             />
 
             {/* Bottom right Agencies pill image */}
@@ -91,17 +92,21 @@ const Hero: React.FC<HeroProps> = ({ nextInView }) => {
 
           {/* Right side - services list */}
           <div className="flex-1 flex justify-start sm:justify-end w-full">
-            <div className="-mt-4 sm:-mt-[104px] md:-mt-[166px] sm:mr-12 md:mr-24 text-left space-y-1 text-[14px] sm:text-[15px] md:text-[16px] text-gray-700 pr-[160px] sm:pr-0">
+            <div className="-mt-4 sm:-mt-[104px] md:-mt-[198px] sm:mr-12 md:mr-24 text-left space-y-1 text-[14px] sm:text-[15px] md:text-[16px] text-gray-700 pr-[160px] sm:pr-0">
               <div>
-                <p>ui/ux design</p>
+                <p>Marketing</p>
                 <img src="/images/Line.png" alt="line" className="mt-1" />
               </div>
               <div>
-                <p>digital marketing</p>
+                <p>Branding</p>
                 <img src="/images/Line.png" alt="line" className="mt-1" />
               </div>
               <div>
-                <p>web development</p>
+                <p>Development</p>
+                <img src="/images/Line.png" alt="line" className="mt-1" />
+              </div>
+              <div>
+                <p>Creative</p>
                 <img src="/images/Line.png" alt="line" className="mt-1" />
               </div>
             </div>
@@ -113,16 +118,17 @@ const Hero: React.FC<HeroProps> = ({ nextInView }) => {
       {!nextInView && (
         <div className="sm:hidden relative w-full px-6 pt-8 pb-10">
           <img
-            src="/images/star.png"
+            src="/images/sstar.svg"
             alt="star shape"
             className="hero-float-1 absolute -left-10 top-12 w-24 h-24 object-contain opacity-35"
           />
 
           <div className="relative h-[210px]">
             <div className="absolute right-0 top-6 space-y-1 text-[14px] leading-[1.05] text-[#6b4f1f] font-medium text-right">
-              <p>ui/ux design</p>
-              <p>digital marketing</p>
-              <p>web development</p>
+              <p>Marketing</p>
+              <p>Branding</p>
+              <p>Development</p>
+              <p>Creative</p>
             </div>
 
             <h1 className="absolute left-1/2 top-[102px] -translate-x-1/2 max-w-full px-2 text-[clamp(44px,13vw,64px)] leading-none font-extrabold tracking-tight text-[#c4cad8] whitespace-nowrap">
@@ -151,8 +157,8 @@ const Hero: React.FC<HeroProps> = ({ nextInView }) => {
             <br className="hidden sm:block" />
             <span>marketing that delivers measurable impact.</span>
           </p>
-          <button
-            type="button"
+          <Link
+            to="/contact"
             className="inline-flex items-center gap-2 rounded-lg bg-[#182126] px-4 py-2 text-[#FBFCFD] text-sm font-medium hover:bg-[#24313b] transition-colors"
           >
             Lets Talk
@@ -161,7 +167,7 @@ const Hero: React.FC<HeroProps> = ({ nextInView }) => {
               alt="arrow icon"
               className="w-4 h-4"
             />
-          </button>
+          </Link>
 
           <SharedVideo
             src="https://customer-leo8lubv91ct4vwd.cloudflarestream.com/5c3acb77ca3fe6464ff0adce38180240/manifest/video.m3u8"

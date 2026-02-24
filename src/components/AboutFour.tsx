@@ -26,7 +26,7 @@ const AboutFour: React.FC = () => {
                   </p>
                 </div>
                 <div className="about-four-badge absolute -top-2 -right-2 w-12 h-12 bg-[#F29335] rounded-lg flex items-center justify-center shadow-md">
-                  <span className="text-white font-bold text-lg">99</span>
+                  <img src="/images/comas.svg" alt="" className="w-6 h-6 object-contain" />
                 </div>
               </div>
             </div>
@@ -43,7 +43,7 @@ const AboutFour: React.FC = () => {
                   </p>
                 </div>
                 <div className="about-four-badge absolute -top-2 -right-2 w-12 h-12 bg-[#F29335] rounded-lg flex items-center justify-center shadow-md">
-                  <span className="text-white font-bold text-lg">99</span>
+                  <img src="/images/comas.svg" alt="" className="w-6 h-6 object-contain" />
                 </div>
               </div>
             </div>

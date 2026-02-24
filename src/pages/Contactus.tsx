@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { buildApiUrl } from '../utils/api';
@@ -26,6 +26,32 @@ const Contactus: React.FC<ContactusProps> = ({ onLoginClick }) => {
   const [region, setRegion] = useState('');
   const [services, setServices] = useState<string[]>([]);
   const [projectDetails, setProjectDetails] = useState('');
+  const [textareaHeight, setTextareaHeight] = useState(120);
+  const resizeRef = useRef<HTMLDivElement>(null);
+  const startY = useRef(0);
+  const startHeight = useRef(120);
+
+  const handleResizeStart = useCallback((e: React.TouchEvent | React.MouseEvent) => {
+    const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+    startY.current = clientY;
+    startHeight.current = textareaHeight;
+    const moveHandler = (moveEvent: TouchEvent | MouseEvent) => {
+      const y = 'touches' in moveEvent ? moveEvent.touches[0].clientY : moveEvent.clientY;
+      const diff = y - startY.current;
+      setTextareaHeight(Math.max(100, Math.min(400, startHeight.current + diff)));
+    };
+    const upHandler = () => {
+      document.removeEventListener('touchmove', moveHandler);
+      document.removeEventListener('touchend', upHandler);
+      document.removeEventListener('mousemove', moveHandler);
+      document.removeEventListener('mouseup', upHandler);
+    };
+    document.addEventListener('touchmove', moveHandler, { passive: true });
+    document.addEventListener('touchend', upHandler);
+    document.addEventListener('mousemove', moveHandler);
+    document.addEventListener('mouseup', upHandler);
+  }, [textareaHeight]);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState<string | null>(null);
 
@@ -90,15 +116,17 @@ const Contactus: React.FC<ContactusProps> = ({ onLoginClick }) => {
     <div className="min-h-screen bg-[#F7F9FB]" style={{ fontFamily: "'Manrope', 'Segoe UI', sans-serif" }}>
       <Navbar onLoginClick={onLoginClick} />
 
-      <main className="max-w-6xl mx-auto py-16 px-4 sm:px-6 lg:px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.3fr] gap-12 bg-white rounded-3xl shadow-sm p-6 sm:p-10">
+      <main className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-10">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.3fr] gap-12  rounded-3xl p-6 sm:p-10">
           {/* Left content */}
           <div className="space-y-6">
             <button className="inline-flex items-center px-5 py-2.5 rounded-lg text-sm font-semibold tracking-wide text-[#272D55] bg-[#D7DDFC] border border-[#B3BDEF]">
               Get in Touch
             </button>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+            <h1
+              className="text-gray-900 max-w-[544px] text-[48px] leading-[100%] tracking-[0.005em] font-medium font-manrope"
+            >
               Let&apos;s discuss your
               <br />
               project
@@ -208,12 +236,25 @@ const Contactus: React.FC<ContactusProps> = ({ onLoginClick }) => {
               <label className="block text-sm font-medium text-gray-700">
                 Project Details <span className="text-red-500">*</span>
               </label>
-              <textarea
-                rows={4}
-                value={projectDetails}
-                onChange={(e) => setProjectDetails(e.target.value)}
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#F29335] focus:border-[#F29335] resize-none"
-              />
+              <div className="relative">
+                <textarea
+                  rows={4}
+                  value={projectDetails}
+                  onChange={(e) => setProjectDetails(e.target.value)}
+                  className="w-full rounded-lg border border-gray-300 px-3 py-2 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-[#F29335] focus:border-[#F29335] resize-none"
+                  style={{ minHeight: textareaHeight, height: textareaHeight }}
+                />
+                <div
+                  ref={resizeRef}
+                  onTouchStart={handleResizeStart}
+                  onMouseDown={handleResizeStart}
+                  className="absolute bottom-2 right-2 p-2 -m-2 flex cursor-se-resize touch-none gap-1 opacity-70 hover:opacity-100 active:opacity-100 items-end"
+                  aria-label="Resize"
+                >
+                  <span className="block h-4 w-px bg-gray-600 rounded rotate-45 origin-bottom" />
+                  <span className="block h-2.5 w-px bg-gray-600 rounded rotate-45 origin-bottom" />
+                </div>
+              </div>
             </div>
 
             <div className="pt-2 flex justify-end">

@@ -118,10 +118,10 @@ const Footer: React.FC = () => {
           <div>
             <div className="mb-4">
               <Link to="/" onClick={handleInternalNavClick} aria-label="Go to home page">
-                <img src="/images/logofooter.png" alt="AiMarkLabs Logo" className="h-12" />
+                <img src="/images/whitelogo.svg" alt="AiMarkLabs Logo" className="h-12" />
               </Link>
             </div>
-            <p className="text-white/70 text-sm mb-6">Amplify Your Brand Presence.</p>
+            <p className="text-white/70 text-sm mb-6">Where AI transforms Marketing</p>
             <div className="flex flex-wrap gap-x-8 gap-y-4 mb-6">
               <div>
                 <p className="text-white/50 text-xs font-semibold uppercase tracking-wider mb-1">Phone</p>

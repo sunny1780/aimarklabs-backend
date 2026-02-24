@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface FolderProps {
   color?: string;
   size?: number;
   items?: React.ReactNode[];
   className?: string;
+  autoOpen?: boolean;
 }
 
 const darkenColor = (hex: string, percent: number): string => {
@@ -25,7 +26,7 @@ const darkenColor = (hex: string, percent: number): string => {
   return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase();
 };
 
-const Folder: React.FC<FolderProps> = ({ color = '#5227FF', size = 1, items = [], className = '' }) => {
+const Folder: React.FC<FolderProps> = ({ color = '#5227FF', size = 1, items = [], className = '', autoOpen = false }) => {
   const maxItems = 3;
   const papers = items.slice(0, maxItems);
   while (papers.length < maxItems) {
@@ -33,6 +34,13 @@ const Folder: React.FC<FolderProps> = ({ color = '#5227FF', size = 1, items = []
   }
 
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (autoOpen) {
+      const timer = setTimeout(() => setOpen(true), 800);
+      return () => clearTimeout(timer);
+    }
+  }, [autoOpen]);
   const [paperOffsets, setPaperOffsets] = useState<{ x: number; y: number }[]>(
     Array.from({ length: maxItems }, () => ({ x: 0, y: 0 }))
   );
@@ -43,12 +51,14 @@ const Folder: React.FC<FolderProps> = ({ color = '#5227FF', size = 1, items = []
   const paper3 = '#ffffff';
 
   const handleMouseEnter = () => {
-    setOpen(true);
+    if (!autoOpen) setOpen(true);
   };
 
   const handleMouseLeave = () => {
-    setOpen(false);
-    setPaperOffsets(Array.from({ length: maxItems }, () => ({ x: 0, y: 0 })));
+    if (!autoOpen) {
+      setOpen(false);
+      setPaperOffsets(Array.from({ length: maxItems }, () => ({ x: 0, y: 0 })));
+    }
   };
 
   const handlePaperMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, index: number) => {

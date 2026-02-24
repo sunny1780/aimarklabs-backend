@@ -47,6 +47,7 @@ const BrandingHero: React.FC = () => {
                 color="#f29335"
                 size={1.6}
                 className="custom-folder"
+                autoOpen
                 items={folderImages.map(src => (
                   <img
                     key={src}

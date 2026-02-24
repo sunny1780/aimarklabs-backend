@@ -39,7 +39,7 @@ const teamMembers: TeamMember[] = [
 ];
 
 const teamProfileImages = [
-  '/images/team/misty.png',
+  '/images/team/Mistyyy.png',
   '/images/team/AALI.png',
   '/images/team/Muhamma.png',
    '/images/team/Farhan.png',

@@ -34,10 +34,10 @@ const Servicehero = () => {
               />
             </h1>
 
-            <p className="text-[#687076] text-sm sm:text-base mb-6 max-w-md">
+            {/* <p className="text-[#687076] text-sm sm:text-base mb-6 max-w-md">
               From strategy to execution, our numbers reflect the growth we
               create for our clients.
-            </p>
+            </p> */}
 
          <button className="relative group bg-[#F29335] hover:bg-orange-600 transition px-5 sm:px-6 py-3 rounded-lg font-medium overflow-hidden text-white text-sm sm:text-base w-full sm:w-auto">
   <span className="relative z-10">Get Designs That Convert</span>

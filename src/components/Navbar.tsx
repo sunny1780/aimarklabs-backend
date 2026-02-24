@@ -74,12 +74,12 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
   };
 
   return (
-      <nav className="sticky top-0 z-[1000] w-full px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 via-orange-50 to-white shadow-sm">
+      <nav className="sticky top-0 z-[1000] w-full px-4 sm:px-6 py-4 bg-white shadow-sm backdrop-blur-sm">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo Section */}
         <Link to="/" className="flex items-center" aria-label="Go to home page">
           <img
-            src="/images/logo1.png"
+            src="/images/purplelogo.svg"
             alt="a Mark Lous Logo"
             className="h-12 w-auto object-contain"
           />
