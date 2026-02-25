@@ -113,7 +113,7 @@ const Contactus: React.FC<ContactusProps> = ({ onLoginClick }) => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F7F9FB]" style={{ fontFamily: "'Manrope', 'Segoe UI', sans-serif" }}>
+    <div className="min-h-screen" style={{ fontFamily: "'Manrope', 'Segoe UI', sans-serif" }}>
       <Navbar onLoginClick={onLoginClick} />
 
       <main className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-10">
@@ -142,7 +142,7 @@ const Contactus: React.FC<ContactusProps> = ({ onLoginClick }) => {
           </div>
 
           {/* Right form */}
-          <form className="space-y-5" onSubmit={handleSubmit}>
+          <form className="space-y-5 bg-[#FBFCFD] p-6 sm:p-8 shadow-sm" onSubmit={handleSubmit}>
             <div className="space-y-1">
               <label className="block text-sm font-medium text-gray-700">
                 Full Name <span className="text-red-500">*</span>
