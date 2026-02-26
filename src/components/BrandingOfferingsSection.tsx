@@ -12,7 +12,7 @@ const cards: OfferingCard[] = [
     title: 'Brand Strategy & Market Positioning',
     description:
       'Develop data-driven positioning frameworks, audience analysis, and competitive intelligence to define your unique market space and messaging architecture.',
-    span: 'lg:col-span-2',
+    span: 'lg:col-span-2 branding-card-wide',
   },
   {
     title: 'Visual Identity & Logo Systems',
@@ -38,7 +38,7 @@ const cards: OfferingCard[] = [
     title: 'Video Production & Editing',
     description:
       'Create professional video content for marketing, social media, tutorials, or brand storytelling with motion graphics, voiceovers, and post-production polish.',
-    span: 'lg:col-span-2',
+    span: 'lg:col-span-2 branding-card-wide',
   },
 ];
 
@@ -275,6 +275,21 @@ const BrandingOfferingsSection: React.FC = () => {
             box-shadow:
               0 14px 40px rgba(8, 10, 34, 0.45),
               0 0 25px rgba(120, 80, 220, 0.12);
+          }
+
+          .branding-card.branding-card-wide:hover {
+            box-shadow:
+              0 10px 28px rgba(8, 10, 34, 0.35),
+              0 0 18px rgba(120, 80, 220, 0.08);
+          }
+
+          .branding-card.branding-card-wide::after {
+            background: radial-gradient(
+              320px circle at var(--glow-x) var(--glow-y),
+              rgba(140, 100, 255, calc(var(--glow-opacity) * 0.12)) 0%,
+              rgba(100, 60, 200, calc(var(--glow-opacity) * 0.05)) 30%,
+              transparent 55%
+            );
           }
 
           .branding-ripple {
