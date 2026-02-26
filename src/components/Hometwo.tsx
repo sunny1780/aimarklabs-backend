@@ -3,9 +3,10 @@ import SharedVideo from './SharedVideo';
 
 interface HometwoProps {
   nextInView: boolean;
+  isMobile?: boolean;
 }
 
-const Hometwo: React.FC<HometwoProps> = ({ nextInView }) => {
+const Hometwo: React.FC<HometwoProps> = ({ nextInView, isMobile = false }) => {
   const cardsRef = useRef<HTMLDivElement>(null);
   const leftTextRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -64,7 +65,8 @@ const Hometwo: React.FC<HometwoProps> = ({ nextInView }) => {
         {nextInView && (
           <SharedVideo
             src="https://customer-leo8lubv91ct4vwd.cloudflarestream.com/5c3acb77ca3fe6464ff0adce38180240/manifest/video.m3u8"
-            layoutId="home-shared-video"
+            layoutId={isMobile ? undefined : 'home-shared-video'}
+            entranceAnimation={isMobile ? 'slideDown' : undefined}
             className="w-full max-w-[1400px] h-[280px] sm:h-[420px] lg:h-[740px] mx-auto mb-12"
           />
         )}
