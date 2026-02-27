@@ -41,6 +41,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLoginClick }) => {
         'cash-for-gold': 'Cash For Gold Beckley',
         'karachi-bbq': 'Karachi BBQ',
         'evolo-ai': 'Evolo AI',
+        'walker-advisor': 'Walker Advisor',
       };
 
       const resolvedName =

@@ -1,14 +1,18 @@
 import React, { useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import './App.css';
+import FacebookAdsOverview from './components/FacebookAdsOverview';
+import InstagramOverview from './components/InstagramOverview';
+import SiteHealthOverview from './components/SiteHealthOverview';
 
 const clientLabels: Record<string, string> = {
   'little-sicily': 'Little Sicily',
   'cash-for-gold': 'Cash for Gold',
   olmdc: 'OLMDC',
   'evolo-ai': 'Evolo AI',
-  'party-hall': 'Party Hall',
+  'party-hall': 'Beckley Party Hall',
   'seagull-seafood': 'Seagull Seafood',
+  'walker-advisor': 'Walker Advisor',
 };
 
 const tabs = [
@@ -37,6 +41,8 @@ const AdminClientDashboard: React.FC = () => {
       'https://lookerstudio.google.com/u/0/reporting/3037419a-81b3-4c0e-8d17-1a319bbee0bd/page/OAikE',
     olmdc:
       'https://lookerstudio.google.com/u/0/reporting/acbe15bf-e922-4d94-8de4-ed870af81a21/page/iTJlE',
+    'walker-advisor':
+      'https://lookerstudio.google.com/u/0/reporting/35566fb0-1a0a-4bb8-861a-7df8c3985bed/page/DsIlE',
   };
   const lookerStudioUrl = slug ? lookerStudioReports[slug] : undefined;
   const lookerStudioEmbedUrl = lookerStudioUrl
@@ -170,13 +176,52 @@ const AdminClientDashboard: React.FC = () => {
           </section>
         )}
 
-        {activeTab === 'web-traffic' && lookerStudioEmbedUrl && (
-          <section className="looker-card">
+        {lookerStudioEmbedUrl && (
+          <section
+            className="looker-card"
+            style={{ display: activeTab === 'web-traffic' ? 'block' : 'none' }}
+            aria-hidden={activeTab !== 'web-traffic'}
+          >
             <iframe
               className="looker-frame"
               src={lookerStudioEmbedUrl}
               title="Web Traffic Report"
               allowFullScreen
+              loading="eager"
+            />
+          </section>
+        )}
+
+        {activeTab === 'meta-analytics' && slug === 'walker-advisor' && (
+          <FacebookAdsOverview clientName={clientName} />
+        )}
+
+        {activeTab === 'meta-analytics' && slug === 'party-hall' && (
+          <InstagramOverview clientName={clientName} clientSlug="party-hall" />
+        )}
+
+        {activeTab === 'meta-analytics' &&
+          slug !== 'walker-advisor' &&
+          slug !== 'party-hall' && (
+          <section className="subscription-empty">
+            <p>
+              Meta analytics is currently configured for Walker Advisor
+              (Facebook) and Beckley Party Hall (Instagram).
+            </p>
+          </section>
+        )}
+
+        {activeTab === 'site-health' && slug === 'walker-advisor' && (
+          <section className="card">
+            <header className="card-header">
+              <h2 className="card-title">Site Health Overview</h2>
+              <p className="card-subtitle">
+                PageSpeed Insights data for Walker Advisor is shown below.
+              </p>
+            </header>
+            <SiteHealthOverview
+              clientSlug="walker-advisor"
+              brandLabel={clientName}
             />
           </section>
         )}
@@ -184,9 +229,17 @@ const AdminClientDashboard: React.FC = () => {
         {activeTab !== 'monthly' &&
           activeTab !== 'audit-report' &&
           activeTab !== 'subscription' &&
+          activeTab !== 'meta-analytics' &&
+          activeTab !== 'site-health' &&
           activeTab !== 'web-traffic' && (
           <section className="subscription-empty">
             <p>Content coming soon for this section.</p>
+          </section>
+        )}
+
+        {activeTab === 'site-health' && slug !== 'walker-advisor' && (
+          <section className="subscription-empty">
+            <p>Site Health is currently configured for Walker Advisor only.</p>
           </section>
         )}
 

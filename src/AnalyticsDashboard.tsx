@@ -1,6 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import './App.css';
+import FacebookAdsOverview from './components/FacebookAdsOverview';
 import MetaAnalyticsSection from './components/MetaAnalyticsSection';
+import InstagramOverview from './components/InstagramOverview';
+import SiteHealthOverview from './components/SiteHealthOverview';
 import Sidebar from './components/Sidebar';
 import TopBar from './components/TopBar';
 
@@ -69,13 +72,50 @@ const DASHBOARD_CLIENTS: Record<string, DashboardClient> = {
     hasAnalyticsData: true,
     showAuditPreview: true,
   },
+  'party-hall': {
+    name: 'Beckley Party Hall',
+    brandLabel: 'Beckley Party Hall',
+    webTrafficEmbedUrl:
+      'https://lookerstudio.google.com/embed/reporting/3037419a-81b3-4c0e-8d17-1a319bbee0bd/page/OAikE',
+    metaAdsEmbedUrl: '',
+    auditReportPreviewUrl:
+      '/images/Karachi-BBQ-Tonight-Digital-Marketing-Audit.pdf',
+    auditReportDownloadUrl:
+      '/images/Karachi-BBQ-Tonight-Digital-Marketing-Audit.pdf',
+    hasAnalyticsData: true,
+    showAuditPreview: false,
+  },
+  'walker-advisor': {
+    name: 'Walker Advisor',
+    brandLabel: 'Walker Advisor',
+    webTrafficEmbedUrl:
+      'https://lookerstudio.google.com/embed/reporting/35566fb0-1a0a-4bb8-861a-7df8c3985bed/page/DsIlE',
+    metaAdsEmbedUrl:
+      'https://lookerstudio.google.com/embed/reporting/c7f66e46-e89f-4879-a554-9087add5ea56/page/p_afos27a1oc',
+    auditReportPreviewUrl:
+      'https://docs.google.com/document/d/1HWkfC6xnBIT6SF-jYRYRq6t9DWS_KhpI/preview',
+    auditReportDownloadUrl:
+      'https://docs.google.com/document/d/1HWkfC6xnBIT6SF-jYRYRq6t9DWS_KhpI/export?format=pdf',
+    hasAnalyticsData: true,
+    showAuditPreview: true,
+  },
 };
+const GOOGLE_ANALYTICS_EMBED_URL =
+  'https://lookerstudio.google.com/embed/reporting/74a8d7cb-48db-439e-9f23-2224d1651b82/page/1h0pF';
 
 const AnalyticsDashboard: React.FC = () => {
   const [activeSection, setActiveSection] = useState<
     'analytics' | 'audit' | 'packages' | 'account'
   >('analytics');
-  const [activeTab, setActiveTab] = useState<'monthly' | 'siteHealth' | 'webTraffic' | 'metaAnalytics' | 'googleAds' | 'googleBusiness'>('monthly');
+  const [activeTab, setActiveTab] = useState<
+    | 'monthly'
+    | 'siteHealth'
+    | 'webTraffic'
+    | 'metaAnalytics'
+    | 'googleAnalytics'
+    | 'googleAds'
+    | 'googleBusiness'
+  >('monthly');
   const [activePackageTab, setActivePackageTab] = useState<
     'everything' | 'reputation' | 'branding' | 'website' | 'app' | 'uiux'
   >('everything');
@@ -85,12 +125,13 @@ const AnalyticsDashboard: React.FC = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [showCheckout, setShowCheckout] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
-  const activeClient = useMemo(() => {
-    if (typeof window === 'undefined') return DASHBOARD_CLIENTS['little-sicily'];
-    const clientSlug =
-      localStorage.getItem('dashboard_active_client_slug') || 'little-sicily';
-    return DASHBOARD_CLIENTS[clientSlug] || DASHBOARD_CLIENTS['little-sicily'];
+  const activeClientSlug = useMemo(() => {
+    if (typeof window === 'undefined') return 'little-sicily';
+    return localStorage.getItem('dashboard_active_client_slug') || 'little-sicily';
   }, []);
+  const activeClient = useMemo(() => {
+    return DASHBOARD_CLIENTS[activeClientSlug] || DASHBOARD_CLIENTS['little-sicily'];
+  }, [activeClientSlug]);
   const isAuditPdf = activeClient.auditReportPreviewUrl
     .toLowerCase()
     .includes('.pdf');
@@ -335,6 +376,12 @@ const AnalyticsDashboard: React.FC = () => {
             Meta Analytics
           </button>
           <button
+            className={`tab ${activeTab === 'googleAnalytics' ? 'active' : ''}`}
+            onClick={() => setActiveTab('googleAnalytics')}
+          >
+            Google Analytics
+          </button>
+          <button
             className={`tab ${activeTab === 'googleAds' ? 'active' : ''}`}
             onClick={() => setActiveTab('googleAds')}
           >
@@ -398,116 +445,10 @@ const AnalyticsDashboard: React.FC = () => {
                 site is fully optimized to attract and convert visitors.
               </p>
             </header>
-
-            <div className="site-health-layout">
-              <div className="site-health-header-bar">
-                <div className="site-health-brand">
-                  <div className="site-health-brand-logo">{activeClient.brandLabel}</div>
-                </div>
-                <button className="site-health-date">
-                  Nov 15, 2025 - Nov 22, 2025 ▾
-                </button>
-              </div>
-
-              <div className="site-health-section">
-                <h3 className="site-health-section-title">Website Health</h3>
-                <div className="site-health-panel wide">
-                  <p className="site-health-muted">
-                    The Health Score shows how well a website is doing
-                  </p>
-                  <div className="site-health-icon-row">
-                    <span className="site-health-icon">🔧</span>
-                    <div className="site-health-panel-text">
-                      <div>Looker Studio cannot connect to your data set.</div>
-                      <button className="site-health-link">See details</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="site-health-columns">
-                <div className="site-health-section">
-                  <h3 className="site-health-section-title">Health score history</h3>
-                  <div className="site-health-panel tall">
-                    <div className="site-health-icon-row center">
-                      <span className="site-health-icon">🔧</span>
-                      <div className="site-health-panel-text center-text">
-                        <div>Data Set Configuration Error</div>
-                        <div className="site-health-muted">
-                          Looker Studio cannot connect to your data set.
-                        </div>
-                        <button className="site-health-link">See details</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="site-health-section">
-                  <h3 className="site-health-section-title">Issues distribution</h3>
-                  <div className="site-health-panel tall">
-                    <div className="site-health-icon-row center">
-                      <span className="site-health-icon">🔧</span>
-                      <div className="site-health-panel-text center-text">
-                        <div>Looker Studio cannot connect to your data set.</div>
-                        <button className="site-health-link">See details</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="site-health-bottom-grid">
-                <div className="site-health-section">
-                  <h3 className="site-health-section-title">
-                    HTTP status codes distribution
-                  </h3>
-                  <div className="site-health-panel">
-                    <div className="site-health-icon-row center">
-                      <span className="site-health-icon">🔧</span>
-                      <div className="site-health-panel-text center-text">
-                        <div>Data Set Configuration Error</div>
-                        <div className="site-health-muted">
-                          Looker Studio cannot connect to your data set.
-                        </div>
-                        <button className="site-health-link">See details</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="site-health-section">
-                  <h3 className="site-health-section-title">Content type distribution</h3>
-                  <div className="site-health-panel">
-                    <div className="site-health-icon-row center">
-                      <span className="site-health-icon">🔧</span>
-                      <div className="site-health-panel-text center-text">
-                        <div>Data Set Configuration Error</div>
-                        <div className="site-health-muted">
-                          Looker Studio cannot connect to your data set.
-                        </div>
-                        <button className="site-health-link">See details</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="site-health-section">
-                  <h3 className="site-health-section-title">Protocols distribution</h3>
-                  <div className="site-health-panel">
-                    <div className="site-health-icon-row center">
-                      <span className="site-health-icon">🔧</span>
-                      <div className="site-health-panel-text center-text">
-                        <div>Data Set Configuration Error</div>
-                        <div className="site-health-muted">
-                          Looker Studio cannot connect to your data set.
-                        </div>
-                        <button className="site-health-link">See details</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <SiteHealthOverview
+              clientSlug={activeClientSlug}
+              brandLabel={activeClient.brandLabel}
+            />
           </section>
         )}
 
@@ -537,12 +478,53 @@ const AnalyticsDashboard: React.FC = () => {
           </section>
         )}
 
-        {activeTab === 'metaAnalytics' && (
-          <MetaAnalyticsSection
-            clientName={activeClient.name}
-            brandLabel={activeClient.brandLabel}
-            metaAdsReportUrl={activeClient.metaAdsEmbedUrl}
-          />
+        {activeTab === 'metaAnalytics' &&
+          (activeClientSlug === 'walker-advisor' ? (
+            <>
+              <FacebookAdsOverview clientName={activeClient.name} />
+              <div style={{ marginTop: '12px' }}>
+                <InstagramOverview
+                  clientName={activeClient.name}
+                  clientSlug={activeClientSlug}
+                />
+              </div>
+            </>
+          ) : activeClientSlug === 'party-hall' ? (
+            <InstagramOverview
+              clientName={activeClient.name}
+              clientSlug={activeClientSlug}
+            />
+          ) : (
+            <MetaAnalyticsSection
+              clientName={activeClient.name}
+              brandLabel={activeClient.brandLabel}
+              metaAdsReportUrl={activeClient.metaAdsEmbedUrl}
+            />
+          ))}
+
+        {activeTab === 'googleAnalytics' && (
+          <section className="card">
+            <header className="card-header">
+              <h2 className="card-title">Google Analytics &amp; Website Insights</h2>
+              <p className="card-subtitle">
+                We monitor website traffic, audience behavior, engagement patterns,
+                and conversion trends to uncover what is working and where to improve.
+              </p>
+            </header>
+
+            <div className="web-traffic-layout">
+              <iframe
+                title="Google Analytics Looker Studio"
+                src={GOOGLE_ANALYTICS_EMBED_URL}
+                width="600"
+                height="450"
+                style={{ border: 0, width: '100%', maxWidth: '100%' }}
+                frameBorder={0}
+                allowFullScreen
+                sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+              />
+            </div>
+          </section>
         )}
 
         {activeTab === 'googleAds' && (

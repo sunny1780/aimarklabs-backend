@@ -14,8 +14,9 @@ const defaultClients: Client[] = [
   { name: 'Cash for Gold', slug: 'cash-for-gold', accent: '#fbbf24' },
   { name: 'OLMDC', slug: 'olmdc', accent: '#22c55e' },
   { name: 'Evolo AI', slug: 'evolo-ai', accent: '#60a5fa' },
-  { name: 'Party Hall', slug: 'party-hall', accent: '#f97316' },
+  { name: 'Beckley Party Hall', slug: 'party-hall', accent: '#f97316' },
   { name: 'Seagull Seafood', slug: 'seagull-seafood', accent: '#38bdf8' },
+  { name: 'Walker Advisor', slug: 'walker-advisor', accent: '#a78bfa' },
 ];
 
 const AdminDashboard: React.FC = () => {

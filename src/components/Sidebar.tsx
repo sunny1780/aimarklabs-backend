@@ -23,6 +23,8 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, onChangeSection, onLog
     'cash-for-gold': 'Cash For Gold Beckley',
     'karachi-bbq': 'Karachi BBQ',
     'evolo-ai': 'Evolo AI',
+    'party-hall': 'Beckley Party Hall',
+    'walker-advisor': 'Walker Advisor',
   };
 
   const displayName = clientNameBySlug[activeClientSlug]

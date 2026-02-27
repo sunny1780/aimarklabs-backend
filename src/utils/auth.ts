@@ -51,6 +51,25 @@ export const DASHBOARD_CREDENTIALS: DashboardCredential[] = [
     destination: '/dashboard',
     clientSlug: 'evolo-ai',
   },
+  {
+    email: 'walkeradvisor@gmail.com',
+    password: '123456',
+    destination: '/dashboard',
+    clientSlug: 'walker-advisor',
+  },
+  {
+    email: 'thewalkeradvisor@gmail.com',
+    password: '123456',
+    destination: '/dashboard',
+    clientSlug: 'walker-advisor',
+  },
+  {
+    email: 'beckleypartyhall@gmail.com',
+    password: '123456',
+    destination: '/dashboard',
+    clientSlug: 'party-hall',
+  },
+  
 ];
 
 const parseJSON = <T,>(value: string | null, fallback: T): T => {

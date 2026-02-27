@@ -236,6 +236,7 @@ const BrandingOfferingsSection: React.FC = () => {
             background: rgba(8, 8, 20, 0.45);
             backdrop-filter: blur(12px) saturate(120%);
             -webkit-backdrop-filter: blur(12px) saturate(120%);
+            box-shadow: none;
           }
 
           .branding-card::before {
@@ -256,7 +257,7 @@ const BrandingOfferingsSection: React.FC = () => {
             mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             mask-composite: exclude;
             pointer-events: none;
-            opacity: 1;
+            opacity: var(--glow-opacity, 0);
             z-index: 1;
             transition: opacity 0.3s ease;
           }
@@ -273,7 +274,7 @@ const BrandingOfferingsSection: React.FC = () => {
               rgba(100, 60, 200, calc(var(--glow-opacity) * 0.08)) 30%,
               transparent 55%
             );
-            opacity: 1;
+            opacity: var(--glow-opacity, 0);
             transition: opacity 0.3s ease;
           }
 
@@ -282,15 +283,11 @@ const BrandingOfferingsSection: React.FC = () => {
             background: rgba(12, 10, 28, 0.65);
             backdrop-filter: blur(24px) saturate(180%);
             -webkit-backdrop-filter: blur(24px) saturate(180%);
-            box-shadow:
-              0 14px 40px rgba(8, 10, 34, 0.45),
-              0 0 25px rgba(120, 80, 220, 0.12);
+            box-shadow: none;
           }
 
           .branding-card.branding-card-wide:hover {
-            box-shadow:
-              0 10px 28px rgba(8, 10, 34, 0.35),
-              0 0 18px rgba(120, 80, 220, 0.08);
+            box-shadow: none;
           }
 
           .branding-card.branding-card-wide::after {
@@ -300,6 +297,7 @@ const BrandingOfferingsSection: React.FC = () => {
               rgba(100, 60, 200, calc(var(--glow-opacity) * 0.05)) 30%,
               transparent 55%
             );
+            opacity: var(--glow-opacity, 0);
           }
 
           .branding-ripple {
