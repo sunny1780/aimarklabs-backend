@@ -9,8 +9,8 @@
  */
 const fs = require('fs');
 const path = require('path');
-const http = require('http');
 const crypto = require('crypto');
+const express = require('express');
 
 const PORT = Number(process.env.PORT || 5000);
 const GRAPH_BASE_URL = 'https://graph.facebook.com';
@@ -1988,14 +1988,15 @@ const requestHandler = async (req, res) => {
   }
 };
 
-if (process.env.VERCEL) {
-  module.exports = requestHandler;
-} else {
-  const server = http.createServer((req, res) => {
-    requestHandler(req, res);
-  });
+const app = express();
+app.use((req, res) => {
+  requestHandler(req, res);
+});
 
-  server.listen(PORT, () => {
+if (process.env.VERCEL) {
+  module.exports = app;
+} else {
+  app.listen(PORT, () => {
     // eslint-disable-next-line no-console
     console.log(`Instagram API server listening on http://localhost:${PORT}`);
   });
