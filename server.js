@@ -1988,11 +1988,15 @@ const requestHandler = async (req, res) => {
   }
 };
 
-const server = http.createServer((req, res) => {
-  requestHandler(req, res);
-});
+if (process.env.VERCEL) {
+  module.exports = requestHandler;
+} else {
+  const server = http.createServer((req, res) => {
+    requestHandler(req, res);
+  });
 
-server.listen(PORT, () => {
-  // eslint-disable-next-line no-console
-  console.log(`Instagram API server listening on http://localhost:${PORT}`);
-});
+  server.listen(PORT, () => {
+    // eslint-disable-next-line no-console
+    console.log(`Instagram API server listening on http://localhost:${PORT}`);
+  });
+}
