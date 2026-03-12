@@ -2831,11 +2831,20 @@ const requestHandler = async (req, res) => {
   }
 };
 
-const server = http.createServer((req, res) => {
-  requestHandler(req, res);
-});
+const createServer = () =>
+  http.createServer((req, res) => {
+    requestHandler(req, res);
+  });
 
-server.listen(PORT, () => {
-  // eslint-disable-next-line no-console
-  console.log(`Instagram API server listening on http://localhost:${PORT}`);
-});
+module.exports = {
+  createServer,
+  requestHandler,
+};
+
+if (require.main === module) {
+  const server = createServer();
+  server.listen(PORT, () => {
+    // eslint-disable-next-line no-console
+    console.log(`Instagram API server listening on http://localhost:${PORT}`);
+  });
+}
