@@ -1460,6 +1460,27 @@ const requestHandler = async (req, res) => {
 
   const requestUrl = new URL(req.url || '/', `http://${req.headers.host}`);
 
+  if (requestUrl.pathname === '/') {
+    sendJson(res, 200, {
+      ok: true,
+      service: 'aimarklabs-backend',
+      routes: [
+        '/health',
+        '/api/instagram/overview',
+        '/api/facebook-ads/overview',
+        '/api/google-analytics/overview',
+        '/api/gsc/traffic',
+        '/api/site-health/overview',
+        '/api/payments/stripe/checkout-session',
+        '/api/payments/stripe/webhook',
+        '/api/subscriptions',
+        '/api/newsletter/subscribe',
+        '/api/youtube/overview',
+      ],
+    });
+    return;
+  }
+
   if (requestUrl.pathname === '/health') {
     sendJson(res, 200, { ok: true });
     return;
