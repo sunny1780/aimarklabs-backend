@@ -635,6 +635,45 @@ const normalizePageUrl = (value) => {
   }
 };
 
+const buildPageSpeedUrlCandidates = (pageUrl) => {
+  const normalized = normalizePageUrl(pageUrl);
+  if (!normalized) return [];
+
+  const candidates = [normalized];
+
+  try {
+    const parsed = new URL(normalized);
+    const hostnameWithoutWww = parsed.hostname.replace(/^www\./i, '');
+    const alternateHostnames = parsed.hostname.startsWith('www.')
+      ? [hostnameWithoutWww]
+      : [`www.${hostnameWithoutWww}`];
+    const alternateProtocols =
+      parsed.protocol === 'https:' ? [] : ['https:'];
+
+    alternateHostnames.forEach((hostname) => {
+      const hostVariant = new URL(parsed.toString());
+      hostVariant.hostname = hostname;
+      candidates.push(hostVariant.toString());
+
+      alternateProtocols.forEach((protocol) => {
+        const secureVariant = new URL(hostVariant.toString());
+        secureVariant.protocol = protocol;
+        candidates.push(secureVariant.toString());
+      });
+    });
+
+    alternateProtocols.forEach((protocol) => {
+      const secureVariant = new URL(parsed.toString());
+      secureVariant.protocol = protocol;
+      candidates.push(secureVariant.toString());
+    });
+  } catch {
+    return candidates;
+  }
+
+  return [...new Set(candidates)];
+};
+
 const addDaysToISODate = (isoDate, days) => {
   const parsed = new Date(`${isoDate}T00:00:00Z`);
   parsed.setUTCDate(parsed.getUTCDate() + days);
@@ -1399,6 +1438,18 @@ const isPageSpeedKeyConfigurationError = (status, message) => {
   );
 };
 
+const isRetryablePageSpeedDocumentError = (message) => {
+  if (typeof message !== 'string') return false;
+  const normalized = message.toLowerCase();
+  return (
+    normalized.includes('failed_document_request') ||
+    normalized.includes('err_timed_out') ||
+    normalized.includes('err_name_not_resolved') ||
+    normalized.includes('err_connection_timed_out') ||
+    normalized.includes('err_connection_refused')
+  );
+};
+
 const fetchPageSpeedApi = async ({ pageUrl, strategy, apiKey }) => {
   const params = new URLSearchParams({
     url: pageUrl,
@@ -1437,19 +1488,49 @@ const fetchPageSpeedApi = async ({ pageUrl, strategy, apiKey }) => {
 };
 
 const fetchPageSpeedStrategy = async ({ pageUrl, strategy, apiKey }) => {
-  try {
-    const data = await fetchPageSpeedApi({ pageUrl, strategy, apiKey });
-    return buildPageSpeedPayload(strategy, data);
-  } catch (error) {
-    if (
-      apiKey &&
-      isPageSpeedKeyConfigurationError(error.status, error.apiMessage)
-    ) {
-      const fallbackData = await fetchPageSpeedApi({ pageUrl, strategy });
-      return buildPageSpeedPayload(strategy, fallbackData);
+  const urlCandidates = buildPageSpeedUrlCandidates(pageUrl);
+  let lastError = null;
+
+  for (let index = 0; index < urlCandidates.length; index += 1) {
+    const candidateUrl = urlCandidates[index];
+
+    try {
+      const data = await fetchPageSpeedApi({
+        pageUrl: candidateUrl,
+        strategy,
+        apiKey,
+      });
+      return buildPageSpeedPayload(strategy, data);
+    } catch (error) {
+      if (
+        apiKey &&
+        isPageSpeedKeyConfigurationError(error.status, error.apiMessage)
+      ) {
+        try {
+          const fallbackData = await fetchPageSpeedApi({
+            pageUrl: candidateUrl,
+            strategy,
+          });
+          return buildPageSpeedPayload(strategy, fallbackData);
+        } catch (fallbackError) {
+          lastError = fallbackError;
+        }
+      } else {
+        lastError = error;
+      }
+
+      if (
+        index === urlCandidates.length - 1 ||
+        !isRetryablePageSpeedDocumentError(
+          lastError?.apiMessage || lastError?.message
+        )
+      ) {
+        throw lastError;
+      }
     }
-    throw error;
   }
+
+  throw lastError || new Error(`PageSpeed API failed for ${strategy}.`);
 };
 
 const requestHandler = async (req, res) => {
@@ -1718,16 +1799,32 @@ const requestHandler = async (req, res) => {
     }
 
     try {
-      const strategyData = await Promise.all(
+      const strategyResults = await Promise.allSettled(
         strategies.map((strategy) =>
           fetchPageSpeedStrategy({ pageUrl, strategy, apiKey })
         )
       );
+      const strategyData = strategyResults
+        .filter((result) => result.status === 'fulfilled')
+        .map((result) => result.value);
+      const failures = strategyResults
+        .filter((result) => result.status === 'rejected')
+        .map((result) => result.reason);
+
+      if (strategyData.length === 0) {
+        throw failures[0] || new Error('PageSpeed API failed.');
+      }
+
       const payload = {
         source: 'pagespeed-insights',
         client,
         url: pageUrl,
         fetchedAt: new Date().toISOString(),
+        warnings: failures
+          .map((failure) =>
+            failure instanceof Error ? failure.message : 'Unable to load one strategy.'
+          )
+          .filter(Boolean),
         strategies: strategyData.reduce((acc, item) => {
           acc[item.strategy] = item;
           return acc;
