@@ -205,12 +205,24 @@ const resolveMetaAccessToken = (preferredEnvKey) => {
   return { token: '', envKey: preferredEnvKey || candidates[0] || '' };
 };
 
-const sendJson = (res, statusCode, payload) => {
+const resolveCorsOrigin = (origin) => {
+  const fallback = 'https://aimarklabs.com';
+  if (!origin || typeof origin !== 'string') return fallback;
+  try {
+    const parsed = new URL(origin);
+    return `${parsed.protocol}//${parsed.host}`;
+  } catch {
+    return fallback;
+  }
+};
+
+const sendJson = (res, statusCode, payload, origin) => {
   res.writeHead(statusCode, {
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Origin': resolveCorsOrigin(origin),
     'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization, Stripe-Signature',
+    Vary: 'Origin',
   });
   res.end(JSON.stringify(payload));
 };
@@ -1537,7 +1549,7 @@ const fetchPageSpeedStrategy = async ({ pageUrl, strategy, apiKey }) => {
 
 const requestHandler = async (req, res) => {
   if (req.method === 'OPTIONS') {
-    sendJson(res, 204, {});
+    sendJson(res, 204, {}, req.headers.origin);
     return;
   }
 

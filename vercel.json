@@ -1,4 +1,23 @@
 {
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "https://aimarklabs.com"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET,POST,OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Content-Type, Authorization, Stripe-Signature"
+        }
+      ]
+    }
+  ],
   "rewrites": [
     {
       "source": "/",
@@ -7,6 +26,10 @@
     {
       "source": "/health",
       "destination": "/api/health"
+    },
+    {
+      "source": "/api/:path*",
+      "destination": "/api/[...path]"
     }
   ]
 }
