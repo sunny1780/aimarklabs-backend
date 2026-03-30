@@ -17,6 +17,7 @@ const path = require('path');
 const http = require('http');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
+const { MongoClient } = require('mongodb');
 
 const PORT = Number(process.env.PORT || 5000);
 const GRAPH_BASE_URL = 'https://graph.facebook.com';
@@ -32,6 +33,13 @@ const STRIPE_API_BASE_URL = 'https://api.stripe.com/v1';
 const STRIPE_WEBHOOK_TOLERANCE_SECONDS = 300;
 const SUBSCRIPTIONS_STORE_PATH = path.resolve(__dirname, 'subscriptions.store.json');
 const NEWSLETTER_STORE_PATH = path.resolve(__dirname, 'newsletter.store.json');
+const HR_PROFILES_STORE_PATH = path.resolve(__dirname, 'hr-profiles.store.json');
+const MONGODB_URI = (process.env.MONGODB_URI || '').trim();
+const MONGODB_DB_NAME = (process.env.MONGODB_DB_NAME || 'aimarklabs').trim();
+const MONGODB_HR_PROFILES_COLLECTION = (
+  process.env.MONGODB_HR_PROFILES_COLLECTION || 'hr_profiles'
+).trim();
+let mongoClientPromise = null;
 
 const parseEnvFile = () => {
   const envCandidates = [
@@ -291,6 +299,78 @@ const readNewsletterStore = () => {
 
 const writeNewsletterStore = (rows) => {
   fs.writeFileSync(NEWSLETTER_STORE_PATH, JSON.stringify(rows, null, 2));
+};
+
+const readHrProfilesStore = () => {
+  try {
+    const raw = fs.readFileSync(HR_PROFILES_STORE_PATH, 'utf8');
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+};
+
+const writeHrProfilesStore = (rows) => {
+  fs.writeFileSync(HR_PROFILES_STORE_PATH, JSON.stringify(rows, null, 2));
+};
+
+const getMongoClient = async () => {
+  if (!MONGODB_URI) {
+    throw new Error('MONGODB_URI is not configured.');
+  }
+
+  if (!mongoClientPromise) {
+    const client = new MongoClient(MONGODB_URI);
+    mongoClientPromise = client.connect();
+  }
+
+  return mongoClientPromise;
+};
+
+const getHrProfilesCollection = async () => {
+  const client = await getMongoClient();
+  return client.db(MONGODB_DB_NAME).collection(MONGODB_HR_PROFILES_COLLECTION);
+};
+
+const readHrProfiles = async () => {
+  if (!MONGODB_URI) {
+    return readHrProfilesStore();
+  }
+
+  const collection = await getHrProfilesCollection();
+  const rows = await collection
+    .find({}, { projection: { _id: 0 } })
+    .sort({ createdAt: -1, id: 1 })
+    .toArray();
+
+  return Array.isArray(rows) ? rows : [];
+};
+
+const writeHrProfiles = async (rows) => {
+  if (!MONGODB_URI) {
+    writeHrProfilesStore(rows);
+    return rows;
+  }
+
+  const collection = await getHrProfilesCollection();
+  await collection.deleteMany({});
+
+  if (rows.length > 0) {
+    await collection.insertMany(
+      rows.map((row, index) => ({
+        ...row,
+        order: index,
+        updatedAt: new Date().toISOString(),
+        createdAt:
+          typeof row?.createdAt === 'string' && row.createdAt.trim()
+            ? row.createdAt.trim()
+            : new Date().toISOString(),
+      }))
+    );
+  }
+
+  return readHrProfiles();
 };
 
 const createNewsletterTransporter = () => {
@@ -1570,6 +1650,7 @@ const requestHandler = async (req, res) => {
         '/api/payments/stripe/webhook',
         '/api/subscriptions',
         '/api/newsletter/subscribe',
+        '/api/hr/profiles',
         '/api/youtube/overview',
       ],
     });
@@ -1578,6 +1659,87 @@ const requestHandler = async (req, res) => {
 
   if (requestUrl.pathname === '/health') {
     sendJson(res, 200, { ok: true });
+    return;
+  }
+
+  if (requestUrl.pathname === '/api/hr/profiles' && req.method === 'GET') {
+    try {
+      const status = String(requestUrl.searchParams.get('status') || '')
+        .trim()
+        .toLowerCase();
+      const rows = await readHrProfiles();
+      const filteredRows =
+        status === 'active' || status === 'inactive'
+          ? rows.filter(
+              (row) => String(row?.status || '').trim().toLowerCase() === status
+            )
+          : rows;
+
+      sendJson(
+        res,
+        200,
+        {
+          source: MONGODB_URI ? 'mongodb' : 'local-file-store',
+          rows: filteredRows,
+        },
+        req.headers.origin
+      );
+    } catch (error) {
+      sendJson(
+        res,
+        500,
+        {
+          message:
+            error instanceof Error ? error.message : 'Unable to fetch HR profiles.',
+        },
+        req.headers.origin
+      );
+    }
+    return;
+  }
+
+  if (requestUrl.pathname === '/api/hr/profiles' && req.method === 'POST') {
+    try {
+      const body = await readJsonBody(req);
+      const rows = Array.isArray(body?.profiles) ? body.profiles : null;
+
+      if (!rows) {
+        sendJson(res, 400, { message: 'Profiles array is required.' }, req.headers.origin);
+        return;
+      }
+
+      const normalizedRows = rows.map((row, index) => ({
+        id:
+          typeof row?.id === 'string' && row.id.trim()
+            ? row.id.trim()
+            : `${Date.now()}-${index}`,
+        name: String(row?.name || '').trim(),
+        role: String(row?.role || '').trim(),
+        experience: String(row?.experience || '').trim(),
+        status:
+          String(row?.status || '').trim().toLowerCase() === 'inactive'
+            ? 'inactive'
+            : 'active',
+        description: String(row?.description || '').trim(),
+        image: String(row?.image || '').trim(),
+      }));
+
+      const savedRows = await writeHrProfiles(normalizedRows);
+      sendJson(
+        res,
+        200,
+        {
+          message: 'HR profiles saved successfully.',
+          source: MONGODB_URI ? 'mongodb' : 'local-file-store',
+          rows: savedRows,
+        },
+        req.headers.origin
+      );
+    } catch (error) {
+      sendJson(res, 400, {
+        message: error instanceof Error ? error.message : 'Unable to save HR profiles.',
+      }, req.headers.origin);
+    }
     return;
   }
 
