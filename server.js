@@ -18,6 +18,7 @@ const http = require('http');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 const { MongoClient } = require('mongodb');
+const { handleUpload } = require('@vercel/blob/client');
 
 const PORT = Number(process.env.PORT || 5000);
 const GRAPH_BASE_URL = 'https://graph.facebook.com';
@@ -1691,6 +1692,45 @@ const requestHandler = async (req, res) => {
         {
           message:
             error instanceof Error ? error.message : 'Unable to fetch HR profiles.',
+        },
+        req.headers.origin
+      );
+    }
+    return;
+  }
+
+  if (requestUrl.pathname === '/api/blob/upload' && req.method === 'POST') {
+    try {
+      const body = await readJsonBody(req);
+      const jsonResponse = await handleUpload({
+        body,
+        request: req,
+        onBeforeGenerateToken: async (pathname) => {
+          const sanitizedName = String(pathname || 'image')
+            .replace(/[^a-zA-Z0-9._/-]/g, '-')
+            .replace(/\/+/g, '/');
+
+          return {
+            allowedContentTypes: ['image/jpeg', 'image/png', 'image/webp', 'image/jpg'],
+            addRandomSuffix: true,
+            tokenPayload: JSON.stringify({ folder: 'hr-profiles' }),
+            pathname: sanitizedName.startsWith('hr-profiles/')
+              ? sanitizedName
+              : `hr-profiles/${sanitizedName}`,
+          };
+        },
+        onUploadCompleted: async ({ blob }) => {
+          console.log('blob upload completed', blob?.url || '');
+        },
+      });
+
+      sendJson(res, 200, jsonResponse, req.headers.origin);
+    } catch (error) {
+      sendJson(
+        res,
+        400,
+        {
+          error: error instanceof Error ? error.message : 'Unable to upload image.',
         },
         req.headers.origin
       );
