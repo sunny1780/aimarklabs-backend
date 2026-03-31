@@ -1,20 +1,11 @@
 [
   {
-    "id": "1774862076146",
-    "name": "eshal",
-    "role": "developer",
-    "experience": "Mid",
-    "status": "active",
-    "description": "test",
-    "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&q=80"
-  },
-  {
     "id": "1774861616881",
     "name": "ali",
     "role": "developer",
     "experience": "Sr",
     "status": "active",
-    "description": "developer",
+    "description": "develope",
     "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&q=80"
   },
   {

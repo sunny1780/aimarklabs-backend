@@ -18,29 +18,6 @@ const http = require('http');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 const { MongoClient } = require('mongodb');
-const { handleUpload } = require('@vercel/blob/client');
-
-const PORT = Number(process.env.PORT || 5000);
-const GRAPH_BASE_URL = 'https://graph.facebook.com';
-const PAGESPEED_BASE_URL =
-  'https://www.googleapis.com/pagespeedonline/v5/runPagespeed';
-const GOOGLE_OAUTH_TOKEN_URL = 'https://oauth2.googleapis.com/token';
-const GSC_BASE_URL = 'https://www.googleapis.com/webmasters/v3';
-const GSC_SCOPE = 'https://www.googleapis.com/auth/webmasters.readonly';
-const GA4_BASE_URL = 'https://analyticsdata.googleapis.com/v1beta';
-const GA4_SCOPE = 'https://www.googleapis.com/auth/analytics.readonly';
-const YOUTUBE_BASE_URL = 'https://www.googleapis.com/youtube/v3';
-const STRIPE_API_BASE_URL = 'https://api.stripe.com/v1';
-const STRIPE_WEBHOOK_TOLERANCE_SECONDS = 300;
-const SUBSCRIPTIONS_STORE_PATH = path.resolve(__dirname, 'subscriptions.store.json');
-const NEWSLETTER_STORE_PATH = path.resolve(__dirname, 'newsletter.store.json');
-const HR_PROFILES_STORE_PATH = path.resolve(__dirname, 'hr-profiles.store.json');
-const MONGODB_URI = (process.env.MONGODB_URI || '').trim();
-const MONGODB_DB_NAME = (process.env.MONGODB_DB_NAME || 'aimarklabs').trim();
-const MONGODB_HR_PROFILES_COLLECTION = (
-  process.env.MONGODB_HR_PROFILES_COLLECTION || 'hr_profiles'
-).trim();
-let mongoClientPromise = null;
 
 const parseEnvFile = () => {
   const envCandidates = [
@@ -67,6 +44,33 @@ const parseEnvFile = () => {
 };
 
 parseEnvFile();
+
+const PORT = Number(process.env.PORT || 5000);
+const GRAPH_BASE_URL = 'https://graph.facebook.com';
+const PAGESPEED_BASE_URL =
+  'https://www.googleapis.com/pagespeedonline/v5/runPagespeed';
+const GOOGLE_OAUTH_TOKEN_URL = 'https://oauth2.googleapis.com/token';
+const GSC_BASE_URL = 'https://www.googleapis.com/webmasters/v3';
+const GSC_SCOPE = 'https://www.googleapis.com/auth/webmasters.readonly';
+const GA4_BASE_URL = 'https://analyticsdata.googleapis.com/v1beta';
+const GA4_SCOPE = 'https://www.googleapis.com/auth/analytics.readonly';
+const YOUTUBE_BASE_URL = 'https://www.googleapis.com/youtube/v3';
+const STRIPE_API_BASE_URL = 'https://api.stripe.com/v1';
+const STRIPE_WEBHOOK_TOLERANCE_SECONDS = 300;
+const SUBSCRIPTIONS_STORE_PATH = path.resolve(__dirname, 'subscriptions.store.json');
+const NEWSLETTER_STORE_PATH = path.resolve(__dirname, 'newsletter.store.json');
+const HR_PROFILES_STORE_PATH = path.resolve(__dirname, 'hr-profiles.store.json');
+const MONGODB_URI = (process.env.MONGODB_URI || '').trim();
+const MONGODB_DB_NAME = (process.env.MONGODB_DB_NAME || 'aimarklabs').trim();
+const MONGODB_HR_PROFILES_COLLECTION = (
+  process.env.MONGODB_HR_PROFILES_COLLECTION || 'hr_profiles'
+).trim();
+const CLOUDFLARE_ACCOUNT_ID = (process.env.CLOUDFLARE_ACCOUNT_ID || '').trim();
+const CLOUDFLARE_IMAGES_API_TOKEN = (process.env.CLOUDFLARE_IMAGES_API_TOKEN || '').trim();
+const CLOUDFLARE_IMAGES_ACCOUNT_HASH = (
+  process.env.CLOUDFLARE_IMAGES_ACCOUNT_HASH || ''
+).trim();
+let mongoClientPromise = null;
 
 const toISODate = (value) => value.toISOString().slice(0, 10);
 
@@ -1652,6 +1656,7 @@ const requestHandler = async (req, res) => {
         '/api/subscriptions',
         '/api/newsletter/subscribe',
         '/api/hr/profiles',
+        '/api/cloudflare/images/direct-upload',
         '/api/youtube/overview',
       ],
     });
@@ -1699,36 +1704,81 @@ const requestHandler = async (req, res) => {
     return;
   }
 
-  if (requestUrl.pathname === '/api/blob/upload' && req.method === 'POST') {
+  if (requestUrl.pathname === '/api/cloudflare/images/direct-upload' && req.method === 'POST') {
     try {
+      if (!CLOUDFLARE_ACCOUNT_ID || !CLOUDFLARE_IMAGES_API_TOKEN || !CLOUDFLARE_IMAGES_ACCOUNT_HASH) {
+        sendJson(
+          res,
+          400,
+          {
+            error:
+              'Set CLOUDFLARE_ACCOUNT_ID, CLOUDFLARE_IMAGES_API_TOKEN, and CLOUDFLARE_IMAGES_ACCOUNT_HASH in backend env.',
+          },
+          req.headers.origin
+        );
+        return;
+      }
+
       const body = await readJsonBody(req);
-      const jsonResponse = await handleUpload({
-        body,
-        request: req,
-        onBeforeGenerateToken: async (pathname) => {
-          const sanitizedName = String(pathname || 'image')
-            .replace(/[^a-zA-Z0-9._/-]/g, '-')
-            .replace(/\/+/g, '/');
+      const baseName = String(body?.fileName || 'profile-image')
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9._-]+/g, '-')
+        .replace(/^-|-$/g, '');
+      const creator = String(body?.creator || 'hr-dashboard').trim() || 'hr-dashboard';
 
-          return {
-            allowedContentTypes: ['image/jpeg', 'image/png', 'image/webp', 'image/jpg'],
-            addRandomSuffix: true,
-            tokenPayload: JSON.stringify({ folder: 'hr-profiles' }),
-            pathname: sanitizedName.startsWith('hr-profiles/')
-              ? sanitizedName
-              : `hr-profiles/${sanitizedName}`,
-          };
-        },
-        onUploadCompleted: async ({ blob }) => {
-          console.log('blob upload completed', blob?.url || '');
-        },
-      });
+      const formData = new FormData();
+      formData.append('requireSignedURLs', 'false');
+      formData.append(
+        'metadata',
+        JSON.stringify({
+          source: 'hr-dashboard',
+          fileName: baseName,
+        })
+      );
+      formData.append('creator', creator);
 
-      sendJson(res, 200, jsonResponse, req.headers.origin);
+      const response = await fetch(
+        `https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/images/v2/direct_upload`,
+        {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${CLOUDFLARE_IMAGES_API_TOKEN}`,
+          },
+          body: formData,
+        }
+      );
+
+      const payload = await response.json().catch(() => null);
+      if (!response.ok || !payload?.success || !payload?.result?.uploadURL || !payload?.result?.id) {
+        sendJson(
+          res,
+          response.ok ? 400 : response.status,
+          {
+            error:
+              payload?.errors?.[0]?.message ||
+              payload?.messages?.[0]?.message ||
+              'Unable to create Cloudflare direct upload URL.',
+          },
+          req.headers.origin
+        );
+        return;
+      }
+
+      sendJson(
+        res,
+        200,
+        {
+          uploadURL: payload.result.uploadURL,
+          imageId: payload.result.id,
+          imageURL: `https://imagedelivery.net/${CLOUDFLARE_IMAGES_ACCOUNT_HASH}/${payload.result.id}/public`,
+        },
+        req.headers.origin
+      );
     } catch (error) {
       sendJson(
         res,
-        400,
+        500,
         {
           error: error instanceof Error ? error.message : 'Unable to upload image.',
         },
