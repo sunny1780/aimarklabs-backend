@@ -1691,12 +1691,26 @@ const requestHandler = async (req, res) => {
         req.headers.origin
       );
     } catch (error) {
+      console.error('Unable to fetch HR profiles from MongoDB.', error);
+      const fallbackRows = readHrProfilesStore();
+      const status = String(requestUrl.searchParams.get('status') || '')
+        .trim()
+        .toLowerCase();
+      const filteredFallbackRows =
+        status === 'active' || status === 'inactive'
+          ? fallbackRows.filter(
+              (row) => String(row?.status || '').trim().toLowerCase() === status
+            )
+          : fallbackRows;
+
       sendJson(
         res,
-        500,
+        200,
         {
-          message:
-            error instanceof Error ? error.message : 'Unable to fetch HR profiles.',
+          source: 'local-file-store-fallback',
+          warning:
+            error instanceof Error ? error.message : 'Unable to fetch HR profiles from MongoDB.',
+          rows: filteredFallbackRows,
         },
         req.headers.origin
       );
@@ -1805,13 +1819,35 @@ const requestHandler = async (req, res) => {
             : `${Date.now()}-${index}`,
         name: String(row?.name || '').trim(),
         role: String(row?.role || '').trim(),
-        experience: String(row?.experience || '').trim(),
+        experienceLevel: String(row?.experienceLevel || row?.experience || '').trim(),
         status:
           String(row?.status || '').trim().toLowerCase() === 'inactive'
             ? 'inactive'
             : 'active',
         description: String(row?.description || '').trim(),
         image: String(row?.image || '').trim(),
+        skills: Array.isArray(row?.skills)
+          ? row.skills
+              .map((skill) => String(skill || '').trim())
+              .filter(Boolean)
+          : [],
+        availability: String(row?.availability || '').trim(),
+        location: String(row?.location || '').trim(),
+        linkedinUrl: String(row?.linkedinUrl || '').trim(),
+        portfolioUrl: String(row?.portfolioUrl || '').trim(),
+        experiences: Array.isArray(row?.experiences)
+          ? row.experiences
+              .map((entry) => ({
+                title: String(entry?.title || '').trim(),
+                company: String(entry?.company || '').trim(),
+                duration: String(entry?.duration || '').trim(),
+              }))
+              .filter((entry) => entry.title || entry.company || entry.duration)
+          : (() => {
+              const title = String(row?.previousRole || '').trim();
+              const company = String(row?.previousCompany || '').trim();
+              return title || company ? [{ title, company, duration: '' }] : [];
+            })(),
       }));
 
       const savedRows = await writeHrProfiles(normalizedRows);
