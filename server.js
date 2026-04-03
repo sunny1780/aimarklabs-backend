@@ -72,6 +72,16 @@ const CLOUDFLARE_IMAGES_ACCOUNT_HASH = (
 ).trim();
 let mongoClientPromise = null;
 
+const normalizeAvailabilityLabel = (availability, status) => {
+  const normalizedAvailability = String(availability || '').trim();
+
+  if (normalizedAvailability) return normalizedAvailability;
+
+  return String(status || '').trim().toLowerCase() === 'inactive'
+    ? 'Check with HR'
+    : 'Available now';
+};
+
 const toISODate = (value) => value.toISOString().slice(0, 10);
 
 const defaultDateRange = () => {
@@ -1812,43 +1822,47 @@ const requestHandler = async (req, res) => {
         return;
       }
 
-      const normalizedRows = rows.map((row, index) => ({
-        id:
-          typeof row?.id === 'string' && row.id.trim()
-            ? row.id.trim()
-            : `${Date.now()}-${index}`,
-        name: String(row?.name || '').trim(),
-        role: String(row?.role || '').trim(),
-        experienceLevel: String(row?.experienceLevel || row?.experience || '').trim(),
-        status:
+      const normalizedRows = rows.map((row, index) => {
+        const normalizedStatus =
           String(row?.status || '').trim().toLowerCase() === 'inactive'
             ? 'inactive'
-            : 'active',
-        description: String(row?.description || '').trim(),
-        image: String(row?.image || '').trim(),
-        skills: Array.isArray(row?.skills)
-          ? row.skills
-              .map((skill) => String(skill || '').trim())
-              .filter(Boolean)
-          : [],
-        availability: String(row?.availability || '').trim(),
-        location: String(row?.location || '').trim(),
-        linkedinUrl: String(row?.linkedinUrl || '').trim(),
-        portfolioUrl: String(row?.portfolioUrl || '').trim(),
-        experiences: Array.isArray(row?.experiences)
-          ? row.experiences
-              .map((entry) => ({
-                title: String(entry?.title || '').trim(),
-                company: String(entry?.company || '').trim(),
-                duration: String(entry?.duration || '').trim(),
-              }))
-              .filter((entry) => entry.title || entry.company || entry.duration)
-          : (() => {
-              const title = String(row?.previousRole || '').trim();
-              const company = String(row?.previousCompany || '').trim();
-              return title || company ? [{ title, company, duration: '' }] : [];
-            })(),
-      }));
+            : 'active';
+
+        return {
+          id:
+            typeof row?.id === 'string' && row.id.trim()
+              ? row.id.trim()
+              : `${Date.now()}-${index}`,
+          name: String(row?.name || '').trim(),
+          role: String(row?.role || '').trim(),
+          experienceLevel: String(row?.experienceLevel || row?.experience || '').trim(),
+          status: normalizedStatus,
+          description: String(row?.description || '').trim(),
+          image: String(row?.image || '').trim(),
+          skills: Array.isArray(row?.skills)
+            ? row.skills
+                .map((skill) => String(skill || '').trim())
+                .filter(Boolean)
+            : [],
+          availability: normalizeAvailabilityLabel(row?.availability, normalizedStatus),
+          location: String(row?.location || '').trim(),
+          linkedinUrl: String(row?.linkedinUrl || '').trim(),
+          portfolioUrl: String(row?.portfolioUrl || '').trim(),
+          experiences: Array.isArray(row?.experiences)
+            ? row.experiences
+                .map((entry) => ({
+                  title: String(entry?.title || '').trim(),
+                  company: String(entry?.company || '').trim(),
+                  duration: String(entry?.duration || '').trim(),
+                }))
+                .filter((entry) => entry.title || entry.company || entry.duration)
+            : (() => {
+                const title = String(row?.previousRole || '').trim();
+                const company = String(row?.previousCompany || '').trim();
+                return title || company ? [{ title, company, duration: '' }] : [];
+              })(),
+        };
+      });
 
       const savedRows = await writeHrProfiles(normalizedRows);
       sendJson(
