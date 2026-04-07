@@ -55,11 +55,13 @@ const GSC_SCOPE = 'https://www.googleapis.com/auth/webmasters.readonly';
 const GA4_BASE_URL = 'https://analyticsdata.googleapis.com/v1beta';
 const GA4_SCOPE = 'https://www.googleapis.com/auth/analytics.readonly';
 const YOUTUBE_BASE_URL = 'https://www.googleapis.com/youtube/v3';
+const OPENAI_API_BASE_URL = 'https://api.openai.com/v1';
 const STRIPE_API_BASE_URL = 'https://api.stripe.com/v1';
 const STRIPE_WEBHOOK_TOLERANCE_SECONDS = 300;
 const SUBSCRIPTIONS_STORE_PATH = path.resolve(__dirname, 'subscriptions.store.json');
 const NEWSLETTER_STORE_PATH = path.resolve(__dirname, 'newsletter.store.json');
 const HR_PROFILES_STORE_PATH = path.resolve(__dirname, 'hr-profiles.store.json');
+const HR_CV_UPLOADS_DIR = path.resolve(__dirname, 'uploads', 'hr-cvs');
 const MONGODB_URI = (process.env.MONGODB_URI || '').trim();
 const MONGODB_DB_NAME = (process.env.MONGODB_DB_NAME || 'aimarklabs').trim();
 const MONGODB_HR_PROFILES_COLLECTION = (
@@ -80,6 +82,35 @@ const normalizeAvailabilityLabel = (availability, status) => {
   return String(status || '').trim().toLowerCase() === 'inactive'
     ? 'Check with HR'
     : 'Available now';
+};
+
+const sanitizeFileName = (value, fallbackBaseName = 'file') => {
+  const extension = path.extname(String(value || '')).toLowerCase();
+  const baseName = path.basename(String(value || ''), extension);
+  const safeBaseName = String(baseName || fallbackBaseName)
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9._-]+/g, '-')
+    .replace(/^-+|-+$/g, '') || fallbackBaseName;
+
+  return `${safeBaseName}${extension || ''}`;
+};
+
+const ensureHrCvUploadsDir = () => {
+  fs.mkdirSync(HR_CV_UPLOADS_DIR, { recursive: true });
+};
+
+const saveHrCvFile = ({ fileName, buffer }) => {
+  ensureHrCvUploadsDir();
+  const safeFileName = sanitizeFileName(fileName, 'cv');
+  const uniqueFileName = `${Date.now()}-${crypto.randomUUID()}-${safeFileName}`;
+  const filePath = path.join(HR_CV_UPLOADS_DIR, uniqueFileName);
+  fs.writeFileSync(filePath, buffer);
+  return {
+    fileName: safeFileName,
+    storedFileName: uniqueFileName,
+    cvUrl: `/uploads/hr-cvs/${uniqueFileName}`,
+  };
 };
 
 const toISODate = (value) => value.toISOString().slice(0, 10);
@@ -126,6 +157,8 @@ const formatGoogleFetchError = (error, serviceLabel) => {
 
 const OVERVIEW_CACHE_TTL_MS = 90 * 1000;
 const overviewCache = new Map();
+const MONTHLY_PLAN_CACHE_TTL_MS = 6 * 60 * 60 * 1000;
+const monthlyPlanCache = new Map();
 const INSTAGRAM_CLIENTS = {
   'party-hall': {
     igUserIdEnv: 'BECKLEY_PARTYHALL_IG_USER_ID',
@@ -229,7 +262,7 @@ const resolveMetaAccessToken = (preferredEnvKey) => {
 };
 
 const resolveCorsOrigin = (origin) => {
-  const fallback = 'https://aimarklabs.com';
+  const fallback = '*';
   if (!origin || typeof origin !== 'string') return fallback;
   try {
     const parsed = new URL(origin);
@@ -270,7 +303,7 @@ const readJsonBody = (req) =>
     let raw = '';
     req.on('data', (chunk) => {
       raw += chunk;
-      if (raw.length > 1024 * 1024) {
+      if (raw.length > 10 * 1024 * 1024) {
         reject(new Error('Request body is too large.'));
       }
     });
@@ -744,6 +777,227 @@ const normalizePageUrl = (value) => {
   }
 };
 
+const roundMetric = (value, digits = 2) => {
+  const parsed = parseNumber(value);
+  if (!Number.isFinite(parsed)) return 0;
+  const factor = 10 ** digits;
+  return Math.round(parsed * factor) / factor;
+};
+
+const safeRatio = (numerator, denominator, digits = 2) => {
+  const num = parseNumber(numerator);
+  const den = parseNumber(denominator);
+  if (!den) return 0;
+  return roundMetric((num / den) * 100, digits);
+};
+
+const pickTopItems = (items, limit, mapper) =>
+  (Array.isArray(items) ? items : [])
+    .slice(0, limit)
+    .map((item, index) => mapper(item, index))
+    .filter(Boolean);
+
+const createMonthlyPlanFallback = ({ client, brandLabel, analyticsSnapshot, generatedAt }) => {
+  const siteHealth = analyticsSnapshot?.siteHealth;
+  const gsc = analyticsSnapshot?.searchConsole;
+  const ga4 = analyticsSnapshot?.googleAnalytics;
+  const meta = analyticsSnapshot?.metaAnalytics;
+  const youtube = analyticsSnapshot?.youtube;
+
+  const mobilePerformance = parseNumber(
+    siteHealth?.strategies?.mobile?.coreWebVitals?.performanceScore
+  );
+  const desktopPerformance = parseNumber(
+    siteHealth?.strategies?.desktop?.coreWebVitals?.performanceScore
+  );
+  const organicClicks = parseNumber(gsc?.summary?.clicks);
+  const organicImpressions = parseNumber(gsc?.summary?.impressions);
+  const organicCtr = roundMetric((gsc?.summary?.ctr || 0) * 100, 2);
+  const avgPosition = roundMetric(gsc?.summary?.position || 0, 2);
+  const sessions = parseNumber(ga4?.summary?.sessions);
+  const users = parseNumber(ga4?.summary?.totalUsers);
+  const pageViews = parseNumber(ga4?.summary?.pageViews);
+  const engagementRate = roundMetric((ga4?.summary?.engagementRate || 0) * 100, 2);
+  const metaImpressions = parseNumber(meta?.summary?.impressions);
+  const metaReach = parseNumber(meta?.summary?.reach);
+  const metaEngagement = parseNumber(meta?.summary?.postEngagement || meta?.summary?.pageEngagement);
+  const videosPublished = parseNumber(youtube?.summary?.videosPublished);
+  const youtubeViews = parseNumber(youtube?.summary?.views);
+
+  const performanceSummary = [
+    mobilePerformance ? `Mobile performance score ${mobilePerformance}/100` : '',
+    desktopPerformance ? `desktop performance ${desktopPerformance}/100` : '',
+    organicClicks ? `${organicClicks} organic clicks from ${organicImpressions} impressions` : '',
+    sessions ? `${sessions} sessions across ${users || sessions} users` : '',
+    metaImpressions ? `${metaImpressions} paid/social impressions with ${metaEngagement} engagements` : '',
+    videosPublished ? `${videosPublished} new videos generated ${youtubeViews} views` : '',
+  ]
+    .filter(Boolean)
+    .join(', ');
+
+  const topPages = pickTopItems(ga4?.topPages, 3, (item) => {
+    const pagePath = String(item?.pagePath || '').trim();
+    if (!pagePath) return null;
+    return `${pagePath} (${parseNumber(item?.pageViews)} views)`;
+  });
+
+  const topChannels = pickTopItems(ga4?.channels, 3, (item) => {
+    const channel = String(item?.channel || '').trim();
+    if (!channel) return null;
+    return `${channel} (${parseNumber(item?.sessions)} sessions)`;
+  });
+
+  const actionItems = [
+    mobilePerformance && mobilePerformance < 70
+      ? 'Improve mobile performance by compressing heavy media, reducing blocking scripts, and tightening page payload size.'
+      : 'Maintain current site speed by keeping image sizes compressed and monitoring new scripts before release.',
+    organicCtr && organicCtr < 3
+      ? 'Rewrite page titles and meta descriptions for priority pages to improve click-through rate from search results.'
+      : 'Expand existing high-performing search pages with stronger internal linking and conversion-oriented CTAs.',
+    sessions && engagementRate < 50
+      ? 'Refresh landing page messaging and above-the-fold calls-to-action to convert current traffic more efficiently.'
+      : 'Double down on channels already generating qualified sessions and replicate content themes that retain users.',
+    metaImpressions
+      ? 'Use Meta creative learnings to produce one stronger winning offer, then rotate fresh visuals to prevent fatigue.'
+      : 'Launch or reconnect a social/ad reporting source so campaign learnings feed the monthly plan automatically.',
+  ];
+
+  return {
+    source: 'fallback',
+    model: 'deterministic-summary',
+    generatedAt,
+    brandLabel,
+    client,
+    title: `${brandLabel} Monthly Growth Plan`,
+    summary:
+      performanceSummary ||
+      `${brandLabel} monthly plan generated from the latest available analytics sources.`,
+    highlights: [
+      organicClicks
+        ? `${organicClicks} search clicks with ${organicCtr}% average CTR and position ${avgPosition}.`
+        : 'Search Console data is limited or unavailable right now.',
+      sessions
+        ? `${sessions} sessions and ${pageViews} page views were recorded in the current reporting window.`
+        : 'Google Analytics data is limited or unavailable right now.',
+      topChannels.length > 0
+        ? `Top acquisition channels: ${topChannels.join(', ')}.`
+        : 'Channel mix is not available yet.',
+    ],
+    priorities: [
+      mobilePerformance && mobilePerformance < 70
+        ? 'Technical performance recovery, especially mobile speed and core web vitals.'
+        : 'Protect site performance while scaling traffic and landing page conversion.',
+      organicClicks
+        ? 'Organic search growth through content expansion, metadata improvements, and internal linking.'
+        : 'Enable search reporting and build an SEO baseline for next month.',
+      metaImpressions || videosPublished
+        ? 'Scale the strongest social/content themes into repeatable weekly campaigns.'
+        : 'Reconnect campaign and content channels so planning is based on complete funnel data.',
+    ],
+    actionItems,
+    opportunities: [
+      topPages.length > 0
+        ? `Expand or repurpose the top pages already attracting attention: ${topPages.join(', ')}.`
+        : 'Identify the top-performing landing pages and use them as the baseline for next month content.',
+      metaReach
+        ? `Retarget users reached on Meta (${metaReach}) with a stronger conversion-specific offer.`
+        : 'Add retargeting or remarketing audiences once paid/social traffic is available.',
+      videosPublished
+        ? 'Turn high-interest video topics into blog, reel, and email formats to extend reach.'
+        : 'Repurpose existing best-performing blog or page topics into short-form social content.',
+    ],
+    risks: [
+      mobilePerformance && mobilePerformance < 60
+        ? 'Low mobile performance can suppress rankings and reduce lead conversion.'
+        : 'Performance can regress quickly if new landing pages are added without optimization checks.',
+      organicCtr && organicCtr < 2
+        ? 'Low organic CTR suggests weak SERP messaging even if impressions are healthy.'
+        : 'Search visibility growth may stall without fresh keyword-targeted pages.',
+      !metaImpressions && !videosPublished
+        ? 'Missing social or content channel data limits full-funnel planning quality.'
+        : 'Channel saturation or creative fatigue can reduce efficiency if creatives are not refreshed.',
+    ],
+  };
+};
+
+const requestOpenAiMonthlyPlan = async ({ client, brandLabel, analyticsSnapshot, generatedAt }) => {
+  const apiKey = (process.env.OPENAI_API_KEY || '').trim();
+  if (!apiKey) {
+    return createMonthlyPlanFallback({ client, brandLabel, analyticsSnapshot, generatedAt });
+  }
+
+  const model = (
+    process.env.OPENAI_MONTHLY_PLAN_MODEL ||
+    process.env.OPENAI_MODEL ||
+    'gpt-4.1-mini'
+  ).trim();
+
+  const response = await fetch(`${OPENAI_API_BASE_URL}/chat/completions`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      model,
+      temperature: 0.4,
+      response_format: { type: 'json_object' },
+      messages: [
+        {
+          role: 'system',
+          content:
+            'You generate concise monthly marketing plans from analytics. Return valid JSON only with keys: title, summary, highlights, priorities, actionItems, opportunities, risks. Each list must contain 3 to 5 short strings. Keep claims grounded in the provided analytics only.',
+        },
+        {
+          role: 'user',
+          content: JSON.stringify({
+            task: 'Create an auto-updating monthly plan for the dashboard.',
+            client,
+            brandLabel,
+            generatedAt,
+            analyticsSnapshot,
+          }),
+        },
+      ],
+    }),
+  });
+
+  const payload = await response.json().catch(() => null);
+  if (!response.ok) {
+    const apiError =
+      payload?.error?.message ||
+      `OpenAI request failed with status ${response.status}.`;
+    throw new Error(apiError);
+  }
+
+  const rawContent = payload?.choices?.[0]?.message?.content;
+  const parsed = typeof rawContent === 'string' ? JSON.parse(rawContent) : null;
+  if (!parsed || typeof parsed !== 'object') {
+    throw new Error('OpenAI did not return a valid monthly plan payload.');
+  }
+
+  const ensureList = (value) =>
+    (Array.isArray(value) ? value : [])
+      .map((item) => String(item || '').trim())
+      .filter(Boolean)
+      .slice(0, 5);
+
+  return {
+    source: 'openai',
+    model,
+    generatedAt,
+    brandLabel,
+    client,
+    title: String(parsed.title || `${brandLabel} Monthly Growth Plan`).trim(),
+    summary: String(parsed.summary || '').trim(),
+    highlights: ensureList(parsed.highlights),
+    priorities: ensureList(parsed.priorities),
+    actionItems: ensureList(parsed.actionItems),
+    opportunities: ensureList(parsed.opportunities),
+    risks: ensureList(parsed.risks),
+  };
+};
+
 const buildPageSpeedUrlCandidates = (pageUrl) => {
   const normalized = normalizePageUrl(pageUrl);
   if (!normalized) return [];
@@ -781,6 +1035,130 @@ const buildPageSpeedUrlCandidates = (pageUrl) => {
   }
 
   return [...new Set(candidates)];
+};
+
+const extractFirstTagValue = (xml, tagName) => {
+  const match = String(xml || '').match(
+    new RegExp(`<${tagName}>([\\s\\S]*?)<\\/${tagName}>`, 'i')
+  );
+  return match ? match[1].trim() : '';
+};
+
+const decodeXmlEntities = (value) =>
+  String(value || '')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'");
+
+const extractSitemapEntries = (xmlText) => {
+  const xml = String(xmlText || '');
+  const sitemapMatches = [...xml.matchAll(/<sitemap>([\s\S]*?)<\/sitemap>/gi)];
+  if (sitemapMatches.length > 0) {
+    return sitemapMatches
+      .map((match) => ({
+        type: 'sitemap',
+        loc: decodeXmlEntities(extractFirstTagValue(match[1], 'loc')),
+        lastmod: extractFirstTagValue(match[1], 'lastmod'),
+      }))
+      .filter((entry) => entry.loc);
+  }
+
+  const urlMatches = [...xml.matchAll(/<url>([\s\S]*?)<\/url>/gi)];
+  return urlMatches
+    .map((match) => ({
+      type: 'url',
+      loc: decodeXmlEntities(extractFirstTagValue(match[1], 'loc')),
+      lastmod: extractFirstTagValue(match[1], 'lastmod'),
+    }))
+    .filter((entry) => entry.loc);
+};
+
+const isDateWithinRange = (value, startDate, endDate) => {
+  const isoDate = String(value || '').slice(0, 10);
+  if (!isValidDateValue(isoDate)) return false;
+  return isoDate >= startDate && isoDate <= endDate;
+};
+
+const buildWebsiteBaseUrl = (value) => {
+  const normalized = normalizePageUrl(value);
+  if (!normalized) return '';
+  try {
+    const parsed = new URL(normalized);
+    return `${parsed.protocol}//${parsed.host}`;
+  } catch {
+    return '';
+  }
+};
+
+const fetchWebsiteBlogSummary = async ({ websiteUrl, startDate, endDate }) => {
+  const baseUrl = buildWebsiteBaseUrl(websiteUrl);
+  if (!baseUrl) {
+    return {
+      source: 'unavailable',
+      websiteUrl,
+      blogsPublishedThisMonth: 0,
+      totalIndexedBlogs: 0,
+      recentBlogUrls: [],
+    };
+  }
+
+  const candidates = [`${baseUrl}/sitemap.xml`, `${baseUrl}/post-sitemap.xml`];
+  const visited = new Set();
+  const queue = [...candidates];
+  const urlEntries = [];
+
+  while (queue.length > 0 && visited.size < 10) {
+    const currentUrl = queue.shift();
+    if (!currentUrl || visited.has(currentUrl)) continue;
+    visited.add(currentUrl);
+
+    try {
+      const response = await fetch(currentUrl);
+      if (!response.ok) continue;
+      const xmlText = await response.text();
+      const entries = extractSitemapEntries(xmlText);
+      entries.forEach((entry) => {
+        if (entry.type === 'sitemap') {
+          if (!visited.has(entry.loc) && queue.length < 20) {
+            queue.push(entry.loc);
+          }
+          return;
+        }
+        urlEntries.push(entry);
+      });
+    } catch {
+      // Ignore unavailable sitemap candidates.
+    }
+  }
+
+  const uniqueBlogEntries = Array.from(
+    new Map(
+      urlEntries
+        .filter((entry) => {
+          try {
+            const parsed = new URL(entry.loc);
+            return /\/blog(s)?(\/|$)/i.test(parsed.pathname);
+          } catch {
+            return false;
+          }
+        })
+        .map((entry) => [entry.loc, entry])
+    ).values()
+  );
+
+  const recentBlogEntries = uniqueBlogEntries.filter((entry) =>
+    isDateWithinRange(entry.lastmod, startDate, endDate)
+  );
+
+  return {
+    source: uniqueBlogEntries.length > 0 ? 'sitemap' : 'unavailable',
+    websiteUrl: baseUrl,
+    blogsPublishedThisMonth: recentBlogEntries.length,
+    totalIndexedBlogs: uniqueBlogEntries.length,
+    recentBlogUrls: recentBlogEntries.slice(0, 5).map((entry) => entry.loc),
+  };
 };
 
 const addDaysToISODate = (isoDate, days) => {
@@ -1643,12 +2021,34 @@ const fetchPageSpeedStrategy = async ({ pageUrl, strategy, apiKey }) => {
 };
 
 const requestHandler = async (req, res) => {
+  const requestUrl = new URL(req.url || '/', `http://${req.headers.host}`);
+
   if (req.method === 'OPTIONS') {
     sendJson(res, 204, {}, req.headers.origin);
     return;
   }
 
-  const requestUrl = new URL(req.url || '/', `http://${req.headers.host}`);
+  if (requestUrl.pathname.startsWith('/uploads/hr-cvs/') && req.method === 'GET') {
+    const requestedFileName = decodeURIComponent(
+      requestUrl.pathname.replace('/uploads/hr-cvs/', '')
+    );
+    const safeFileName = path.basename(requestedFileName);
+    const filePath = path.join(HR_CV_UPLOADS_DIR, safeFileName);
+
+    if (!safeFileName || !fs.existsSync(filePath)) {
+      sendJson(res, 404, { error: 'CV file not found.' }, req.headers.origin);
+      return;
+    }
+
+    res.writeHead(200, {
+      'Content-Type': 'application/pdf',
+      'Content-Disposition': `inline; filename="${safeFileName}"`,
+      'Access-Control-Allow-Origin': resolveCorsOrigin(req.headers.origin),
+      Vary: 'Origin',
+    });
+    fs.createReadStream(filePath).pipe(res);
+    return;
+  }
 
   if (requestUrl.pathname === '/') {
     sendJson(res, 200, {
@@ -1661,11 +2061,14 @@ const requestHandler = async (req, res) => {
         '/api/google-analytics/overview',
         '/api/gsc/traffic',
         '/api/site-health/overview',
+        '/api/content/website-summary',
+        '/api/monthly-plan/generate',
         '/api/payments/stripe/checkout-session',
         '/api/payments/stripe/webhook',
         '/api/subscriptions',
         '/api/newsletter/subscribe',
         '/api/hr/profiles',
+        '/api/hr/upload-cv',
         '/api/cloudflare/images/direct-upload',
         '/api/youtube/overview',
       ],
@@ -1675,6 +2078,125 @@ const requestHandler = async (req, res) => {
 
   if (requestUrl.pathname === '/health') {
     sendJson(res, 200, { ok: true });
+    return;
+  }
+
+  if (requestUrl.pathname === '/api/content/website-summary' && req.method === 'GET') {
+    const client = (requestUrl.searchParams.get('client') || '').trim().toLowerCase();
+    const websiteUrl = normalizePageUrl(
+      requestUrl.searchParams.get('url') || SITE_HEALTH_CLIENT_URLS[client] || ''
+    );
+    const today = toISODate(new Date());
+    const monthStart = `${today.slice(0, 8)}01`;
+    const startDate = (requestUrl.searchParams.get('startDate') || monthStart).trim();
+    const endDate = (requestUrl.searchParams.get('endDate') || today).trim();
+
+    if (!websiteUrl) {
+      sendJson(
+        res,
+        400,
+        { error: 'Missing website url. Pass ?url= or configure a client site URL.' },
+        req.headers.origin
+      );
+      return;
+    }
+
+    try {
+      const payload = await fetchWebsiteBlogSummary({
+        websiteUrl,
+        startDate,
+        endDate,
+      });
+      sendJson(
+        res,
+        200,
+        {
+          client,
+          startDate,
+          endDate,
+          ...payload,
+        },
+        req.headers.origin
+      );
+    } catch (error) {
+      sendJson(
+        res,
+        500,
+        {
+          error:
+            error instanceof Error ? error.message : 'Unable to load website content summary.',
+        },
+        req.headers.origin
+      );
+    }
+    return;
+  }
+
+  if (requestUrl.pathname === '/api/monthly-plan/generate' && req.method === 'POST') {
+    try {
+      const body = await readJsonBody(req);
+      const client = String(body?.client || 'unknown-client')
+        .trim()
+        .toLowerCase();
+      const brandLabel =
+        String(body?.brandLabel || body?.client || 'Client').trim() || 'Client';
+      const analyticsSnapshot =
+        body?.analyticsSnapshot && typeof body.analyticsSnapshot === 'object'
+          ? body.analyticsSnapshot
+          : {};
+      const fingerprint = crypto
+        .createHash('sha1')
+        .update(JSON.stringify({ client, brandLabel, analyticsSnapshot }))
+        .digest('hex');
+      const cached = monthlyPlanCache.get(fingerprint);
+      if (cached && Date.now() - cached.at < MONTHLY_PLAN_CACHE_TTL_MS) {
+        sendJson(res, 200, { ...cached.payload, cached: true }, req.headers.origin);
+        return;
+      }
+
+      const generatedAt = new Date().toISOString();
+      let report = null;
+
+      try {
+        report = await requestOpenAiMonthlyPlan({
+          client,
+          brandLabel,
+          analyticsSnapshot,
+          generatedAt,
+        });
+      } catch (error) {
+        console.error('Monthly plan AI generation failed. Falling back.', {
+          client,
+          message: error instanceof Error ? error.message : String(error),
+        });
+        report = createMonthlyPlanFallback({
+          client,
+          brandLabel,
+          analyticsSnapshot,
+          generatedAt,
+        });
+      }
+
+      const payload = {
+        ok: true,
+        cached: false,
+        report,
+      };
+      monthlyPlanCache.set(fingerprint, { at: Date.now(), payload });
+      sendJson(res, 200, payload, req.headers.origin);
+    } catch (error) {
+      sendJson(
+        res,
+        400,
+        {
+          error:
+            error instanceof Error
+              ? error.message
+              : 'Unable to generate monthly plan.',
+        },
+        req.headers.origin
+      );
+    }
     return;
   }
 
@@ -1812,6 +2334,45 @@ const requestHandler = async (req, res) => {
     return;
   }
 
+  if (requestUrl.pathname === '/api/hr/upload-cv' && req.method === 'POST') {
+    try {
+      const body = await readJsonBody(req);
+      const fileName = String(body?.fileName || 'cv.pdf').trim();
+      const fileDataUrl = String(body?.fileDataUrl || '').trim();
+      const dataUrlMatch = fileDataUrl.match(/^data:(application\/pdf);base64,(.+)$/i);
+
+      if (!dataUrlMatch) {
+        sendJson(res, 400, { error: 'Only PDF files are supported.' }, req.headers.origin);
+        return;
+      }
+
+      const upload = saveHrCvFile({
+        fileName: fileName.toLowerCase().endsWith('.pdf') ? fileName : `${fileName}.pdf`,
+        buffer: Buffer.from(dataUrlMatch[2], 'base64'),
+      });
+
+      sendJson(
+        res,
+        200,
+        {
+          fileName: upload.fileName,
+          cvUrl: upload.cvUrl,
+        },
+        req.headers.origin
+      );
+    } catch (error) {
+      sendJson(
+        res,
+        500,
+        {
+          error: error instanceof Error ? error.message : 'Unable to upload CV PDF.',
+        },
+        req.headers.origin
+      );
+    }
+    return;
+  }
+
   if (requestUrl.pathname === '/api/hr/profiles' && req.method === 'POST') {
     try {
       const body = await readJsonBody(req);
@@ -1848,6 +2409,9 @@ const requestHandler = async (req, res) => {
           location: String(row?.location || '').trim(),
           linkedinUrl: String(row?.linkedinUrl || '').trim(),
           portfolioUrl: String(row?.portfolioUrl || '').trim(),
+          cvUrl: String(row?.cvUrl || '').trim(),
+          cvFileName: String(row?.cvFileName || '').trim(),
+          cvText: String(row?.cvText || '').trim(),
           experiences: Array.isArray(row?.experiences)
             ? row.experiences
                 .map((entry) => ({
@@ -2580,11 +3144,13 @@ const requestHandler = async (req, res) => {
         ? adsData.data.map((row, index) => ({
             id: row?.ad_id || `campaign-${index}`,
             source: 'facebook',
+            kind: 'ad_campaign',
             campaign: row?.campaign_name || 'Untitled Campaign',
             impressions: parseNumber(row?.impressions),
             clicks: parseNumber(row?.clicks),
             amountSpent: parseNumber(row?.spend),
             postEngagement: getActionValue(row?.actions, 'post_engagement'),
+            publishedAt: '',
           }))
         : [];
 
@@ -2696,11 +3262,13 @@ const requestHandler = async (req, res) => {
                 return {
                   id: `fb-post-${index}`,
                   source: 'facebook',
+                  kind: 'organic_post',
                   campaign: fallbackCampaign,
                   impressions: 0,
                   clicks: 0,
                   amountSpent: 0,
                   postEngagement: 0,
+                  publishedAt: post?.created_time || '',
                 };
               }
               try {
@@ -2716,17 +3284,20 @@ const requestHandler = async (req, res) => {
                   return {
                     id: postId,
                     source: 'facebook',
+                    kind: 'organic_post',
                     campaign: fallbackCampaign,
                     impressions: 0,
                     clicks: 0,
                     amountSpent: 0,
                     postEngagement: 0,
+                    publishedAt: post?.created_time || '',
                   };
                 }
                 const postInsightsData = await postInsightsResponse.json();
                 return {
                   id: postId,
                   source: 'facebook',
+                  kind: 'organic_post',
                   campaign: fallbackCampaign,
                   impressions: getInsightMetricTotal(
                     postInsightsData,
@@ -2738,16 +3309,19 @@ const requestHandler = async (req, res) => {
                     postInsightsData,
                     'post_engaged_users'
                   ),
+                  publishedAt: post?.created_time || '',
                 };
               } catch {
                 return {
                   id: postId,
                   source: 'facebook',
+                  kind: 'organic_post',
                   campaign: fallbackCampaign,
                   impressions: 0,
                   clicks: 0,
                   amountSpent: 0,
                   postEngagement: 0,
+                  publishedAt: post?.created_time || '',
                 };
               }
             })
@@ -3074,11 +3648,13 @@ const requestHandler = async (req, res) => {
         ? fbPostsData.data.map((row) => ({
             id: row.id,
             source: 'facebook',
+            kind: 'organic_post',
             campaign: (row.message || '').slice(0, 70) || 'Facebook post',
             impressions: 0,
             clicks: 0,
             amountSpent: 0,
             postEngagement: 0,
+            publishedAt: row.created_time || '',
           }))
         : [];
       const fbInsightMap = new Map();
@@ -3185,11 +3761,13 @@ const requestHandler = async (req, res) => {
             return {
               id: row.id,
               source: 'instagram',
+              kind: 'social_post',
               campaign: row.caption?.slice(0, 70) || `${row.media_type || 'MEDIA'} post`,
               impressions: parseNumber(mediaInsight?.impressions),
               clicks: likes,
               amountSpent: 0,
               postEngagement: likes + comments,
+              publishedAt: row.timestamp || '',
             };
           })
         : [];
