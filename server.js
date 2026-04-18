@@ -215,6 +215,9 @@ const SITE_HEALTH_CLIENT_URLS = {
     process.env.CASH_FOR_GOLD_SITE_URL || 'http://cashforgoldbeckley.com'
   ).trim(),
   'evolo-ai': (process.env.EVOLO_AI_SITE_URL || 'https://goevolo.com/').trim(),
+  talkearlyed: (
+    process.env.TALKEARLYED_SITE_URL || 'https://talkearlyed.com/'
+  ).trim(),
   'walker-advisor': 'https://thewalkeradvisor.com/',
 };
 const GSC_CLIENT_SITE_URLS = {
@@ -2396,6 +2399,9 @@ const requestHandler = async (req, res) => {
               : `${Date.now()}-${index}`,
           name: String(row?.name || '').trim(),
           role: String(row?.role || '').trim(),
+          module: String(row?.module || '').trim(),
+          country: String(row?.country || '').trim(),
+          state: String(row?.state || '').trim(),
           experienceLevel: String(row?.experienceLevel || row?.experience || '').trim(),
           status: normalizedStatus,
           description: String(row?.description || '').trim(),
@@ -2412,6 +2418,11 @@ const requestHandler = async (req, res) => {
           cvUrl: String(row?.cvUrl || '').trim(),
           cvFileName: String(row?.cvFileName || '').trim(),
           cvText: String(row?.cvText || '').trim(),
+          allowedClientEmails: Array.isArray(row?.allowedClientEmails)
+            ? row.allowedClientEmails
+                .map((entry) => String(entry || '').trim().toLowerCase())
+                .filter(Boolean)
+            : [],
           experiences: Array.isArray(row?.experiences)
             ? row.experiences
                 .map((entry) => ({
