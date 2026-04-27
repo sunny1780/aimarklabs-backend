@@ -60,6 +60,7 @@ const STRIPE_API_BASE_URL = 'https://api.stripe.com/v1';
 const STRIPE_WEBHOOK_TOLERANCE_SECONDS = 300;
 const SUBSCRIPTIONS_STORE_PATH = path.resolve(__dirname, 'subscriptions.store.json');
 const NEWSLETTER_STORE_PATH = path.resolve(__dirname, 'newsletter.store.json');
+const CONTACT_STORE_PATH = path.resolve(__dirname, 'contact.store.json');
 const HR_PROFILES_STORE_PATH = path.resolve(__dirname, 'hr-profiles.store.json');
 const HR_CV_UPLOADS_DIR = path.resolve(__dirname, 'uploads', 'hr-cvs');
 const MONGODB_URI = (process.env.MONGODB_URI || '').trim();
@@ -153,6 +154,32 @@ const formatGoogleFetchError = (error, serviceLabel) => {
     return `${serviceLabel} request could not reach Google APIs. Check internet/proxy/firewall on backend host and try again.`;
   }
   return error.message || fallback;
+};
+
+const isTransientFetchError = (error) =>
+  error instanceof Error &&
+  (error.message === 'fetch failed' ||
+    error.name === 'AbortError' ||
+    ['ECONNRESET', 'ETIMEDOUT', 'ENOTFOUND', 'EAI_AGAIN'].includes(
+      error.cause?.code
+    ));
+
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+const fetchWithRetry = async (url, options = {}, retries = 2) => {
+  let lastError = null;
+  for (let attempt = 0; attempt <= retries; attempt += 1) {
+    try {
+      return await fetch(url, options);
+    } catch (error) {
+      lastError = error;
+      if (!isTransientFetchError(error) || attempt === retries) {
+        throw error;
+      }
+      await wait(350 * (attempt + 1));
+    }
+  }
+  throw lastError;
 };
 
 const OVERVIEW_CACHE_TTL_MS = 90 * 1000;
@@ -352,6 +379,20 @@ const writeNewsletterStore = (rows) => {
   fs.writeFileSync(NEWSLETTER_STORE_PATH, JSON.stringify(rows, null, 2));
 };
 
+const readContactStore = () => {
+  try {
+    const raw = fs.readFileSync(CONTACT_STORE_PATH, 'utf8');
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+};
+
+const writeContactStore = (rows) => {
+  fs.writeFileSync(CONTACT_STORE_PATH, JSON.stringify(rows, null, 2));
+};
+
 const readHrProfilesStore = () => {
   try {
     const raw = fs.readFileSync(HR_PROFILES_STORE_PATH, 'utf8');
@@ -479,6 +520,57 @@ const sendNewsletterSubscriptionEmails = async (subscriberEmail) => {
     to: subscriberEmail,
     subject: 'Newsletter Subscription Confirmed',
     text: 'Thanks for subscribing to AI Mark Labs newsletter. We will share updates with you soon.',
+  });
+};
+
+const sendContactSubmissionEmails = async (submission) => {
+  const transporter = createNewsletterTransporter();
+  if (!transporter) return;
+
+  const fromEmail =
+    (process.env.CONTACT_FROM_EMAIL || process.env.SMTP_USER || '').trim();
+  if (!fromEmail) return;
+
+  const adminRecipients = (
+    process.env.CONTACT_ADMIN_EMAILS ||
+    process.env.NEWSLETTER_ADMIN_EMAILS ||
+    ''
+  )
+    .split(',')
+    .map((value) => value.trim())
+    .filter(Boolean);
+
+  if (adminRecipients.length === 0) return;
+
+  const services = Array.isArray(submission.services)
+    ? submission.services.join(', ')
+    : String(submission.services || '');
+
+  const submittedAt = new Date(submission.submittedAt || Date.now()).toLocaleString('en-US', {
+    dateStyle: 'medium',
+    timeStyle: 'short',
+  });
+
+  await transporter.sendMail({
+    from: fromEmail,
+    to: adminRecipients.join(','),
+    subject: `New Contact Request${submission.source ? ` - ${submission.source}` : ''}`,
+    text: [
+      'A new contact request was received.',
+      '',
+      `Name: ${submission.fullName}`,
+      `Email: ${submission.email}`,
+      `Phone: ${submission.phoneNumber}`,
+      `Company: ${submission.companyName || 'N/A'}`,
+      `Company size: ${submission.companySize || 'N/A'}`,
+      `Company URL: ${submission.companyUrl || 'N/A'}`,
+      `Region: ${submission.region || 'N/A'}`,
+      `Services: ${services || 'N/A'}`,
+      `Source: ${submission.source || 'Website contact form'}`,
+      `Submitted: ${submittedAt}`,
+      '',
+      `Project details:\n${submission.projectDetails || 'N/A'}`,
+    ].join('\n'),
   });
 };
 
@@ -666,7 +758,23 @@ const createStripeCheckoutSession = async ({
   return payload;
 };
 
-const relayMetaError = async (res, response, label) => {
+const isMetaAccessTokenErrorMessage = (message) => {
+  const lower = String(message || '').toLowerCase();
+  return (
+    lower.includes('error validating access token') ||
+    lower.includes('session has expired') ||
+    lower.includes('session has been invalidated')
+  );
+};
+
+const normalizeMetaErrorMessage = (message, envKey) => {
+  if (isMetaAccessTokenErrorMessage(message)) {
+    return `Meta access token expired or invalid. Update ${envKey || 'the Meta access token env var'} in backend .env and restart the API.`;
+  }
+  return message;
+};
+
+const relayMetaError = async (res, response, label, envKey = '') => {
   let details = null;
   try {
     details = await response.json();
@@ -680,14 +788,22 @@ const relayMetaError = async (res, response, label) => {
     typeof details.error.message === 'string'
       ? details.error.message
       : null;
+  const errorMessage = normalizeMetaErrorMessage(
+    metaMessage || `${label} failed with status ${response.status}.`,
+    envKey
+  );
+  const statusCode =
+    metaMessage && isMetaAccessTokenErrorMessage(metaMessage)
+      ? 400
+      : response.status;
 
-  sendJson(res, response.status, {
-    error: metaMessage || `${label} failed with status ${response.status}.`,
+  sendJson(res, statusCode, {
+    error: errorMessage,
     metaError: details,
   });
 };
 
-const getMetaErrorFromResponse = async (response, fallback) => {
+const getMetaErrorFromResponse = async (response, fallback, envKey = '') => {
   try {
     const details = await response.json();
     const metaMessage =
@@ -696,9 +812,9 @@ const getMetaErrorFromResponse = async (response, fallback) => {
       typeof details.error.message === 'string'
         ? details.error.message
         : null;
-    return metaMessage || fallback;
+    return normalizeMetaErrorMessage(metaMessage || fallback, envKey);
   } catch {
-    return fallback;
+    return normalizeMetaErrorMessage(fallback, envKey);
   }
 };
 
@@ -735,7 +851,7 @@ const discoverMetaAdAccountId = async (graphVersion, accessToken) => {
       },
       accessToken
     );
-    const response = await fetch(adAccountsUrl);
+    const response = await fetchWithRetry(adAccountsUrl);
     if (!response.ok) return '';
     const data = await response.json();
     const rows = Array.isArray(data?.data) ? data.data : [];
@@ -756,7 +872,7 @@ const discoverManagedPageWithInstagram = async (graphVersion, accessToken) => {
       },
       accessToken
     );
-    const response = await fetch(pagesUrl);
+    const response = await fetchWithRetry(pagesUrl);
     if (!response.ok) return null;
     const data = await response.json();
     const rows = Array.isArray(data?.data) ? data.data : [];
@@ -1268,7 +1384,7 @@ const getGscAccessTokenFromOAuthRefreshToken = async () => {
     grant_type: 'refresh_token',
   });
 
-  const tokenResponse = await fetch(GOOGLE_OAUTH_TOKEN_URL, {
+  const tokenResponse = await fetchWithRetry(GOOGLE_OAUTH_TOKEN_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body,
@@ -1356,7 +1472,7 @@ const getGscAccessTokenFromServiceAccount = async () => {
     assertion,
   });
 
-  const tokenResponse = await fetch(GOOGLE_OAUTH_TOKEN_URL, {
+  const tokenResponse = await fetchWithRetry(GOOGLE_OAUTH_TOKEN_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body,
@@ -2069,6 +2185,7 @@ const requestHandler = async (req, res) => {
         '/api/payments/stripe/checkout-session',
         '/api/payments/stripe/webhook',
         '/api/subscriptions',
+        '/api/contact',
         '/api/newsletter/subscribe',
         '/api/hr/profiles',
         '/api/hr/upload-cv',
@@ -2510,6 +2627,81 @@ const requestHandler = async (req, res) => {
     return;
   }
 
+  if (requestUrl.pathname === '/api/contact' && req.method === 'POST') {
+    try {
+      const body = await readJsonBody(req);
+      const fullName = String(body?.fullName || '').trim();
+      const email = String(body?.email || '').trim().toLowerCase();
+      const phoneNumber = String(body?.phoneNumber || '').trim();
+
+      if (!fullName || !email || !phoneNumber) {
+        sendJson(
+          res,
+          400,
+          { message: 'Full name, email and phone number are required.' },
+          req.headers.origin
+        );
+        return;
+      }
+
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(email)) {
+        sendJson(
+          res,
+          400,
+          { message: 'Please enter a valid email address.' },
+          req.headers.origin
+        );
+        return;
+      }
+
+      const submission = {
+        id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+        fullName,
+        email,
+        phoneNumber,
+        companyName: String(body?.companyName || '').trim(),
+        companySize: String(body?.companySize || '').trim(),
+        companyUrl: String(body?.companyUrl || '').trim(),
+        region: String(body?.region || '').trim(),
+        services: Array.isArray(body?.services)
+          ? body.services.map((service) => String(service || '').trim()).filter(Boolean)
+          : [],
+        projectDetails: String(body?.projectDetails || '').trim(),
+        source: String(body?.source || 'Website contact form').trim(),
+        submittedAt: new Date().toISOString(),
+      };
+
+      writeContactStore([submission, ...readContactStore()]);
+
+      try {
+        await sendContactSubmissionEmails(submission);
+      } catch (mailError) {
+        console.error(
+          '[contact] Unable to send email notification:',
+          mailError instanceof Error ? mailError.message : mailError
+        );
+      }
+
+      sendJson(
+        res,
+        200,
+        { message: 'Contact request submitted successfully.' },
+        req.headers.origin
+      );
+    } catch (error) {
+      sendJson(
+        res,
+        400,
+        {
+          message: error instanceof Error ? error.message : 'Unable to process contact request.',
+        },
+        req.headers.origin
+      );
+    }
+    return;
+  }
+
   if (requestUrl.pathname === '/api/subscriptions' && req.method === 'GET') {
     const email = (requestUrl.searchParams.get('email') || '').trim().toLowerCase();
     if (!email) {
@@ -2777,7 +2969,7 @@ const requestHandler = async (req, res) => {
 
     try {
       const accessToken = await getGscAccessToken();
-      const queryResponse = await fetch(
+      const queryResponse = await fetchWithRetry(
         `${GSC_BASE_URL}/sites/${encodeURIComponent(
           siteUrl
         )}/searchAnalytics/query`,
@@ -3137,9 +3329,14 @@ const requestHandler = async (req, res) => {
         },
         accessToken
       );
-      const adsResponse = await fetch(adsUrl);
+      const adsResponse = await fetchWithRetry(adsUrl);
       if (!adsResponse.ok) {
-        await relayMetaError(res, adsResponse, 'Facebook Ads API');
+        await relayMetaError(
+          res,
+          adsResponse,
+          'Facebook Ads API',
+          metaTokenConfig.envKey
+        );
         return;
       }
       const adsData = await adsResponse.json();
@@ -3177,7 +3374,7 @@ const requestHandler = async (req, res) => {
             },
             accessToken
           );
-          const adsWithCreativeResponse = await fetch(adsWithCreativeUrl);
+          const adsWithCreativeResponse = await fetchWithRetry(adsWithCreativeUrl);
           if (adsWithCreativeResponse.ok) {
             const adsWithCreativeData = await adsWithCreativeResponse.json();
             const creativeRows = Array.isArray(adsWithCreativeData?.data)
@@ -3237,9 +3434,9 @@ const requestHandler = async (req, res) => {
         );
 
         const [pageResponse, pagePostsResponse, pageInsightsResponse] = await Promise.all([
-          fetch(pageUrl),
-          fetch(pagePostsUrl),
-          fetch(pageInsightsUrl),
+          fetchWithRetry(pageUrl),
+          fetchWithRetry(pagePostsUrl),
+          fetchWithRetry(pageInsightsUrl),
         ]);
 
         if (pageResponse.ok) {
@@ -3256,7 +3453,8 @@ const requestHandler = async (req, res) => {
         } else {
           pageInsightsError = await getMetaErrorFromResponse(
             pageInsightsResponse,
-            `Facebook Page Insights API failed (${pageInsightsResponse.status}).`
+            `Facebook Page Insights API failed (${pageInsightsResponse.status}).`,
+            metaTokenConfig.envKey
           );
         }
 
@@ -3290,7 +3488,7 @@ const requestHandler = async (req, res) => {
                   },
                   accessToken
                 );
-                const postInsightsResponse = await fetch(postInsightsUrl);
+                const postInsightsResponse = await fetchWithRetry(postInsightsUrl);
                 if (!postInsightsResponse.ok) {
                   return {
                     id: postId,
@@ -3602,13 +3800,14 @@ const requestHandler = async (req, res) => {
           { fields: pageFields },
           accessToken
         );
-        const pageResponse = await fetch(pageUrl);
+        const pageResponse = await fetchWithRetry(pageUrl);
         if (pageResponse.ok) {
           pageData = await pageResponse.json();
         } else {
           configuredPageError = await getMetaErrorFromResponse(
             pageResponse,
-            `Facebook Page API failed (${pageResponse.status}).`
+            `Facebook Page API failed (${pageResponse.status}).`,
+            metaTokenConfig.envKey
           );
         }
       }
@@ -3650,8 +3849,8 @@ const requestHandler = async (req, res) => {
         accessToken
       );
       const [fbPostsRes, fbInsightsRes] = await Promise.all([
-        fetch(fbPostsUrl),
-        fetch(fbInsightsUrl),
+        fetchWithRetry(fbPostsUrl),
+        fetchWithRetry(fbInsightsUrl),
       ]);
       const fbPostsData = fbPostsRes.ok ? await fbPostsRes.json() : { data: [] };
       const fbInsightsData = fbInsightsRes.ok ? await fbInsightsRes.json() : { data: [] };
@@ -3710,15 +3909,16 @@ const requestHandler = async (req, res) => {
         accessToken
       );
       const [mediaResponse, accountResponse, insightsResponse] = await Promise.all([
-        fetch(mediaUrl),
-        fetch(accountUrl),
-        fetch(insightsUrl),
+        fetchWithRetry(mediaUrl),
+        fetchWithRetry(accountUrl),
+        fetchWithRetry(insightsUrl),
       ]);
       if (!mediaResponse.ok) {
         throw new Error(
           await getMetaErrorFromResponse(
             mediaResponse,
-            `Instagram media API failed with status ${mediaResponse.status}.`
+            `Instagram media API failed with status ${mediaResponse.status}.`,
+            metaTokenConfig.envKey
           )
         );
       }
@@ -3726,7 +3926,8 @@ const requestHandler = async (req, res) => {
         throw new Error(
           await getMetaErrorFromResponse(
             accountResponse,
-            `Instagram account API failed with status ${accountResponse.status}.`
+            `Instagram account API failed with status ${accountResponse.status}.`,
+            metaTokenConfig.envKey
           )
         );
       }
@@ -3748,7 +3949,7 @@ const requestHandler = async (req, res) => {
               { metric: 'impressions,reach', period: 'lifetime' },
               accessToken
             );
-            const mediaInsightsResponse = await fetch(mediaInsightsUrl);
+            const mediaInsightsResponse = await fetchWithRetry(mediaInsightsUrl);
             if (!mediaInsightsResponse.ok) return;
             const mediaInsightsData = await mediaInsightsResponse.json();
             mediaInsightsById.set(mediaId, {
@@ -3846,9 +4047,12 @@ const requestHandler = async (req, res) => {
       typeof error.cause.message === 'string'
         ? error.cause.message
         : null;
+    const errorMessage =
+      error instanceof Error ? error.message : 'Unexpected server error.';
+    const statusCode = isMetaAccessTokenErrorMessage(errorMessage) ? 400 : 500;
 
-    sendJson(res, 500, {
-      error: error instanceof Error ? error.message : 'Unexpected server error.',
+    sendJson(res, statusCode, {
+      error: errorMessage,
       cause: causeMessage,
     });
   }
