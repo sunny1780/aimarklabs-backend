@@ -407,6 +407,26 @@ const writeHrProfilesStore = (rows) => {
   fs.writeFileSync(HR_PROFILES_STORE_PATH, JSON.stringify(rows, null, 2));
 };
 
+const RECRUITMENT_CONTACT_RECIPIENTS = [
+  'support@aimarklabs.com',
+  'areeba@aimarklabs.com',
+];
+
+const isRecruitmentContactSubmission = (submission) => {
+  const services = Array.isArray(submission?.services)
+    ? submission.services.join(', ')
+    : String(submission?.services || '');
+  const normalizedSource = String(submission?.source || '').trim().toLowerCase();
+  const normalizedServices = services.toLowerCase();
+
+  return (
+    normalizedSource.includes('aiml recuriment service') ||
+    normalizedSource.includes('aiml recruitment service') ||
+    normalizedServices.includes('aiml recuriment service') ||
+    normalizedServices.includes('aiml recruitment service')
+  );
+};
+
 const getMongoClient = async () => {
   if (!MONGODB_URI) {
     throw new Error('MONGODB_URI is not configured.');
@@ -469,7 +489,7 @@ const createNewsletterTransporter = () => {
   const host = (process.env.SMTP_HOST || '').trim();
   const port = Number(process.env.SMTP_PORT || '587');
   const user = (process.env.SMTP_USER || '').trim();
-  const pass = (process.env.SMTP_PASS || '').trim();
+  const pass = (process.env.SMTP_PASS || '').replace(/\s+/g, '');
 
   if (!host || !user || !pass || !Number.isFinite(port)) {
     return null;
@@ -485,6 +505,9 @@ const createNewsletterTransporter = () => {
     port,
     secure,
     auth: { user, pass },
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
+    socketTimeout: 15000,
   });
 };
 
@@ -496,7 +519,7 @@ const sendNewsletterSubscriptionEmails = async (subscriberEmail) => {
     (process.env.NEWSLETTER_FROM_EMAIL || process.env.SMTP_USER || '').trim();
   if (!fromEmail) return;
 
-  const adminRecipients = (process.env.NEWSLETTER_ADMIN_EMAILS || '')
+  const adminRecipients = (process.env.NEWSLETTER_ADMIN_EMAILS || 'support@aimarklabs.com')
     .split(',')
     .map((value) => value.trim())
     .filter(Boolean);
@@ -524,13 +547,6 @@ const sendNewsletterSubscriptionEmails = async (subscriberEmail) => {
 };
 
 const sendContactSubmissionEmails = async (submission) => {
-  const transporter = createNewsletterTransporter();
-  if (!transporter) return;
-
-  const fromEmail =
-    (process.env.CONTACT_FROM_EMAIL || process.env.SMTP_USER || '').trim();
-  if (!fromEmail) return;
-
   const adminRecipients = (
     process.env.CONTACT_ADMIN_EMAILS ||
     process.env.NEWSLETTER_ADMIN_EMAILS ||
@@ -540,11 +556,28 @@ const sendContactSubmissionEmails = async (submission) => {
     .map((value) => value.trim())
     .filter(Boolean);
 
-  if (adminRecipients.length === 0) return;
-
   const services = Array.isArray(submission.services)
     ? submission.services.join(', ')
     : String(submission.services || '');
+  const recipients = [
+    ...adminRecipients,
+    ...(isRecruitmentContactSubmission(submission) ? RECRUITMENT_CONTACT_RECIPIENTS : []),
+  ].filter((email, index, list) => email && list.indexOf(email) === index);
+
+  if (recipients.length === 0) {
+    throw new Error('No contact email recipients are configured.');
+  }
+
+  const transporter = createNewsletterTransporter();
+  if (!transporter) {
+    throw new Error('SMTP email is not configured. Set SMTP_HOST, SMTP_USER and SMTP_PASS.');
+  }
+
+  const fromEmail =
+    (process.env.CONTACT_FROM_EMAIL || process.env.SMTP_USER || '').trim();
+  if (!fromEmail) {
+    throw new Error('Contact sender email is not configured.');
+  }
 
   const submittedAt = new Date(submission.submittedAt || Date.now()).toLocaleString('en-US', {
     dateStyle: 'medium',
@@ -553,7 +586,7 @@ const sendContactSubmissionEmails = async (submission) => {
 
   await transporter.sendMail({
     from: fromEmail,
-    to: adminRecipients.join(','),
+    to: recipients.join(','),
     subject: `New Contact Request${submission.source ? ` - ${submission.source}` : ''}`,
     text: [
       'A new contact request was received.',
@@ -2672,15 +2705,27 @@ const requestHandler = async (req, res) => {
         submittedAt: new Date().toISOString(),
       };
 
-      writeContactStore([submission, ...readContactStore()]);
+      if (!isRecruitmentContactSubmission(submission)) {
+        writeContactStore([submission, ...readContactStore()]);
+      }
 
       try {
         await sendContactSubmissionEmails(submission);
       } catch (mailError) {
+        const mailMessage = mailError instanceof Error ? mailError.message : String(mailError);
         console.error(
           '[contact] Unable to send email notification:',
-          mailError instanceof Error ? mailError.message : mailError
+          mailMessage
         );
+        if (isRecruitmentContactSubmission(submission)) {
+          sendJson(
+            res,
+            500,
+            { message: `Email could not be sent: ${mailMessage}` },
+            req.headers.origin
+          );
+          return;
+        }
       }
 
       sendJson(
